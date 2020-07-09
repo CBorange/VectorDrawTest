@@ -1,0 +1,2052 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>vdIFC</name>
+    </assembly>
+    <members>
+        <member name="T:vdIFC.vdIFCBaseObject">
+            <summary>
+            This is a Base object that the vdIFC objects are inherited from.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBaseObject.IFCDocument">
+            <summary>
+            Returns the <see cref="T:vdIFC.vdIFCDocument"/> that this object belongs to
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBaseObject.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBaseObject.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBaseObject.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdSectionRevolved">
+            <summary>
+            A <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> object that defines a collection of section curves that revolved around a 3d axis
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)"/> 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.#ctor(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.CoverTopFaces">
+            <summary>
+            Determines whether the top and bottom, at the beginning and end of the Path are covered.
+            </summary>
+            <remarks>Default value is true.</remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.StartParam">
+            <summary>
+            Specifies the start angle of the revolution  in range 0 to 1 as percentage of a full circle rotation.
+            </summary>
+            <remarks>Default value is 0 and the revolution starts from the angle in 0 degrees </remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.EndParam">
+            <summary>
+            Specifies the end angle  of the revolution in range 0 to 1 as percentage of a full circle rotation.
+            </summary>
+            <remarks>Default value is 1 and the revolution ends at the angle in 360 degrees </remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.ECSMatrix">
+            <summary>
+            Returns the matrix that transforms the object to World CS
+            </summary>
+            <remarks>Always return the <see cref="P:vdIFC.vdSectionRevolved.Placement"/> property matrix.</remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.Placement">
+            <summary>
+             Get / Set a Matrix that place the object inside the drawing.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.Sections">
+            <summary>
+            A collection of closed curves that defines the section that will be revolved around <see cref="P:vdIFC.vdSectionRevolved.Axis"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.Axis">
+            <summary>
+            Get/Set the Axis of revolution
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.AxisOrigin">
+            <summary>
+            Get/Set the origin of the revolution Axis
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.ToMesh(System.Int32)">
+            <summary>
+            Converts the object into a <see cref="T:VectorDraw.Professional.vdFigures.vdPolyface"/> object.
+            </summary>
+            <param name="arcsamples">Determines the number of the segments that the arcs will be devided.</param>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Transformby(VectorDraw.Geometry.Matrix)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionRevolved.BoundingBox">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.BoundingBox"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.Update">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Update"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.Explode">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Explode"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionRevolved.Draw(VectorDraw.Render.vdRender)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Draw(VectorDraw.Render.vdRender)"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCBuildings">
+            <summary>
+            Implements the a collection of <see cref="T:vdIFC.vdIFCBuilding"/> object types.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildings.Active">
+            <summary>
+            Get / Set an element that belongs to this collection as Active
+            </summary>
+            <remarks>
+            <para>If no Active is selected then returns the last element in the collection.</para>
+            <para>If this collection is Empty then a new default element is added and returns it.</para>
+            <para>Always sets the <see cref="P:VectorDraw.Serialize.IvdDeleted.Deleted"/> to false.</para>
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildings.Item(System.Int32)">
+            <summary>
+            Get an  object from the collection at a specified index.
+            </summary>
+            <param name="index">A zero based index of the collection.</param>
+            <returns>The object at the specified index.</returns>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildings.Count">
+            <summary>
+            Get the item's count of the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.Add(vdIFC.vdIFCBuilding)">
+            <summary>
+            Add the passed object to the collection
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null or already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.Add(System.String)">
+            <summary>
+            Create a new object with <see cref="P:vdIFC.vdIFCBuilding.Name"/> and add it to the collection.
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null an object with the passed name already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.FindName(System.String)">
+            <summary>
+            Returns an object in the collection that matches the passed <see cref="P:vdIFC.vdIFCBuilding.Name"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.GetEnumerator">
+            <summary>
+            Implements the "foreach" expression for the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildings.RemoveAll">
+            <summary>
+            Remove all items from the collection.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCBuildingStoreys">
+            <summary>
+            Implements the a collection of <see cref="T:vdIFC.vdIFCBuildingStorey"/> object types.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStoreys.Active">
+            <summary>
+            Get / Set an element that belongs to this collection as Active
+            </summary>
+            <remarks>
+            <para>If no Active is selected then returns the last element in the collection.</para>
+            <para>If this collection is Empty then a new default element is added and returns it.</para>
+            <para>Always sets the <see cref="P:VectorDraw.Serialize.IvdDeleted.Deleted"/> to false.</para>
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStoreys.Item(System.Int32)">
+            <summary>
+            Get an  object from the collection at a specified index.
+            </summary>
+            <param name="index">A zero based index of the collection.</param>
+            <returns>The object at the specified index.</returns>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStoreys.Count">
+            <summary>
+            Get the item's count of the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.Add(vdIFC.vdIFCBuildingStorey)">
+            <summary>
+            Add the passed object to the collection
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null or already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.Add(System.String)">
+            <summary>
+            Create a new object with <see cref="P:vdIFC.vdIFCBuildingStorey.Name"/> and add it to the collection.
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null an object with the passed name already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.FindName(System.String)">
+            <summary>
+            Returns an object in the collection that matches the passed <see cref="P:vdIFC.vdIFCBuildingStorey.Name"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.GetEnumerator">
+            <summary>
+            Implements the "foreach" expression for the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStoreys.RemoveAll">
+            <summary>
+            Remove all items from the collection.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCProducts">
+            <summary>
+            Implements the a collection of <see cref="T:vdIFC.vdIFCProduct"/> object types.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProducts.Item(System.Int32)">
+            <summary>
+            Get an  object from the collection at a specified index.
+            </summary>
+            <param name="index">A zero based index of the collection.</param>
+            <returns>The object at the specified index.</returns>
+        </member>
+        <member name="P:vdIFC.vdIFCProducts.Count">
+            <summary>
+            Get the item's count of the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.Add(vdIFC.vdIFCProduct)">
+            <summary>
+            Add the passed object to the collection
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null or already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProducts.RemoveAll">
+            <summary>
+            Remove all items from the collection.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCBuilding">
+            <summary>
+            A collection that contains <see cref="T:vdIFC.vdIFCBuildingStorey"/> items
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.PropertiesGroup">
+            <summary>
+            Returns the User define properites group <see cref="T:vdIFC.vdIFCPropertiesGroup"/>
+            <para>By default is empty.</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.IFCGlobalId">
+            <summary>
+             Holds an identifier that is unique throughout the software world.
+             <para>It is created when the object is first created</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Address">
+            <summary>
+            Address given to the object for postal purposes.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.BuildingStoreys">
+            <summary>
+            A collection of <see cref="T:vdIFC.vdIFCBuildingStorey"/> items belongs to this building
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Name">
+            <summary>
+            Get / Set a unique Name used to add this element into a <see cref="T:vdIFC.vdIFCBuildings"/> collection
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.LongName">
+            <summary>
+            Get / Set a descriptive name that used for informal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Deleted">
+            <summary>
+            Get/Set a property that marks the object as Deleted or not.
+            </summary>
+            <remarks>A Deleted object is not drawn and is not saved</remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.GetBoundingBox">
+            <summary>
+            Returns the <see cref="T:VectorDraw.Geometry.Box"/> that enclose all the elements that belong to this object, in World Co-ordinate system, relative to the <see cref="P:vdIFC.vdIFCDocument.Placement"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.Update">
+            <summary>
+            Updates all the items in this collection.
+            </summary>
+            <remarks >
+            Call this method after changing properties that influences the geometry of the object. 
+            The update method will force other properties to be recalculated (e.g Bounding Box).
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            Transforms all the geometrical properties of all items in this collection, with the specific Matrix mat.
+            </summary>
+            <param name="mat">The Matrix with which the transformation will be done.</param>
+        </member>
+        <member name="M:vdIFC.vdIFCBuilding.GetAllEntities(System.Boolean)">
+            <summary>
+            Returns all <see cref="T:vdIFC.vdIFCProduct"/> elements that belongs to this object
+            </summary>
+            <param name="checkVisibility">True in order to return only elements with Visible property true.</param>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Visible">
+            <summary>
+            Defines if the items in this collection will be visible in the drawing context.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuilding.Elevation">
+            <summary>
+            The elevation of the lower element relative to the <see cref="P:vdIFC.vdIFCDocument.Elevation"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCBuildingStorey">
+            <summary>
+            A collection that contains <see cref="T:vdIFC.vdIFCProduct"/> items
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.PropertiesGroup">
+            <summary>
+            Returns the User define properites group <see cref="T:vdIFC.vdIFCPropertiesGroup"/>
+            <para>By default is empty.</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.IFCGlobalId">
+            <summary>
+             Holds an identifier that is unique throughout the software world.
+             <para>It is created when the object is first created</para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Products">
+            <summary>
+            A collection of <see cref="T:vdIFC.vdIFCProduct"/> items belongs to this building storey
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Name">
+            <summary>
+            Get / Set a unique Name used to add this element into a <see cref="T:vdIFC.vdIFCBuildingStoreys"/> collection
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.LongName">
+            <summary>
+            Get / Set a descriptive name that used for informal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Deleted">
+            <summary>
+            Get/Set a property that marks the object as Deleted or not.
+            </summary>
+            <remarks>A Deleted object is not drawn and is not saved</remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.GetBoundingBox">
+            <summary>
+            Returns the <see cref="T:VectorDraw.Geometry.Box"/> that enclose all the elements that belong to this object, in World Co-ordinate system, relative to the <see cref="P:vdIFC.vdIFCDocument.Placement"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.Update">
+            <summary>
+            Updates all the items in this collection.
+            </summary>
+            <remarks >
+            Call this method after changing properties that influences the geometry of the object. 
+            The update method will force other properties to be recalculated (e.g Bounding Box).
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            Transforms all the geometrical properties of all items in this collection, with the specific Matrix mat.
+            </summary>
+            <param name="mat">The Matrix with which the transformation will be done.</param>
+        </member>
+        <member name="M:vdIFC.vdIFCBuildingStorey.GetAllEntities(System.Boolean)">
+            <summary>
+            Returns all <see cref="T:vdIFC.vdIFCProduct"/> elements that belongs to this object
+            </summary>
+            <param name="checkVisibility">True in order to return only elements with Visible property true.</param>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Visible">
+            <summary>
+            Defines if the items in this collection will be visible in the drawing context.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCBuildingStorey.Elevation">
+            <summary>
+            The elevation of the lower element relative to the <see cref="P:vdIFC.vdIFCDocument.Elevation"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.IFCGlobals">
+            <summary>
+            Global Settings Manager
+            </summary>
+        </member>
+        <member name="M:vdIFC.IFCGlobals.InitParallelLoops(System.Boolean)">
+            <summary>
+            Initialize the usage of Parallel Loops On or Off, when doing compine operations with solid objects.
+            </summary>
+            <remarks>By default is initialized to true.</remarks>
+            <example>
+            <para>InitParallelLoops usage</para>
+            <code>
+            vdIFC.vdIFCDocument.globals.InitParallelLoops(true);
+            -or-
+            vdIFC.vdIFCDocument.globals.InitParallelLoops(false);
+            </code>
+            </example>
+        </member>
+        <member name="T:vdIFC.IFCVersionEnum">
+            <summary>
+            Defines the version of an IFC file
+            </summary>
+        </member>
+        <member name="F:vdIFC.IFCVersionEnum.IFC3">
+            <summary>
+            IFC version 3
+            </summary>
+        </member>
+        <member name="F:vdIFC.IFCVersionEnum.IFC4">
+            <summary>
+            IFC version 4
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCExportProperties">
+            <summary>
+            An object that defines properties when saving an IFC file <see cref="M:vdIFC.vdIFCComponent.Save(vdIFC.vdIFCDocument,System.String,vdIFC.vdIFCExportProperties)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCExportProperties.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCExportProperties.IFCVersion">
+            <summary>
+            Get/Set the file version for an IFC exported file.
+            </summary>
+            <remarks>Default value is <see cref="F:vdIFC.IFCVersionEnum.IFC4"/></remarks>
+        </member>
+        <member name="P:vdIFC.vdIFCExportProperties.EmbedImages">
+            <summary>
+            Defines if Images will be embedded in the export IFC or the will be saved to an external image file.
+            </summary>
+            <remarks>Default value is true.</remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCExportProperties.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="T:vdIFC.vdIFCRenderProperties">
+            <summary>
+            An object that defines rendering representation properties of a <see cref="T:vdIFC.vdIFCDocument"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCRenderProperties.SelectionFlag">
+            <summary>
+            Defines the behavior when user select with the mouse pointer over th IFC object
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCRenderProperties.SelectionFlag.Single">
+            <summary>
+            the whole <see cref="T:vdIFC.vdIFCDocument"/> is selected
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCRenderProperties.SelectionFlag.Product">
+            <summary>
+            The inner <see cref="T:vdIFC.vdIFCProduct"/> is selected
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCRenderProperties.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCRenderProperties.EdgeEffect">
+            <summary>
+            Controls the Edge display of polyfaces of the IFC elements.
+            </summary>
+            <remarks>Default value is <see cref="F:VectorDraw.Render.vdRenderGlobalProperties.EdgeEffectFlag.AutoDetect"/></remarks>
+        </member>
+        <member name="P:vdIFC.vdIFCRenderProperties.IFCWindowColor">
+            <summary>
+            Get / Set the color of IFC element when the <see cref="P:vdIFC.vdIFCProduct.IFCType"/> is IFCWINDOW
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCRenderProperties.IFCSpaceColor">
+            <summary>
+            Get / Set the color of IFC element when the <see cref="P:vdIFC.vdIFCProduct.IFCType"/> is IFCSPACE
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCRenderProperties.ArcSamples">
+            <summary>
+            Get/ Set the number of line segments arc is divided.Valid range between 4 and 24
+            </summary>
+            <remarks>Default value is 8.</remarks>
+        </member>
+        <member name="P:vdIFC.vdIFCRenderProperties.SelectionMode">
+            <summary>
+            Get / Set the <see cref="T:vdIFC.vdIFCRenderProperties.SelectionFlag"/> that Defines the behavior when user select with the mouse pointer over th IFC object.
+            <para>Default value is <see cref="F:vdIFC.vdIFCRenderProperties.SelectionFlag.Product"/></para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCRenderProperties.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            Write the object properties to a vdml file format.
+            </summary>
+            <param name="serializer">The Serializer object.</param>
+            <seealso cref="T:VectorDraw.Serialize.Serializer"/>
+        </member>
+        <member name="M:vdIFC.vdIFCRenderProperties.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            Read the object properties from a vdml file format.
+            </summary>
+            <param name="deserializer">The DeSerializer object.</param>
+            <param name="fieldname">The name of the property of the object.</param>
+            <param name="value">the value of the property.</param>
+            <returns>Returns False if the fieldname does not correspond to a property of the object.</returns>
+            <seealso cref="T:VectorDraw.Serialize.DeSerializer"/>
+        </member>
+        <member name="T:vdIFC.vdIFCDocument">
+            <summary>
+            An object that manage IFC files
+            <para>It is derived from <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> type and can be added to a <see cref="P:VectorDraw.Professional.vdPrimaries.vdLayout.Entities"/> or <see cref="P:VectorDraw.Professional.vdPrimaries.vdBlock.Entities"/> of a <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> object. </para>
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCDocument.globals">
+            <summary>
+            The Global Settings object Manager 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.GetObjectFromGlobalId(System.String)">
+            <summary>
+            Returns an object that implements the <see cref="T:vdIFC.IIFCGlobalId"/> interface and is added to this object.
+            <para>It can be <see cref="T:vdIFC.vdIFCProduct"/> or <see cref="T:vdIFC.vdIFCProject"/> or <see cref="T:vdIFC.vdIFCSite"/> or <see cref="T:vdIFC.vdIFCBuilding"/> or <see cref="T:vdIFC.vdIFCBuildingStorey"/> </para>
+            </summary>
+            <param name="id">the <see cref="P:vdIFC.IIFCGlobalId.IFCGlobalId"/> unique string assign to an ifc element</param>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.RenderProperties">
+            <summary>
+            Returns a reference to <see cref="T:vdIFC.vdIFCRenderProperties"/> that defines rendering representation properties of this object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)"/> 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.FILE_SCHEMA">
+            <summary>
+            Returns the File Schema(ifc version) that this object is created from.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.IFCFileName">
+            <summary>
+            Returns the filename that this object is created from of saved to.
+            <para>Default value is "IFCDocument"</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.ECSMatrix">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.ECSMatrix"/> <seealso cref="P:vdIFC.vdIFCDocument.Placement"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.Placement">
+            <summary>
+            Get / Set a Matrix that place the object inside the drawing.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Transformby(VectorDraw.Geometry.Matrix)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.BoundingBox">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.BoundingBox"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Update">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Update"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Explode">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Explode"/>
+            Returns a collection of all <see cref="T:vdIFC.vdIFCProduct"/> in all collections that own to this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.Draw3DFlag">
+            <summary>
+            Get/Set a property value used when drawing an object in 3d.
+            <para>It always returns <see cref="F:VectorDraw.Render.Draw3DFlagEnum.ExcludeFromList"/> for this object type.</para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.Draw(VectorDraw.Render.vdRender)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Draw(VectorDraw.Render.vdRender)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.Project">
+            <summary>
+            Get /Set the <see cref="T:vdIFC.vdIFCProject"/> of this object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCDocument.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCDocument.Elevation">
+            <summary>
+            The elevation of the lower element in World Co-ordinate system
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCProduct">
+            <summary>
+            An object that defines an IFC element object with graphical representation
+            <para>Is derived from <see cref="T:vdIFC.vdProductGroup"/> which is hold the h graphical representation as <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> object types.</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.PropertiesGroup">
+            <summary>
+            Returns the User define properites group <see cref="T:vdIFC.vdIFCPropertiesGroup"/>
+            <para>By default is empty.</para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)"/> 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.IFCDocument">
+            <summary>
+            Returns the <see cref="T:vdIFC.vdIFCDocument"/> that this object belongs to
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCProduct.IfcElementTypeName">
+            <summary>
+            Supported IFC types by a <see cref="T:vdIFC.vdIFCProduct"/> object <seealso cref="P:vdIFC.vdIFCProduct.IFCType"/>
+            </summary>
+            <remarks>
+            In case you put a type that is not supported(not only from the enum but generally in IFC) then this will be converted to IfcVirtualElement or IfcBuildingElementProxy depending where the product is added.
+            </remarks>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.Default">
+            <summary>
+            VDIFC Framework automatically selects an IFC Element type for a <see cref="T:vdIFC.vdIFCProduct"/> object.
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcBuildingElementProxy">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcBeam">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcColumn">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcCovering">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcCurtainWall">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcDoor">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcFooting">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcMember">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcPile">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcPlate">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcRailing">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcRamp">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcRampFlight">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcRoof">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcSlab">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcStair">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcStairFlight">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcWall">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcWindow">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcVirtualElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcCivilElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcDistributionElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcElementAssembly">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcSystemFurnitureElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcGeographicElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcTransportElement">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCProduct.IfcElementTypeName.IfcSpace">
+            <summary>
+            IFC Element Type Name
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.#ctor(VectorDraw.Professional.vdObjects.vdDocument,System.String,System.String,vdIFC.vdIFCProduct.IfcElementTypeName,VectorDraw.Professional.vdPrimaries.vdFigure)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+            <param name="doc" >A <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> where the object is reference to and get the default PenColor Layer and other Table that needed by the graphical representation  </param>
+            <param name="name">set the <see cref="P:vdIFC.vdIFCProduct.Name"/> proprty for the created object</param>
+            <param name="description">set the <see cref="P:vdIFC.vdIFCProduct.Description"/> proprty for the created object</param>
+            <param name="ifctype">set the <see cref="P:vdIFC.vdIFCProduct.IFCType"/> proprty for the created object</param>
+            <param name="representation">A <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> as graphical representation of the object</param>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.#ctor(VectorDraw.Professional.vdObjects.vdDocument,System.String,System.String,vdIFC.vdIFCProduct.IfcElementTypeName,VectorDraw.Professional.vdCollections.vdEntities)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+            <param name="doc" >A <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> where the object is reference to and get the default PenColor Layer and other Table that needed by the graphical representation  </param>
+            <param name="name">set the <see cref="P:vdIFC.vdIFCProduct.Name"/> proprty for the created object</param>
+            <param name="description">set the <see cref="P:vdIFC.vdIFCProduct.Description"/> proprty for the created object</param>
+            <param name="ifctype">set the <see cref="P:vdIFC.vdIFCProduct.IFCType"/> proprty for the created object</param>
+            <param name="representation">A collection of <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> as graphical representation of the object</param>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.IFCType">
+            <summary>
+            An IFC predefined type 
+            <para>Can be one of <see cref="T:vdIFC.vdIFCProduct.IfcElementTypeName"/> values converted to string</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.IFCGlobalId">
+            <summary>
+             Holds an identifier that is unique throughout the software world.
+             <para>It is created when the object is first created</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.Name">
+            <summary>
+            Get / Set a short string Name that defines this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProduct.Visible">
+            <summary>
+            Defines if the items in this collection will be visible in the drawing context.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.Update">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Update"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.Draw(VectorDraw.Render.vdRender)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Draw(VectorDraw.Render.vdRender)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProduct.GetAllEntities(System.Boolean)">
+            <summary>
+            Returns all <see cref="T:vdIFC.vdIFCProduct"/> elements that belongs to this object
+            </summary>
+            <param name="checkVisibility">True in order to return only elements with Visible property true.</param>
+        </member>
+        <member name="T:vdIFC.vdIFCProject">
+            <summary>
+            An object that indicates the undertaking of some design, engineering, construction, or maintenance activities.
+            It contains physical address information, as well as products from which the project is composed.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.PropertiesGroup">
+            <summary>
+            Returns the User define properites group <see cref="T:vdIFC.vdIFCPropertiesGroup"/>
+            <para>By default is empty.</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.IFCGlobalId">
+            <summary>
+             Holds an identifier that is unique throughout the software world.
+             <para>It is created when the object is first created</para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.TrueNorth">
+            <summary>
+            Direction of the true north within the xy-plane of the world coordinate system.
+            If not given, it defaults to the positive direction of the y-axis of the WorldCoordinateSystem. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.ApplicationName">
+            <summary>
+            Get / Set the application name used to create the ifc file
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.LongName">
+            <summary>
+            Get / Set a descriptive name that used for informal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Phase">
+            <summary>
+            Description of the Current project phase
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Site">
+            <summary>
+            Returns a reference to the <see cref="T:vdIFC.vdIFCSite"/> object of the project where ifc elements will be added
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Name">
+            <summary>
+            Get / Set a short string Name that defines this object
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.GetBoundingBox">
+            <summary>
+            Returns the <see cref="T:VectorDraw.Geometry.Box"/> that enclose all the elements that belong to this object, in World Co-ordinate system, relative to the <see cref="P:vdIFC.vdIFCDocument.Placement"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.Update">
+            <summary>
+            Updates all the items in this object included in <see cref="P:vdIFC.vdIFCProject.Site"/>.
+            </summary>
+            <remarks >
+            Call this method after changing properties that influences the geometry of the object. 
+            The update method will force other properties to be recalculated (e.g Bounding Box).
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCProject.GetAllEntities(System.Boolean)">
+            <summary>
+            Returns all <see cref="T:vdIFC.vdIFCProduct"/> elements that belongs to this object
+            </summary>
+            <param name="checkVisibility">True in order to return only elements with Visible property true.</param>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Visible">
+            <summary>
+            Defines if the items in this collection will be visible in the drawing context.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProject.Elevation">
+            <summary>
+            The elevation of the lower element relative to the <see cref="P:vdIFC.vdIFCDocument.Elevation"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdAddress">
+            <summary>
+            Address given to an object for postal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.InternalLocation">
+            <summary>
+            An organization defined address for internal mail delivery.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.AddressLines">
+            <summary>
+            The postal addressthat may occupy several lines.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.PostalBox">
+            <summary>
+            An address that is implied by an identifiable mail drop.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.Town">
+            <summary>
+            The name of a town.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.Region">
+            <summary>
+            The name of a region, for example a county or a state.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.PostalCode">
+            <summary>
+            The code that is used by the country's postal service.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.Country">
+            <summary>
+            The name of a country.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdAddress.GPSLocation">
+            <summary>
+            Geographical coordinates values for Latitude and Longitude.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdAddress.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            Write the object properties to a vdml file format.
+            </summary>
+            <param name="serializer">The Serializer object.</param>
+            <seealso cref="T:VectorDraw.Serialize.Serializer"/>
+        </member>
+        <member name="M:vdIFC.vdAddress.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            Read the object properties from a vdml file format.
+            </summary>
+            <param name="deserializer">The DeSerializer object.</param>
+            <param name="fieldname">The name of the property of the object.</param>
+            <param name="value">the value of the property.</param>
+            <returns>Returns False if the fieldname does not correspond to a property of the object.</returns>
+            <seealso cref="T:VectorDraw.Serialize.DeSerializer"/>
+        </member>
+        <member name="M:vdIFC.vdAddress.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="T:vdIFC.vdIFCSite">
+            <summary>
+            An object that contains <see cref="T:vdIFC.vdIFCProduct"/> and or <see cref="T:vdIFC.vdIFCBuilding"/> elements
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.PropertiesGroup">
+            <summary>
+            Returns the User define properites group <see cref="T:vdIFC.vdIFCPropertiesGroup"/>
+            <para>By default is empty.</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.IFCGlobalId">
+            <summary>
+             Holds an identifier that is unique throughout the software world.
+             <para>It is created when the object is first created</para>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Address">
+            <summary>
+            Address given to the object for postal purposes.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Products">
+            <summary>
+            The collection of <see cref="T:vdIFC.vdIFCProduct"/> element type of this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Buildings">
+            <summary>
+            The collection of <see cref="T:vdIFC.vdIFCBuilding"/> element type of this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Name">
+            <summary>
+            Get / Set a short string Name that defines this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.LongName">
+            <summary>
+            Get / Set a descriptive name that used for informal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.GetBoundingBox">
+            <summary>
+            Returns the <see cref="T:VectorDraw.Geometry.Box"/> that enclose all the elements that belong to this object, in World Co-ordinate system, relative to the <see cref="P:vdIFC.vdIFCDocument.Placement"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.Update">
+            <summary>
+            Updates all the items in this object included in <see cref="P:vdIFC.vdIFCSite.Products"/> and <see cref="P:vdIFC.vdIFCSite.Buildings"/>.
+            </summary>
+            <remarks >
+            Call this method after changing properties that influences the geometry of the object. 
+            The update method will force other properties to be recalculated (e.g Bounding Box).
+            </remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCSite.GetAllEntities(System.Boolean)">
+            <summary>
+            Returns all <see cref="T:vdIFC.vdIFCProduct"/> elements that belongs to this object
+            </summary>
+            <param name="checkVisibility">True in order to return only elements with Visible property true.</param>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Visible">
+            <summary>
+            Defines if the items in this collection will be visible in the drawing context.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCSite.Elevation">
+            <summary>
+            The elevation of the lower element relative to the <see cref="P:vdIFC.vdIFCDocument.Elevation"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCProperties">
+            <summary>
+            A container class that holds a <see cref="T:VectorDraw.Professional.vdCollections.vdXProperties"/> dictionary of property values that assign to named attributes.
+            <para>Usually contains IFC property values of the types (Boolean , Integer, Real, Label Text, and DateTime) </para>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProperties.Properties">
+            <summary>
+            A collection of <see cref="T:VectorDraw.Professional.vdObjects.vdXProperty"/> items belongs to this object
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProperties.Name">
+            <summary>
+            Get / Set a unique Name used to add this element into a <see cref="T:vdIFC.vdIFCPropertiesGroup"/> collection
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProperties.LongName">
+            <summary>
+            Get / Set a descriptive name that used for informal purposes.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProperties.Description">
+            <summary>
+             Get / Set a string provided for exchanging full informative comments
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCProperties.Deleted">
+            <summary>
+            Get/Set a property that marks the object as Deleted or not.
+            </summary>
+            <remarks>A Deleted object is not drawn and is not saved</remarks>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCProperties.GetEnumerator">
+            <summary>
+            Implements the "foreach" expression for the collection.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCPropertiesGroup">
+            <summary>
+            A container class that holds a <see cref="T:vdIFC.vdIFCProperties"/> dictionary using the <see cref="P:vdIFC.vdIFCProperties.Name"/> as key
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.ToString">
+            <summary>
+            Provides a string that describes the object.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCPropertiesGroup.Item(System.Int32)">
+            <summary>
+            Get an  object from the collection at a specified index.
+            </summary>
+            <param name="index">A zero based index of the collection.</param>
+            <returns>The object at the specified index.</returns>
+        </member>
+        <member name="P:vdIFC.vdIFCPropertiesGroup.Count">
+            <summary>
+            Get the item's count of the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.Add(vdIFC.vdIFCProperties)">
+            <summary>
+            Add the passed object to the collection
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null or already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.Add(System.String)">
+            <summary>
+            Create a new object with <see cref="P:vdIFC.vdIFCProperties.Name"/> and add it to the collection.
+            </summary>
+            <returns>True if the passed object added to the collection, False if the passed object is null an object with the passed name already exist in the collection.</returns>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.FindName(System.String)">
+            <summary>
+            Returns an object in the collection that matches the passed <see cref="P:vdIFC.vdIFCProperties.Name"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.GetEnumerator">
+            <summary>
+            Implements the "foreach" expression for the collection.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCPropertiesGroup.RemoveAll">
+            <summary>
+            Remove all items from the collection.
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdProductGroup">
+            <summary>
+            A <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> object that contains a collection of <see cref="T:VectorDraw.Professional.vdCollections.vdEntities"/> type.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Dispose">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Dispose"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.InternalSetOwner(VectorDraw.Professional.vdObjects.vdBaseObject)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdProductGroup.Entities">
+            <summary>
+            Returns a reference of the entities collection
+            </summary>
+            <remarks>The <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> items of the Entities collection can be shared with others <see cref="T:VectorDraw.Professional.vdCollections.vdEntities"/> collections. </remarks>
+        </member>
+        <member name="P:vdIFC.vdProductGroup.ECSMatrix">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.ECSMatrix"/> <seealso cref="P:vdIFC.vdProductGroup.Placement"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdProductGroup.Placement">
+            <summary>
+            Get / Set a Matrix that place the <see cref="P:vdIFC.vdProductGroup.Entities"/> inside the drawing.
+            </summary>
+            <remarks>If this object belong to a <see cref="T:vdIFC.vdIFCDocument"/> then this matrix is relative to <see cref="P:vdIFC.vdIFCDocument.Placement"/></remarks>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Transformby(VectorDraw.Geometry.Matrix)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdProductGroup.BoundingBox">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.BoundingBox"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Update">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Update"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Explode">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Explode"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdProductGroup.Draw3DFlag">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.Draw3DFlag"/>  and always returns <see cref="F:VectorDraw.Render.Draw3DFlagEnum.ExcludeFromList"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.Draw(VectorDraw.Render.vdRender)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Draw(VectorDraw.Render.vdRender)"/> 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdProductGroup.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)"/> 
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdSectionPath">
+            <summary>
+            A <see cref="T:VectorDraw.Professional.vdPrimaries.vdFigure"/> object that defines a collection of section curves that extruded along to a curve path
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.Serialize(VectorDraw.Serialize.Serializer)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.Serialize(VectorDraw.Serialize.Serializer)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.DeSerialize(VectorDraw.Serialize.DeSerializer,System.String,System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.OnOwnerChanged">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnOwnerChanged"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.MatchProperties(VectorDraw.Professional.vdObjects.vdPrimary,VectorDraw.Professional.vdObjects.vdDocument)"/> 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.#ctor(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdObjects.vdBaseObject.OnDocumentSelected(VectorDraw.Professional.vdObjects.vdDocument)"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.#ctor(VectorDraw.Professional.vdObjects.vdDocument,VectorDraw.Professional.vdFigures.vdCurve,System.Double,VectorDraw.Geometry.Matrix)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.#ctor(VectorDraw.Professional.vdObjects.vdDocument,VectorDraw.Geometry.gPoints,System.Double,VectorDraw.Geometry.Matrix)">
+            <summary>
+            Initializes a new instance of the object with passed parameters. 
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.CoverTopFaces">
+            <summary>
+            Determines whether the top and bottom, at the beginning and end of the Path are covered.
+            </summary>
+            <remarks>Default value is true.</remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.StartParam">
+            <summary>
+            Specifies the distance from the beginning of the <see cref="P:vdIFC.vdSectionPath.Path"/> that the extrusion is started.
+            </summary>
+            <remarks>Default value is -1 and the extrusion starts from the fisrst point in <see cref="P:vdIFC.vdSectionPath.Path"/></remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.EndParam">
+            <summary>
+            Specifies the distance from the beginning of the <see cref="P:vdIFC.vdSectionPath.Path"/> that the extrusion ends.
+            </summary>
+            <remarks>Default value is -1 and the extrusion ends at the last point of <see cref="P:vdIFC.vdSectionPath.Path"/></remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.ECSMatrix">
+            <summary>
+            Returns the matrix that transforms the object to World CS
+            </summary>
+            <remarks>Always return the <see cref="P:vdIFC.vdSectionPath.Placement"/> property matrix.</remarks>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.Placement">
+            <summary>
+             Get / Set a Matrix that place the object inside the drawing.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.Sections">
+            <summary>
+            A collection of closed curves that defines the section that will be extruded over the <see cref="P:vdIFC.vdSectionPath.Path"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.Path">
+            <summary>
+            A collection of continuous connected curves that defines the path of the extrusion.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.ToMesh(System.Int32)">
+            <summary>
+            Converts the object into a <see cref="T:VectorDraw.Professional.vdFigures.vdPolyface"/> object.
+            </summary>
+            <param name="arcsamples">Determines the number of the segments that the arcs will be devided.</param>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.Transformby(VectorDraw.Geometry.Matrix)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Transformby(VectorDraw.Geometry.Matrix)"/>
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdSectionPath.BoundingBox">
+            <summary>
+            overrides the base type <see cref="P:VectorDraw.Professional.vdPrimaries.vdFigure.BoundingBox"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.Update">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Update"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.Explode">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Explode"/>
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdSectionPath.Draw(VectorDraw.Render.vdRender)">
+            <summary>
+            overrides the base type <see cref="M:VectorDraw.Professional.vdPrimaries.vdFigure.Draw(VectorDraw.Render.vdRender)"/>
+            </summary>
+        </member>
+        <member name="T:vdIFC.vdIFCComponent">
+            <summary>
+            A Component that manage the IFC read write files.
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCComponent.MeterProgress">
+            <summary>
+            Get /Set the <see cref="T:VectorDraw.Professional.Utilities.ProgressMeter"/> used to fire the progress events when read / write IFC files.
+            </summary>
+            <remarks>The <see cref="P:VectorDraw.Professional.vdObjects.vdDocument.MeterProgress"/></remarks> can be used.
+        </member>
+        <member name="E:vdIFC.vdIFCComponent.GenericError">
+            <summary>
+            Fires when an error occurs in a method or property.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.#ctor">
+            <summary>
+            Initializes a new instance of the object. 
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.New">
+            <summary>
+            Creates and returns a new empty <see cref="T:vdIFC.vdIFCDocument"/>
+            </summary>
+            <example> 
+            <para> IFC New Open and Save example.</para>
+            <code>
+            //create a new empty IFC Document
+            vdIFCDocument vdifcdoc = vdIFCComponent1.New();
+            
+            //Set some properties for the IFC Document project
+            vdifcdoc.Project.Name = "MyProject";
+            vdifcdoc.Project.Site.Address = new vdAddress() { Country = "Greece", Region = "Attica", Town = "Glyfada", InternalLocation = "VectorDraw Software Corporation 11 Kyrillou - Methodiou Street" };
+            
+            //Create a new Bulding and add it to the Buildings collection of the project site
+            vdIFCBuilding building = vdifcdoc.Project.Site.Buildings.Add("Building 1");
+            
+            //create a new storey and add it to the previous created building
+            vdIFCBuildingStorey storey = building.BuildingStoreys.Add("Ground");
+            
+            //create an IFC element that represents an ifc wall element type
+            vdIFCProduct mywall = new vdIFCProduct() { Name = "Wall_1", IFCType = vdIFCProduct.IfcElementTypeName.IfcWall.ToString() };
+            //create a vdRect that represents the wall element grapics
+            vdFigure mywallGraphics = new vdRect() { PenColor = new vdColor(vdColor.ColorType.ByBlock), Width = 10, Height = 0.4, Thickness = 3, HatchProperties = new vdHatchProperties(VectorDraw.Professional.Constants.VdConstFill.VdFillModeSolid) };
+            //add the graphic representation to the wall product entities
+            mywall.Entities.AddItem(mywallGraphics);
+            
+            //select a color for the wall
+            mywall.PenColor = new vdColor(Color.Brown);
+            //set some properties that will be exported to the ifc file format
+            vdIFCProperties vdprops = mywall.PropertiesGroup.Add("VectorDraw Wall Properties");
+            vdprops.Properties["Wall_Length"] = 10;
+            vdprops.Properties["Wall_Width"] = 0.4;
+            vdprops.Properties["Wall_Height"] = 3.0;
+            //add the wall to the storey
+            storey.Products.Add(mywall);
+            
+            //Note if the object you create does not have the Building logic for example as simple space area (vdIFCProduct.IfcElementTypeName.IfcSpace) 
+            //you can add it to vdifcdoc.Project.Site.Products as follow
+            
+            vdIFCProduct myspace = new vdIFCProduct() { Name = "Space_1", IFCType = vdIFCProduct.IfcElementTypeName.IfcSpace.ToString() };
+            //create a vdRect that represents the space element grapics
+            vdFigure myspaceGraphics = new vdRect() { PenColor = new vdColor(vdColor.ColorType.ByBlock), InsertionPoint = new gPoint(-5, -10, 0), Width = 20, Height = 20, HatchProperties = new vdHatchProperties(VectorDraw.Professional.Constants.VdConstFill.VdFillModeSolid) };
+            //add the graphic representation to the space product entities
+            myspace.Entities.AddItem(myspaceGraphics);
+            
+            //select a color for the wall
+            myspace.PenColor = new vdColor(Color.Green);
+            
+            //set some properties that will be exported to the ifc file format
+            vdIFCProperties space_vdprops = myspace.PropertiesGroup.Add("VectorDraw Space Properties");
+            space_vdprops.Properties["Sapce_Length"] = 20;
+            space_vdprops.Properties["Space_Width"] = 20;
+            space_vdprops.Properties["Space_Area"] = 400;
+            
+            //add the space to the project Site products
+            vdifcdoc.Project.Site.Products.Add(myspace);
+            
+            
+            
+            //save the ifc file to IFC4 format
+            string filename = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\test.ifc";
+            
+            bool suc = vdIFCComponent1.Save(vdifcdoc, filename);
+            
+            //Open an ifc file and create a new vdIFCDocument with contents of the file
+            vdIFCDocument vdifcdoc2 = vdIFCComponent1.Open(filename);
+            //add the file to the Model Entities of an existing vdDocument object (doc) in order to view and edit it.
+            //Then if vdDocument is saved as vdml/vdcl format will contain the vdIFCDocument in the document.Model.Entities
+            //Note that the vdIFC.dll must exist in the VectorDraw FrameWork Installation path in order to read the vdIFCDocument else
+            //it will be read as vdProxyFigure
+            if (vdifcdoc2 != null)
+            {
+                doc.New();
+                doc.Model.Entities.AddItem(vdifcdoc2);
+                doc.ZoomExtents();
+                doc.Redraw(true);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.Open(System.String)">
+            <summary>
+            Read the passed IFC filename and returns a new <see cref="T:vdIFC.vdIFCDocument"/> that filled with the passed file IFC elements
+            </summary>
+            <param name="filename">An exisiting file with ".ifc" extension</param>
+            <returns>A new <see cref="T:vdIFC.vdIFCDocument"/> that filled with the passed file IFC elements</returns>
+            <example>for example see <see cref="M:vdIFC.vdIFCComponent.New"/> method</example>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.Save(vdIFC.vdIFCDocument,System.String,vdIFC.vdIFCExportProperties)">
+            <summary>
+            Write the contents of the passed <see cref="T:vdIFC.vdIFCDocument"/> into an IFC4 release version formated file.
+            </summary>
+            <param name="ifcDocument">A <see cref="T:vdIFC.vdIFCDocument"/> to be saved</param>
+            <param name="filename">A Full path file name usually end with .ifc extension</param>
+            <param name="exportprops">A <see cref="T:vdIFC.vdIFCExportProperties"/> object contains properties for the way that the export is done.It can be null</param>
+            <returns>True if the file was successfully created.</returns>
+            <example>for example see <see cref="M:vdIFC.vdIFCComponent.New"/> method</example>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.IsIFCExtension(System.String)">
+            <summary>
+            Returns true if the passed fileName is valid IFC file
+            </summary>
+        </member>
+        <member name="P:vdIFC.vdIFCComponent.DefaultOpenDialogFilter">
+            <summary>
+            Returns the defult supported ifc file type filters that can be used with OpenFile Dialogs
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.DefaultSaveDialogFilter(System.String@)">
+            <summary>
+            Returns the defult supported ifc file type filters with their versions that can be used with SaveFile Dialogs
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Initializes a new instance of the object and add it to the passed container. 
+            </summary>
+        </member>
+        <member name="F:vdIFC.vdIFCComponent.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:vdIFC.vdIFCComponent.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>
