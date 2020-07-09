@@ -28,75 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.SideBarRotLabel = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.vectorDrawBaseControl1 = new VectorDraw.Professional.Control.VectorDrawBaseControl();
             this.SuspendLayout();
             // 
-            // panel1
+            // vectorDrawBaseControl1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel1.Controls.Add(this.SideBarRotLabel);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(780, 430);
-            this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(589, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 34);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "측면 바 회전+";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(686, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 34);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "측면 바 회전-";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // SideBarRotLabel
-            // 
-            this.SideBarRotLabel.AutoSize = true;
-            this.SideBarRotLabel.Font = new System.Drawing.Font("굴림", 15F);
-            this.SideBarRotLabel.Location = new System.Drawing.Point(585, 40);
-            this.SideBarRotLabel.Name = "SideBarRotLabel";
-            this.SideBarRotLabel.Size = new System.Drawing.Size(155, 20);
-            this.SideBarRotLabel.TabIndex = 4;
-            this.SideBarRotLabel.Text = "측면 바 각도 : 0";
+            this.vectorDrawBaseControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            this.vectorDrawBaseControl1.AllowDrop = true;
+            this.vectorDrawBaseControl1.Location = new System.Drawing.Point(12, 12);
+            this.vectorDrawBaseControl1.Name = "vectorDrawBaseControl1";
+            this.vectorDrawBaseControl1.Size = new System.Drawing.Size(747, 657);
+            this.vectorDrawBaseControl1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.vectorDrawBaseControl1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label SideBarRotLabel;
+        private VectorDraw.Professional.Control.VectorDrawBaseControl vectorDrawBaseControl1;
     }
 }
 

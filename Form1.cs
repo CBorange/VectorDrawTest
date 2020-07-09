@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Spatial;
+using VectorDraw.Geometry;
+using VectorDraw.Professional.vdPrimaries;
 
 namespace MathPractice
 {
@@ -35,19 +37,14 @@ namespace MathPractice
         private Beam baseBeam;
         private Beam sideBeam;
 
-        // Culling Triangle
-        private bool triangleVisible;
-        private Point2 trianglePoint1;
-        private Point2 trianglePoint2;
-        private Point2 trianglePoint3;
         public Form1()
         {
-            triangleVisible = false;
             InitializeComponent();
             InitPoint();
             InitBeam();
             mathSupporter = MathSupporter.Instance;
             mathSupporter.SetClientRect(PANEL_WIDTH, PANEL_HEIGHT);
+            VectorDrawTest();
         }
         private void InitPoint()
         {
@@ -65,59 +62,9 @@ namespace MathPractice
             sideBeam = new Beam(new Point2(0, 0), SIDEBEAM_WIDTH, SIDEBEAM_HEIGHT, Color.Red, rot);
             Point2 temp = new Point2(SIDEBEAM_HEIGHT * Math.Cos(Vector2.DegreesToRadians * rot), SIDEBEAM_HEIGHT * Math.Sin(Vector2.DegreesToRadians * rot));
             sideBeam.SetPosition(new Point2(temp.X * 0.5f, temp.Y * 0.5f));
-            SideBarRotLabel.Text = $"측면 바 각도 : {sideBeam.Rotation}";
         }
-        private void DrawBaseLine(Graphics g)
+        private void VectorDrawTest()
         {
-            Pen baseLinePen = new Pen(Color.Black, 1);
-            baseLinePen.DashStyle = DashStyle.DashDotDot;
-            g.DrawLine(baseLinePen, mathSupporter.TransformToLeftHand(baseLineStart_Y),
-                mathSupporter.TransformToLeftHand(baseLineEnd_Y));
-            g.DrawLine(baseLinePen, mathSupporter.TransformToLeftHand(baseLineStart_X),
-                mathSupporter.TransformToLeftHand(baseLineEnd_X));
-        }
-        private void DrawBeam(Graphics g)
-        {
-            baseBeam.DrawBeam(g);
-            sideBeam.DrawBeam(g);
-        }
-        private void DrawTraingle(Graphics g)
-        {
-            if (!triangleVisible)
-                return;
-            Pen trianglePen = new Pen(Color.Green, 3);
-            g.DrawLine(trianglePen, mathSupporter.TransformToLeftHand(trianglePoint1),
-                mathSupporter.TransformToLeftHand(trianglePoint2));
-            g.DrawLine(trianglePen, mathSupporter.TransformToLeftHand(trianglePoint2),
-                mathSupporter.TransformToLeftHand(trianglePoint3));
-            g.DrawLine(trianglePen, mathSupporter.TransformToLeftHand(trianglePoint3),
-                mathSupporter.TransformToLeftHand(trianglePoint1));
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            DrawBaseLine(g);
-            DrawBeam(g);
-            DrawTraingle(g);        
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            sideBeam.RotateBeam(10);
-            Point2 temp = new Point2(SIDEBEAM_HEIGHT * Math.Cos(Vector2.DegreesToRadians * sideBeam.Rotation), 
-                SIDEBEAM_HEIGHT * Math.Sin(Vector2.DegreesToRadians * sideBeam.Rotation));
-            sideBeam.SetPosition(new Point2(temp.X * 0.5f, temp.Y * 0.5f));
-            SideBarRotLabel.Text = $"측면 바 각도 : {sideBeam.Rotation}";
-            Refresh();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            sideBeam.RotateBeam(-10);
-            Point2 temp = new Point2(SIDEBEAM_HEIGHT * Math.Cos(Vector2.DegreesToRadians * sideBeam.Rotation),
-                SIDEBEAM_HEIGHT * Math.Sin(Vector2.DegreesToRadians * sideBeam.Rotation));
-            sideBeam.SetPosition(new Point2(temp.X * 0.5f, temp.Y * 0.5f));
-            SideBarRotLabel.Text = $"측면 바 각도 : {sideBeam.Rotation}";
-            Refresh();
         }
     }
 }
