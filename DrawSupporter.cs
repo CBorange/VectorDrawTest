@@ -6,12 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spatial;
+using VectorDraw.Geometry;
+using VectorDraw.Professional.vdPrimaries;
+using VectorDraw.Professional.vdFigures;
+using VectorDraw.Professional.vdObjects;
 
 namespace MathPractice
 {
     public class Beam
     {
-        private const int CALIB_ROTCOORD = 90;
         private int beamWidth;
         public int BeamWidth
         {
@@ -22,97 +25,162 @@ namespace MathPractice
         {
             get { return beamHeight; }
         }
+        private string beamName;
 
         // Rect Point
         private int rotation;
         public int Rotation
         {
-            get { return rotation + 90; }
+            get { return rotation; }
         }
-        private int disCenterToVertex;
-        public int DisCenterToVertex
-        {
-            get { return disCenterToVertex; }
-        }
-        private Point2 leftTop;
-        public Point2 LeftTop { get { return leftTop; } }
+        private gPoint leftTop;
+        public gPoint LeftTop { get { return leftTop; } }
 
-        private Point2 rightTop;
-        public Point2 RightTop { get { return rightTop; } }
+        private gPoint rightTop;
+        public gPoint RightTop { get { return rightTop; } }
 
-        private Point2 leftBottom;
-        public Point2 LeftBottom { get { return leftBottom; } }
+        private gPoint leftBottom;
+        public gPoint LeftBottom { get { return leftBottom; } }
 
-        private Point2 rightBottom;
-        public Point2 RightBottom { get { return rightBottom; } }
+        private gPoint rightBottom;
+        public gPoint RightBottom { get { return rightBottom; } }
 
-        private Point2 bottom;
-        public Point2 Bottom { get { return bottom; } }
+        private gPoint bottom;
+        public gPoint Bottom { get { return bottom; } }
 
-        private Point2 top;
-        public Point2 Top { get { return top; } }
+        private gPoint top;
+        public gPoint Top { get { return top; } }
 
-        private Point2 center;
-        public Point2 Center { get { return center; } }
+        private gPoint center;
+        public gPoint Center { get { return center; } }
 
-        public Color DrawColor;
-        public Beam(Point2 centerPos, int width, int height, Color color,int rot)
+        // Draw Variable
+        private vdDocument document;
+        private vdLine line_lt2rt;
+        private vdLine line_rt2rb;
+        private vdLine line_rb2lb;
+        private vdLine line_lb2lt;
+        private vdLine line_top2bottom;
+
+        public short DrawColorIndex;
+        public Beam(gPoint centerPos,vdDocument document, int width, int height, short colorIndex,int rot,
+            string beamName)
         {
             beamWidth = width;
             beamHeight = height;
             center = centerPos;
-            rotation = rot - CALIB_ROTCOORD;
-            DrawColor = color;
+            rotation = rot;
+            this.beamName = beamName;
+            DrawColorIndex = colorIndex;
+            this.document = document;
 
+            InitDrawLine();
             CalcRectData();
+        }
+        private void InitDrawLine()
+        {
+            line_lt2rt = new vdLine();
+            AddBarLineToDocument(line_lt2rt);
+
+            line_rt2rb = new vdLine();
+            AddBarLineToDocument(line_rt2rb);
+
+            line_rb2lb = new vdLine();
+            AddBarLineToDocument(line_rb2lb);
+
+            line_lb2lt = new vdLine();
+            AddBarLineToDocument(line_lb2lt);
+
+            line_top2bottom = new vdLine();
+            AddBarLineToDocument(line_top2bottom);
+        }
+        private void AddBarLineToDocument(vdLine newLine)
+        {
+            newLine.SetUnRegisterDocument(document);
+            newLine.setDocumentDefaults();
+            document.Model.Entities.AddItem(newLine);
         }
         private void CalcRectData()
         {
             int halfWidth = (int)(beamWidth * 0.5f);
             int halfHeight = (int)(beamHeight * 0.5f);
-
-            leftTop = new Point2(center.X - halfWidth, center.Y + halfHeight);
-            rightTop = new Point2(center.X + halfWidth, center.Y + halfHeight);
-            rightBottom = new Point2(center.X + halfWidth, center.Y - halfHeight);
-            leftBottom = new Point2(center.X - halfWidth, center.Y - halfHeight);
-            top = new Point2(center.X, center.Y + halfHeight);
-            bottom = new Point2(center.X, center.Y - halfHeight);
+            
+            leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
+            rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
+            rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
+            leftBottom = new gPoint(center.x - halfWidth, center.y - halfHeight);
+            top = new gPoint(center.x, center.y + halfHeight);
+            bottom = new gPoint(center.x, center.y - halfHeight);
 
             double[,] rotMatrix = new double[2, 2];
-            rotMatrix[0, 0] = Math.Cos(rotation * Vector2.DegreesToRadians);
-            rotMatrix[0, 1] = -Math.Sin(rotation * Vector2.DegreesToRadians);
-            rotMatrix[1,0] = Math.Sin(rotation * Vector2.DegreesToRadians);
-            rotMatrix[1,1] = Math.Cos(rotation * Vector2.DegreesToRadians);
+            rotMatrix[0, 0] = Math.Cos(Globals.DegreesToRadians(rotation));
+            rotMatrix[0, 1] = -Math.Sin(Globals.DegreesToRadians(rotation));
+            rotMatrix[1, 0] = Math.Sin(Globals.DegreesToRadians(rotation));
+            rotMatrix[1, 1] = Math.Cos(Globals.DegreesToRadians(rotation));
 
-            leftTop = leftTop.RotateAt(center, rotation);
-            rightTop = rightTop.RotateAt(center, rotation);
-            rightBottom = rightBottom.RotateAt(center, rotation);
-            leftBottom = leftBottom.RotateAt(center, rotation);
-            top = top.RotateAt(center, rotation);
-            bottom = bottom.RotateAt(center, rotation);
+            leftTop = CalcMatrixMultiply(rotMatrix, leftTop);
+            rightTop = CalcMatrixMultiply(rotMatrix, rightTop);
+            rightBottom = CalcMatrixMultiply(rotMatrix, rightBottom);
+            leftBottom = CalcMatrixMultiply(rotMatrix, leftBottom);
+            top = CalcMatrixMultiply(rotMatrix, top);
+            bottom = CalcMatrixMultiply(rotMatrix, bottom);
+
+            line_lt2rt.StartPoint = leftTop;
+            line_lt2rt.EndPoint = rightTop;
+
+            line_rt2rb.StartPoint = rightTop;
+            line_rt2rb.EndPoint = rightBottom;
+
+            line_rb2lb.StartPoint = rightBottom;
+            line_rb2lb.EndPoint = leftBottom;
+
+            line_lb2lt.StartPoint = leftBottom;
+            line_lb2lt.EndPoint = leftTop;
+
+            line_top2bottom.StartPoint = top;
+            line_top2bottom.EndPoint = bottom;
         }
-        public void DrawBeam(Graphics g)
+        private gPoint CalcMatrixMultiply(double[,] mat, gPoint vec)
         {
-            Pen pen = new Pen(DrawColor, 2);
-            g.DrawLine(pen, MathSupporter.Instance.TransformToLeftHand(leftTop),
-                MathSupporter.Instance.TransformToLeftHand(rightTop));
-            g.DrawLine(pen, MathSupporter.Instance.TransformToLeftHand(rightTop),
-                MathSupporter.Instance.TransformToLeftHand(rightBottom));
-            g.DrawLine(pen, MathSupporter.Instance.TransformToLeftHand(rightBottom),
-                MathSupporter.Instance.TransformToLeftHand(leftBottom));
-            g.DrawLine(pen, MathSupporter.Instance.TransformToLeftHand(leftBottom),
-                MathSupporter.Instance.TransformToLeftHand(leftTop));
-
-            Pen innerLinePen = new Pen(Color.AliceBlue, 2);
-            innerLinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            g.DrawLine(innerLinePen, MathSupporter.Instance.TransformToLeftHand(bottom), MathSupporter.Instance.TransformToLeftHand(top));
+            gPoint result = new gPoint();
+            result.x = ((mat[0, 0] * (vec.x - center.x)) + (mat[0, 1] * (vec.y - center.y)) + center.x);
+            result.y = ((mat[1, 0] * (vec.x - center.x)) + (mat[1, 1] * (vec.y - center.y)) + center.y);
+            return result;
         }
-        public void SetPosition(Point2 newPos)
+        public void DrawBeam(vdDocument document)
+        {
+            Debug.WriteLine($"{beamName} End : {line_lt2rt.EndPoint} ");
+            line_lt2rt.SetUnRegisterDocument(document);
+            line_lt2rt.setDocumentDefaults();
+            line_lt2rt.Update();
+
+            line_rt2rb.SetUnRegisterDocument(document);
+            line_rt2rb.setDocumentDefaults();
+            line_rt2rb.Update();
+
+            line_rb2lb.SetUnRegisterDocument(document);
+            line_rb2lb.setDocumentDefaults();
+            line_rb2lb.Update();
+
+            line_lb2lt.SetUnRegisterDocument(document);
+            line_lb2lt.setDocumentDefaults();
+            line_lb2lt.Update();
+
+            line_top2bottom.SetUnRegisterDocument(document);
+            line_top2bottom.setDocumentDefaults();
+            line_top2bottom.Update();
+
+            document.Redraw(true);
+        }
+
+
+        #region Translate Beam Transform Method
+        public void SetPosition(gPoint newPos)
         {
             center = newPos;
             CalcRectData();
         }
-        public void Translate(Point2 delta)
+        public void Translate(gPoint delta)
         {
             center += delta;
             CalcRectData();
@@ -124,8 +192,9 @@ namespace MathPractice
         }
         public void SetRotation(int degreeAngle)
         {
-            rotation = degreeAngle - CALIB_ROTCOORD;
+            rotation = degreeAngle;
             CalcRectData();
         }
+        #endregion
     }
 }
