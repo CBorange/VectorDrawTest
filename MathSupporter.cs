@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing.Drawing2D;
-using System.Drawing;
 using Spatial;
-using System.Diagnostics;
+using VectorDraw.Geometry;
+using VectorDraw.Professional.vdPrimaries;
+using VectorDraw.Professional.vdFigures;
+using VectorDraw.Professional.vdObjects;
 
 namespace MathPractice
 {
     public class MathSupporter
     {
+        private MathSupporter() { }
         private static MathSupporter instance;
         public static MathSupporter Instance
         {
@@ -47,6 +51,49 @@ namespace MathPractice
             Point2 resultPoint = newPoint + transformPoint;
 
             return new Point((int)resultPoint.X, (int)resultPoint.Y);
+        }
+        public gPoint GetCrossPoint(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
+        {
+            Vector2 lineA2C = new Vector2(pointC.x - pointA.x, pointC.y - pointA.y);
+            Vector2 lineA2B = new Vector2(pointB.x - pointA.x, pointB.y - pointA.y);
+            Vector2 lineA2B_Unit = lineA2B.Normalize();
+
+            double a2eLength = lineA2C.Dot(lineA2B_Unit);
+            Vector2 lineA2E = lineA2B_Unit * a2eLength;
+            gPoint pointE = new gPoint(pointA.x + lineA2E.X, pointA.y + lineA2E.Y);
+
+            Vector2 lineC2E = new Vector2(pointE.x - pointC.x, pointE.y - pointC.y);
+            Vector2 lineC2E_Unit = lineC2E.Normalize();
+            Vector2 lineC2D = new Vector2(pointD.x - pointC.x, pointD.y - pointC.y);
+            double c2fLength = lineC2D.Dot(lineC2E_Unit);
+
+            Vector2 lineC2F = lineC2E_Unit * c2fLength;
+            gPoint pointF = new gPoint(pointC.x + lineC2F.X, pointC.y + lineC2F.Y);
+
+            double c2eRatio = lineC2E.Length() / c2fLength;
+
+            double crossPointLength = lineC2D.Length() * c2eRatio;
+            Vector2 lineC2D_Unit = lineC2D.Normalize();
+            Vector2 lineC2CrossPoint = lineC2D_Unit * crossPointLength;
+
+            gPoint crossPoint = new gPoint(pointC.x + lineC2CrossPoint.X, pointC.y + lineC2CrossPoint.Y);
+            return crossPoint;
+        }
+        public Vector2 GetVectorBy2Point(gPoint target, gPoint origin)
+        {
+            return new Vector2(target.x - origin.x, target.y - origin.y);
+        }
+        public gPoint GetExpandPoint(gPoint origin, Vector2 expandVec)
+        {
+            return new gPoint(origin.x + expandVec.X, origin.y + expandVec.Y);
+        }
+        public gPoint GetExpandedPointBy2Points(gPoint startP, gPoint endP, int expandValue)
+        {
+            Vector2 vec = GetVectorBy2Point(startP, endP);
+            vec = vec.Normalize();
+            vec *= expandValue;
+            gPoint expanded = GetExpandPoint(startP, vec);
+            return expanded;
         }
     }
 }

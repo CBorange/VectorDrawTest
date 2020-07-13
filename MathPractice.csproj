@@ -63,7 +63,8 @@
     <Reference Include="VectorDraw.SolidModel, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrawSupporter.cs" />
+    <Compile Include="Beam.cs" />
+    <Compile Include="CuttingRect.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -45,11 +45,11 @@ namespace MathPractice
         private gPoint rightBottom;
         public gPoint RightBottom { get { return rightBottom; } }
 
-        private gPoint bottom;
-        public gPoint Bottom { get { return bottom; } }
+        private gPoint right;
+        public gPoint Right { get { return right; } }
 
-        private gPoint top;
-        public gPoint Top { get { return top; } }
+        private gPoint left;
+        public gPoint Left { get { return left; } }
 
         private gPoint center;
         public gPoint Center { get { return center; } }
@@ -60,18 +60,20 @@ namespace MathPractice
         private vdLine line_rt2rb;
         private vdLine line_rb2lb;
         private vdLine line_lb2lt;
-        private vdLine line_top2bottom;
+        private vdLine line_left2right;
 
-        public short DrawColorIndex;
-        public Beam(gPoint centerPos,vdDocument document, int width, int height, short colorIndex,int rot,
-            string beamName)
+        public Color DrawColor;
+        public Color CenterColor;
+        public Beam(gPoint centerPos, vdDocument document, int width, int height, Color drawColor,
+            Color centerColor, int rot, string beamName)
         {
             beamWidth = width;
             beamHeight = height;
             center = centerPos;
             rotation = rot;
             this.beamName = beamName;
-            DrawColorIndex = colorIndex;
+            DrawColor = drawColor;
+            CenterColor = centerColor;
             this.document = document;
 
             InitDrawLine();
@@ -91,8 +93,8 @@ namespace MathPractice
             line_lb2lt = new vdLine();
             AddBarLineToDocument(line_lb2lt);
 
-            line_top2bottom = new vdLine();
-            AddBarLineToDocument(line_top2bottom);
+            line_left2right = new vdLine();
+            AddBarLineToDocument(line_left2right);
         }
         private void AddBarLineToDocument(vdLine newLine)
         {
@@ -104,13 +106,13 @@ namespace MathPractice
         {
             int halfWidth = (int)(beamWidth * 0.5f);
             int halfHeight = (int)(beamHeight * 0.5f);
-            
+
             leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
             rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
             rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
             leftBottom = new gPoint(center.x - halfWidth, center.y - halfHeight);
-            top = new gPoint(center.x, center.y + halfHeight);
-            bottom = new gPoint(center.x, center.y - halfHeight);
+            left = new gPoint(center.x - halfWidth, center.y);
+            right = new gPoint(center.x + halfWidth, center.y);
 
             double[,] rotMatrix = new double[2, 2];
             rotMatrix[0, 0] = Math.Cos(Globals.DegreesToRadians(rotation));
@@ -122,8 +124,8 @@ namespace MathPractice
             rightTop = CalcMatrixMultiply(rotMatrix, rightTop);
             rightBottom = CalcMatrixMultiply(rotMatrix, rightBottom);
             leftBottom = CalcMatrixMultiply(rotMatrix, leftBottom);
-            top = CalcMatrixMultiply(rotMatrix, top);
-            bottom = CalcMatrixMultiply(rotMatrix, bottom);
+            left = CalcMatrixMultiply(rotMatrix, left);
+            right = CalcMatrixMultiply(rotMatrix, right);
 
             line_lt2rt.StartPoint = leftTop;
             line_lt2rt.EndPoint = rightTop;
@@ -137,8 +139,8 @@ namespace MathPractice
             line_lb2lt.StartPoint = leftBottom;
             line_lb2lt.EndPoint = leftTop;
 
-            line_top2bottom.StartPoint = top;
-            line_top2bottom.EndPoint = bottom;
+            line_left2right.StartPoint = left;
+            line_left2right.EndPoint = right;
         }
         private gPoint CalcMatrixMultiply(double[,] mat, gPoint vec)
         {
@@ -149,26 +151,20 @@ namespace MathPractice
         }
         public void DrawBeam(vdDocument document)
         {
-            Debug.WriteLine($"{beamName} End : {line_lt2rt.EndPoint} ");
-            line_lt2rt.SetUnRegisterDocument(document);
-            line_lt2rt.setDocumentDefaults();
             line_lt2rt.Update();
+            line_lt2rt.PenColor.SystemColor = DrawColor;
 
-            line_rt2rb.SetUnRegisterDocument(document);
-            line_rt2rb.setDocumentDefaults();
             line_rt2rb.Update();
+            line_rt2rb.PenColor.SystemColor = DrawColor;
 
-            line_rb2lb.SetUnRegisterDocument(document);
-            line_rb2lb.setDocumentDefaults();
             line_rb2lb.Update();
+            line_rb2lb.PenColor.SystemColor = DrawColor;
 
-            line_lb2lt.SetUnRegisterDocument(document);
-            line_lb2lt.setDocumentDefaults();
             line_lb2lt.Update();
+            line_lb2lt.PenColor.SystemColor = DrawColor;
 
-            line_top2bottom.SetUnRegisterDocument(document);
-            line_top2bottom.setDocumentDefaults();
-            line_top2bottom.Update();
+            line_left2right.Update();
+            line_left2right.PenColor.SystemColor = CenterColor;
 
             document.Redraw(true);
         }
@@ -188,6 +184,10 @@ namespace MathPractice
         public void RotateBeam(int degreeAngle)
         {
             rotation += degreeAngle;
+            if (rotation > 360)
+                rotation = rotation - 360;
+            else if (rotation < 0)
+                rotation = rotation + 360;
             CalcRectData();
         }
         public void SetRotation(int degreeAngle)
