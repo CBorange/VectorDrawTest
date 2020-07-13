@@ -32,9 +32,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.vdCommandLine1 = new VectorDraw.Professional.vdCommandLine.vdCommandLine();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // vectorDrawBaseControl1
@@ -42,8 +42,6 @@
             this.vectorDrawBaseControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.vectorDrawBaseControl1.AllowDrop = true;
             this.vectorDrawBaseControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.vectorDrawBaseControl1.DisableVdrawDxf = false;
-            this.vectorDrawBaseControl1.EnableAutoGripOn = true;
             this.vectorDrawBaseControl1.Location = new System.Drawing.Point(12, 12);
             this.vectorDrawBaseControl1.Name = "vectorDrawBaseControl1";
             this.vectorDrawBaseControl1.Size = new System.Drawing.Size(650, 650);
@@ -71,7 +69,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(668, 129);
+            this.button3.Location = new System.Drawing.Point(668, 87);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 28);
             this.button3.TabIndex = 3;
@@ -79,40 +77,53 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.CuttingByHorizontal_Click);
             // 
+            // vdCommandLine1
+            // 
+            this.vdCommandLine1.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
+            this.vdCommandLine1.EnablePopupForm = true;
+            this.vdCommandLine1.Location = new System.Drawing.Point(12, 668);
+            this.vdCommandLine1.MaxNumberOfCommandsShown = 10;
+            this.vdCommandLine1.Name = "vdCommandLine1";
+            this.vdCommandLine1.PopupBackColor = System.Drawing.Color.White;
+            this.vdCommandLine1.PopupFormFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.vdCommandLine1.PopupFormShowBelow = false;
+            this.vdCommandLine1.PopupFormShowIcons = true;
+            this.vdCommandLine1.PopupFormWidth = 250;
+            this.vdCommandLine1.PopuphighlightColor = System.Drawing.SystemColors.Highlight;
+            this.vdCommandLine1.ProcessKeyMessages = true;
+            this.vdCommandLine1.ShowPopupFormPerigram = true;
+            this.vdCommandLine1.Size = new System.Drawing.Size(650, 54);
+            this.vdCommandLine1.TabIndex = 7;
+            this.vdCommandLine1.UserTextString = "";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(668, 130);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(94, 28);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "라인";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(668, 163);
+            this.button4.Location = new System.Drawing.Point(668, 164);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 28);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "세로 바 위";
+            this.button4.TabIndex = 9;
+            this.button4.Text = "지우기";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.CuttingByVertical_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(668, 93);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(94, 21);
-            this.textBox1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(666, 78);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "회전 각도";
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 677);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(774, 734);
             this.Controls.Add(this.button4);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.vdCommandLine1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -121,7 +132,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -131,9 +141,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private VectorDraw.Professional.vdCommandLine.vdCommandLine vdCommandLine1;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
     }
 }
 

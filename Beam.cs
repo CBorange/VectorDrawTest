@@ -114,18 +114,12 @@ namespace MathPractice
             left = new gPoint(center.x - halfWidth, center.y);
             right = new gPoint(center.x + halfWidth, center.y);
 
-            double[,] rotMatrix = new double[2, 2];
-            rotMatrix[0, 0] = Math.Cos(Globals.DegreesToRadians(rotation));
-            rotMatrix[0, 1] = -Math.Sin(Globals.DegreesToRadians(rotation));
-            rotMatrix[1, 0] = Math.Sin(Globals.DegreesToRadians(rotation));
-            rotMatrix[1, 1] = Math.Cos(Globals.DegreesToRadians(rotation));
-
-            leftTop = CalcMatrixMultiply(rotMatrix, leftTop);
-            rightTop = CalcMatrixMultiply(rotMatrix, rightTop);
-            rightBottom = CalcMatrixMultiply(rotMatrix, rightBottom);
-            leftBottom = CalcMatrixMultiply(rotMatrix, leftBottom);
-            left = CalcMatrixMultiply(rotMatrix, left);
-            right = CalcMatrixMultiply(rotMatrix, right);
+            leftTop = MathSupporter.Instance.GetRotatedPoint(rotation, leftTop, center);
+            rightTop = MathSupporter.Instance.GetRotatedPoint(rotation, rightTop, center);
+            rightBottom = MathSupporter.Instance.GetRotatedPoint(rotation, rightBottom, center);
+            leftBottom = MathSupporter.Instance.GetRotatedPoint(rotation, leftBottom, center);
+            left = MathSupporter.Instance.GetRotatedPoint(rotation, left, center);
+            right = MathSupporter.Instance.GetRotatedPoint(rotation, right, center);
 
             line_lt2rt.StartPoint = leftTop;
             line_lt2rt.EndPoint = rightTop;
@@ -141,13 +135,6 @@ namespace MathPractice
 
             line_left2right.StartPoint = left;
             line_left2right.EndPoint = right;
-        }
-        private gPoint CalcMatrixMultiply(double[,] mat, gPoint vec)
-        {
-            gPoint result = new gPoint();
-            result.x = ((mat[0, 0] * (vec.x - center.x)) + (mat[0, 1] * (vec.y - center.y)) + center.x);
-            result.y = ((mat[1, 0] * (vec.x - center.x)) + (mat[1, 1] * (vec.y - center.y)) + center.y);
-            return result;
         }
         public void DrawBeam(vdDocument document)
         {

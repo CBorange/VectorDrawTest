@@ -1,0 +1,2 @@
+Line,l,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,LineEx
+Erase,e,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,EraseEx

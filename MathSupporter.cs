@@ -95,5 +95,22 @@ namespace MathPractice
             gPoint expanded = GetExpandPoint(startP, vec);
             return expanded;
         }
+        public double[,] GetRotationMat(int rot)
+        {
+            double[,] rotMatrix = new double[2, 2];
+            rotMatrix[0, 0] = Math.Cos(Globals.DegreesToRadians(rot));
+            rotMatrix[0, 1] = -Math.Sin(Globals.DegreesToRadians(rot));
+            rotMatrix[1, 0] = Math.Sin(Globals.DegreesToRadians(rot));
+            rotMatrix[1, 1] = Math.Cos(Globals.DegreesToRadians(rot));
+            return rotMatrix;
+        }
+        public gPoint GetRotatedPoint(int rot, gPoint point, gPoint center)
+        {
+            double[,] mat = GetRotationMat(rot);
+            gPoint result = new gPoint();
+            result.x = ((mat[0, 0] * (point.x - center.x)) + (mat[0, 1] * (point.y - center.y)) + center.x);
+            result.y = ((mat[1, 0] * (point.x - center.x)) + (mat[1, 1] * (point.y - center.y)) + center.y);
+            return result;
+        }
     }
 }
