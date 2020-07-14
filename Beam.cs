@@ -54,6 +54,17 @@ namespace MathPractice
         private gPoint center;
         public gPoint Center { get { return center; } }
 
+        private Beam attachedBeam;
+        public Beam AttachedBeam { get { return attachedBeam; } }
+
+
+        // Figures 
+        private List<FigureDrawer> cuttingFigures;
+        public List<FigureDrawer> CuttingFigures { get { return cuttingFigures; } }
+
+        private List<FigureDrawer> expandFigures;
+        public List<FigureDrawer> ExpandFigures { get { return expandFigures; } }
+
         // Draw Variable
         private vdDocument document;
         private vdLine line_lt2rt;
@@ -75,6 +86,10 @@ namespace MathPractice
             DrawColor = drawColor;
             CenterColor = centerColor;
             this.document = document;
+            attachedBeam = null;
+
+            cuttingFigures = new List<FigureDrawer>();
+            expandFigures = new List<FigureDrawer>();
 
             InitDrawLine();
             CalcRectData();
@@ -106,6 +121,14 @@ namespace MathPractice
         {
             int halfWidth = (int)(beamWidth * 0.5f);
             int halfHeight = (int)(beamHeight * 0.5f);
+
+            if (attachedBeam != null)
+            {
+                Vector2 temp = new Vector2(BeamWidth * Math.Cos(Globals.DegreesToRadians(rotation)),
+                    BeamWidth * Math.Sin(Globals.DegreesToRadians(rotation)));
+                temp *= 0.5f;
+                center = MathSupporter.Instance.GetExpandPoint(attachedBeam.center, temp);
+            }
 
             leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
             rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
@@ -153,7 +176,32 @@ namespace MathPractice
             line_left2right.Update();
             line_left2right.PenColor.SystemColor = CenterColor;
 
+            for (int i = 0; i < cuttingFigures.Count; ++i)
+            {
+                cuttingFigures[i].DrawCuttingRect();
+            }
+            for (int i = 0; i < expandFigures.Count; ++i)
+            {
+                expandFigures[i].DrawCuttingRect();
+            }
+
             document.Redraw(true);
+        }
+        public void RemoveAllFigures()
+        {
+            int cutCount = cuttingFigures.Count;
+            for (int i = 0; i < cutCount; ++i)
+            {
+                cuttingFigures[0].Release();
+                cuttingFigures.RemoveAt(0);
+            }
+
+            int exCount = expandFigures.Count;
+            for (int i = 0; i < exCount; ++i)
+            {
+                expandFigures[0].Release();
+                expandFigures.RemoveAt(0);
+            }
         }
 
 
@@ -180,6 +228,11 @@ namespace MathPractice
         public void SetRotation(int degreeAngle)
         {
             rotation = degreeAngle;
+            CalcRectData();
+        }
+        public void AttachToBeam(Beam verBeam)
+        {
+            attachedBeam = verBeam;
             CalcRectData();
         }
         #endregion

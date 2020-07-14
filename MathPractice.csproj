@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beam.cs" />
-    <Compile Include="CuttingRect.cs" />
+    <Compile Include="FigureDrawer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

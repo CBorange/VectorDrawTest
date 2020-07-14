@@ -129,5 +129,10 @@ namespace MathPractice
 
             return result;
         }
+        public double GetShetaBy2Points(gPoint center, gPoint target)
+        {
+            gPoint diffrent = center - target;
+            return Globals.RadiansToDegrees(Math.Atan2(diffrent.y, diffrent.x));
+        }
     }
 }

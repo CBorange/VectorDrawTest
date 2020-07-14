@@ -153,9 +153,17 @@ namespace MathPractice
             }
             for (int i = 0; i < circles.Length; ++i)
             {
+                circles[i].visibility = vdFigure.VisibilityEnum.Invisible;
                 circles[i].Update();
             }
             document.Redraw(true);
+        }
+        public void Release()
+        {
+            for (int i = 0; i < lines.Length; ++i)
+                document.Model.Entities.RemoveItem(lines[i]);
+            for (int i = 0; i < circles.Length; ++i)
+                document.Model.Entities.RemoveItem(circles[i]);
         }
     }
 }
