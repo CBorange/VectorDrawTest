@@ -79,9 +79,18 @@ namespace MathPractice
             gPoint crossPoint = new gPoint(pointC.x + lineC2CrossPoint.X, pointC.y + lineC2CrossPoint.Y);
             return crossPoint;
         }
+        public double GetLengthBy2Point(gPoint pointA, gPoint pointB)
+        {
+            Vector2 vec = new Vector2(pointA.x - pointB.x, pointA.y - pointB.y);
+            return vec.Length();
+        }
         public Vector2 GetVectorBy2Point(gPoint target, gPoint origin)
         {
             return new Vector2(target.x - origin.x, target.y - origin.y);
+        }
+        public Vector2 GetUnitVecBy2Point(gPoint target, gPoint origin)
+        {
+            return GetVectorBy2Point(target, origin).Normalize();
         }
         public gPoint GetExpandPoint(gPoint origin, Vector2 expandVec)
         {
@@ -95,7 +104,7 @@ namespace MathPractice
             gPoint expanded = GetExpandPoint(startP, vec);
             return expanded;
         }
-        public double[,] GetRotationMat(int rot)
+        public double[,] GetRotationMat(double rot)
         {
             double[,] rotMatrix = new double[2, 2];
             rotMatrix[0, 0] = Math.Cos(Globals.DegreesToRadians(rot));
@@ -104,12 +113,20 @@ namespace MathPractice
             rotMatrix[1, 1] = Math.Cos(Globals.DegreesToRadians(rot));
             return rotMatrix;
         }
-        public gPoint GetRotatedPoint(int rot, gPoint point, gPoint center)
+        public gPoint GetRotatedPoint(double rot, gPoint point, gPoint center)
         {
             double[,] mat = GetRotationMat(rot);
             gPoint result = new gPoint();
             result.x = ((mat[0, 0] * (point.x - center.x)) + (mat[0, 1] * (point.y - center.y)) + center.x);
             result.y = ((mat[1, 0] * (point.x - center.x)) + (mat[1, 1] * (point.y - center.y)) + center.y);
+            return result;
+        }
+        public Vector2 GetRotatedVector(double rot, gPoint center, gPoint unitPoint)
+        {
+            double[,] mat = GetRotationMat(rot);
+            Vector2 result = new Vector2(((mat[0, 0] * (unitPoint.x - center.x)) + (mat[0, 1] * (unitPoint.y - center.y)) + center.x),
+                ((mat[1, 0] * (unitPoint.x - center.x)) + (mat[1, 1] * (unitPoint.y - center.y)) + center.y));
+
             return result;
         }
     }

@@ -28,8 +28,8 @@ namespace MathPractice
         private string beamName;
 
         // Rect Point
-        private int rotation;
-        public int Rotation
+        private double rotation;
+        public double Rotation
         {
             get { return rotation; }
         }
@@ -65,7 +65,7 @@ namespace MathPractice
         public Color DrawColor;
         public Color CenterColor;
         public Beam(gPoint centerPos, vdDocument document, int width, int height, Color drawColor,
-            Color centerColor, int rot, string beamName)
+            Color centerColor, double rot, string beamName)
         {
             beamWidth = width;
             beamHeight = height;

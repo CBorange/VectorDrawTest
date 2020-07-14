@@ -13,7 +13,7 @@ using VectorDraw.Professional.vdObjects;
 
 namespace MathPractice
 {
-    public class CuttingRect
+    public class FigureDrawer
     {
         private bool visible;
         public bool Visible
@@ -54,22 +54,26 @@ namespace MathPractice
         {
             get { return lines; }
         }
+        public Color DrawColor;
+        public bool LinkedDraw;
 
         // Draw Variable
         private vdDocument document;
 
-        public CuttingRect(gPoint[] points, vdDocument document)
+        public FigureDrawer(gPoint[] points, vdDocument document, Color drawColor)
         {
             this.points = points;
             this.document = document;
+            DrawColor = drawColor;
 
             ClearFigures();
             Visible = true;
         }
-        public CuttingRect(vdDocument document)
+        public FigureDrawer(vdDocument document)
         {
             this.document = document;
             Visible = false;
+            LinkedDraw = true;
         }
         private void ClearFigures()
         {
@@ -79,7 +83,10 @@ namespace MathPractice
                 for (int i = 0; i < lines.Length; ++i)
                     document.Model.Entities.RemoveItem(lines[i]);
             }
-            lines = new vdLine[(points.Length / 2) + 1];
+            if (LinkedDraw)
+                lines = new vdLine[points.Length];
+            else
+                lines = new vdLine[(points.Length / 2) + 1];
             for (int i = 0; i < lines.Length; ++i)
             {
                 lines[i] = new vdLine();
@@ -88,8 +95,12 @@ namespace MathPractice
 
             for (int i = 0; i < lines.Length; ++i)
             {
+                int nextPointIdx = i + 1;
+                if (LinkedDraw && (nextPointIdx > (lines.Length - 1)))  
+                    nextPointIdx = 0;
+
                 lines[i].StartPoint = points[i];
-                lines[i].EndPoint = points[i + 1];
+                lines[i].EndPoint = points[nextPointIdx];
                 lines[i].Update();
             }
 
@@ -107,7 +118,7 @@ namespace MathPractice
             }
             for (int i = 0; i < circles.Length; ++i)
             {
-                circles[i].Radius = 3;
+                circles[i].Radius = 1.5;
                 circles[i].Center = points[i];
                 circles[i].Update();
             }
@@ -137,11 +148,13 @@ namespace MathPractice
 
             for (int i = 0; i < lines.Length; ++i)
             {
-                lines[i].PenColor.SystemColor = Color.Green;
                 lines[i].Update();
+                lines[i].PenColor.SystemColor = DrawColor;
             }
             for (int i = 0; i < circles.Length; ++i)
+            {
                 circles[i].Update();
+            }
             document.Redraw(true);
         }
     }
