@@ -115,6 +115,11 @@ namespace MathPractice
         }
         public gPoint GetRotatedPoint(double rot, gPoint point, gPoint center)
         {
+            if (rot > 90 && rot <270)
+                rot -= 180;
+            if (rot >= 270 && rot < 360)
+                rot -= 360;
+
             double[,] mat = GetRotationMat(rot);
             gPoint result = new gPoint();
             result.x = ((mat[0, 0] * (point.x - center.x)) + (mat[0, 1] * (point.y - center.y)) + center.x);

@@ -91,6 +91,7 @@ namespace MathPractice
             cuttingFigures = new List<FigureDrawer>();
             expandFigures = new List<FigureDrawer>();
 
+            ConvertRotation();
             InitDrawLine();
             CalcRectData();
         }
@@ -159,6 +160,13 @@ namespace MathPractice
             line_left2right.StartPoint = left;
             line_left2right.EndPoint = right;
         }
+        private void ConvertRect_2And3Quadrant()
+        {
+            leftTop = new gPoint(rightBottom);
+            rightTop = new gPoint(leftBottom);
+            rightBottom = new gPoint(leftTop);
+            leftBottom = new gPoint(rightTop);
+        }
         public void DrawBeam(vdDocument document)
         {
             line_lt2rt.Update();
@@ -216,14 +224,20 @@ namespace MathPractice
             center += delta;
             CalcRectData();
         }
-        public void RotateBeam(int degreeAngle)
+        public void RotateBeam(double degreeAngle)
         {
             rotation += degreeAngle;
+            ConvertRotation();
+            CalcRectData();
+        }
+        private void ConvertRotation()
+        {
             if (rotation > 360)
                 rotation = rotation - 360;
             else if (rotation < 0)
                 rotation = rotation + 360;
-            CalcRectData();
+
+
         }
         public void SetRotation(int degreeAngle)
         {
