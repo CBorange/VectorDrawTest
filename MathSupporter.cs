@@ -139,5 +139,28 @@ namespace MathPractice
             gPoint diffrent = center - target;
             return Globals.RadiansToDegrees(Math.Atan2(diffrent.y, diffrent.x));
         }
+        public bool OBBColision(Beam beamA, Beam beamB)
+        {
+            Vector2 disVec = GetVectorBy2Point(beamA.Center, beamB.Center);
+            Vector2[] seperateVec =
+            {
+                GetVectorBy2Point(beamA.Top,beamA.Center),
+                GetVectorBy2Point(beamA.Right,beamA.Center),
+                GetVectorBy2Point(beamB.Top,beamB.Center),
+                GetVectorBy2Point(beamB.Right,beamB.Center)
+            };
+            Vector2 seperateUnit;
+            for (int seperateIDX = 0; seperateIDX < 4; ++seperateIDX)
+            {
+                double sum = 0;
+                seperateUnit = seperateVec[seperateIDX].Normalize();
+                for (int vecIDx = 0; vecIDx < 4; ++vecIDx)
+                    sum += Math.Abs(seperateVec[vecIDx].Dot(seperateUnit));
+
+                if (Math.Abs(disVec.Dot(seperateUnit)) > sum)
+                    return false;
+            }
+            return true;
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace MathPractice
         private const int SIDEBEAM_HEIGHT = 50;
 
         private List<Beam> verBeams;
+        private List<Beam> calcVerBeams;
         private List<Beam> horBeams;
         private Beam vertical_Beam1;
         private Beam vertical_Beam2;
@@ -42,6 +43,7 @@ namespace MathPractice
             math = MathSupporter.Instance;
             verBeams = new List<Beam>();
             horBeams = new List<Beam>();
+            calcVerBeams = new List<Beam>();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -69,8 +71,11 @@ namespace MathPractice
             verBeams.Add(vertical_Beam1);
             verBeams.Add(vertical_Beam2);
             horBeams.Add(horizontal_Beam);
-            //horizontal_Beam.AttachToBeam(vertical_Beam1);
 
+            for (int i = 0; i < horBeams.Count; ++i)
+            {
+                CollisionCheck(horBeams[i]);
+            }
         }
 
         // DrawBaseLine
@@ -108,6 +113,17 @@ namespace MathPractice
             vectorDrawBaseControl1.ActiveDocument.Model.Entities.AddItem(newLine);
         }
 
+        private void CollisionCheck(Beam horBeam)
+        {
+            horBeam.RemoveAllCalcTarget();
+            for (int i = 0; i < verBeams.Count; ++i)
+            {
+                if (math.OBBColision(horBeam, verBeams[i]))
+                {
+                    horBeam.CalcTargetBeams.Add(verBeams[i]);
+                }
+            }
+        }
         private void DrawBeam()
         {
             for (int i = 0; i < verBeams.Count; ++i)
@@ -119,6 +135,8 @@ namespace MathPractice
         {
             for (int i = 0; i < horBeams.Count; ++i)
                 horBeams[i].RotateBeam(degree);
+            for (int i = 0; i < horBeams.Count; ++i)
+                CollisionCheck(horBeams[i]);
             DrawBeam();
         }
         private void InitDegreeText()
@@ -157,9 +175,15 @@ namespace MathPractice
 
         private void CuttingByHorizontal_Click(object sender, EventArgs e)
         {
-            horizontal_Beam.RemoveAllFigures();
-            CalcCuttingRect_CrossAlgorithm(vertical_Beam1, horizontal_Beam);
-            CalcCuttingRect_CrossAlgorithm(vertical_Beam2, horizontal_Beam);
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+            {
+                horBeams[horIDX].RemoveAllFigures();
+                List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
+                for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
+                {
+                    CalcCuttingRect_CrossAlgorithm(calcBeams[verIDX], horBeams[horIDX]);
+                }
+            }
         }
         private void CalcCuttingRect_RotationAlgorithm()
         {

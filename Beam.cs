@@ -51,12 +51,20 @@ namespace MathPractice
         private gPoint left;
         public gPoint Left { get { return left; } }
 
+        private gPoint top;
+        public gPoint Top { get { return top; } }
+
+        private gPoint bottom;
+        public gPoint Bottom { get { return bottom; } }
+
         private gPoint center;
         public gPoint Center { get { return center; } }
 
         private Beam attachedBeam;
         public Beam AttachedBeam { get { return attachedBeam; } }
 
+        private List<Beam> calcTargetBeams;
+        public List<Beam> CalcTargetBeams { get { return calcTargetBeams; } }
 
         // Figures 
         private List<FigureDrawer> cuttingFigures;
@@ -88,6 +96,7 @@ namespace MathPractice
             this.document = document;
             attachedBeam = null;
 
+            calcTargetBeams = new List<Beam>();
             cuttingFigures = new List<FigureDrawer>();
             expandFigures = new List<FigureDrawer>();
 
@@ -137,6 +146,8 @@ namespace MathPractice
             leftBottom = new gPoint(center.x - halfWidth, center.y - halfHeight);
             left = new gPoint(center.x - halfWidth, center.y);
             right = new gPoint(center.x + halfWidth, center.y);
+            top = new gPoint(center.x, center.y + halfHeight);
+            bottom = new gPoint(center.x, center.y - halfHeight);
 
             leftTop = MathSupporter.Instance.GetRotatedPoint(rotation, leftTop, center);
             rightTop = MathSupporter.Instance.GetRotatedPoint(rotation, rightTop, center);
@@ -144,6 +155,8 @@ namespace MathPractice
             leftBottom = MathSupporter.Instance.GetRotatedPoint(rotation, leftBottom, center);
             left = MathSupporter.Instance.GetRotatedPoint(rotation, left, center);
             right = MathSupporter.Instance.GetRotatedPoint(rotation, right, center);
+            top = MathSupporter.Instance.GetRotatedPoint(rotation, top, center);
+            bottom = MathSupporter.Instance.GetRotatedPoint(rotation, bottom, center);
 
             line_lt2rt.StartPoint = leftTop;
             line_lt2rt.EndPoint = rightTop;
@@ -159,13 +172,6 @@ namespace MathPractice
 
             line_left2right.StartPoint = left;
             line_left2right.EndPoint = right;
-        }
-        private void ConvertRect_2And3Quadrant()
-        {
-            leftTop = new gPoint(rightBottom);
-            rightTop = new gPoint(leftBottom);
-            rightBottom = new gPoint(leftTop);
-            leftBottom = new gPoint(rightTop);
         }
         public void DrawBeam(vdDocument document)
         {
@@ -211,6 +217,10 @@ namespace MathPractice
                 expandFigures.RemoveAt(0);
             }
         }
+        public void RemoveAllCalcTarget()
+        {
+            calcTargetBeams.RemoveRange(0, calcTargetBeams.Count);
+        }
 
 
         #region Translate Beam Transform Method
@@ -236,8 +246,6 @@ namespace MathPractice
                 rotation = rotation - 360;
             else if (rotation < 0)
                 rotation = rotation + 360;
-
-
         }
         public void SetRotation(int degreeAngle)
         {
