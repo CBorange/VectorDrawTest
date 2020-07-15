@@ -11,7 +11,7 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 
-namespace MathPractice
+namespace MathPractice.Model
 {
     public class MathSupporter
     {

@@ -11,7 +11,7 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 
-namespace MathPractice
+namespace MathPractice.Model
 {
     public class Beam
     {
@@ -173,7 +173,7 @@ namespace MathPractice
             line_left2right.StartPoint = left;
             line_left2right.EndPoint = right;
         }
-        public void DrawBeam(vdDocument document)
+        public void DrawBeam()
         {
             line_lt2rt.Update();
             line_lt2rt.PenColor.SystemColor = DrawColor;

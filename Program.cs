@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MathPractice.Controller;
+using MathPractice.Model;
+using MathPractice.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +17,23 @@ namespace MathPractice
         [STAThread]
         static void Main()
         {
+            // Create Model Instance
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Form1 mainForm = new Form1();
+            VectorDrawConfigure drawConfigure = new VectorDrawConfigure();
+            BeamManager beamManager = new BeamManager();
+            BeamCollisionCalculator collisionCalculator = new BeamCollisionCalculator();
+            BeamBuilder beamBuilder = new BeamBuilder();
+            mainForm.InitializeAllModels(drawConfigure, beamManager, collisionCalculator, beamBuilder);
+
+            MainController mainController = new MainController(mainForm, drawConfigure, beamManager, collisionCalculator,
+                beamBuilder);
+            mainForm.AttachController(mainController);
+
+
+            Application.Run(mainForm);
         }
     }
 }
