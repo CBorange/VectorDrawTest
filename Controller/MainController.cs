@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MathPractice.View;
 using MathPractice.Controller;
 using MathPractice.Model;
 
@@ -42,6 +41,14 @@ namespace MathPractice.Controller
         public void CuttingBeam_HorizontalUp()
         {
             beamManager.CuttingBeam_HorizontalUp();
+        }
+        public void CreateNewHorBeam()
+        {
+
+        }
+        public void CreateNewVerBeam()
+        {
+
         }
     }
 }

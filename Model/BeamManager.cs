@@ -14,9 +14,7 @@ namespace MathPractice.Model
 {
     public class BeamManager
     {
-        // Const
-        private const int DEFAULT_BEAM_WIDTH = 200;
-        private const int DEFAULT_BEAM_HEIGHT = 50;
+
 
         // Variable
         private vdDocument document;
@@ -60,13 +58,13 @@ namespace MathPractice.Model
             verBeams = new List<Beam>();
             horBeams = new List<Beam>();
 
-            verBeams.Add(new Beam(new gPoint(-25, 100), document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
+            verBeams.Add(new Beam(new gPoint(-25, 100), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
                 Color.Blue, 90, "verBeam1"));
 
-            verBeams.Add(new Beam(new gPoint(-50, 200), document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
+            verBeams.Add(new Beam(new gPoint(-50, 200), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
                 Color.Blue, 90, "verBeam2"));
 
-            horBeams.Add(new Beam(new gPoint(100, 100), document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Red,
+            horBeams.Add(new Beam(new gPoint(100, 100), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Red,
                 Color.Red, 45, "HorBeam1"));
 
             for (int i = 0; i < horBeams.Count; ++i)

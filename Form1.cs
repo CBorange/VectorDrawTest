@@ -53,7 +53,7 @@ namespace MathPractice
             drawConfigure.InitializeSystem(vectorDrawBaseControl1.ActiveDocument, vdCommandLine1);
             collisionCalculator.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
             beamManager.Initialize(vectorDrawBaseControl1.ActiveDocument, collisionCalculator, drawConfigure);
-            beamBuilder.Initialize(vectorDrawBaseControl1.ActiveDocument);
+            beamBuilder.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
         }
 
         private void PlusRotate_Click(object sender, EventArgs e)
@@ -71,5 +71,20 @@ namespace MathPractice
             mainController.CuttingBeam_HorizontalUp();
         }
 
+        private void CreateHorBeam(object sender, EventArgs e)
+        {
+            gPoint point;
+            vectorDrawBaseControl1.ActiveDocument.ActionUtility.getUserPoint(out point);
+            if (point == null)
+                Debug.Write("null");
+        }
+
+        private void CreateVerBeam(object sender, EventArgs e)
+        {
+            gPoint point;
+            vectorDrawBaseControl1.ActiveDocument.ActionUtility.getUserPoint(out point);
+            if (point == null)
+                Debug.Write("null");
+        }
     }
 }

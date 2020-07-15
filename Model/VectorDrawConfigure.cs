@@ -58,5 +58,8 @@ namespace MathPractice.Model
             document.Model.Entities.Add(circle);
             document.Redraw(true);
         }
+        public void ChangeCursor()
+        {
+        }
     }
 }
