@@ -75,6 +75,10 @@ namespace MathPractice.Model
 
         // Draw Variable
         private vdDocument document;
+        public vdDocument Document
+        {
+            get { return document; }
+        }
         private vdLine line_lt2rt;
         private vdLine line_rt2rb;
         private vdLine line_rb2lb;

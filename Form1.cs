@@ -76,7 +76,8 @@ namespace MathPractice
             gPoint point;
             vectorDrawBaseControl1.ActiveDocument.ActionUtility.getUserPoint(out point);
             if (point == null)
-                Debug.Write("null");
+                return;
+            mainController.CreateNewHorBeam(point);
         }
 
         private void CreateVerBeam(object sender, EventArgs e)
@@ -84,7 +85,8 @@ namespace MathPractice
             gPoint point;
             vectorDrawBaseControl1.ActiveDocument.ActionUtility.getUserPoint(out point);
             if (point == null)
-                Debug.Write("null");
+                return;
+            mainController.CreateNewVerBeam(point);
         }
     }
 }

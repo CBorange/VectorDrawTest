@@ -32,14 +32,14 @@ namespace MathPractice.Model
             this.document = document;
             this.beamManager = beamManager;
         }
-        public Beam CreateHorBeam()
+        public Beam CreateHorBeam(gPoint newPoint)
         {
-            return new Beam(new gPoint(-25, 100), document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
-                Color.Blue, 90, $"verBeam_{beamManager.HorBeams.Count}");
+            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Red,
+                Color.Red, 90, $"horBeam_{beamManager.HorBeams.Count}");
         }
-        public Beam CreateVerBeam()
+        public Beam CreateVerBeam(gPoint newPoint)
         {
-            return new Beam(new gPoint(-25, 100), document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
+            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
                 Color.Blue, 90, $"verBeam_{beamManager.VerBeams.Count}");
         }
     }

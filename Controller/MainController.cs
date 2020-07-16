@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathPractice.Controller;
 using MathPractice.Model;
+using VectorDraw.Geometry;
 
 namespace MathPractice.Controller
 {
@@ -42,13 +43,15 @@ namespace MathPractice.Controller
         {
             beamManager.CuttingBeam_HorizontalUp();
         }
-        public void CreateNewHorBeam()
+        public void CreateNewHorBeam(gPoint point)
         {
-
+            Beam newBeam = beamBuilder.CreateHorBeam(point);
+            beamManager.AddNewHorBeam(newBeam);
         }
-        public void CreateNewVerBeam()
+        public void CreateNewVerBeam(gPoint point)
         {
-
+            Beam newBeam = beamBuilder.CreateVerBeam(point);
+            beamManager.AddNewVerBeam(newBeam);
         }
     }
 }

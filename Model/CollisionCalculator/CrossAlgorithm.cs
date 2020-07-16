@@ -10,63 +10,16 @@ using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.CollisionCalculator
 {
-    public class BeamCollisionCalculator
+    public class CrossAlgorithm : ICollisionAlgorithm
     {
         private MathSupporter math;
-        private vdDocument document;
-        private BeamManager beamManager;
-
-        public BeamCollisionCalculator()
+        public CrossAlgorithm()
         {
-            
-        }
-        public void Initialize(vdDocument document, BeamManager beamManager)
-        {
-            this.document = document;
             math = MathSupporter.Instance;
-            this.beamManager = beamManager;
         }
-        public void CalcCuttingRect_RotationAlgorithm()
-        {
-            //Triangle miniTriangle = new Triangle();
-            //Triangle bigTriangle = new Triangle();
-
-            //// miniTriangle
-            //double center2ASheta = Globals.DegreesToRadians(180 - (horizontalBar.Rotation + 90));
-            //double Height = (horizontalBar.BeamHeight * 0.5f) * Math.Tan(center2ASheta);
-            //miniTriangle.PointA = new gPoint(verticalBar.Center.x - horizontalBar.BeamHeight * 0.5f, verticalBar.Center.y);
-            //miniTriangle.PointA.y = miniTriangle.PointA.y + Height;
-
-            //Vector2 center2PointA_Unit = new Vector2(miniTriangle.PointA.x - horizontalBar.Left.x,
-            //    miniTriangle.PointA.y - horizontalBar.Left.y).Normalize();
-            //miniTriangle.PointB = new gPoint(center2PointA_Unit.X * horizontalBar.BeamHeight * 0.5f,
-            //    center2PointA_Unit.Y * horizontalBar.BeamHeight * 0.5f);
-
-            //double a2bLenghth = new Vector2(miniTriangle.PointA.x - miniTriangle.PointB.x,
-            //    miniTriangle.PointA.y - miniTriangle.PointB.y).Length();
-
-            //double shetaC = Globals.DegreesToRadians(180 - (horizontalBar.Rotation + 90));
-            //double b2cLength = a2bLenghth / Math.Tan(shetaC);
-
-            //Vector2 r2lUnit = new Vector2(horizontalBar.Left.x - horizontalBar.Right.x, 
-            //    horizontalBar.Left.y - horizontalBar.Right.y).Normalize();
-            //Vector2 rt2PointC = (b2cLength + horizontalBar.BeamWidth) * r2lUnit;
-            //miniTriangle.PointC = new gPoint(horizontalBar.RightTop.x + rt2PointC.X,
-            //    horizontalBar.RightTop.y + rt2PointC.Y);
-
-            //// bigTriangle
-            //double bigHeight = a2bLenghth + horizontalBar.BeamHeight;
-            //double rb2PointCLength = bigHeight / Math.Tan(shetaC);
-            //Vector2 rb2PointC = (horizontalBar.BeamWidth + rb2PointCLength) * r2lUnit;
-            //bigTriangle.PointC = new gPoint(horizontalBar.RightBottom.x + rb2PointC.X,
-            //    horizontalBar.RightBottom.y + rb2PointC.Y);
-
-            //AddCircleToDocument(miniTriangle.PointC);
-            //AddCircleToDocument(bigTriangle.PointC);
-        }
-        public void CalcCuttingRect_CrossAlgorithm(Beam verBeam, Beam horBeam)
+        public void CalcAlgorithm_CuttingRect(Beam verBeam, Beam horBeam)
         {
             List<gPoint> cuttingPointList = new List<gPoint>();
             gPoint[] expandedPoints = new gPoint[4];
@@ -91,9 +44,9 @@ namespace MathPractice.Model
 
                 // LT
                 gPoint lt = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightTop, horEX_RT2LT);
-                horRT2LT_Length = math.GetLengthBy2Point(horBeam.RightTop, lt);
-                if (horBeam.LeftTop.x > verBeam.Top.x)
+                if (horBeam.LeftTop.x < verBeam.Top.x)
                     lt = horBeam.LeftTop;
+                horRT2LT_Length = math.GetLengthBy2Point(horBeam.RightTop, lt);
                 if (lt.y > verBeam.RightTop.y)
                 {
                     lt = math.GetCrossPoint(verBeam.RightTop, verEX_RT2RB, horBeam.RightTop, horEX_RT2LT);
@@ -129,9 +82,9 @@ namespace MathPractice.Model
 
                 // LB
                 gPoint lb = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightBottom, horEX_RB2LB);
-                horRB2LB_Length = math.GetLengthBy2Point(horBeam.RightBottom, lb);
-                if (horBeam.LeftBottom.x > verBeam.Top.x)
+                if (horBeam.LeftBottom.x < verBeam.Top.x)
                     lb = horBeam.LeftBottom;
+                horRB2LB_Length = math.GetLengthBy2Point(horBeam.RightBottom, lb);
                 if (lb.y < verBeam.LeftTop.y)
                 {
                     lb = math.GetCrossPoint(verBeam.LeftTop, verEX_LT2LB, horBeam.RightBottom, horEX_RB2LB);
@@ -265,28 +218,17 @@ namespace MathPractice.Model
 
             gPoint[] cuttingPoints = cuttingPointList.ToArray();
 
-            FigureDrawer cuttingFigure = new FigureDrawer(document);
+            FigureDrawer cuttingFigure = new FigureDrawer(horBeam.Document);
             cuttingFigure.Visible = true;
             cuttingFigure.DrawColor = Color.Green;
             cuttingFigure.SetPoints(cuttingPoints);
             horBeam.CuttingFigures.Add(cuttingFigure);
 
-            FigureDrawer expandFigure = new FigureDrawer(document);
+            FigureDrawer expandFigure = new FigureDrawer(horBeam.Document);
             expandFigure.Visible = true;
             expandFigure.DrawColor = Color.Yellow;
             expandFigure.SetPoints(expandedPoints);
             horBeam.ExpandFigures.Add(expandFigure);
-        }
-        public void CollisionCheck(Beam horBeam)
-        {
-            horBeam.RemoveAllCalcTarget();
-            for (int i = 0; i < beamManager.VerBeams.Count; ++i)
-            {
-                if (math.OBBColision(horBeam, beamManager.VerBeams[i]))
-                {
-                    horBeam.CalcTargetBeams.Add(beamManager.VerBeams[i]);
-                }
-            }
         }
     }
 }

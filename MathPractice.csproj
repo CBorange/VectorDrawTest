@@ -66,8 +66,11 @@
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Beam.cs" />
     <Compile Include="Model\BeamBuilder.cs" />
-    <Compile Include="Model\BeamCollisionCalculator.cs" />
+    <Compile Include="Model\CollisionCalculator\BeamCollisionCalculator.cs" />
     <Compile Include="Model\BeamManager.cs" />
+    <Compile Include="Model\CollisionCalculator\CrossAlgorithm.cs" />
+    <Compile Include="Model\CollisionCalculator\ICollisionAlgorithm.cs" />
+    <Compile Include="Model\CollisionCalculator\RotationAlgorithm.cs" />
     <Compile Include="Model\DebugSupproter.cs" />
     <Compile Include="Model\FigureDrawer.cs" />
     <Compile Include="Form1.cs">

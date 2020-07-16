@@ -14,8 +14,6 @@ namespace MathPractice.Model
 {
     public class BeamManager
     {
-
-
         // Variable
         private vdDocument document;
         public vdDocument Document 
@@ -51,50 +49,55 @@ namespace MathPractice.Model
 
             InitBaseLine();
             InitBeams();
-            RedrawAllBeam();
+            RefreshAllBeam();
         }
         private void InitBeams()
         {
             verBeams = new List<Beam>();
             horBeams = new List<Beam>();
 
-            verBeams.Add(new Beam(new gPoint(-25, 100), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
+            verBeams.Add(new Beam(new gPoint(-100, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
                 Color.Blue, 90, "verBeam1"));
 
-            verBeams.Add(new Beam(new gPoint(-50, 200), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
-                Color.Blue, 90, "verBeam2"));
-
-            horBeams.Add(new Beam(new gPoint(100, 100), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Red,
+            horBeams.Add(new Beam(new gPoint(0, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Red,
                 Color.Red, 45, "HorBeam1"));
 
-            for (int i = 0; i < horBeams.Count; ++i)
-            {
-                collisionCalculator.CollisionCheck(horBeams[i]);
-            }
+            RefreshAllBeam();
         }
         private void InitBaseLine()
         {
             drawConfigure.AddLineToDocument(new gPoint(-1000, 0), new gPoint(1000, 0));
             drawConfigure.AddLineToDocument(new gPoint(0, -1000), new gPoint(0, 1000));
         }
-        private void RedrawAllBeam()
+        private void RefreshAllBeam()
         {
             for (int i = 0; i < verBeams.Count; ++i)
                 verBeams[i].DrawBeam();
             for (int i = 0; i < horBeams.Count; ++i)
                 horBeams[i].DrawBeam();
+            for (int i = 0; i < horBeams.Count; ++i)
+                collisionCalculator.CollisionCheck(horBeams[i]);
 
             document.Redraw(true);
         }
 
         // Event Handler
+        public void AddNewHorBeam(Beam beam)
+        {
+            horBeams.Add(beam);
+            RefreshAllBeam();
+        }
+        public void AddNewVerBeam(Beam beam)
+        {
+            verBeams.Add(beam);
+            RefreshAllBeam();
+        }
         public void RotateBeam(double degree)
         {
             for (int i = 0; i < horBeams.Count; ++i)
                 horBeams[i].RotateBeam(degree);
-            for (int i = 0; i < horBeams.Count; ++i)
-                collisionCalculator.CollisionCheck(horBeams[i]);
-            RedrawAllBeam();
+            
+            RefreshAllBeam();
         }
         public void CuttingBeam_HorizontalUp()
         {
@@ -107,7 +110,7 @@ namespace MathPractice.Model
                     collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[verIDX], horBeams[horIDX]);
                 }
             }
-            RedrawAllBeam();
+            RefreshAllBeam();
         }
 
     }
