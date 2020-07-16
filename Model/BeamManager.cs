@@ -56,7 +56,7 @@ namespace MathPractice.Model
             verBeams = new List<Beam>();
             horBeams = new List<Beam>();
 
-            verBeams.Add(new Beam(new gPoint(-100, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
+            verBeams.Add(new Beam(new gPoint(-50, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
                 Color.Blue, 90, "verBeam1"));
 
             horBeams.Add(new Beam(new gPoint(0, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Red,

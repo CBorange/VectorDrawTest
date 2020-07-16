@@ -139,7 +139,7 @@ namespace MathPractice.Model
             gPoint diffrent = center - target;
             return Globals.RadiansToDegrees(Math.Atan2(diffrent.y, diffrent.x));
         }
-        public bool OBBColision(Beam beamA, Beam beamB)
+        public bool OBBCollision(Beam beamA, Beam beamB)
         {
             Vector2 disVec = GetVectorBy2Point(beamA.Center, beamB.Center);
             Vector2[] seperateVec =
@@ -162,5 +162,10 @@ namespace MathPractice.Model
             }
             return true;
         }
+        //public bool Rect2PointCollision(Beam rect, gPoint point)
+        //{
+        //    // Calc Rotated Point Based On Rect Rotation
+        //     GetRotatedPoint(-rect.Rotation, point, rect.Center);
+        //}
     }
 }

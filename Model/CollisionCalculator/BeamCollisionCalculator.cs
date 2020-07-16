@@ -45,7 +45,7 @@ namespace MathPractice.Model
             horBeam.RemoveAllCalcTarget();
             for (int i = 0; i < beamManager.VerBeams.Count; ++i)
             {
-                if (math.OBBColision(horBeam, beamManager.VerBeams[i]))
+                if (math.OBBCollision(horBeam, beamManager.VerBeams[i]))
                 {
                     horBeam.CalcTargetBeams.Add(beamManager.VerBeams[i]);
                 }

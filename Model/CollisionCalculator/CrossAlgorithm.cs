@@ -36,6 +36,10 @@ namespace MathPractice.Model.CollisionCalculator
             gPoint horEX_LT2RT = math.GetExpandedPointBy2Points(horBeam.LeftTop, horBeam.RightTop, 5);
             gPoint horEX_LB2RB = math.GetExpandedPointBy2Points(horBeam.LeftBottom, horBeam.RightBottom, 5);
 
+            bool needExpand = true;
+            if ((horBeam.LeftTop.x < verBeam.Top.x) && (horBeam.LeftBottom.x < verBeam.Top.x) &&
+                (horBeam.RightTop.x > verBeam.Bottom.x) && (horBeam.RightBottom.x > verBeam.Bottom.x)) 
+                needExpand = false;
             // 우측
             if (horBeam.Center.x > verBeam.Center.x - 1)
             {
@@ -44,8 +48,8 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // LT
                 gPoint lt = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightTop, horEX_RT2LT);
-                if (horBeam.LeftTop.x < verBeam.Top.x)
-                    lt = horBeam.LeftTop;
+                //if (horBeam.LeftTop.x < verBeam.Top.x)
+                //    lt = horBeam.LeftTop;
                 horRT2LT_Length = math.GetLengthBy2Point(horBeam.RightTop, lt);
                 if (lt.y > verBeam.RightTop.y)
                 {
@@ -82,8 +86,8 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // LB
                 gPoint lb = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightBottom, horEX_RB2LB);
-                if (horBeam.LeftBottom.x < verBeam.Top.x)
-                    lb = horBeam.LeftBottom;
+                //if (horBeam.LeftBottom.x < verBeam.Top.x)
+                //    lb = horBeam.LeftBottom;
                 horRB2LB_Length = math.GetLengthBy2Point(horBeam.RightBottom, lb);
                 if (lb.y < verBeam.LeftTop.y)
                 {
@@ -98,32 +102,35 @@ namespace MathPractice.Model.CollisionCalculator
                     cuttingPointList.Add(lb);
 
                 // Cutting Length에 따른 Expanded Point 계산
-                if (horRT2LT_Length > horRB2LB_Length)
+                if (needExpand)
                 {
+                    if (horRT2LT_Length > horRB2LB_Length)
+                    {
 
-                    Vector2 horRT2LT_Unit = math.GetUnitVecBy2Point(lt, horBeam.RightTop);
-                    Vector2 horRT2LTVec = horRT2LT_Unit * horRT2LT_Length;
+                        Vector2 horRT2LT_Unit = math.GetUnitVecBy2Point(lt, horBeam.RightTop);
+                        Vector2 horRT2LTVec = horRT2LT_Unit * horRT2LT_Length;
 
-                    Vector2 horRB2LB_Unit = math.GetUnitVecBy2Point(lb, horBeam.RightBottom);
-                    Vector2 horRB2LBVec = horRB2LB_Unit * horRT2LT_Length;
+                        Vector2 horRB2LB_Unit = math.GetUnitVecBy2Point(lb, horBeam.RightBottom);
+                        Vector2 horRB2LBVec = horRB2LB_Unit * horRT2LT_Length;
 
-                    expandedPoints[0] = lt;
-                    expandedPoints[1] = math.GetExpandPoint(horBeam.RightTop, horRT2LTVec);
-                    expandedPoints[2] = math.GetExpandPoint(horBeam.RightBottom, horRB2LBVec);
-                    expandedPoints[3] = lb;
-                }
-                else
-                {
-                    Vector2 horRB2LB_Unit = math.GetUnitVecBy2Point(lb, horBeam.RightBottom);
-                    Vector2 horRB2LBVec = horRB2LB_Unit * horRB2LB_Length;
+                        expandedPoints[0] = lt;
+                        expandedPoints[1] = math.GetExpandPoint(horBeam.RightTop, horRT2LTVec);
+                        expandedPoints[2] = math.GetExpandPoint(horBeam.RightBottom, horRB2LBVec);
+                        expandedPoints[3] = lb;
+                    }
+                    else
+                    {
+                        Vector2 horRB2LB_Unit = math.GetUnitVecBy2Point(lb, horBeam.RightBottom);
+                        Vector2 horRB2LBVec = horRB2LB_Unit * horRB2LB_Length;
 
-                    Vector2 horRT2LT_Unit = math.GetUnitVecBy2Point(lt, horBeam.RightTop);
-                    Vector2 horRT2LTVec = horRT2LT_Unit * horRB2LB_Length;
+                        Vector2 horRT2LT_Unit = math.GetUnitVecBy2Point(lt, horBeam.RightTop);
+                        Vector2 horRT2LTVec = horRT2LT_Unit * horRB2LB_Length;
 
-                    expandedPoints[0] = lb;
-                    expandedPoints[1] = math.GetExpandPoint(horBeam.RightBottom, horRB2LBVec);
-                    expandedPoints[2] = math.GetExpandPoint(horBeam.RightTop, horRT2LTVec);
-                    expandedPoints[3] = lt;
+                        expandedPoints[0] = lb;
+                        expandedPoints[1] = math.GetExpandPoint(horBeam.RightBottom, horRB2LBVec);
+                        expandedPoints[2] = math.GetExpandPoint(horBeam.RightTop, horRT2LTVec);
+                        expandedPoints[3] = lt;
+                    }
                 }
             }
             // 좌측
@@ -144,8 +151,8 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // RT
                 gPoint rt = math.GetCrossPoint(verBeam.RightBottom, verEX_RB2LB, horBeam.LeftTop, horEX_LT2RT);
-                if (horBeam.RightTop.x > verBeam.Bottom.x)
-                    rt = horBeam.RightTop;
+                //if (horBeam.RightTop.x > verBeam.Bottom.x)
+                //    rt = horBeam.RightTop;
                 horLT2RT_Length = math.GetLengthBy2Point(rt, horBeam.LeftTop);
                 if (rt.y > verBeam.RightBottom.y)
                 {
@@ -161,8 +168,8 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // RB
                 gPoint rb = math.GetCrossPoint(verBeam.RightBottom, verEX_RB2LB, horBeam.LeftBottom, horEX_LB2RB);
-                if (horBeam.RightBottom.x > verBeam.Bottom.x)
-                    rb = horBeam.RightBottom;
+                //if (horBeam.RightBottom.x > verBeam.Bottom.x)
+                //    rb = horBeam.RightBottom;
                 horLB2RB_Length = math.GetLengthBy2Point(horBeam.LeftBottom, rb);
                 if (rb.y < verBeam.LeftBottom.y)
                 {
@@ -187,32 +194,35 @@ namespace MathPractice.Model.CollisionCalculator
                     cuttingPointList.Add(lb);
 
                 // Cutting Length에 따른 Expanded Point 계산
-                if (horLT2RT_Length > horLB2RB_Length)
+                if (needExpand)
                 {
+                    if (horLT2RT_Length > horLB2RB_Length)
+                    {
 
-                    Vector2 horLT2RT_Unit = math.GetUnitVecBy2Point(rt, horBeam.LeftTop);
-                    Vector2 horLT2RTVec = horLT2RT_Unit * horLT2RT_Length;
+                        Vector2 horLT2RT_Unit = math.GetUnitVecBy2Point(rt, horBeam.LeftTop);
+                        Vector2 horLT2RTVec = horLT2RT_Unit * horLT2RT_Length;
 
-                    Vector2 horLB2RB_Unit = math.GetUnitVecBy2Point(rb, horBeam.LeftBottom);
-                    Vector2 horLB2RBVec = horLB2RB_Unit * horLT2RT_Length;
+                        Vector2 horLB2RB_Unit = math.GetUnitVecBy2Point(rb, horBeam.LeftBottom);
+                        Vector2 horLB2RBVec = horLB2RB_Unit * horLT2RT_Length;
 
-                    expandedPoints[0] = rt;
-                    expandedPoints[1] = math.GetExpandPoint(horBeam.LeftTop, horLT2RTVec);
-                    expandedPoints[2] = math.GetExpandPoint(horBeam.LeftBottom, horLB2RBVec);
-                    expandedPoints[3] = rb;
-                }
-                else
-                {
-                    Vector2 horLB2RB_Unit = math.GetUnitVecBy2Point(rb, horBeam.LeftBottom);
-                    Vector2 horLB2RBVec = horLB2RB_Unit * horLB2RB_Length;
+                        expandedPoints[0] = rt;
+                        expandedPoints[1] = math.GetExpandPoint(horBeam.LeftTop, horLT2RTVec);
+                        expandedPoints[2] = math.GetExpandPoint(horBeam.LeftBottom, horLB2RBVec);
+                        expandedPoints[3] = rb;
+                    }
+                    else
+                    {
+                        Vector2 horLB2RB_Unit = math.GetUnitVecBy2Point(rb, horBeam.LeftBottom);
+                        Vector2 horLB2RBVec = horLB2RB_Unit * horLB2RB_Length;
 
-                    Vector2 horLT2RT_Unit = math.GetUnitVecBy2Point(rt, horBeam.LeftTop);
-                    Vector2 horLT2RTVec = horLT2RT_Unit * horLB2RB_Length;
+                        Vector2 horLT2RT_Unit = math.GetUnitVecBy2Point(rt, horBeam.LeftTop);
+                        Vector2 horLT2RTVec = horLT2RT_Unit * horLB2RB_Length;
 
-                    expandedPoints[0] = rb;
-                    expandedPoints[1] = math.GetExpandPoint(horBeam.LeftBottom, horLB2RBVec);
-                    expandedPoints[2] = math.GetExpandPoint(horBeam.LeftTop, horLT2RTVec);
-                    expandedPoints[3] = rt;
+                        expandedPoints[0] = rb;
+                        expandedPoints[1] = math.GetExpandPoint(horBeam.LeftBottom, horLB2RBVec);
+                        expandedPoints[2] = math.GetExpandPoint(horBeam.LeftTop, horLT2RTVec);
+                        expandedPoints[3] = rt;
+                    }
                 }
             }
 
@@ -225,10 +235,14 @@ namespace MathPractice.Model.CollisionCalculator
             horBeam.CuttingFigures.Add(cuttingFigure);
 
             FigureDrawer expandFigure = new FigureDrawer(horBeam.Document);
-            expandFigure.Visible = true;
-            expandFigure.DrawColor = Color.Yellow;
-            expandFigure.SetPoints(expandedPoints);
-            horBeam.ExpandFigures.Add(expandFigure);
+            expandFigure.Visible = false;
+            if (needExpand)
+            {
+                expandFigure.Visible = true;
+                expandFigure.DrawColor = Color.Yellow;
+                expandFigure.SetPoints(expandedPoints);
+                horBeam.ExpandFigures.Add(expandFigure);
+            }
         }
     }
 }
