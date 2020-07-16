@@ -11,8 +11,9 @@ using VectorDraw.Professional.vdObjects;
 using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 using System.Drawing;
+using MathPractice.Model.CustomFigure;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Manager
 {
     public class BeamBuilder
     {

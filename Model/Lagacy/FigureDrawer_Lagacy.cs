@@ -13,7 +13,7 @@ using VectorDraw.Professional.vdObjects;
 
 namespace MathPractice.Model
 {
-    public class FigureDrawer
+    public class FigureDrawer_Lagacy
     {
         private bool visible;
         public bool Visible
@@ -60,7 +60,7 @@ namespace MathPractice.Model
         // Draw Variable
         private vdDocument document;
 
-        public FigureDrawer(gPoint[] points, vdDocument document, Color drawColor)
+        public FigureDrawer_Lagacy(gPoint[] points, vdDocument document, Color drawColor)
         {
             this.points = points;
             this.document = document;
@@ -69,7 +69,7 @@ namespace MathPractice.Model
             ClearFigures();
             Visible = true;
         }
-        public FigureDrawer(vdDocument document)
+        public FigureDrawer_Lagacy(vdDocument document)
         {
             this.document = document;
             Visible = false;

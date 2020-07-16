@@ -188,3 +188,4 @@ C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractic
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.CopyComplete
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.exe
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.pdb
+C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csprojResolveAssemblyReference.cache

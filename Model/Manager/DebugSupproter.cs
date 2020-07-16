@@ -12,7 +12,7 @@ using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Manager
 {
     public class DebugSupproter
     {

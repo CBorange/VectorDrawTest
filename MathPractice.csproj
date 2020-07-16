@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MathPractice</RootNamespace>
     <AssemblyName>MathPractice</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,23 +65,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\MainController.cs" />
-    <Compile Include="Model\Beam.cs" />
-    <Compile Include="Model\BeamBuilder.cs" />
+    <Compile Include="Model\CustomFigure\Beam.cs" />
+    <Compile Include="Model\CustomFigure\FigureDrawer.cs" />
+    <Compile Include="Model\Lagacy\BeamLagacy.cs" />
+    <Compile Include="Model\Manager\BeamBuilder.cs" />
     <Compile Include="Model\CollisionCalculator\BeamCollisionCalculator.cs" />
-    <Compile Include="Model\BeamManager.cs" />
+    <Compile Include="Model\Manager\BeamManager.cs" />
     <Compile Include="Model\CollisionCalculator\CrossAlgorithm.cs" />
     <Compile Include="Model\CollisionCalculator\ICollisionAlgorithm.cs" />
     <Compile Include="Model\CollisionCalculator\RotationAlgorithm.cs" />
-    <Compile Include="Model\DebugSupproter.cs" />
-    <Compile Include="Model\FigureDrawer.cs" />
+    <Compile Include="Model\Manager\DebugSupproter.cs" />
+    <Compile Include="Model\Lagacy\FigureDrawer_Lagacy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\MathSupporter.cs" />
-    <Compile Include="Model\VectorDrawConfigure.cs" />
+    <Compile Include="Model\Manager\MathSupporter.cs" />
+    <Compile Include="Model\Manager\VectorDrawConfigure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\IMainView.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

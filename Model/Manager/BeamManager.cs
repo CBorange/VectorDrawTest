@@ -9,8 +9,9 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
+using MathPractice.Model.CustomFigure;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Manager
 {
     public class BeamManager
     {

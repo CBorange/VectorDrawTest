@@ -11,7 +11,7 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Manager
 {
     public class MathSupporter
     {
@@ -115,7 +115,7 @@ namespace MathPractice.Model
         }
         public gPoint GetRotatedPoint(double rot, gPoint point, gPoint center)
         {
-            if (rot > 90 && rot <270)
+            if (rot >= 90 && rot <270)
                 rot -= 180;
             if (rot >= 270 && rot < 360)
                 rot -= 360;

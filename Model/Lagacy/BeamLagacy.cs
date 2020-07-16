@@ -11,9 +11,9 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Lagacy
 {
-    public class Beam
+    public class Beam_Lagacy
     {
         private int beamWidth;
         public int BeamWidth
@@ -60,11 +60,11 @@ namespace MathPractice.Model
         private gPoint center;
         public gPoint Center { get { return center; } }
 
-        private Beam attachedBeam;
-        public Beam AttachedBeam { get { return attachedBeam; } }
+        private Beam_Lagacy attachedBeam;
+        public Beam_Lagacy AttachedBeam { get { return attachedBeam; } }
 
-        private List<Beam> calcTargetBeams;
-        public List<Beam> CalcTargetBeams { get { return calcTargetBeams; } }
+        private List<Beam_Lagacy> calcTargetBeams;
+        public List<Beam_Lagacy> CalcTargetBeams { get { return calcTargetBeams; } }
 
         // Figures 
         private List<FigureDrawer> cuttingFigures;
@@ -75,10 +75,6 @@ namespace MathPractice.Model
 
         // Draw Variable
         private vdDocument document;
-        public vdDocument Document
-        {
-            get { return document; }
-        }
         private vdLine line_lt2rt;
         private vdLine line_rt2rb;
         private vdLine line_rb2lb;
@@ -87,7 +83,7 @@ namespace MathPractice.Model
 
         public Color DrawColor;
         public Color CenterColor;
-        public Beam(gPoint centerPos, vdDocument document, int width, int height, Color drawColor,
+        public Beam_Lagacy(gPoint centerPos, vdDocument document, int width, int height, Color drawColor,
             Color centerColor, double rot, string beamName)
         {
             beamWidth = width;
@@ -100,7 +96,7 @@ namespace MathPractice.Model
             this.document = document;
             attachedBeam = null;
 
-            calcTargetBeams = new List<Beam>();
+            calcTargetBeams = new List<Beam_Lagacy>();
             cuttingFigures = new List<FigureDrawer>();
             expandFigures = new List<FigureDrawer>();
 
@@ -256,7 +252,7 @@ namespace MathPractice.Model
             rotation = degreeAngle;
             CalcRectData();
         }
-        public void AttachToBeam(Beam verBeam)
+        public void AttachToBeam(Beam_Lagacy verBeam)
         {
             attachedBeam = verBeam;
             CalcRectData();

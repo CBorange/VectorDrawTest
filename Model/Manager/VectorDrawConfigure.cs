@@ -11,8 +11,9 @@ using VectorDraw.Professional.vdObjects;
 using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 using System.Drawing;
+using VectorDraw.Render;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.Manager
 {
     public class VectorDrawConfigure
     {
@@ -31,6 +32,7 @@ namespace MathPractice.Model
 
             document.ShowUCSAxis = false;
             document.ActiveLayOut.ZoomWindow(new gPoint(-VIEW_HALFWIDTH, -VIEW_HALFHEIGHT), new gPoint(VIEW_HALFWIDTH, VIEW_HALFHEIGHT));
+            document.OnDrawOverAll += new vdDocument.DrawOverAllEventHandler(AllDrawOver_Handler);
             commandLine.LoadCommands(System.IO.Path.GetDirectoryName(Application.ExecutablePath), "Commands.txt");
         }
         public void AddLineToDocument(gPoint startPoint, gPoint endPoint)
@@ -58,8 +60,9 @@ namespace MathPractice.Model
             document.Model.Entities.Add(circle);
             document.Redraw(true);
         }
-        public void ChangeCursor()
+        public void AllDrawOver_Handler(object sender, vdRender render, ref bool cancel)
         {
+            
         }
     }
 }
