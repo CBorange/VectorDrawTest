@@ -9,6 +9,7 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
+using VectorDraw.Professional.PropertyList;
 
 namespace MathPractice.Model.CollisionCalculator
 {
@@ -48,8 +49,6 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // LT
                 gPoint lt = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightTop, horEX_RT2LT);
-                //if (horBeam.LeftTop.x < verBeam.Top.x)
-                //    lt = horBeam.LeftTop;
                 horRT2LT_Length = math.GetLengthBy2Point(horBeam.RightTop, lt);
                 if (lt.y > verBeam.RightTop.y)
                 {
@@ -86,8 +85,6 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // LB
                 gPoint lb = math.GetCrossPoint(verBeam.RightTop, verEX_RT2LT, horBeam.RightBottom, horEX_RB2LB);
-                //if (horBeam.LeftBottom.x < verBeam.Top.x)
-                //    lb = horBeam.LeftBottom;
                 horRB2LB_Length = math.GetLengthBy2Point(horBeam.RightBottom, lb);
                 if (lb.y < verBeam.LeftTop.y)
                 {
@@ -151,8 +148,6 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // RT
                 gPoint rt = math.GetCrossPoint(verBeam.RightBottom, verEX_RB2LB, horBeam.LeftTop, horEX_LT2RT);
-                //if (horBeam.RightTop.x > verBeam.Bottom.x)
-                //    rt = horBeam.RightTop;
                 horLT2RT_Length = math.GetLengthBy2Point(rt, horBeam.LeftTop);
                 if (rt.y > verBeam.RightBottom.y)
                 {
@@ -168,8 +163,6 @@ namespace MathPractice.Model.CollisionCalculator
 
                 // RB
                 gPoint rb = math.GetCrossPoint(verBeam.RightBottom, verEX_RB2LB, horBeam.LeftBottom, horEX_LB2RB);
-                //if (horBeam.RightBottom.x > verBeam.Bottom.x)
-                //    rb = horBeam.RightBottom;
                 horLB2RB_Length = math.GetLengthBy2Point(horBeam.LeftBottom, rb);
                 if (rb.y < verBeam.LeftBottom.y)
                 {
