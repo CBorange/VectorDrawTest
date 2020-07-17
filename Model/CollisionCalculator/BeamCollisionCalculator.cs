@@ -9,9 +9,10 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CustomFigure;
+using MathPractice.Model.Manager;
 
-namespace MathPractice.Model
+namespace MathPractice.Model.CollisionCalculator
 {
     public class BeamCollisionCalculator
     {

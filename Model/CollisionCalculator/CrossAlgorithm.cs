@@ -10,6 +10,8 @@ using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
 using VectorDraw.Professional.PropertyList;
+using MathPractice.Model.Manager;
+using MathPractice.Model.CustomFigure;
 
 namespace MathPractice.Model.CollisionCalculator
 {
@@ -221,21 +223,21 @@ namespace MathPractice.Model.CollisionCalculator
 
             gPoint[] cuttingPoints = cuttingPointList.ToArray();
 
-            FigureDrawer cuttingFigure = new FigureDrawer(horBeam.Document);
-            cuttingFigure.Visible = true;
-            cuttingFigure.DrawColor = Color.Green;
-            cuttingFigure.SetPoints(cuttingPoints);
-            horBeam.CuttingFigures.Add(cuttingFigure);
+            //FigureDrawer cuttingFigure = new FigureDrawer(horBeam.Document);
+            //cuttingFigure.Visible = true;
+            //cuttingFigure.DrawColor = Color.Green;
+            //cuttingFigure.SetPoints(cuttingPoints);
+            //horBeam.CuttingFigures.Add(cuttingFigure);
 
-            FigureDrawer expandFigure = new FigureDrawer(horBeam.Document);
-            expandFigure.Visible = false;
-            if (needExpand)
-            {
-                expandFigure.Visible = true;
-                expandFigure.DrawColor = Color.Yellow;
-                expandFigure.SetPoints(expandedPoints);
-                horBeam.ExpandFigures.Add(expandFigure);
-            }
+            //FigureDrawer expandFigure = new FigureDrawer(horBeam.Document);
+            //expandFigure.Visible = false;
+            //if (needExpand)
+            //{
+            //    expandFigure.Visible = true;
+            //    expandFigure.DrawColor = Color.Yellow;
+            //    expandFigure.SetPoints(expandedPoints);
+            //    horBeam.ExpandFigures.Add(expandFigure);
+            //}
         }
     }
 }

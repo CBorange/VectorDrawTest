@@ -8,6 +8,7 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
+using VectorDraw.Render;
 using MathPractice.Model.Manager;
 
 namespace MathPractice.Model.CustomFigure
@@ -75,6 +76,10 @@ namespace MathPractice.Model.CustomFigure
         public gPoint Center { get { return center; } }
 
         private vdLine baseLine;
+        private vdLine line_lt2rt;
+        private vdLine line_rt2rb;
+        private vdLine line_rb2lb;
+        private vdLine line_lb2lt;
 
         private List<Beam> calcTargetBeams;
         public List<Beam> CalcTargetBeams { get { return calcTargetBeams; } }
@@ -86,15 +91,43 @@ namespace MathPractice.Model.CustomFigure
         private List<FigureDrawer> expandFigures;
         public List<FigureDrawer> ExpandFigures { get { return expandFigures; } }
 
-        public Beam(vdDocument document, double width, double height,double rotation, string beamName)
+        public Beam(gPoint point, vdDocument document, double width, double height,double rotation, string beamName)
         {
-            baseLine.SetUnRegisterDocument(document);
+            center = point;
             beamWidth = width;
             beamHeight = height;
+            halfWidth = width * 0.5f;
+            halfHeight = height * 0.5f;
             this.rotation = rotation;
             this.beamName = beamName;
             this.document = document;
 
+            calcTargetBeams = new List<Beam>();
+            cuttingFigures = new List<FigureDrawer>();
+            expandFigures = new List<FigureDrawer>();
+
+            InitLines();
+            RefreshRectData();
+            AddBarLineToDocument(baseLine);
+        }
+        private void InitLines()
+        {
+            baseLine = new vdLine();
+
+            line_lt2rt = new vdLine();
+            line_lt2rt.SetUnRegisterDocument(document);
+
+            line_rt2rb = new vdLine();
+            line_rt2rb.SetUnRegisterDocument(document);
+
+            line_rb2lb = new vdLine();
+            line_rb2lb.SetUnRegisterDocument(document);
+
+            line_lb2lt = new vdLine();
+            line_lb2lt.SetUnRegisterDocument(document);
+        }
+        private void RefreshRectData()
+        {
             leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
             rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
             rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
@@ -116,13 +149,49 @@ namespace MathPractice.Model.CustomFigure
             baseLine.StartPoint = left;
             baseLine.EndPoint = right;
 
-            AddBarLineToDocument(baseLine);
+            line_lt2rt.StartPoint = leftTop;
+            line_lt2rt.EndPoint = rightTop;
+
+            line_rt2rb.StartPoint = rightTop;
+            line_rt2rb.EndPoint = rightBottom;
+
+            line_rb2lb.StartPoint = rightBottom;
+            line_rb2lb.EndPoint = leftBottom;
+
+            line_lb2lt.StartPoint = leftBottom;
+            line_lb2lt.EndPoint = leftTop;
         }
         private void AddBarLineToDocument(vdLine newLine)
         {
             newLine.SetUnRegisterDocument(document);
             newLine.setDocumentDefaults();
             document.Model.Entities.AddItem(newLine);
+        }
+        public void UpdateBaseLine()
+        {
+            RefreshRectData();
+            baseLine.Update();
+        }
+        public void DrawOutLines(vdRender render)
+        {
+            line_lt2rt.Update();
+            line_rt2rb.Update();
+            line_rb2lb.Update();
+            line_lb2lt.Update();
+
+            line_lt2rt.Draw(render);
+            line_rt2rb.Draw(render);
+            line_rb2lb.Draw(render);
+            line_lb2lt.Draw(render);
+        }
+        public void RemoveAllFigures()
+        {
+            cuttingFigures.Clear();
+            expandFigures.Clear();
+        }
+        public void RemoveAllCalcTarget()
+        {
+            calcTargetBeams.Clear();
         }
     }
 }

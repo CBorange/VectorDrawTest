@@ -179,13 +179,10 @@ C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\bin\Debug\VectorDraw.
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\bin\Debug\VectorDraw.Render.xml
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\bin\Debug\VectorDraw.Serialize.xml
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\bin\Debug\vdScrollableControl.xml
-C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csprojAssemblyReference.cache
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.Form1.resources
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.Properties.Resources.resources
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.GenerateResource.cache
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.exe.licenses
-C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.CopyComplete
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.exe
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.pdb
 C:\Users\Administrator\Desktop\Project\VectorDrawTest_0713\obj\Debug\MathPractice.csprojResolveAssemblyReference.cache

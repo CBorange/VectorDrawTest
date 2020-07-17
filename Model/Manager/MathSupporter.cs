@@ -10,6 +10,7 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
+using MathPractice.Model.CustomFigure;
 
 namespace MathPractice.Model.Manager
 {

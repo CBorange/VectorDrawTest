@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using MathPractice.Controller;
 using MathPractice.Model;
 using VectorDraw.Geometry;
+using MathPractice.Model.Manager;
+using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CustomFigure;
 
 namespace MathPractice.Controller
 {
@@ -31,14 +34,6 @@ namespace MathPractice.Controller
             this.beamBuilder = beamBuilder;
         }
 
-        public void RotateBeam_Plus()
-        {
-            beamManager.RotateBeam(5);
-        }
-        public void RotateBeam_Minus()
-        {
-            beamManager.RotateBeam(-5);
-        }
         public void CuttingBeam_HorizontalUp()
         {
             beamManager.CuttingBeam_HorizontalUp();

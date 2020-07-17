@@ -17,6 +17,8 @@ using VectorDraw.Professional.vdFigures;
 using MathPractice.View;
 using MathPractice.Controller;
 using MathPractice.Model;
+using MathPractice.Model.Manager;
+using MathPractice.Model.CollisionCalculator;
 
 namespace MathPractice
 {
@@ -50,20 +52,10 @@ namespace MathPractice
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            drawConfigure.InitializeSystem(vectorDrawBaseControl1.ActiveDocument, vdCommandLine1);
+            drawConfigure.InitializeSystem(vectorDrawBaseControl1.ActiveDocument, vdCommandLine1, beamManager);
             collisionCalculator.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
             beamManager.Initialize(vectorDrawBaseControl1.ActiveDocument, collisionCalculator, drawConfigure);
             beamBuilder.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
-        }
-
-        private void PlusRotate_Click(object sender, EventArgs e)
-        {
-            mainController.RotateBeam_Plus();
-        }
-
-        private void MinusRotate_Click(object sender, EventArgs e)
-        {
-            mainController.RotateBeam_Minus();
         }
 
         private void CuttingByHorizontal_Click(object sender, EventArgs e)

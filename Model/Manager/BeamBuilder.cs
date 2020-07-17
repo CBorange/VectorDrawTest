@@ -32,16 +32,17 @@ namespace MathPractice.Model.Manager
         {
             this.document = document;
             this.beamManager = beamManager;
+
+            beamManager.AddNewHorBeam(CreateHorBeam(new gPoint(0, 0)));
+            beamManager.AddNewVerBeam(CreateVerBeam(new gPoint(100, 0)));
         }
         public Beam CreateHorBeam(gPoint newPoint)
         {
-            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Red,
-                Color.Red, 90, $"horBeam_{beamManager.HorBeams.Count}");
+            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 90, $"horBeam_{beamManager.HorBeams.Count}");
         }
         public Beam CreateVerBeam(gPoint newPoint)
         {
-            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, Color.Blue,
-                Color.Blue, 90, $"verBeam_{beamManager.VerBeams.Count}");
+            return new Beam(newPoint, document, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 90, $"verBeam_{beamManager.VerBeams.Count}");
         }
     }
 }

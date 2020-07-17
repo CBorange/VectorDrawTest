@@ -10,6 +10,7 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
+using MathPractice.Model.Manager;
 
 namespace MathPractice.Model.Lagacy
 {
@@ -67,11 +68,11 @@ namespace MathPractice.Model.Lagacy
         public List<Beam_Lagacy> CalcTargetBeams { get { return calcTargetBeams; } }
 
         // Figures 
-        private List<FigureDrawer> cuttingFigures;
-        public List<FigureDrawer> CuttingFigures { get { return cuttingFigures; } }
+        private List<FigureDrawer_Lagacy> cuttingFigures;
+        public List<FigureDrawer_Lagacy> CuttingFigures { get { return cuttingFigures; } }
 
-        private List<FigureDrawer> expandFigures;
-        public List<FigureDrawer> ExpandFigures { get { return expandFigures; } }
+        private List<FigureDrawer_Lagacy> expandFigures;
+        public List<FigureDrawer_Lagacy> ExpandFigures { get { return expandFigures; } }
 
         // Draw Variable
         private vdDocument document;
@@ -97,8 +98,8 @@ namespace MathPractice.Model.Lagacy
             attachedBeam = null;
 
             calcTargetBeams = new List<Beam_Lagacy>();
-            cuttingFigures = new List<FigureDrawer>();
-            expandFigures = new List<FigureDrawer>();
+            cuttingFigures = new List<FigureDrawer_Lagacy>();
+            expandFigures = new List<FigureDrawer_Lagacy>();
 
             ConvertRotation();
             InitDrawLine();

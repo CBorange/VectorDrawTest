@@ -8,8 +8,10 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
+using VectorDraw.Render;
 using System.Drawing;
 using MathPractice.Model.CustomFigure;
+using MathPractice.Model.CollisionCalculator;
 
 namespace MathPractice.Model.Manager
 {
@@ -56,14 +58,6 @@ namespace MathPractice.Model.Manager
         {
             verBeams = new List<Beam>();
             horBeams = new List<Beam>();
-
-            verBeams.Add(new Beam(new gPoint(-50, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Blue,
-                Color.Blue, 90, "verBeam1"));
-
-            horBeams.Add(new Beam(new gPoint(0, 0), document, BeamBuilder.DEFAULT_BEAM_WIDTH, BeamBuilder.DEFAULT_BEAM_HEIGHT, Color.Red,
-                Color.Red, 45, "HorBeam1"));
-
-            RefreshAllBeam();
         }
         private void InitBaseLine()
         {
@@ -73,13 +67,29 @@ namespace MathPractice.Model.Manager
         private void RefreshAllBeam()
         {
             for (int i = 0; i < verBeams.Count; ++i)
-                verBeams[i].DrawBeam();
+            {
+                verBeams[i].UpdateBaseLine();
+            }
             for (int i = 0; i < horBeams.Count; ++i)
-                horBeams[i].DrawBeam();
+            {
+                horBeams[i].UpdateBaseLine();
+            }
             for (int i = 0; i < horBeams.Count; ++i)
+            {
                 collisionCalculator.CollisionCheck(horBeams[i]);
-
+            }
             document.Redraw(true);
+        }
+        private void DrawOutLineFromAllBeam(vdRender render)
+        {
+            for (int i = 0; i < verBeams.Count; ++i)
+            {
+                verBeams[i].DrawOutLines(render);
+            }
+            for (int i = 0; i < horBeams.Count; ++i)
+            {
+                horBeams[i].DrawOutLines(render);
+            }
         }
 
         // Event Handler
@@ -91,13 +101,6 @@ namespace MathPractice.Model.Manager
         public void AddNewVerBeam(Beam beam)
         {
             verBeams.Add(beam);
-            RefreshAllBeam();
-        }
-        public void RotateBeam(double degree)
-        {
-            for (int i = 0; i < horBeams.Count; ++i)
-                horBeams[i].RotateBeam(degree);
-            
             RefreshAllBeam();
         }
         public void CuttingBeam_HorizontalUp()

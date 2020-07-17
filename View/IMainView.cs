@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathPractice.Model.Manager;
+using MathPractice.Model.CollisionCalculator;
 
 namespace MathPractice.View
 {

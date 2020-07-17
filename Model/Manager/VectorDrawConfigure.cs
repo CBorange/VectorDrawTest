@@ -25,10 +25,13 @@ namespace MathPractice.Model.Manager
         private vdDocument document;
         private vdCommandLine commandLine;
 
-        public void InitializeSystem(vdDocument document, vdCommandLine commandLine)
+        private BeamManager beamManager;
+
+        public void InitializeSystem(vdDocument document, vdCommandLine commandLine, BeamManager beamManager)
         {
             this.document = document;
             this.commandLine = commandLine;
+            this.beamManager = beamManager;
 
             document.ShowUCSAxis = false;
             document.ActiveLayOut.ZoomWindow(new gPoint(-VIEW_HALFWIDTH, -VIEW_HALFHEIGHT), new gPoint(VIEW_HALFWIDTH, VIEW_HALFHEIGHT));
@@ -62,7 +65,14 @@ namespace MathPractice.Model.Manager
         }
         public void AllDrawOver_Handler(object sender, vdRender render, ref bool cancel)
         {
-            
+            for (int i = 0; i < beamManager.HorBeams.Count; ++i)
+            {
+                beamManager.HorBeams[i].DrawOutLines(render);
+            }
+            for (int i = 0; i < beamManager.VerBeams.Count; ++i)
+            {
+                beamManager.VerBeams[i].DrawOutLines(render);
+            }
         }
     }
 }
