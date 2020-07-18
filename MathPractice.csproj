@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\CustomFigure\Beam.cs" />
+    <Compile Include="Model\CustomFigure\DebugCircle.cs" />
     <Compile Include="Model\CustomFigure\FigureDrawer.cs" />
     <Compile Include="Model\Manager\BeamBuilder.cs" />
     <Compile Include="Model\CollisionCalculator\BeamCollisionCalculator.cs" />

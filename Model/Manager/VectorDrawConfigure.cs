@@ -87,7 +87,7 @@ namespace MathPractice.Model.Manager
             newLine.setDocumentDefaults();
             document.Model.Entities.AddItem(newLine);
         }
-        public void AddCircleToDocument(gPoint center, double radius)
+        public vdCircle AddCircleToDocument(gPoint center, double radius)
         {
             vdCircle circle = new vdCircle(document, center, radius);
             circle.PenColor.SystemColor = Color.Yellow;
@@ -95,6 +95,17 @@ namespace MathPractice.Model.Manager
 
             document.Model.Entities.Add(circle);
             document.Redraw(true);
+            return circle;
+        }
+        public vdText AddTextToDocument(gPoint insertPoint, string caption)
+        {
+            vdText text = new vdText(document, caption, insertPoint, 5);
+            text.PenColor.SystemColor = Color.Orange;
+            text.Update();
+
+            document.Model.Entities.Add(text);
+            document.Redraw(true);
+            return text;
         }
 
         // Event Handler

@@ -82,6 +82,11 @@ namespace MathPractice.Model.CustomFigure
         private vdLine line_rb2lb;
         private vdLine line_lb2lt;
 
+        private DebugCircle ltCircle;
+        private DebugCircle rtCircle;
+        private DebugCircle lbCircle;
+        private DebugCircle rbCircle;
+
         private Color drawColor;
 
         private List<Beam> calcTargetBeams;
@@ -107,11 +112,17 @@ namespace MathPractice.Model.CustomFigure
             halfWidth = width * 0.5f;
             halfHeight = height * 0.5f;
 
+            leftTop = new gPoint();
+            rightTop = new gPoint();
+            leftBottom = new gPoint();
+            rightBottom = new gPoint();
+
             calcTargetBeams = new List<Beam>();
             cuttingFigures = new List<FigureDrawer>();
             expandFigures = new List<FigureDrawer>();
 
             InitLines();
+            InitDebugCircles();
             VectorDrawConfigure.Instance.AddLineToDocument(baseLine);
         }
         private void InitLines()
@@ -133,6 +144,13 @@ namespace MathPractice.Model.CustomFigure
 
             line_lb2lt = new vdLine();
             line_lb2lt.SetUnRegisterDocument(document);
+        }
+        private void InitDebugCircles()
+        {
+            ltCircle = new DebugCircle(document, leftTop, 1, "LT");
+            rtCircle = new DebugCircle(document, rightTop, 1, "RT");
+            lbCircle = new DebugCircle(document, leftBottom, 1, "LB");
+            rbCircle = new DebugCircle(document, rightBottom, 1, "RB");
         }
         private void RefreshRectData()
         {
@@ -161,6 +179,8 @@ namespace MathPractice.Model.CustomFigure
             rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
             rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
             leftBottom = new gPoint(center.x - halfWidth, center.y - halfHeight);
+            
+
             left = new gPoint(center.x - halfWidth, center.y);
             right = new gPoint(center.x + halfWidth, center.y);
             top = new gPoint(center.x, center.y + halfHeight);
@@ -174,6 +194,11 @@ namespace MathPractice.Model.CustomFigure
             right = MathSupporter.Instance.GetRotatedPoint(rotation, right, center);
             top = MathSupporter.Instance.GetRotatedPoint(rotation, top, center);
             bottom = MathSupporter.Instance.GetRotatedPoint(rotation, bottom, center);
+
+            ltCircle.UpdatePoint(leftTop);
+            rtCircle.UpdatePoint(rightTop);
+            rbCircle.UpdatePoint(rightBottom);
+            lbCircle.UpdatePoint(leftBottom);
 
             // refresh line vertex
             line_lt2rt.StartPoint = leftTop;

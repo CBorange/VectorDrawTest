@@ -24,6 +24,7 @@ namespace MathPractice.Model.Manager
             this.document = document;
             debugCircles = new List<vdCircle>();
             debugCircleTexts = new List<vdText>();
+
         }
     }
 }
