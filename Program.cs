@@ -24,13 +24,12 @@ namespace MathPractice
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form1 mainForm = new Form1();
-            VectorDrawConfigure drawConfigure = new VectorDrawConfigure();
             BeamManager beamManager = new BeamManager();
             BeamCollisionCalculator collisionCalculator = new BeamCollisionCalculator();
             BeamBuilder beamBuilder = new BeamBuilder();
-            mainForm.InitializeAllModels(drawConfigure, beamManager, collisionCalculator, beamBuilder);
+            mainForm.InitializeAllModels(VectorDrawConfigure.Instance, beamManager, collisionCalculator, beamBuilder);
 
-            MainController mainController = new MainController(mainForm, drawConfigure, beamManager, collisionCalculator,
+            MainController mainController = new MainController(mainForm, VectorDrawConfigure.Instance, beamManager, collisionCalculator,
                 beamBuilder);
             mainForm.AttachController(mainController);
 

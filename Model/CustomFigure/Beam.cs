@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Spatial;
 using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using VectorDraw.Render;
 using MathPractice.Model.Manager;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace MathPractice.Model.CustomFigure
 {
@@ -81,6 +82,8 @@ namespace MathPractice.Model.CustomFigure
         private vdLine line_rb2lb;
         private vdLine line_lb2lt;
 
+        private Color drawColor;
+
         private List<Beam> calcTargetBeams;
         public List<Beam> CalcTargetBeams { get { return calcTargetBeams; } }
 
@@ -91,28 +94,33 @@ namespace MathPractice.Model.CustomFigure
         private List<FigureDrawer> expandFigures;
         public List<FigureDrawer> ExpandFigures { get { return expandFigures; } }
 
-        public Beam(gPoint point, vdDocument document, double width, double height,double rotation, string beamName)
+        public Beam(gPoint point, vdDocument document, Color drawColor, double width, double height,double rotation, string beamName)
         {
+            this.rotation = rotation;
+            this.beamName = beamName;
+            this.document = document;
+            this.drawColor = drawColor;
+
             center = point;
             beamWidth = width;
             beamHeight = height;
             halfWidth = width * 0.5f;
             halfHeight = height * 0.5f;
-            this.rotation = rotation;
-            this.beamName = beamName;
-            this.document = document;
 
             calcTargetBeams = new List<Beam>();
             cuttingFigures = new List<FigureDrawer>();
             expandFigures = new List<FigureDrawer>();
 
             InitLines();
-            RefreshRectData();
-            AddBarLineToDocument(baseLine);
+            VectorDrawConfigure.Instance.AddLineToDocument(baseLine);
         }
         private void InitLines()
         {
             baseLine = new vdLine();
+            baseLine.StartPoint = new gPoint(center.x - halfWidth, center.y);
+            baseLine.EndPoint = new gPoint(center.x + halfWidth, center.y);
+            baseLine.StartPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.StartPoint, center);
+            baseLine.EndPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.EndPoint, center);
 
             line_lt2rt = new vdLine();
             line_lt2rt.SetUnRegisterDocument(document);
@@ -128,6 +136,27 @@ namespace MathPractice.Model.CustomFigure
         }
         private void RefreshRectData()
         {
+            // center refresh
+            center = MathSupporter.Instance.GetCenterBy2Points(baseLine.EndPoint, baseLine.StartPoint);
+
+            // rotate calc
+            Vector centerShiftVec = new Vector(center.x * -1, center.y * -1, 0);
+            Vector shifted2Origin_BaseStartVec = new Vector(baseLine.StartPoint.x + centerShiftVec.x, baseLine.StartPoint.y + centerShiftVec.y, 0);
+
+            Vector centerLineUnit = new Vector(1, 0, 0);
+            if (shifted2Origin_BaseStartVec.x < 0)
+                centerLineUnit = new Vector(-1, 0, 0);
+
+            double x = shifted2Origin_BaseStartVec.Dot(centerLineUnit);
+            rotation = Math.Atan2(shifted2Origin_BaseStartVec.y, x);
+
+            rotation = Globals.RadiansToDegrees(rotation);
+            if (shifted2Origin_BaseStartVec.x < 0 && shifted2Origin_BaseStartVec.y >= 0)
+                rotation *= -1;
+            else if (shifted2Origin_BaseStartVec.x < 0 && shifted2Origin_BaseStartVec.y <= 0)
+                rotation *= -1;
+
+            // calc vertex point
             leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
             rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
             rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
@@ -146,9 +175,7 @@ namespace MathPractice.Model.CustomFigure
             top = MathSupporter.Instance.GetRotatedPoint(rotation, top, center);
             bottom = MathSupporter.Instance.GetRotatedPoint(rotation, bottom, center);
 
-            baseLine.StartPoint = left;
-            baseLine.EndPoint = right;
-
+            // refresh line vertex
             line_lt2rt.StartPoint = leftTop;
             line_lt2rt.EndPoint = rightTop;
 
@@ -161,22 +188,25 @@ namespace MathPractice.Model.CustomFigure
             line_lb2lt.StartPoint = leftBottom;
             line_lb2lt.EndPoint = leftTop;
         }
-        private void AddBarLineToDocument(vdLine newLine)
-        {
-            newLine.SetUnRegisterDocument(document);
-            newLine.setDocumentDefaults();
-            document.Model.Entities.AddItem(newLine);
-        }
+        
         public void UpdateBaseLine()
         {
             RefreshRectData();
+            baseLine.PenColor.SystemColor = drawColor;
             baseLine.Update();
         }
         public void DrawOutLines(vdRender render)
         {
+            line_lt2rt.PenColor.SystemColor = drawColor;
             line_lt2rt.Update();
+
+            line_rt2rb.PenColor.SystemColor = drawColor;
             line_rt2rb.Update();
+
+            line_rb2lb.PenColor.SystemColor = drawColor;
             line_rb2lb.Update();
+
+            line_lb2lt.PenColor.SystemColor = drawColor;
             line_lb2lt.Update();
 
             line_lt2rt.Draw(render);

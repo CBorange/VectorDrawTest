@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Spatial;
 using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
@@ -79,6 +78,11 @@ namespace MathPractice
             if (point == null)
                 return;
             mainController.CreateNewVerBeam(point);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            VectorDraw.Professional.ActionUtilities.vdCommandAction.LineEx(vectorDrawBaseControl1.ActiveDocument);
         }
     }
 }

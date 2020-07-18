@@ -4,22 +4,6 @@
         <name>vdFramedControl</name>
     </assembly>
     <members>
-        <member name="T:vdFramedControl.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:vdFramedControl.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:vdFramedControl.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
         <member name="T:vdControls.ChangeCoordEventHandler">
             <summary>
             Represents the method that will mhandle the <see cref="E:vdControls.vdFramedControl.ChangeCoord"/> event.
@@ -35,101 +19,6 @@
             This is the main Framed Control that contains a property list, commandline, menu and scroll bars.
             </summary>
         </member>
-        <member name="E:vdControls.vdFramedControl.ChangeCoord">
-            <summary>
-            Fires just before a message appear on status bar coordinate pane in order to change this message if necessary.
-            </summary>
-        </member>
-        <member name="T:vdControls.vdFramedControl.LayoutStyle">
-            <summary>
-            Used to control the visibility of the various sub controls of the vdFramedControl.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.CommandLine">
-            <summary>
-            Refers to the Commandline control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.PropertyGrid">
-            <summary>
-            Refers to the Property grid control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.StatusBar">
-            <summary>
-            Refers to the status bar of the control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.LayoutTab">
-            <summary>
-            Refers to the layout bar of the control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.HorizodalScroll">
-            <summary>
-            Refers to the horizontal scroll bar of the control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.VericalScroll">
-            <summary>
-            Refers to the vertical scroll bar of the control.
-            </summary>
-        </member>
-        <member name="F:vdControls.vdFramedControl.LayoutStyle.LayoutPopupMenu">
-            <summary>
-            Refers to the Popup menu that shows when right click on the Layout tab.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.CommandLine">
-            <summary>
-            Get the vdCommandLine control of the vdFramedControl.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.BackColor">
-            <summary>
-            Get/Set the BackColor of the control's form.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.BackgroundImage">
-            <summary>
-            Get/Set the BackGroundImage of the control's form.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.BackgroundImageLayout">
-            <summary>
-            Specifies the position of the image of the control's form.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.Font">
-            <summary>
-            Get/Set the Font used in the control's form.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.ForeColor">
-            <summary>
-            Get/Set the forecolor of the control's form.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.DisplayPolarCoord">
-            <summary>
-            Get/Set a boolean value representing the visibility of the polar tracking coordinates.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.BaseControl">
-            <summary>
-            Get the VectorDrawBaseControl control of the vdFramedControl.This is the main method the gain access to the rest properties and methods of the control like ActiveDocument.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.ScrollableControl">
-            <summary>
-            Get the vdScrollableControl control of the vdFramedControl.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.vdGrid">
-            <summary>
-            Get the vdPropertyGrid control of the vdFramedControl.
-            </summary>
-        </member>
         <member name="M:vdControls.vdFramedControl.SetLayoutStyle(vdControls.vdFramedControl.LayoutStyle,System.Boolean)">
             <summary>
             Controls the visibility of the various controls of the vdFramedControl.
@@ -143,16 +32,6 @@
             </summary>
             <param name="style">An enumerator representing the requested control.</param>
             <returns>A boolean value representing the visibility of the control.</returns>
-        </member>
-        <member name="P:vdControls.vdFramedControl.PropertyGridWidth">
-            <summary>
-            Get/Set the width of PropertyGrid and resumes the layout of control.
-            </summary>
-        </member>
-        <member name="P:vdControls.vdFramedControl.HistoryLines">
-            <summary>
-            Get/Set the number of history lines and resumes the layout of control.
-            </summary>
         </member>
         <member name="M:vdControls.vdFramedControl.#ctor">
             <summary>
@@ -207,13 +86,13 @@
             <param name="file">The System.IO.StreamReader stream to load the commands from. This can be a project's resources file that is common to the commands.txt that we provide.</param>
             <returns>True if the commands were succesfully loaded.</returns>
              <example>This code will Load the commands from a project's resources file.<code>
-               stream = new MemoryStream();
-               writer = new StreamWriter(stream);
-               writer.Write(Resources.Commands);
-               writer.Flush();
-               stream.Position = 0;
-               StreamReader Commands = new StreamReader(stream);
-               vdFramedControl1.LoadCommands(Commands);
+                        stream = new MemoryStream();
+                        writer = new StreamWriter(stream);
+                        writer.Write(Resources.Commands);
+                        writer.Flush();
+                        stream.Position = 0;
+                        StreamReader Commands = new StreamReader(stream);
+                        vdFramedControl1.LoadCommands(Commands);
             </code>
             </example>
         </member>
@@ -230,15 +109,14 @@
             </summary>
             <param name="file">A System.IO.StreamReader stream to load the menu from. This can be a text file in the resources of the project as the menu.txt that we provide.</param>
             <param name="ImagesPath">The directory where the Images are for the icons of the menu.</param>
-             <example>This code will Load the menu from a resources file of the project.
-             <code>
-              MemoryStream stream = new MemoryStream();
-              StreamWriter writer = new StreamWriter(stream);
-              writer.Write(Resources.Menu);
-              writer.Flush();
-              stream.Position = 0;
-              StreamReader Menu = new StreamReader(stream);
-              vdFramedControl1.LoadMenu (Menu,"C:\\vdraw6\\REDIS\\AnyCPU\\images"); */
+             <example>This code will Load the menu from a resources file of the project.<code>
+                        MemoryStream stream = new MemoryStream();
+                        StreamWriter writer = new StreamWriter(stream);
+                        writer.Write(Resources.Menu);
+                        writer.Flush();
+                        stream.Position = 0;
+                        StreamReader Menu = new StreamReader(stream);
+                        vdFramedControl1.LoadMenu (Menu,"C:\\vdraw6\\REDIS\\AnyCPU\\images"); 
             </code>
             </example>
         </member>
@@ -255,6 +133,156 @@
         <member name="M:vdControls.vdFramedControl.UpdateStatusBarButtonsText">
             <summary>
             Updates the status bar button's text depending the control's values for Grid,Snap,Ortho and Osnap mode.
+            </summary>
+        </member>
+        <member name="M:vdControls.vdFramedControl.GetStatusBarOption(vdControls.vdFramedControl.StatusBarOptions)">
+            <summary>
+            Get the visibility of the specified status bar button.
+            </summary>
+            <param name="option">An enumerator that represents a button on the status bar.</param>
+            <returns>True if the button is visible.</returns>
+        </member>
+        <member name="M:vdControls.vdFramedControl.SetStatusBarOption(vdControls.vdFramedControl.StatusBarOptions,System.Boolean)">
+            <summary>
+            Set the visibility of the specified button of the status bar.
+            </summary>
+            <param name="option"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:vdControls.vdFramedControl.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+            <summary>
+            Internally used to process Key input.
+            </summary>
+            <param name="msg"></param>
+            <param name="keyData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:vdControls.vdFramedControl.OnGotFocus(System.EventArgs)">
+            <summary>
+             Raises the System.Windows.Forms.Control.GotFocus event.
+            </summary>
+            <param name="e"> An System.EventArgs that contains the event data.</param>
+        </member>
+        <member name="F:vdControls.vdFramedControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:vdControls.vdFramedControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:vdControls.vdFramedControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:vdControls.vdFramedControl.ChangeCoord">
+            <summary>
+            Fires just before a message appear on status bar coordinate pane in order to change this message if necessary.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.CommandLine">
+            <summary>
+            Get the vdCommandLine control of the vdFramedControl.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.BackColor">
+            <summary>
+            Get/Set the BackColor of the control's form.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.BackgroundImage">
+            <summary>
+            Get/Set the BackGroundImage of the control's form.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.BackgroundImageLayout">
+            <summary>
+            Specifies the position of the image of the control's form.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.Font">
+            <summary>
+            Get/Set the Font used in the control's form.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.ForeColor">
+            <summary>
+            Get/Set the forecolor of the control's form.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.DisplayPolarCoord">
+            <summary>
+            Get/Set a boolean value representing the visibility of the polar tracking coordinates.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.BaseControl">
+            <summary>
+            Get the VectorDrawBaseControl control of the vdFramedControl.This is the main method the gain access to the rest properties and methods of the control like ActiveDocument.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.ScrollableControl">
+            <summary>
+            Get the vdScrollableControl control of the vdFramedControl.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.vdGrid">
+            <summary>
+            Get the vdPropertyGrid control of the vdFramedControl.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.PropertyGridWidth">
+            <summary>
+            Get/Set the width of PropertyGrid and resumes the layout of control.
+            </summary>
+        </member>
+        <member name="P:vdControls.vdFramedControl.HistoryLines">
+            <summary>
+            Get/Set the number of history lines and resumes the layout of control.
+            </summary>
+        </member>
+        <member name="T:vdControls.vdFramedControl.LayoutStyle">
+            <summary>
+            Used to control the visibility of the various sub controls of the vdFramedControl.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.CommandLine">
+            <summary>
+            Refers to the Commandline control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.PropertyGrid">
+            <summary>
+            Refers to the Property grid control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.StatusBar">
+            <summary>
+            Refers to the status bar of the control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.LayoutTab">
+            <summary>
+            Refers to the layout bar of the control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.HorizodalScroll">
+            <summary>
+            Refers to the horizontal scroll bar of the control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.VericalScroll">
+            <summary>
+            Refers to the vertical scroll bar of the control.
+            </summary>
+        </member>
+        <member name="F:vdControls.vdFramedControl.LayoutStyle.LayoutPopupMenu">
+            <summary>
+            Refers to the Popup menu that shows when right click on the Layout tab.
             </summary>
         </member>
         <member name="T:vdControls.vdFramedControl.StatusBarOptions">
@@ -302,49 +330,20 @@
             Represents all the buttons of the status bar(all the above).
             </summary>
         </member>
-        <member name="M:vdControls.vdFramedControl.GetStatusBarOption(vdControls.vdFramedControl.StatusBarOptions)">
+        <member name="T:vdFramedControl.Properties.Resources">
             <summary>
-            Get the visibility of the specified status bar button.
-            </summary>
-            <param name="option">An enumerator that represents a button on the status bar.</param>
-            <returns>True if the button is visible.</returns>
-        </member>
-        <member name="M:vdControls.vdFramedControl.SetStatusBarOption(vdControls.vdFramedControl.StatusBarOptions,System.Boolean)">
-            <summary>
-            Set the visibility of the specified button of the status bar.
-            </summary>
-            <param name="option"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:vdControls.vdFramedControl.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
-            <summary>
-            Internally used to process Key input.
-            </summary>
-            <param name="msg"></param>
-            <param name="keyData"></param>
-            <returns></returns>
-        </member>
-        <member name="M:vdControls.vdFramedControl.OnGotFocus(System.EventArgs)">
-            <summary>
-             Raises the System.Windows.Forms.Control.GotFocus event.
-            </summary>
-            <param name="e"> An System.EventArgs that contains the event data.</param>
-        </member>
-        <member name="F:vdControls.vdFramedControl.components">
-            <summary>
-            Required designer variable.
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="M:vdControls.vdFramedControl.Dispose(System.Boolean)">
+        <member name="P:vdFramedControl.Properties.Resources.ResourceManager">
             <summary>
-            Clean up any resources being used.
+              Returns the cached ResourceManager instance used by this class.
             </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:vdControls.vdFramedControl.InitializeComponent">
+        <member name="P:vdFramedControl.Properties.Resources.Culture">
             <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
             </summary>
         </member>
     </members>

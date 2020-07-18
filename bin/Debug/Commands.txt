@@ -1,2 +1,4 @@
 Line,l,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,LineEx
 Erase,e,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,EraseEx
+Rotate,r,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,RotateEx
+Move,m,VectorDraw.Professional.dll,VectorDraw.Professional.ActionUtilities.vdCommandAction,MoveEx

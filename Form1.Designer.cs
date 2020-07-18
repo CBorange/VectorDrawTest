@@ -33,12 +33,16 @@
             this.vdCommandLine1 = new VectorDraw.Professional.vdCommandLine.vdCommandLine();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // vectorDrawBaseControl1
             // 
             this.vectorDrawBaseControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.vectorDrawBaseControl1.AllowDrop = true;
+            this.vectorDrawBaseControl1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.vectorDrawBaseControl1.DisableVdrawDxf = false;
+            this.vectorDrawBaseControl1.EnableAutoGripOn = true;
             this.vectorDrawBaseControl1.Location = new System.Drawing.Point(173, 12);
             this.vectorDrawBaseControl1.Name = "vectorDrawBaseControl1";
             this.vectorDrawBaseControl1.Size = new System.Drawing.Size(650, 650);
@@ -95,11 +99,23 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.CreateVerBeam);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("굴림", 9F);
+            this.button1.Location = new System.Drawing.Point(829, 144);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 27);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 734);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.vdCommandLine1);
@@ -119,6 +135,7 @@
         private VectorDraw.Professional.vdCommandLine.vdCommandLine vdCommandLine1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Spatial;
 using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
@@ -12,11 +11,23 @@ using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 using System.Drawing;
 using VectorDraw.Render;
+using System.Runtime.Remoting.Messaging;
+using System.Diagnostics;
 
 namespace MathPractice.Model.Manager
 {
     public class VectorDrawConfigure
     {
+        private static  VectorDrawConfigure instance;
+        public static VectorDrawConfigure Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new VectorDrawConfigure();
+                return instance;
+            }
+        }
         public const int VIEW_WIDTH = 650;
         public const int VIEW_HEIGHT = 650;
         public const int VIEW_HALFWIDTH = 325;
@@ -27,6 +38,10 @@ namespace MathPractice.Model.Manager
 
         private BeamManager beamManager;
 
+        private VectorDrawConfigure()
+        {
+
+        }
         public void InitializeSystem(vdDocument document, vdCommandLine commandLine, BeamManager beamManager)
         {
             this.document = document;
@@ -36,7 +51,19 @@ namespace MathPractice.Model.Manager
             document.ShowUCSAxis = false;
             document.ActiveLayOut.ZoomWindow(new gPoint(-VIEW_HALFWIDTH, -VIEW_HALFHEIGHT), new gPoint(VIEW_HALFWIDTH, VIEW_HALFHEIGHT));
             document.OnDrawOverAll += new vdDocument.DrawOverAllEventHandler(AllDrawOver_Handler);
-            commandLine.LoadCommands(System.IO.Path.GetDirectoryName(Application.ExecutablePath), "Commands.txt");
+            document.ActionEnd += new vdDocument.ActionEndEventHandler(ActionEnd_Handler);
+
+            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\";
+            if (System.IO.Directory.Exists(path))
+            {
+                document.SupportPath = path;
+
+                commandLine.SelectDocument(document);
+                commandLine.UnLoadCommands();
+                bool result = commandLine.LoadCommands(path, "Commands.txt");
+                if (!result)
+                    Debug.WriteLine("Load Command Error");
+            }
         }
         public void AddLineToDocument(gPoint startPoint, gPoint endPoint)
         {
@@ -54,6 +81,12 @@ namespace MathPractice.Model.Manager
             document.Model.Entities.AddItem(newLine);
             document.Redraw(true);
         }
+        public void AddLineToDocument(vdLine newLine)
+        {
+            newLine.SetUnRegisterDocument(document);
+            newLine.setDocumentDefaults();
+            document.Model.Entities.AddItem(newLine);
+        }
         public void AddCircleToDocument(gPoint center, double radius)
         {
             vdCircle circle = new vdCircle(document, center, radius);
@@ -63,16 +96,18 @@ namespace MathPractice.Model.Manager
             document.Model.Entities.Add(circle);
             document.Redraw(true);
         }
+
+        // Event Handler
         public void AllDrawOver_Handler(object sender, vdRender render, ref bool cancel)
         {
-            for (int i = 0; i < beamManager.HorBeams.Count; ++i)
-            {
-                beamManager.HorBeams[i].DrawOutLines(render);
-            }
-            for (int i = 0; i < beamManager.VerBeams.Count; ++i)
-            {
-                beamManager.VerBeams[i].DrawOutLines(render);
-            }
+            Debug.WriteLine("AllDrawOver");
+            beamManager.DrawOutLineFromAllBeam(render);
+        }
+        public void ActionEnd_Handler(object sender, string actionName)
+        {
+            Debug.WriteLine("ActionEnd");
+            beamManager.RefreshAllBeam();
+            document.Redraw(true);
         }
     }
 }

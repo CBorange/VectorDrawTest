@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Spatial;
 using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
@@ -52,7 +51,6 @@ namespace MathPractice.Model.Manager
 
             InitBaseLine();
             InitBeams();
-            RefreshAllBeam();
         }
         private void InitBeams()
         {
@@ -64,7 +62,21 @@ namespace MathPractice.Model.Manager
             drawConfigure.AddLineToDocument(new gPoint(-1000, 0), new gPoint(1000, 0));
             drawConfigure.AddLineToDocument(new gPoint(0, -1000), new gPoint(0, 1000));
         }
-        private void RefreshAllBeam()
+        
+
+        // Event Handler
+        public void DrawOutLineFromAllBeam(vdRender render)
+        {
+            for (int i = 0; i < verBeams.Count; ++i)
+            {
+                verBeams[i].DrawOutLines(render);
+            }
+            for (int i = 0; i < horBeams.Count; ++i)
+            {
+                horBeams[i].DrawOutLines(render);
+            }
+        }
+        public void RefreshAllBeam()
         {
             for (int i = 0; i < verBeams.Count; ++i)
             {
@@ -80,19 +92,6 @@ namespace MathPractice.Model.Manager
             }
             document.Redraw(true);
         }
-        private void DrawOutLineFromAllBeam(vdRender render)
-        {
-            for (int i = 0; i < verBeams.Count; ++i)
-            {
-                verBeams[i].DrawOutLines(render);
-            }
-            for (int i = 0; i < horBeams.Count; ++i)
-            {
-                horBeams[i].DrawOutLines(render);
-            }
-        }
-
-        // Event Handler
         public void AddNewHorBeam(Beam beam)
         {
             horBeams.Add(beam);

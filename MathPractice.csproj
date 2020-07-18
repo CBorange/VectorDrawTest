@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Math.Spatial, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Math.Spatial.1.2.0\lib\net461\Math.Spatial.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,26 +45,36 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="vdCommandLine, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdFramedControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdIFC, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VdProControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdPropertyGrid, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VDrawBaseControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VdrawPro5, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Actions, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Generics, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Geometry, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Professional, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Render, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Serialize, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.SolidModel, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdCommandLine, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdDXF, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdFramedControl, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VDgridLib, Version=7.7009.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VdProControl, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdPropertyGrid, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VDrawBaseControl, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VDrawI5, Version=7.7009.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VDrawLib5, Version=7.7009.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VdrawPro5, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdRay, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdScrollableControl, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="vdxFcnv, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Actions, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Generics, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Geometry, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Professional, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Render, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VectorDraw.Serialize, Version=7.7009.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\CustomFigure\Beam.cs" />
     <Compile Include="Model\CustomFigure\FigureDrawer.cs" />
-    <Compile Include="Model\Lagacy\BeamLagacy.cs" />
     <Compile Include="Model\Manager\BeamBuilder.cs" />
     <Compile Include="Model\CollisionCalculator\BeamCollisionCalculator.cs" />
     <Compile Include="Model\Manager\BeamManager.cs" />
@@ -76,7 +82,6 @@
     <Compile Include="Model\CollisionCalculator\ICollisionAlgorithm.cs" />
     <Compile Include="Model\CollisionCalculator\RotationAlgorithm.cs" />
     <Compile Include="Model\Manager\DebugSupproter.cs" />
-    <Compile Include="Model\Lagacy\FigureDrawer_Lagacy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Commands.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

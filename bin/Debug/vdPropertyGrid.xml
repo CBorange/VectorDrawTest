@@ -4,33 +4,47 @@
         <name>vdPropertyGrid</name>
     </assembly>
     <members>
-        <member name="T:vdPropertyGrid.PropertyValueChangedDelegate">
-            <summary>
-            Represents the method that will handle the PropertyValueChanged event.
-            </summary>
-            <param name="propertyName">The name of the property that changed.</param>
-            <param name="OldValue">Old value of the changed property.</param>
-        </member>
-        <member name="T:vdPropertyGrid.SelectedGridItemChangedDelegate">
-            <summary>
-            Represents the method that will handle the SelectedGridItemChanged event.
-            </summary>
-            <param name="oldComponentTypeName">The name of the Object Type where the previous selected GridItem property belongs to.</param>
-            <param name="oldPropertyName">The name of the previous selected GridItem property.</param>
-            <param name="newComponentTypeName">The name of the Object Type where the currently selected GridItem property belongs to.</param>
-            <param name="newPropertyName">The name of the currently selected GridItem property.</param>
-            <param name="cancel">A boolean reference value that represents if the currently selected item can get the focus.</param>
-        </member>
-        <member name="T:vdPropertyGrid.SelectedObjectChangeDelegate">
-            <summary>
-            Represents the method that will handle the SelectedObjectChange event.
-            </summary>
-            <param name="newObject">New object which is going to be selected in the PropertyGrid control.</param>
-            <param name="cancel">A boolean reference value that represents if the currently selected item can be changed to the newObject.</param>
-        </member>
         <member name="T:vdPropertyGrid.vdPropertyGrid">
             <summary>
              Provides a grid control that can be used to display the properties of VectorDraw objects.
+            </summary>
+        </member>
+        <member name="F:vdPropertyGrid.vdPropertyGrid.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.#ctor">
+            <summary>
+             Initializes a new instance of the vdPropertyGrid class.
+            </summary>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.OnResize(System.EventArgs)">
+            <summary>
+            Raises the System.Windows.Forms.UserControl.Resize event.
+            </summary>
+            <param name="e">An System.EventArgs that contains the event data.</param>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.Clear">
+            <summary>
+            Clear the seleted object and update the globalized property descriptors.
+            </summary>
+        </member>
+        <member name="M:vdPropertyGrid.vdPropertyGrid.RefreshGrid">
+            <summary>
+             Forces the control to invalidate its client area and immediately redraw itself and any child controls.
             </summary>
         </member>
         <member name="E:vdPropertyGrid.vdPropertyGrid.PropertyValueChanged">
@@ -56,27 +70,6 @@
         <member name="E:vdPropertyGrid.vdPropertyGrid.SelectedObjectChange">
             <summary>
             Fires before a new object selected in the property grid control.
-            </summary>
-        </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.#ctor">
-            <summary>
-             Initializes a new instance of the vdPropertyGrid class.
-            </summary>
-        </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.OnResize(System.EventArgs)">
-            <summary>
-            Raises the System.Windows.Forms.UserControl.Resize event.
-            </summary>
-            <param name="e">An System.EventArgs that contains the event data.</param>
-        </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.Clear">
-            <summary>
-            Clear the seleted object and update the globalized property descriptors.
-            </summary>
-        </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.RefreshGrid">
-            <summary>
-             Forces the control to invalidate its client area and immediately redraw itself and any child controls.
             </summary>
         </member>
         <member name="P:vdPropertyGrid.vdPropertyGrid.UseGroupItems">
@@ -118,22 +111,29 @@
             Get/Set the selected object of the grid control.
             </summary>
         </member>
-        <member name="F:vdPropertyGrid.vdPropertyGrid.components">
+        <member name="T:vdPropertyGrid.PropertyValueChangedDelegate">
             <summary>
-            Required designer variable.
+            Represents the method that will handle the PropertyValueChanged event.
             </summary>
+            <param name="propertyName">The name of the property that changed.</param>
+            <param name="OldValue">Old value of the changed property.</param>
         </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.Dispose(System.Boolean)">
+        <member name="T:vdPropertyGrid.SelectedGridItemChangedDelegate">
             <summary>
-            Clean up any resources being used.
+            Represents the method that will handle the SelectedGridItemChanged event.
             </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+            <param name="oldComponentTypeName">The name of the Object Type where the previous selected GridItem property belongs to.</param>
+            <param name="oldPropertyName">The name of the previous selected GridItem property.</param>
+            <param name="newComponentTypeName">The name of the Object Type where the currently selected GridItem property belongs to.</param>
+            <param name="newPropertyName">The name of the currently selected GridItem property.</param>
+            <param name="cancel">A boolean reference value that represents if the currently selected item can get the focus.</param>
         </member>
-        <member name="M:vdPropertyGrid.vdPropertyGrid.InitializeComponent">
+        <member name="T:vdPropertyGrid.SelectedObjectChangeDelegate">
             <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
+            Represents the method that will handle the SelectedObjectChange event.
             </summary>
+            <param name="newObject">New object which is going to be selected in the PropertyGrid control.</param>
+            <param name="cancel">A boolean reference value that represents if the currently selected item can be changed to the newObject.</param>
         </member>
         <member name="T:vdPropertyGrid.IvdPropertyGridEvents">
             <summary>
