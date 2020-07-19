@@ -244,9 +244,12 @@ namespace MathPractice.Model.CustomFigure
             line_lb2lt.Draw(render);
 
             // Cutting Rect Draw
-
+            for (int i = 0; i < cuttingFigures.Count; ++i)
+                cuttingFigures[i].DrawLines(render);
 
             // Expand Rect Draw
+            for (int i = 0; i < expandFigures.Count; ++i)
+                expandFigures[i].DrawLines(render);
 
         }
         public void RemoveAllFigures()
@@ -254,6 +257,15 @@ namespace MathPractice.Model.CustomFigure
             cuttingFigures.Clear();
             expandFigures.Clear();
         }
+        public void AddCuttingFigure(List<gPoint> points)
+        {
+            cuttingFigures.Add(new FigureDrawer(points.ToArray(), document));
+        }
+        public void AddExpandFigure(List<gPoint> points)
+        {
+            expandFigures.Add(new FigureDrawer(points.ToArray(), document));
+        }
+
         public void RemoveAllCalcTarget()
         {
             calcTargetBeams.Clear();

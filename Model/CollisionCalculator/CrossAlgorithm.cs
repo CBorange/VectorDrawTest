@@ -38,9 +38,31 @@ namespace MathPractice.Model.CollisionCalculator
                 if (colPointCount > 0)
                     needExpand = true;
 
-                gPoint calcLineA_End = math.GetExpandedPointBy2Points(horBeam.RightTop, horBeam.LeftTop, 5);
-                gPoint calcLineB_End = math.GetExpandedPointBy2Points(horBeam.RightBottom, horBeam.LeftBottom, 5);
+                // 충돌 위치 산출
+                gPoint calcLineA_End = math.GetExpandedPointBy2Points(horBeam.RightTop, horBeam.LeftTop, 1000);
+                VectorDrawConfigure.Instance.AddCircleToDocument(horBeam.RightTop, 3);
+                VectorDrawConfigure.Instance.AddCircleToDocument(calcLineA_End, 3);
+                gPoint calcLineB_End = math.GetExpandedPointBy2Points(horBeam.RightBottom, horBeam.LeftBottom, 1000);
+                VectorDrawConfigure.Instance.AddCircleToDocument(horBeam.RightBottom, 3);
+                VectorDrawConfigure.Instance.AddCircleToDocument(calcLineB_End, 3);
+
+                List<gPoint> calcRectPoints = new List<gPoint>();
+                GetCollisionPoints(horBeam.RightTop, calcLineA_End, verBeam, calcRectPoints);
+                GetCollisionPoints(horBeam.RightBottom, calcLineB_End, verBeam, calcRectPoints);
+
+                horBeam.AddCuttingFigure(calcRectPoints);
             }
+        }
+        private void GetCollisionPoints(gPoint calcLineStart, gPoint calcLineEnd, Beam baseBeam, List<gPoint> rectPointList)
+        {
+            if (math.GetLineIsCross(calcLineStart, calcLineEnd, baseBeam.LeftTop, baseBeam.RightTop))
+                rectPointList.Add(math.GetCrossPoint(calcLineStart, calcLineEnd, baseBeam.LeftTop, baseBeam.RightTop));
+            if (math.GetLineIsCross(calcLineStart, calcLineEnd, baseBeam.LeftBottom, baseBeam.RightBottom))
+                rectPointList.Add(math.GetCrossPoint(calcLineStart, calcLineEnd, baseBeam.LeftBottom, baseBeam.RightBottom));
+            if (math.GetLineIsCross(calcLineStart, calcLineEnd, baseBeam.LeftTop, baseBeam.LeftBottom))
+                rectPointList.Add(math.GetCrossPoint(calcLineStart, calcLineEnd, baseBeam.LeftTop, baseBeam.LeftBottom));
+            if (math.GetLineIsCross(calcLineStart, calcLineEnd, baseBeam.RightTop, baseBeam.RightBottom))
+                rectPointList.Add(math.GetCrossPoint(calcLineStart, calcLineEnd, baseBeam.RightTop, baseBeam.RightBottom));
         }
     }
 }

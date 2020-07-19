@@ -95,7 +95,7 @@ namespace MathPractice.Model.Manager
         }
         public gPoint GetExpandedPointBy2Points(gPoint startP, gPoint endP, int expandValue)
         {
-            Vector vec = GetVectorBy2Point(startP, endP);
+            Vector vec = GetVectorBy2Point(endP, startP);
             vec.Normalize();
             vec *= expandValue;
             gPoint expanded = GetExpandPoint(startP, vec);
@@ -174,18 +174,25 @@ namespace MathPractice.Model.Manager
                 return true;
             return false;
         }
+        public double CCW(gPoint a, gPoint b, gPoint c)
+        {
+            double ans = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+            if (ans < 0) 
+                return 1;
+            else if (ans > 0) 
+                return -1;
+            else 
+                return 0;
+        }
         public bool GetLineIsCross(gPoint vecA_Start, gPoint vecA_End, gPoint vecB_Start, gPoint vecB_End)
         {
-            double den = ((vecB_End.y - vecB_Start.y) * (vecB_End.x - vecA_Start.x)) - ((vecB_End.x - vecB_Start.x) * (vecA_End.y - vecA_Start.y));
-            if (den == 0)
-                return false;
+            double ab = CCW(vecA_Start, vecA_End, vecB_Start) * CCW(vecA_Start, vecA_End, vecB_End);
+            double cd = CCW(vecB_Start, vecB_End, vecA_Start) * CCW(vecB_Start, vecB_End, vecA_End);
+            if (ab == 0 && cd == 0)
+            {
 
-            double ua = (((vecB_End.x - vecA_Start.x) * (vecA_Start.y - vecB_Start.y)) - ((vecB_End.y - vecB_Start.x) * (vecA_Start.x - vecA_End.x))) / den;
-            double ub = (((vecA_End.x - vecA_Start.x) * (vecA_Start.y - vecB_Start.y)) - ((vecA_End.y - vecA_Start.y) * (vecA_Start.x - vecB_Start.x))) / den;
-
-            if ((ua >= 0 && ua <= 1) && (ub >= 0 && ub <= 1))
-                return true;
-            return false;
+            }
+            return ab <= 0 && cd <= 0;
         }
         //public double GetAngleByCenterLine(gPoint center, gPoint a1, gPoint a2)
         //{

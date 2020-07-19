@@ -40,6 +40,7 @@ namespace MathPractice.Model.CustomFigure
             lines = new vdLine[points.Length];
             for (int i = 0; i < lines.Length; ++i)
             {
+                lines[i] = new vdLine();
                 lines[i].SetUnRegisterDocument(document);
 
                 int nextPointIDX = i + 1;
@@ -50,13 +51,13 @@ namespace MathPractice.Model.CustomFigure
                 lines[i].EndPoint = points[nextPointIDX];
             }
         }
-        private void UpdateData(gPoint[] newPoints)
+        public void DrawLines(vdRender render)
         {
-
-        }
-        private void DrawLines(vdRender render)
-        {
-
+            for (int i = 0; i < lines.Length; ++i)
+            {
+                lines[i].Update();
+                lines[i].Draw(render);
+            }
         }
     }
 }
