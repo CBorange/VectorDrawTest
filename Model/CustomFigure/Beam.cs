@@ -86,6 +86,7 @@ namespace MathPractice.Model.CustomFigure
         private DebugCircle rtCircle;
         private DebugCircle lbCircle;
         private DebugCircle rbCircle;
+        private DebugCircle rotCircle;
 
         private Color drawColor;
 
@@ -151,6 +152,7 @@ namespace MathPractice.Model.CustomFigure
             rtCircle = new DebugCircle(document, rightTop, 1, "RT");
             lbCircle = new DebugCircle(document, leftBottom, 1, "LB");
             rbCircle = new DebugCircle(document, rightBottom, 1, "RB");
+            rotCircle = new DebugCircle(document, center, 1, "ROT");
         }
         private void RefreshRectData()
         {
@@ -195,10 +197,11 @@ namespace MathPractice.Model.CustomFigure
             top = MathSupporter.Instance.GetRotatedPoint(rotation, top, center);
             bottom = MathSupporter.Instance.GetRotatedPoint(rotation, bottom, center);
 
-            ltCircle.UpdatePoint(leftTop);
-            rtCircle.UpdatePoint(rightTop);
-            rbCircle.UpdatePoint(rightBottom);
-            lbCircle.UpdatePoint(leftBottom);
+            ltCircle.UpdateCircle(leftTop, $"{string.Format("{0:0.00}",leftTop.x)}, {string.Format("{0:0.00}", leftTop.y)}");
+            rtCircle.UpdateCircle(rightTop, $"{string.Format("{0:0.00}", rightTop.x)}, {string.Format("{0:0.00}", rightTop.y)}");
+            rbCircle.UpdateCircle(rightBottom, $"{string.Format("{0:0.00}", rightBottom.x)}, {string.Format("{0:0.00}", rightBottom.y)}");
+            lbCircle.UpdateCircle(leftBottom, $"{string.Format("{0:0.00}", leftBottom.x)}, {string.Format("{0:0.00}", leftBottom.y)}");
+            rotCircle.UpdateCircle(center, $"{string.Format("{0:0.00}", rotation)}");
 
             // refresh line vertex
             line_lt2rt.StartPoint = leftTop;
@@ -222,6 +225,7 @@ namespace MathPractice.Model.CustomFigure
         }
         public void DrawOutLines(vdRender render)
         {
+            // Beam OutLines Draw
             line_lt2rt.PenColor.SystemColor = drawColor;
             line_lt2rt.Update();
 
@@ -238,6 +242,12 @@ namespace MathPractice.Model.CustomFigure
             line_rt2rb.Draw(render);
             line_rb2lb.Draw(render);
             line_lb2lt.Draw(render);
+
+            // Cutting Rect Draw
+
+
+            // Expand Rect Draw
+
         }
         public void RemoveAllFigures()
         {

@@ -89,7 +89,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Manager\MathSupporter.cs" />
+    <Compile Include="Model\Manager\MathSupporter\MathSupporter.cs" />
     <Compile Include="Model\Manager\VectorDrawConfigure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

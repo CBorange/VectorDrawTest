@@ -32,12 +32,12 @@ namespace MathPractice.Model.CustomFigure
         }
 
         // Event Handler
-        public void UpdatePoint(gPoint newPoint)
+        public void UpdateCircle(gPoint newPoint, string text)
         {
             debugCircle.Center = newPoint;
             debugCircle.Update();
 
-            debugText.TextString = $"{caption} : {newPoint}";
+            debugText.TextString = $"{caption} : {text}";
             debugText.InsertionPoint = newPoint;
             debugText.Update();
 

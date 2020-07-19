@@ -7,6 +7,8 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
+using VectorDraw.Render;
+using MathPractice.Model.Manager;
 
 namespace MathPractice.Model.CustomFigure
 {
@@ -17,10 +19,10 @@ namespace MathPractice.Model.CustomFigure
         {
             get { return points; }
         }
-        private vdLine[] drawLines;
-        public vdLine[] DrawLines
+        private vdLine[] lines;
+        public vdLine[] Lines
         {
-            get { return drawLines; }
+            get { return lines; }
         }
         private vdDocument document;
         public vdDocument Document
@@ -35,18 +37,26 @@ namespace MathPractice.Model.CustomFigure
         }
         private void InitLines()
         {
-            drawLines = new vdLine[points.Length];
-            for (int i = 0; i < drawLines.Length; ++i)
+            lines = new vdLine[points.Length];
+            for (int i = 0; i < lines.Length; ++i)
             {
-                drawLines[i].SetUnRegisterDocument(document);
+                lines[i].SetUnRegisterDocument(document);
 
                 int nextPointIDX = i + 1;
-                if (nextPointIDX > drawLines.Length - 1)
+                if (nextPointIDX > lines.Length - 1)
                     nextPointIDX = 0;
 
-                drawLines[i].StartPoint = points[i];
-                drawLines[i].EndPoint = points[nextPointIDX];
+                lines[i].StartPoint = points[i];
+                lines[i].EndPoint = points[nextPointIDX];
             }
+        }
+        private void UpdateData(gPoint[] newPoints)
+        {
+
+        }
+        private void DrawLines(vdRender render)
+        {
+
         }
     }
 }

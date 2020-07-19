@@ -156,6 +156,37 @@ namespace MathPractice.Model.Manager
             }
             return true;
         }
+        public bool Point2BeamCollision(gPoint point, Beam beam)
+        {
+            gPoint left = new gPoint(beam.Left);
+            gPoint right = new gPoint(beam.Right);
+            gPoint bottom = new gPoint(beam.Bottom);
+            gPoint top = new gPoint(beam.Top);
+
+            double rot = beam.Rotation * -1;
+            left = GetRotatedPoint(rot, left, beam.Center);
+            right = GetRotatedPoint(rot, right, beam.Center);
+            bottom = GetRotatedPoint(rot, bottom, beam.Center);
+            top = GetRotatedPoint(rot, top, beam.Center);
+            point = GetRotatedPoint(rot, point, beam.Center);
+
+            if (point.x >= left.x && point.x <= right.x && point.y <= top.y && point.y >= bottom.y)
+                return true;
+            return false;
+        }
+        public bool GetLineIsCross(gPoint vecA_Start, gPoint vecA_End, gPoint vecB_Start, gPoint vecB_End)
+        {
+            double den = ((vecB_End.y - vecB_Start.y) * (vecB_End.x - vecA_Start.x)) - ((vecB_End.x - vecB_Start.x) * (vecA_End.y - vecA_Start.y));
+            if (den == 0)
+                return false;
+
+            double ua = (((vecB_End.x - vecA_Start.x) * (vecA_Start.y - vecB_Start.y)) - ((vecB_End.y - vecB_Start.x) * (vecA_Start.x - vecA_End.x))) / den;
+            double ub = (((vecA_End.x - vecA_Start.x) * (vecA_Start.y - vecB_Start.y)) - ((vecA_End.y - vecA_Start.y) * (vecA_Start.x - vecB_Start.x))) / den;
+
+            if ((ua >= 0 && ua <= 1) && (ub >= 0 && ub <= 1))
+                return true;
+            return false;
+        }
         //public double GetAngleByCenterLine(gPoint center, gPoint a1, gPoint a2)
         //{
         //    gPoint centerLeft = new gPoint(center.x - 1000.0f, center.y);
