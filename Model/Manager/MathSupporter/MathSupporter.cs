@@ -174,23 +174,34 @@ namespace MathPractice.Model.Manager
                 return true;
             return false;
         }
-        public double CCW(gPoint a, gPoint b, gPoint c)
+        public int CCW(gPoint a, gPoint b, gPoint c)
         {
-            double ans = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-            if (ans < 0) 
-                return 1;
-            else if (ans > 0) 
-                return -1;
-            else 
-                return 0;
+            double op = (a.x * b.y) + (b.x * c.y) + (c.x * a.y);
+            op -= (a.y * b.x) + (b.y * c.x) + (c.y * a.x);
+            if (op > 0) return 1;
+            else if (op == 0) return 0;
+            else return -1;
         }
-        public bool GetLineIsCross(gPoint vecA_Start, gPoint vecA_End, gPoint vecB_Start, gPoint vecB_End)
+        public bool GetLineIsCross(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {
-            double ab = CCW(vecA_Start, vecA_End, vecB_Start) * CCW(vecA_Start, vecA_End, vecB_End);
-            double cd = CCW(vecB_Start, vecB_End, vecA_Start) * CCW(vecB_Start, vecB_End, vecA_End);
+            int ab = CCW(pointA, pointB, pointC) * CCW(pointA, pointB, pointD);
+            int cd = CCW(pointC, pointD, pointA) * CCW(pointC, pointD, pointB);
             if (ab == 0 && cd == 0)
             {
+                Vector AC = GetVectorBy2Point(pointC, pointA);
+                Vector AD = GetVectorBy2Point(pointD, pointA);
+                Vector BC = GetVectorBy2Point(pointC, pointB);
+                Vector BD = GetVectorBy2Point(pointD, pointB);
 
+                double maxLength_A = Math.Max(AC.Length, AD.Length);
+                double maxLength_B = Math.Max(BC.Length, BD.Length);
+                double crossLineLength = Math.Max(maxLength_A, maxLength_B);
+
+                Vector AB = GetVectorBy2Point(pointB, pointA);
+                Vector CD = GetVectorBy2Point(pointD, pointC);
+
+                if (crossLineLength < AB.Length + CD.Length)
+                    return true;
             }
             return ab <= 0 && cd <= 0;
         }
