@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace MathPractice.Model.Manager
 {
-    public class DebugSupproter
+    public class DebugSupporter
     {
         private vdDocument document;
         private List<vdCircle> debugCircles;
         private List<vdText> debugCircleTexts;
 
-        public DebugSupproter(vdDocument document)
+        public DebugSupporter(vdDocument document)
         {
             this.document = document;
             debugCircles = new List<vdCircle>();

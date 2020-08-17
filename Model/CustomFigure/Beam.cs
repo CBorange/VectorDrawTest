@@ -160,20 +160,18 @@ namespace MathPractice.Model.CustomFigure
             center = MathSupporter.Instance.GetCenterBy2Points(baseLine.EndPoint, baseLine.StartPoint);
 
             // rotate calc
-            Vector centerShiftVec = new Vector(center.x * -1, center.y * -1, 0);
-            Vector shifted2Origin_BaseStartVec = new Vector(baseLine.StartPoint.x + centerShiftVec.x, baseLine.StartPoint.y + centerShiftVec.y, 0);
-
+            Vector baseS2E = new Vector(baseLine.EndPoint.x - baseLine.StartPoint.x, baseLine.EndPoint.y - baseLine.StartPoint.y, 0);
             Vector centerLineUnit = new Vector(1, 0, 0);
-            if (shifted2Origin_BaseStartVec.x < 0)
+            if (baseS2E.x < 0)
                 centerLineUnit = new Vector(-1, 0, 0);
 
-            double x = shifted2Origin_BaseStartVec.Dot(centerLineUnit);
-            rotation = Math.Atan2(shifted2Origin_BaseStartVec.y, x);
+            double x = baseS2E.Dot(centerLineUnit);
+            rotation = Math.Atan2(baseS2E.y, x);
 
             rotation = Globals.RadiansToDegrees(rotation);
-            if (shifted2Origin_BaseStartVec.x < 0 && shifted2Origin_BaseStartVec.y >= 0)
+            if (baseS2E.x < 0 && baseS2E.y >= 0)
                 rotation *= -1;
-            else if (shifted2Origin_BaseStartVec.x < 0 && shifted2Origin_BaseStartVec.y <= 0)
+            else if (baseS2E.x < 0 && baseS2E.y <= 0)
                 rotation *= -1;
 
             // calc vertex point
