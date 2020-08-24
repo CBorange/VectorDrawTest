@@ -22,37 +22,37 @@ namespace MathPractice.Model.CollisionCalculator
         {
             math = MathSupporter.Instance;
         }
-        public void CalcAlgorithm_CuttingRect(Beam verBeam, Beam horBeam)
+        public void CalcAlgorithm_CuttingRect(Beam cuttedBeam, Beam upBeam)
         {
             bool needExpand = false;
 
             // 확장 여부 검사
             int colPointCount = 0;
-            if (math.Point2BeamCollision(horBeam.LeftTop, verBeam))
+            if (math.Point2BeamCollision(upBeam.LeftTop, cuttedBeam))
                 colPointCount += 1;
-            if (math.Point2BeamCollision(horBeam.LeftBottom, verBeam))
+            if (math.Point2BeamCollision(upBeam.LeftBottom, cuttedBeam))
                 colPointCount += 1;
 
             if (colPointCount > 0)
                 needExpand = true;
 
             // 충돌 위치 산출
-            gPoint ltExpand = math.GetExpandedPointBy2Points(horBeam.RightTop, horBeam.LeftTop, 1000);
-            gPoint lbExpand = math.GetExpandedPointBy2Points(horBeam.RightBottom, horBeam.LeftBottom, 1000);
-            gPoint rtExpand = math.GetExpandedPointBy2Points(horBeam.LeftTop, horBeam.RightTop, 1000);
-            gPoint rbExpand = math.GetExpandedPointBy2Points(horBeam.LeftBottom, horBeam.RightBottom, 1000);
+            gPoint ltExpand = math.GetExpandedPointBy2Points(upBeam.RightTop, upBeam.LeftTop, 1000);
+            gPoint lbExpand = math.GetExpandedPointBy2Points(upBeam.RightBottom, upBeam.LeftBottom, 1000);
+            gPoint rtExpand = math.GetExpandedPointBy2Points(upBeam.LeftTop, upBeam.RightTop, 1000);
+            gPoint rbExpand = math.GetExpandedPointBy2Points(upBeam.LeftBottom, upBeam.RightBottom, 1000);
 
             List<gPoint> calcRectPoints = new List<gPoint>();
-            GetCollisionPoints(rtExpand, ltExpand, verBeam, calcRectPoints);
-            GetCollisionPoints(rbExpand, lbExpand, verBeam, calcRectPoints);
+            GetCollisionPoints(rtExpand, ltExpand, cuttedBeam, calcRectPoints);
+            GetCollisionPoints(rbExpand, lbExpand, cuttedBeam, calcRectPoints);
             if (calcRectPoints.Count < 2)
             {
-                GetCollisionPoints(ltExpand, rtExpand, verBeam, calcRectPoints);
-                GetCollisionPoints(lbExpand, rbExpand, verBeam, calcRectPoints);
+                GetCollisionPoints(ltExpand, rtExpand, cuttedBeam, calcRectPoints);
+                GetCollisionPoints(lbExpand, rbExpand, cuttedBeam, calcRectPoints);
             }
             calcRectPoints = calcRectPoints.OrderBy(x => x.x).ToList();
 
-            horBeam.AddCuttingFigure(calcRectPoints);
+            upBeam.AddCuttingFigure(calcRectPoints);
         }
         private void GetCollisionPoints(gPoint calcLineStart, gPoint calcLineEnd, Beam targetBeam, List<gPoint> rectPointList)
         {

@@ -253,3 +253,8 @@ D:\Project\Hicom_Orientation\VectorDrawTest_0713\obj\Debug\MathPractice.Form1.re
 D:\Project\Hicom_Orientation\VectorDrawTest_0713\obj\Debug\MathPractice.Properties.Resources.resources
 D:\Project\Hicom_Orientation\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.GenerateResource.Cache
 D:\Project\Hicom_Orientation\VectorDrawTest_0713\obj\Debug\MathPractice.exe.licenses
+D:\Project\Hicom_Orientation\VectorDrawTest_0713\bin\Debug\vdIFC.dll
+D:\Project\Hicom_Orientation\VectorDrawTest_0713\bin\Debug\VectorDraw.SolidModel.dll
+D:\Project\Hicom_Orientation\VectorDrawTest_0713\bin\Debug\vdgrAPI.dll
+D:\Project\Hicom_Orientation\VectorDrawTest_0713\bin\Debug\vdIFC.xml
+D:\Project\Hicom_Orientation\VectorDrawTest_0713\obj\Debug\MathPractice.csproj.MathPractice.exe.config

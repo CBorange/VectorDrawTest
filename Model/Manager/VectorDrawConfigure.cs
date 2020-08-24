@@ -65,6 +65,7 @@ namespace MathPractice.Model.Manager
                     Debug.WriteLine("Load Command Error");
             }
         }
+        // Line, Circle, Text 등 Custom Class로 제어되지 않는 객체 추가
         public void AddLineToDocument(gPoint startPoint, gPoint endPoint)
         {
             vdLine newLine = new vdLine();

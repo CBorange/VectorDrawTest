@@ -34,9 +34,13 @@ namespace MathPractice.Controller
             this.beamBuilder = beamBuilder;
         }
 
-        public void CuttingBeam_HorizontalUp()
+        public void UpBeam_HorizontalUp()
         {
             beamManager.CuttingBeam_HorizontalUp();
+        }
+        public void UpBeam_Vertical()
+        {
+            beamManager.CuttingBeam_VerticalUp();
         }
         public void CreateNewHorBeam(gPoint point)
         {

@@ -36,11 +36,11 @@ namespace MathPractice.Model.CollisionCalculator
         {
             rotationAlgorithm.CalcAlgorithm_CuttingRect(verBeam, horBeam);
         }
-        public void CalcCuttingRect_CrossAlgorithm(Beam verBeam, Beam horBeam)
+        public void CalcCuttingRect_CrossAlgorithm(Beam cuttedBeam, Beam upBeam)
         {
-            crossAlgorithm.CalcAlgorithm_CuttingRect(verBeam, horBeam);
+            crossAlgorithm.CalcAlgorithm_CuttingRect(cuttedBeam, upBeam);
         }
-        public void CollisionCheck(Beam horBeam)
+        public void CheckCollisionHorToVer(Beam horBeam)
         {
             horBeam.RemoveAllCalcTarget();
             for (int i = 0; i < beamManager.VerBeams.Count; ++i)
@@ -48,6 +48,17 @@ namespace MathPractice.Model.CollisionCalculator
                 if (math.OBBCollision(horBeam, beamManager.VerBeams[i]))
                 {
                     horBeam.CalcTargetBeams.Add(beamManager.VerBeams[i]);
+                }
+            }
+        }
+        public void CheckCollisionVerToHor(Beam verBeam)
+        {
+            verBeam.RemoveAllCalcTarget();
+            for (int i = 0; i < beamManager.HorBeams.Count; ++i)
+            {
+                if (math.OBBCollision(verBeam, beamManager.HorBeams[i]))
+                {
+                    verBeam.CalcTargetBeams.Add(beamManager.HorBeams[i]);
                 }
             }
         }

@@ -81,15 +81,14 @@ namespace MathPractice.Model.Manager
             for (int i = 0; i < verBeams.Count; ++i)
             {
                 verBeams[i].UpdateBaseLine();
+                collisionCalculator.CheckCollisionVerToHor(verBeams[i]);
             }
             for (int i = 0; i < horBeams.Count; ++i)
             {
                 horBeams[i].UpdateBaseLine();
+                collisionCalculator.CheckCollisionHorToVer(horBeams[i]);
             }
-            for (int i = 0; i < horBeams.Count; ++i)
-            {
-                collisionCalculator.CollisionCheck(horBeams[i]);
-            }
+                
             document.Redraw(true);
         }
         public void AddNewHorBeam(Beam beam)
@@ -115,6 +114,18 @@ namespace MathPractice.Model.Manager
             }
             RefreshAllBeam();
         }
-
+        public void CuttingBeam_VerticalUp()
+        {
+            for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
+            {
+                verBeams[verIdx].RemoveAllFigures();
+                List<Beam> calcBeams = verBeams[verIdx].CalcTargetBeams;
+                for (int horIdx = 0; horIdx < calcBeams.Count; ++horIdx)
+                {
+                    collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[horIdx], verBeams[verIdx]);
+                }
+            }
+            RefreshAllBeam();
+        }
     }
 }

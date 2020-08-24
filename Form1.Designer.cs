@@ -34,6 +34,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // vectorDrawBaseControl1
@@ -56,7 +57,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "가로 바 위";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.CuttingByHorizontal_Click);
+            this.button3.Click += new System.EventHandler(this.UpBeam_ForHorizontal);
             // 
             // vdCommandLine1
             // 
@@ -80,7 +81,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("굴림", 9F);
-            this.button4.Location = new System.Drawing.Point(829, 46);
+            this.button4.Location = new System.Drawing.Point(829, 86);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(115, 27);
             this.button4.TabIndex = 8;
@@ -91,7 +92,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("굴림", 9F);
-            this.button5.Location = new System.Drawing.Point(829, 79);
+            this.button5.Location = new System.Drawing.Point(829, 119);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(115, 27);
             this.button5.TabIndex = 9;
@@ -102,7 +103,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("굴림", 9F);
-            this.button1.Location = new System.Drawing.Point(829, 144);
+            this.button1.Location = new System.Drawing.Point(829, 184);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(115, 27);
             this.button1.TabIndex = 10;
@@ -110,11 +111,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(829, 46);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(115, 28);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "세로 바 위";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.UpBeam_ForVertical);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 734);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -136,6 +148,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

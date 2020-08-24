@@ -57,9 +57,13 @@ namespace MathPractice
             beamBuilder.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
         }
 
-        private void CuttingByHorizontal_Click(object sender, EventArgs e)
+        private void UpBeam_ForHorizontal(object sender, EventArgs e)
         {
-            mainController.CuttingBeam_HorizontalUp();
+            mainController.UpBeam_HorizontalUp();
+        }
+        private void UpBeam_ForVertical(object sender, EventArgs e)
+        {
+            mainController.UpBeam_Vertical();
         }
 
         private void CreateHorBeam(object sender, EventArgs e)

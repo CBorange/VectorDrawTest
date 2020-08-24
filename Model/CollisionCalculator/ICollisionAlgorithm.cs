@@ -14,6 +14,6 @@ namespace MathPractice.Model.CollisionCalculator
 {
     public interface ICollisionAlgorithm
     {
-        void CalcAlgorithm_CuttingRect(Beam verBeam, Beam horBeam);
+        void CalcAlgorithm_CuttingRect(Beam cuttedBeam, Beam upBeam);
     }
 }
