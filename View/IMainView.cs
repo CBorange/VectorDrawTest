@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathPractice.Model.Manager;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CuttingAlgorithm;
 
 namespace MathPractice.View
 {
     public interface IMainView
     {
         void InitializeAllModels(VectorDrawConfigure drawConfigure, BeamManager beamManager,
-            BeamCollisionCalculator collisionCalculator, BeamBuilder beamBuilder);
+            BeamCutter collisionCalculator, BeamBuilder beamBuilder);
         void AttachController(MainController controller);
     }
 }

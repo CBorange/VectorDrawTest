@@ -8,7 +8,7 @@ using MathPractice.Controller;
 using MathPractice.Model;
 using VectorDraw.Geometry;
 using MathPractice.Model.Manager;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CuttingAlgorithm;
 using MathPractice.Model.CustomFigure;
 
 namespace MathPractice.Controller
@@ -21,11 +21,11 @@ namespace MathPractice.Controller
         // Models
         private VectorDrawConfigure drawConfigure;
         private BeamManager beamManager;
-        private BeamCollisionCalculator collisionCalculator;
+        private BeamCutter collisionCalculator;
         private BeamBuilder beamBuilder;
 
         public MainController(IMainView mainView, VectorDrawConfigure drawConfigure, BeamManager beamManager,
-            BeamCollisionCalculator collisionCalculator, BeamBuilder beamBuilder)
+            BeamCutter collisionCalculator, BeamBuilder beamBuilder)
         {
             this.mainView = mainView;
             this.drawConfigure = drawConfigure;

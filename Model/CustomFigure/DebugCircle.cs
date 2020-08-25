@@ -28,7 +28,7 @@ namespace MathPractice.Model.CustomFigure
         private void InitDebugFigures(gPoint circlePoint, double radius, string caption)
         {
             debugCircle = VectorDrawConfigure.Instance.AddCircleToDocument(circlePoint, radius);
-            debugText = VectorDrawConfigure.Instance.AddTextToDocument(new gPoint(circlePoint.x, circlePoint.y + 10), caption);
+            debugText = VectorDrawConfigure.Instance.AddTextToDocument(new gPoint(circlePoint.x, circlePoint.y), caption);
         }
 
         // Event Handler

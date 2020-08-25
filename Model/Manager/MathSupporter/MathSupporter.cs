@@ -131,6 +131,36 @@ namespace MathPractice.Model.Manager
             gPoint diffrent = center - target;
             return Globals.RadiansToDegrees(Math.Atan2(diffrent.y, diffrent.x));
         }
+        public gPoint GetNearestPoint(gPoint center, gPoint[] points)
+        {
+            gPoint nearestPoint = points[0];
+            double minLength = GetLengthBy2Point(center, points[0]);
+            for (int i = 1; i < points.Length; ++i)
+            {
+                double dis = GetLengthBy2Point(center, points[i]);
+                if (dis < minLength)
+                {
+                    minLength = dis;
+                    nearestPoint = points[i];
+                }
+            }
+            return new gPoint(nearestPoint);
+        }
+        public gPoint GetFarthestPoint(gPoint center, gPoint[] points)
+        {
+            gPoint farthestPoint = points[0];
+            double maxLength = GetLengthBy2Point(center, points[0]);
+            for (int i = 1; i < points.Length; ++i)
+            {
+                double dis = GetLengthBy2Point(center, points[i]);
+                if (dis > maxLength)
+                {
+                    maxLength = dis;
+                    farthestPoint = points[i];
+                }
+            }
+            return new gPoint(farthestPoint);
+        }
         public bool OBBCollision(Beam beamA, Beam beamB)
         {
             Vector disVec = GetVectorBy2Point(beamA.Center, beamB.Center);

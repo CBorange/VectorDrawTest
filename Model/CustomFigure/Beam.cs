@@ -82,11 +82,16 @@ namespace MathPractice.Model.CustomFigure
         private vdLine line_rb2lb;
         private vdLine line_lb2lt;
 
+        private const double CIRCLE_SIZE = 0.5f;
         private DebugCircle ltCircle;
         private DebugCircle rtCircle;
         private DebugCircle lbCircle;
         private DebugCircle rbCircle;
         private DebugCircle rotCircle;
+        private DebugCircle lCircle;
+        private DebugCircle rCircle;
+        private DebugCircle tCircle;
+        private DebugCircle bCircle;
 
         private Color drawColor;
 
@@ -117,6 +122,10 @@ namespace MathPractice.Model.CustomFigure
             rightTop = new gPoint();
             leftBottom = new gPoint();
             rightBottom = new gPoint();
+            left = new gPoint();
+            right = new gPoint();
+            top = new gPoint();
+            bottom = new gPoint();
 
             calcTargetBeams = new List<Beam>();
             cuttingFigures = new List<FigureDrawer>();
@@ -148,11 +157,15 @@ namespace MathPractice.Model.CustomFigure
         }
         private void InitDebugCircles()
         {
-            ltCircle = new DebugCircle(document, leftTop, 1, "LT");
-            rtCircle = new DebugCircle(document, rightTop, 1, "RT");
-            lbCircle = new DebugCircle(document, leftBottom, 1, "LB");
-            rbCircle = new DebugCircle(document, rightBottom, 1, "RB");
-            rotCircle = new DebugCircle(document, center, 1, "ROT");
+            ltCircle = new DebugCircle(document, leftTop, CIRCLE_SIZE, "LT");
+            rtCircle = new DebugCircle(document, rightTop, CIRCLE_SIZE, "RT");
+            lbCircle = new DebugCircle(document, leftBottom, CIRCLE_SIZE, "LB");
+            rbCircle = new DebugCircle(document, rightBottom, CIRCLE_SIZE, "RB");
+            rotCircle = new DebugCircle(document, center, CIRCLE_SIZE, "ROT");
+            lCircle = new DebugCircle(document, left, CIRCLE_SIZE, "LEFT");
+            rCircle = new DebugCircle(document, right, CIRCLE_SIZE, "RIGHT");
+            tCircle = new DebugCircle(document, top, CIRCLE_SIZE, "TOP");
+            bCircle = new DebugCircle(document, bottom, CIRCLE_SIZE, "BOTTOM");
         }
         private void RefreshRectData()
         {
@@ -199,6 +212,10 @@ namespace MathPractice.Model.CustomFigure
             rtCircle.UpdateCircle(rightTop, $"{string.Format("{0:0.00}", rightTop.x)}, {string.Format("{0:0.00}", rightTop.y)}");
             rbCircle.UpdateCircle(rightBottom, $"{string.Format("{0:0.00}", rightBottom.x)}, {string.Format("{0:0.00}", rightBottom.y)}");
             lbCircle.UpdateCircle(leftBottom, $"{string.Format("{0:0.00}", leftBottom.x)}, {string.Format("{0:0.00}", leftBottom.y)}");
+            lCircle.UpdateCircle(left, $"{string.Format("{0:0.00}", left.x)}, {string.Format("{0:0.00}", left.y)}");
+            rCircle.UpdateCircle(right, $"{string.Format("{0:0.00}", right.x)}, {string.Format("{0:0.00}", right.y)}");
+            tCircle.UpdateCircle(top, $"{string.Format("{0:0.00}", top.x)}, {string.Format("{0:0.00}", top.y)}");
+            bCircle.UpdateCircle(bottom, $"{string.Format("{0:0.00}", bottom.x)}, {string.Format("{0:0.00}", bottom.y)}");
             rotCircle.UpdateCircle(center, $"{string.Format("{0:0.00}", rotation)}");
 
             // refresh line vertex
@@ -255,13 +272,13 @@ namespace MathPractice.Model.CustomFigure
             cuttingFigures.Clear();
             expandFigures.Clear();
         }
-        public void AddCuttingFigure(List<gPoint> points)
+        public void AddCuttingFigure(List<gPoint> points, Color figureColor)
         {
-            cuttingFigures.Add(new FigureDrawer(points.ToArray(), document));
+            cuttingFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor));
         }
-        public void AddExpandFigure(List<gPoint> points)
+        public void AddExpandFigure(List<gPoint> points, Color figureColor)
         {
-            expandFigures.Add(new FigureDrawer(points.ToArray(), document));
+            expandFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor));
         }
 
         public void RemoveAllCalcTarget()

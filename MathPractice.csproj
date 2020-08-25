@@ -80,11 +80,10 @@
     <Compile Include="Model\CustomFigure\DebugCircle.cs" />
     <Compile Include="Model\CustomFigure\FigureDrawer.cs" />
     <Compile Include="Model\Manager\BeamBuilder.cs" />
-    <Compile Include="Model\CollisionCalculator\BeamCollisionCalculator.cs" />
+    <Compile Include="Model\CuttingAlgorithm\BeamCutter.cs" />
     <Compile Include="Model\Manager\BeamManager.cs" />
-    <Compile Include="Model\CollisionCalculator\CrossAlgorithm.cs" />
-    <Compile Include="Model\CollisionCalculator\ICollisionAlgorithm.cs" />
-    <Compile Include="Model\CollisionCalculator\RotationAlgorithm.cs" />
+    <Compile Include="Model\CuttingAlgorithm\UpCutting_Cross.cs" />
+    <Compile Include="Model\CuttingAlgorithm\IUpCuttingAlgorithm.cs" />
     <Compile Include="Model\Manager\DebugSupporter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

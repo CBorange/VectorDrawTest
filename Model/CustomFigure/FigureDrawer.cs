@@ -9,6 +9,7 @@ using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using VectorDraw.Render;
 using MathPractice.Model.Manager;
+using System.Drawing;
 
 namespace MathPractice.Model.CustomFigure
 {
@@ -29,10 +30,16 @@ namespace MathPractice.Model.CustomFigure
         {
             get { return document; }
         }
-        public FigureDrawer(gPoint[] points, vdDocument document)
+        private Color figureColor;
+        public Color FigureColor
+        {
+            get { return figureColor; }
+        }
+        public FigureDrawer(gPoint[] points, vdDocument document, Color figureColor)
         {
             this.points = points;
             this.document = document;
+            this.figureColor = figureColor;
             InitLines();
         }
         private void InitLines()
@@ -49,6 +56,7 @@ namespace MathPractice.Model.CustomFigure
 
                 lines[i].StartPoint = points[i];
                 lines[i].EndPoint = points[nextPointIDX];
+                lines[i].PenColor.SystemColor = figureColor;
             }
         }
         public void DrawLines(vdRender render)

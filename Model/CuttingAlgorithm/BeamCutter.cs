@@ -11,20 +11,18 @@ using System.Drawing;
 using MathPractice.Model.CustomFigure;
 using MathPractice.Model.Manager;
 
-namespace MathPractice.Model.CollisionCalculator
+namespace MathPractice.Model.CuttingAlgorithm
 {
-    public class BeamCollisionCalculator
+    public class BeamCutter
     {
         private MathSupporter math;
         private vdDocument document;
         private BeamManager beamManager;
-        private ICollisionAlgorithm crossAlgorithm;
-        private ICollisionAlgorithm rotationAlgorithm;
+        private IUpCuttingAlgorithm crossAlgorithm;
 
-        public BeamCollisionCalculator()
+        public BeamCutter()
         {
-            crossAlgorithm = new CrossAlgorithm();
-            rotationAlgorithm = new RotationAlgorithm();
+            crossAlgorithm = new UpCutting_Cross();
         }
         public void Initialize(vdDocument document, BeamManager beamManager)
         {
@@ -32,13 +30,9 @@ namespace MathPractice.Model.CollisionCalculator
             math = MathSupporter.Instance;
             this.beamManager = beamManager;
         }
-        public void CalcCuttingRect_RotationAlgorithm(Beam verBeam, Beam horBeam)
+        public void CalcCuttingRect_CrossAlgorithm(Beam upBeam, Beam cuttedBeam)
         {
-            rotationAlgorithm.CalcAlgorithm_CuttingRect(verBeam, horBeam);
-        }
-        public void CalcCuttingRect_CrossAlgorithm(Beam cuttedBeam, Beam upBeam)
-        {
-            crossAlgorithm.CalcAlgorithm_CuttingRect(cuttedBeam, upBeam);
+            crossAlgorithm.CalcAlgorithm_CuttingRect(upBeam, cuttedBeam);
         }
         public void CheckCollisionHorToVer(Beam horBeam)
         {

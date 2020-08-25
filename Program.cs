@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathPractice.Model.Manager;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CuttingAlgorithm;
 
 namespace MathPractice
 {
@@ -25,7 +25,7 @@ namespace MathPractice
 
             Form1 mainForm = new Form1();
             BeamManager beamManager = new BeamManager();
-            BeamCollisionCalculator collisionCalculator = new BeamCollisionCalculator();
+            BeamCutter collisionCalculator = new BeamCutter();
             BeamBuilder beamBuilder = new BeamBuilder();
             mainForm.InitializeAllModels(VectorDrawConfigure.Instance, beamManager, collisionCalculator, beamBuilder);
 

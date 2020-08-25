@@ -10,7 +10,7 @@ using VectorDraw.Professional.vdObjects;
 using VectorDraw.Render;
 using System.Drawing;
 using MathPractice.Model.CustomFigure;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CuttingAlgorithm;
 
 namespace MathPractice.Model.Manager
 {
@@ -35,14 +35,14 @@ namespace MathPractice.Model.Manager
             get { return horBeams; }
         }
 
-        private BeamCollisionCalculator collisionCalculator;
+        private BeamCutter collisionCalculator;
         private VectorDrawConfigure drawConfigure;
 
         public BeamManager()
         {
 
         }
-        public void Initialize(vdDocument document, BeamCollisionCalculator collisionCalculator,
+        public void Initialize(vdDocument document, BeamCutter collisionCalculator,
             VectorDrawConfigure configure)
         {
             this.document = document;
@@ -101,8 +101,11 @@ namespace MathPractice.Model.Manager
             verBeams.Add(beam);
             RefreshAllBeam();
         }
-        public void CuttingBeam_HorizontalUp()
+        public void CuttingBeam_VerticalUp()
         {
+            for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
+                verBeams[verIdx].RemoveAllFigures();
+
             for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
             {
                 horBeams[horIDX].RemoveAllFigures();
@@ -114,8 +117,10 @@ namespace MathPractice.Model.Manager
             }
             RefreshAllBeam();
         }
-        public void CuttingBeam_VerticalUp()
+        public void CuttingBeam_HorizontalUp()
         {
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+                horBeams[horIDX].RemoveAllFigures();
             for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
             {
                 verBeams[verIdx].RemoveAllFigures();

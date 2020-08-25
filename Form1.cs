@@ -17,7 +17,7 @@ using MathPractice.View;
 using MathPractice.Controller;
 using MathPractice.Model;
 using MathPractice.Model.Manager;
-using MathPractice.Model.CollisionCalculator;
+using MathPractice.Model.CuttingAlgorithm;
 
 namespace MathPractice
 {
@@ -29,7 +29,7 @@ namespace MathPractice
         // Model
         private VectorDrawConfigure drawConfigure;
         private BeamManager beamManager;
-        private BeamCollisionCalculator collisionCalculator;
+        private BeamCutter beamCutter;
         private BeamBuilder beamBuilder;
 
         public Form1()
@@ -38,11 +38,11 @@ namespace MathPractice
             
         }
         public void InitializeAllModels(VectorDrawConfigure drawConfigure, BeamManager beamManager,
-            BeamCollisionCalculator collisionCalculator, BeamBuilder beamBuilder)
+            BeamCutter beamCutter, BeamBuilder beamBuilder)
         {
             this.drawConfigure = drawConfigure;
             this.beamManager = beamManager;
-            this.collisionCalculator = collisionCalculator;
+            this.beamCutter = beamCutter;
             this.beamBuilder = beamBuilder;
         }
         public void AttachController(MainController controller)
@@ -52,8 +52,8 @@ namespace MathPractice
         private void Form1_Load(object sender, EventArgs e)
         {
             drawConfigure.InitializeSystem(vectorDrawBaseControl1.ActiveDocument, vdCommandLine1, beamManager);
-            collisionCalculator.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
-            beamManager.Initialize(vectorDrawBaseControl1.ActiveDocument, collisionCalculator, drawConfigure);
+            beamCutter.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
+            beamManager.Initialize(vectorDrawBaseControl1.ActiveDocument, beamCutter, drawConfigure);
             beamBuilder.Initialize(vectorDrawBaseControl1.ActiveDocument, beamManager);
         }
 
