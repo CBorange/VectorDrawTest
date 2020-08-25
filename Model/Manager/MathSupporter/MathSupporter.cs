@@ -89,16 +89,16 @@ namespace MathPractice.Model.Manager
             vec.Normalize();
             return vec;
         }
-        public gPoint GetExpandPoint(gPoint origin, Vector expandVec)
+        public gPoint GetExtendPoint(gPoint origin, Vector expandVec)
         {
             return new gPoint(origin.x + expandVec.x, origin.y + expandVec.y);
         }
-        public gPoint GetExpandedPointBy2Points(gPoint startP, gPoint endP, int expandValue)
+        public gPoint GetExtendedPointBy2Points(gPoint startP, gPoint endP, int expandValue)
         {
             Vector vec = GetVectorBy2Point(endP, startP);
             vec.Normalize();
             vec *= expandValue;
-            gPoint expanded = GetExpandPoint(startP, vec);
+            gPoint expanded = GetExtendPoint(startP, vec);
             return expanded;
         }
         public gPoint GetCenterBy2Points(gPoint pointA, gPoint pointB)

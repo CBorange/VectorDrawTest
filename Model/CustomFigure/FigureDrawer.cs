@@ -55,6 +55,7 @@ namespace MathPractice.Model.CustomFigure
                     nextPointIDX = 0;
 
                 lines[i].StartPoint = points[i];
+                lines[i].PenWidth = 0.75f;
                 lines[i].EndPoint = points[nextPointIDX];
                 lines[i].PenColor.SystemColor = figureColor;
             }

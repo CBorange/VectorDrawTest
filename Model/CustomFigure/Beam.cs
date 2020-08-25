@@ -102,8 +102,8 @@ namespace MathPractice.Model.CustomFigure
         private List<FigureDrawer> cuttingFigures;
         public List<FigureDrawer> CuttingFigures { get { return cuttingFigures; } }
 
-        private List<FigureDrawer> expandFigures;
-        public List<FigureDrawer> ExpandFigures { get { return expandFigures; } }
+        private List<FigureDrawer> extendFigure;
+        public List<FigureDrawer> ExtendFigure { get { return extendFigure; } }
 
         public Beam(gPoint point, vdDocument document, Color drawColor, double width, double height,double rotation, string beamName)
         {
@@ -129,7 +129,7 @@ namespace MathPractice.Model.CustomFigure
 
             calcTargetBeams = new List<Beam>();
             cuttingFigures = new List<FigureDrawer>();
-            expandFigures = new List<FigureDrawer>();
+            extendFigure = new List<FigureDrawer>();
 
             InitLines();
             InitDebugCircles();
@@ -263,22 +263,26 @@ namespace MathPractice.Model.CustomFigure
                 cuttingFigures[i].DrawLines(render);
 
             // Expand Rect Draw
-            for (int i = 0; i < expandFigures.Count; ++i)
-                expandFigures[i].DrawLines(render);
+            for (int i = 0; i < extendFigure.Count; ++i)
+                extendFigure[i].DrawLines(render);
 
         }
         public void RemoveAllFigures()
         {
             cuttingFigures.Clear();
-            expandFigures.Clear();
+            extendFigure.Clear();
         }
         public void AddCuttingFigure(List<gPoint> points, Color figureColor)
         {
             cuttingFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor));
         }
-        public void AddExpandFigure(List<gPoint> points, Color figureColor)
+        public void AddExtendFigure(List<gPoint> points, Color figureColor)
         {
-            expandFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor));
+            extendFigure.Add(new FigureDrawer(points.ToArray(), document, figureColor));
+        }
+        public void AddExtendFigure(gPoint[] points, Color figureColor)
+        {
+            extendFigure.Add(new FigureDrawer(points, document, figureColor));
         }
 
         public void RemoveAllCalcTarget()
