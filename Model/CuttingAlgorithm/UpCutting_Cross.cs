@@ -15,22 +15,32 @@ using System.Diagnostics;
 
 namespace MathPractice.Model.CuttingAlgorithm
 {
-
+    public class PointAndDis
+    {
+        public gPoint Point;
+        public double Distance;
+    }
+    
     public class UpCutting_Cross : IUpCuttingAlgorithm
     {
-        
         private MathSupporter math;
         private Beam upBeam;
         private Beam cuttedBeam;
 
         // 계산용
-        private gPoint ltExtend;
-        private gPoint lbExtend;
-        private gPoint rtExtend;
-        private gPoint rbExtend;
+        private gPoint rt2ltExtend;
+        private gPoint rb2lbExtend;
+        private gPoint lt2rtExtend;
+        private gPoint lb2rbExtend;
+
+        private gPoint lt2lbExtend;
+        private gPoint rt2rbExtend;
+        private gPoint lb2ltExtend;
+        private gPoint rb2rtExtend;
+
         private List<gPoint> entireColPoints;
+        private List<PointAndDis> colPointsAndDisList;
         private bool needExtend;
-        private gPoint farthestColPoint;
         private CuttingResult result;
 
         public UpCutting_Cross()
@@ -39,6 +49,7 @@ namespace MathPractice.Model.CuttingAlgorithm
         }
 
         // Ver / Hor : Lagacy Parameter
+        // 항상 CuttedBeam -> UpBeam 방향으로 검사 진행(즉 CuttedBeam이 확장 대상임)
         public CuttingResult CalcAlgorithm_CuttingRect(Beam upBeam, Beam cuttedBeam)
         {
             // Init
@@ -46,9 +57,9 @@ namespace MathPractice.Model.CuttingAlgorithm
 
             this.cuttedBeam = cuttedBeam;
             this.upBeam = upBeam;
-
-            // 확장 여부 검사
             needExtend = false;
+            entireColPoints = new List<gPoint>();
+            colPointsAndDisList = new List<PointAndDis>();
 
             // 확장 여부 검사
             int colPointCount = 0;
@@ -64,86 +75,57 @@ namespace MathPractice.Model.CuttingAlgorithm
             if (colPointCount == 1)
                 needExtend = true;
 
-            // 충돌 위치 산출
-            ltExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightTop, cuttedBeam.LeftTop, 1000);
-            lbExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightBottom, cuttedBeam.LeftBottom, 1000);
-            rtExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftTop, cuttedBeam.RightTop, 1000);
-            rbExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftBottom, cuttedBeam.RightBottom, 1000);
+            // 검사 용 각 꼭짓점 확장 지점 생성
+            rt2ltExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightTop, cuttedBeam.LeftTop, 1000000);
+            rb2lbExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightBottom, cuttedBeam.LeftBottom, 1000000);
+            lt2rtExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftTop, cuttedBeam.RightTop, 1000000);
+            lb2rbExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftBottom, cuttedBeam.RightBottom, 1000000);
+            lt2lbExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftTop, cuttedBeam.LeftBottom, 1000000);
+            rt2rbExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightTop, cuttedBeam.RightBottom, 1000000);
+            lb2ltExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftBottom, cuttedBeam.LeftTop, 1000000);
+            rb2rtExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightBottom, cuttedBeam.RightTop, 1000000);
 
-            entireColPoints = new List<gPoint>();
-            GetCollisionPoints();
-            // 확장 길이 산출
-            if (needExtend)
-            {
-                farthestColPoint = math.GetFarthestPoint(cuttedBeam.Center, entireColPoints.ToArray());
-                double rot = cuttedBeam.Rotation * -1;
-                farthestColPoint = math.GetRotatedPoint(rot, farthestColPoint, cuttedBeam.Center);
+            CuttingProcess_Left2Right();
+            CuttingProcess_Right2Left();
 
-                // Center 기준 상단에 가장 먼 충돌지점(이하 충돌지점) 존재
-                if (farthestColPoint.y > cuttedBeam.Center.y)
-                {
-                    rot *= -1;
-                    farthestColPoint = math.GetRotatedPoint(rot, farthestColPoint, cuttedBeam.Center);
-                    // Center 기준 충돌지점의 X값으로 좌측 또는 우측 분리하여 계산
-                    if (farthestColPoint.x <= cuttedBeam.Center.x)
-                        result.LeftExtendLength = math.GetLengthBy2Point(cuttedBeam.RightTop, farthestColPoint) - cuttedBeam.BeamWidth;
-                    else if (farthestColPoint.x > cuttedBeam.Center.x)
-                        result.LeftExtendLength = math.GetLengthBy2Point(cuttedBeam.LeftTop, farthestColPoint) - cuttedBeam.BeamWidth;
-                }
-                // 반대로 계산
-                else if (farthestColPoint.y < cuttedBeam.Center.y)
-                {
-                    rot *= -1;
-                    farthestColPoint = math.GetRotatedPoint(rot, farthestColPoint, cuttedBeam.Center);
-                    if (farthestColPoint.x <= cuttedBeam.Center.x)
-                        result.RightExtendLength = math.GetLengthBy2Point(cuttedBeam.RightBottom, farthestColPoint) - cuttedBeam.BeamWidth;
-                    else if (farthestColPoint.x > cuttedBeam.Center.x)
-                        result.RightExtendLength = math.GetLengthBy2Point(cuttedBeam.LeftBottom, farthestColPoint) - cuttedBeam.BeamWidth;
-                }
-                // 산출된 길이만큼 바 확장
-                if (result.LeftExtendLength != 0)
-                    cuttedBeam.AddExtendFigure(CreateExtendPoints_FromLeft(), Color.BlanchedAlmond);
-                if (result.RightExtendLength != 0)
-                    cuttedBeam.AddExtendFigure(CreateExtendPoints_FromRight(), Color.Cornsilk);
-            }
-            cuttedBeam.AddCuttingFigure(entireColPoints, Color.Azure);
-
-            // 각도 산출
-            // 
             return result;
         }
-        private void GetCollisionPoints()
-        {
-            if (math.GetLineIsCross(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightTop, ltExtend))
-                entireColPoints.Add(math.GetCrossPoint(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightTop, ltExtend));
-            if (math.GetLineIsCross(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightBottom, lbExtend))
-                entireColPoints.Add(math.GetCrossPoint(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightBottom, lbExtend));
-            if (entireColPoints.Count == 2 && needExtend == true) return;
-            if (math.GetLineIsCross(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftTop, rtExtend))
-                entireColPoints.Add(math.GetCrossPoint(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftTop, rtExtend));
-            if (math.GetLineIsCross(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftBottom, rbExtend))
-                entireColPoints.Add(math.GetCrossPoint(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftBottom, rbExtend));
-        }
-        private gPoint[] CreateExtendPoints_FromLeft()
-        {
-            Vector rt2ltUnit = math.GetUnitVecBy2Point(cuttedBeam.LeftTop, cuttedBeam.RightTop);
-            Vector rb2lbUnit = math.GetUnitVecBy2Point(cuttedBeam.LeftBottom, cuttedBeam.RightBottom);
-            gPoint extendLT = math.GetExtendPoint(cuttedBeam.LeftTop, rt2ltUnit * result.LeftExtendLength);
-            gPoint extendLB = math.GetExtendPoint(cuttedBeam.LeftBottom, rb2lbUnit * result.LeftExtendLength);
 
-            gPoint[] extendBox = new gPoint[4];
-            extendBox[0] = new gPoint(cuttedBeam.LeftTop);
-            extendBox[1] = new gPoint(extendLT);
-            extendBox[2] = new gPoint(extendLB);
-            extendBox[3] = new gPoint(cuttedBeam.LeftBottom);
-            return extendBox;
+        // 좌측 -> 우측 검사 Process 함수
+        private void CuttingProcess_Left2Right()
+        {
+            CalcCutting_Left2Right();
+
+            if (needExtend)
+            {
+                double origin2SecondNearPointLen = GetOrigin2SecondNearPointLen();
+                if (origin2SecondNearPointLen == -1)    // 확장 검사가 가능한 방향 Process가 아님
+                    return;
+                result.ExtendLength = origin2SecondNearPointLen - cuttedBeam.BeamWidth;
+            }
+            ApplyFigureGraphic(CreateExtendPoints_Left2Right());
         }
-        private gPoint[] CreateExtendPoints_FromRight()
+        private void CalcCutting_Left2Right()
+        {
+            // 좌 -> 우 충돌 검사
+            entireColPoints.Clear();
+            GetCollisionPoints(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.LeftTop, cuttedBeam.RightTop, lt2rtExtend);
+            GetCollisionPoints(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.LeftBottom, cuttedBeam.RightBottom, lb2rbExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftTop, cuttedBeam.RightTop, lt2rtExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.LeftBottom, cuttedBeam.RightBottom, lb2rbExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.LeftTop, cuttedBeam.LeftTop, cuttedBeam.RightTop, lt2rtExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.LeftTop, cuttedBeam.LeftBottom, cuttedBeam.RightBottom, lb2rbExtend);
+            GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.LeftTop, cuttedBeam.RightTop, lt2rtExtend);
+            GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.LeftBottom, cuttedBeam.RightBottom, lb2rbExtend);
+
+            CalcCollisionPoint("L2R");
+        }
+        private gPoint[] CreateExtendPoints_Left2Right()
         {
             Vector lt2rtUnit = math.GetUnitVecBy2Point(cuttedBeam.RightTop, cuttedBeam.LeftTop);
             Vector lb2rbUnit = math.GetUnitVecBy2Point(cuttedBeam.RightBottom, cuttedBeam.LeftBottom);
-            gPoint extendRT = math.GetExtendPoint(cuttedBeam.RightTop, lt2rtUnit * result.RightExtendLength);
-            gPoint extendRB = math.GetExtendPoint(cuttedBeam.RightBottom, lb2rbUnit * result.RightExtendLength);
+            gPoint extendRT = math.GetExtendPoint(cuttedBeam.RightTop, lt2rtUnit * result.ExtendLength);
+            gPoint extendRB = math.GetExtendPoint(cuttedBeam.RightBottom, lb2rbUnit * result.ExtendLength);
 
             gPoint[] extendBox = new gPoint[4];
             extendBox[0] = new gPoint(cuttedBeam.RightTop);
@@ -152,5 +134,182 @@ namespace MathPractice.Model.CuttingAlgorithm
             extendBox[3] = new gPoint(cuttedBeam.RightBottom);
             return extendBox;
         }
+
+        // 우측 -> 좌측 검사 Process 함수
+        private void CuttingProcess_Right2Left()
+        {
+            CalcCutting_Right2Left();
+
+            if (needExtend)
+            {
+                double origin2SecondNearPointLen = GetOrigin2SecondNearPointLen();
+                if (origin2SecondNearPointLen == -1)    // 확장 검사가 가능한 방향 Process가 아님
+                    return;
+                result.ExtendLength = origin2SecondNearPointLen - cuttedBeam.BeamWidth;
+            }
+            ApplyFigureGraphic(CreateExtendPoints_Right2Left());
+        }
+        private void CalcCutting_Right2Left()
+        {
+            // 우 -> 좌
+            entireColPoints.Clear();
+            GetCollisionPoints(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightTop, cuttedBeam.LeftTop, rt2ltExtend);
+            GetCollisionPoints(upBeam.LeftTop, upBeam.RightTop, cuttedBeam.RightBottom, cuttedBeam.LeftBottom, rb2lbExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.RightTop, cuttedBeam.LeftTop, rt2ltExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.RightBottom, cuttedBeam.RightBottom, cuttedBeam.LeftBottom, rb2lbExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.LeftTop, cuttedBeam.RightTop, cuttedBeam.LeftTop, rt2ltExtend);
+            GetCollisionPoints(upBeam.LeftBottom, upBeam.LeftTop, cuttedBeam.RightBottom, cuttedBeam.LeftBottom, rb2lbExtend);
+            GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.RightTop, cuttedBeam.LeftTop, rt2ltExtend);
+            GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.RightBottom, cuttedBeam.LeftBottom, rb2lbExtend);
+
+            CalcCollisionPoint("R2L");
+        }
+        private gPoint[] CreateExtendPoints_Right2Left()
+        {
+            Vector rt2ltUnit = math.GetUnitVecBy2Point(cuttedBeam.LeftTop, cuttedBeam.RightTop);
+            Vector rb2lbUnit = math.GetUnitVecBy2Point(cuttedBeam.LeftBottom, cuttedBeam.RightBottom);
+            gPoint extendLT = math.GetExtendPoint(cuttedBeam.LeftTop, rt2ltUnit * result.ExtendLength);
+            gPoint extendLB = math.GetExtendPoint(cuttedBeam.LeftBottom, rb2lbUnit * result.ExtendLength);
+
+            gPoint[] extendBox = new gPoint[4];
+            extendBox[0] = new gPoint(cuttedBeam.LeftTop);
+            extendBox[1] = new gPoint(extendLT);
+            extendBox[2] = new gPoint(extendLB);
+            extendBox[3] = new gPoint(cuttedBeam.LeftBottom);
+            return extendBox;
+        }
+
+        // 방향 상관없이 공통 함수
+        private void ApplyFigureGraphic(gPoint[] extendPoints)
+        {
+            // 산출한 확장 길이 비주얼 적용
+            if (needExtend)
+                cuttedBeam.AddExtendFigure(extendPoints, Color.Green);
+
+            // 충돌 좌표 중 가까운 2 충돌 점만 표시
+            List<gPoint> finalCuttingFigures = new List<gPoint>(2);
+            finalCuttingFigures.Add(colPointsAndDisList[0].Point);
+            finalCuttingFigures.Add(colPointsAndDisList[1].Point);
+            cuttedBeam.AddCuttingFigure(finalCuttingFigures, Color.Azure);
+        }
+        private void CalcCollisionPoint(string CheckDir)
+        {
+            colPointsAndDisList.Clear();
+            for (int i = 0; i < entireColPoints.Count; ++i)
+            {
+                PointAndDis pointAndDis = new PointAndDis();
+                pointAndDis.Point = entireColPoints[i];
+                if (CheckDir.Equals("L2R"))
+                    pointAndDis.Distance = math.GetLengthBy2Point(cuttedBeam.Left, entireColPoints[i]);
+                else
+                    pointAndDis.Distance = math.GetLengthBy2Point(cuttedBeam.Right, entireColPoints[i]);
+                colPointsAndDisList.Add(pointAndDis);
+            }
+            if (needExtend)
+                colPointsAndDisList = DistinctSelf_Double(colPointsAndDisList);
+            else
+                colPointsAndDisList = DistinctSelf_gPoint(colPointsAndDisList);
+            colPointsAndDisList = colPointsAndDisList.OrderBy(dis => dis.Distance).ToList();
+
+            if (colPointsAndDisList.Count <= 1)
+                return;
+            result.FirstCutPoint = colPointsAndDisList[0].Point;
+            result.SecondCutPoint = colPointsAndDisList[1].Point;
+        }
+        private double GetOrigin2SecondNearPointLen()
+        {
+            if (colPointsAndDisList.Count <= 1)
+                return -1;
+            double rot = cuttedBeam.Rotation * -1;
+            gPoint secondNearestPoint = math.GetRotatedPoint(rot, colPointsAndDisList[1].Point, cuttedBeam.Center);
+
+            double origin2SecondNearestPointLen = 0;
+            if (secondNearestPoint.y > cuttedBeam.Center.y)
+            {
+                if (secondNearestPoint.x <= cuttedBeam.Center.x)
+                {
+                    secondNearestPoint = math.GetRotatedPoint(rot * -1, secondNearestPoint, cuttedBeam.Center);
+                    origin2SecondNearestPointLen = math.GetLengthBy2Point(secondNearestPoint, cuttedBeam.RightTop);
+                }
+                else if (secondNearestPoint.x > cuttedBeam.Center.x)
+                {
+                    secondNearestPoint = math.GetRotatedPoint(rot * -1, secondNearestPoint, cuttedBeam.Center);
+                    origin2SecondNearestPointLen = math.GetLengthBy2Point(secondNearestPoint, cuttedBeam.LeftTop);
+                }
+            }
+            else if (secondNearestPoint.y <= cuttedBeam.Center.y)
+            {
+                if (secondNearestPoint.x <= cuttedBeam.Center.x)
+                {
+                    secondNearestPoint = math.GetRotatedPoint(rot * -1, secondNearestPoint, cuttedBeam.Center);
+                    origin2SecondNearestPointLen = math.GetLengthBy2Point(secondNearestPoint, cuttedBeam.RightBottom);
+                }
+                else if (secondNearestPoint.x > cuttedBeam.Center.x)
+                {
+                    secondNearestPoint = math.GetRotatedPoint(rot * -1, secondNearestPoint, cuttedBeam.Center);
+                    origin2SecondNearestPointLen = math.GetLengthBy2Point(secondNearestPoint, cuttedBeam.LeftBottom);
+                }
+            }
+            return origin2SecondNearestPointLen;
+        }
+
+        private bool CompareDouble(double a, double b)
+        {
+            double difference = Math.Abs(a - b);
+            if (difference <= 0.000000001 || difference == 0)
+                return true;
+            return false;
+        }
+        private List<PointAndDis> DistinctSelf_Double(List<PointAndDis> originList)
+        {
+            List<PointAndDis> resultList = new List<PointAndDis>();
+            for (int i = 0; i < originList.Count; ++i)
+            {
+                bool duplicate = false;
+                for (int j = 0; j < i; ++j)
+                {
+                    if (CompareDouble(originList[i].Distance, originList[j].Distance))
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate)
+                    resultList.Add(originList[i]);
+            }
+            return resultList;
+        }
+        private List<PointAndDis> DistinctSelf_gPoint(List<PointAndDis> originList)
+        {
+            List<PointAndDis> resultList = new List<PointAndDis>();
+            for (int i = 0; i < originList.Count; ++i)
+            {
+                bool duplicate = false;
+                for (int j = 0; j < i; ++j)
+                {
+                    if (CompareDouble(originList[i].Point.x, originList[j].Point.x) &&
+                        CompareDouble(originList[i].Point.y, originList[j].Point.y))
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate)
+                    resultList.Add(originList[i]);
+            }
+            return resultList;
+        }
+        private void GetCollisionPoints(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, gPoint cutBeam_EpointExpend)
+        {
+            if (!math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint))
+            {
+                if (math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend))
+                    entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend));
+            }
+            else
+                entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint));
+        }
+        
+        
     }
 }

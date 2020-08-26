@@ -16,15 +16,15 @@ namespace MathPractice.Model.CuttingAlgorithm
     {
         public CuttingResult()
         {
-            LeftCutAngle = 0;
-            RightCutAngle = 0;
-            LeftExtendLength = 0;
-            RightExtendLength = 0;
+            CutAngle = 0;
+            ExtendLength = 0;
+            FirstCutPoint = null;
+            SecondCutPoint = null;
         }
-        public double LeftCutAngle;
-        public double RightCutAngle;
-        public double LeftExtendLength;
-        public double RightExtendLength;
+        public double CutAngle;
+        public double ExtendLength;
+        public gPoint FirstCutPoint;
+        public gPoint SecondCutPoint;
     }
     public interface IUpCuttingAlgorithm
     {
