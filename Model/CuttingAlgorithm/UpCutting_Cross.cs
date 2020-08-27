@@ -101,6 +101,7 @@ namespace MathPractice.Model.CuttingAlgorithm
                 MessageBox.Show("계산할 수 없는 형태의 이형 입니다.", "계산 불가", MessageBoxButtons.OK);
                 return result;
             }
+            result.CutAngle = GetCuttingAngle();
             return result;
         }
 
@@ -131,7 +132,7 @@ namespace MathPractice.Model.CuttingAlgorithm
             GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.LeftTop, cuttedBeam.RightTop, lt2rtExtend);
             GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.LeftBottom, cuttedBeam.RightBottom, lb2rbExtend);
 
-            CalcCollisionPoint("L2R");
+            CalcCollisionPoint();
         }
         private gPoint[] CreateExtendPoints_Left2Right()
         {
@@ -175,7 +176,7 @@ namespace MathPractice.Model.CuttingAlgorithm
             GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.RightTop, cuttedBeam.LeftTop, rt2ltExtend);
             GetCollisionPoints(upBeam.RightBottom, upBeam.RightTop, cuttedBeam.RightBottom, cuttedBeam.LeftBottom, rb2lbExtend);
 
-            CalcCollisionPoint("R2L");
+            CalcCollisionPoint();
         }
         private gPoint[] CreateExtendPoints_Right2Left()
         {
@@ -205,17 +206,14 @@ namespace MathPractice.Model.CuttingAlgorithm
             finalCuttingFigures.Add(colPointsAndDisList[1].Point);
             cuttedBeam.AddCuttingFigure(finalCuttingFigures, Color.Yellow,0.75f);
         }
-        private void CalcCollisionPoint(string CheckDir)
+        private void CalcCollisionPoint()
         {
             colPointsAndDisList.Clear();
             for (int i = 0; i < entireColPoints.Count; ++i)
             {
                 PointAndDis pointAndDis = new PointAndDis();
                 pointAndDis.Point = entireColPoints[i];
-                if (CheckDir.Equals("L2R"))
-                    pointAndDis.Distance = math.GetLengthBy2Point(cuttedBeam.Left, entireColPoints[i]);
-                else
-                    pointAndDis.Distance = math.GetLengthBy2Point(cuttedBeam.Right, entireColPoints[i]);
+                pointAndDis.Distance = math.GetLengthBy2Point(cuttedBeam.Center, entireColPoints[i]);
                 colPointsAndDisList.Add(pointAndDis);
             }
             if (needExtend)
@@ -228,6 +226,36 @@ namespace MathPractice.Model.CuttingAlgorithm
                 return;
             result.FirstCutPoint = colPointsAndDisList[0].Point;
             result.SecondCutPoint = colPointsAndDisList[1].Point;
+        }
+        private double GetCuttingAngle()
+        {
+            gPoint farPoint = new gPoint(result.SecondCutPoint);
+            gPoint originPoint = null;
+            double rot = cuttedBeam.Rotation * -1;
+            farPoint = math.GetRotatedPoint(rot, farPoint, cuttedBeam.Center);
+            if (farPoint.y <= cuttedBeam.Center.y)
+            {
+                if (farPoint.x <= cuttedBeam.Center.x)
+                    originPoint = cuttedBeam.RightBottom;
+                else
+                    originPoint = cuttedBeam.LeftBottom;
+            }
+            else
+            {
+                if (farPoint.x <= cuttedBeam.Center.x)
+                    originPoint = cuttedBeam.RightTop;
+                else
+                    originPoint = cuttedBeam.RightBottom;
+            }
+            rot *= -1;
+            farPoint = result.SecondCutPoint;
+
+            Vector cutVec = math.GetUnitVecBy2Point(result.FirstCutPoint, farPoint);
+            Vector horVec = math.GetUnitVecBy2Point(originPoint, farPoint);
+            double cutAngle = cutVec.Dot(horVec);
+            cutAngle = Math.Acos(cutAngle);
+            cutAngle = Globals.RadiansToDegrees(cutAngle);
+            return cutAngle;
         }
         private double GetOrigin2SecondNearPointLen()
         {
