@@ -10,6 +10,7 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using MathPractice.Model.CustomFigure;
+using MathPractice.Model.CuttingAlgorithm;
 
 namespace MathPractice.Model.Manager
 {
@@ -27,22 +28,6 @@ namespace MathPractice.Model.Manager
             }
         }
 
-        public int ClientWidth;
-        public int ClientHeight;
-
-        public double DegreeToRadian(double angle)
-        {
-            return angle * (Math.PI / 180.0f);
-        }
-        public double RadianToDegree(double angle)
-        {
-            return angle * (180.0f / Math.PI);
-        }
-        public void SetClientRect(int width, int height)
-        {
-            ClientWidth = width;
-            ClientHeight = height;
-        }
         public gPoint GetCrossPoint(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {
             Vector lineA2C = GetVectorBy2Point(pointC, pointA);
@@ -204,6 +189,7 @@ namespace MathPractice.Model.Manager
                 return true;
             return false;
         }
+        
         public int CCW(gPoint a, gPoint b, gPoint c)
         {
             double op = (a.x * b.y) + (b.x * c.y) + (c.x * a.y);
@@ -247,16 +233,5 @@ namespace MathPractice.Model.Manager
                 return true;
             return false;
         }
-        //public double GetAngleByCenterLine(gPoint center, gPoint a1, gPoint a2)
-        //{
-        //    gPoint centerLeft = new gPoint(center.x - 1000.0f, center.y);
-        //    gPoint centerRight = new gPoint(center.x + 1000.0f, center.y);
-
-        //}
-        //public bool Rect2PointCollision(Beam rect, gPoint point)
-        //{
-        //    // Calc Rotated Point Based On Rect Rotation
-        //     GetRotatedPoint(-rect.Rotation, point, rect.Center);
-        //}
     }
 }

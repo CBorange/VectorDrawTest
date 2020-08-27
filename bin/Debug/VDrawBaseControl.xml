@@ -4,6 +4,22 @@
         <name>VDrawBaseControl</name>
     </assembly>
     <members>
+        <member name="T:VDrawBaseControl.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:VDrawBaseControl.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:VDrawBaseControl.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
         <member name="T:VectorDraw.Professional.Control.FilterActionPointEventHandler">
             <summary>
             Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.FilterActionPoint"/> event.
@@ -553,329 +569,6 @@
             This is a Control which used to render a VdDocumentComponent.
             </summary>
         </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionStart(System.Object,System.String,System.Boolean@)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionStart"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="actionName"></param>
-            <param name="cancel"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionEnd(System.Object,System.String)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionEnd"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="actionName"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionError(System.Object,System.String)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionError"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="actionName"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseGetDimensionText(System.Object,System.String@)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.GetDimensionText"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="newText"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseFilterActionPoint(System.Object,System.Object,VectorDraw.Geometry.gPoint@)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.FilterActionPoint"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="action"></param>
-            <param name="pt"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseGripSelectionModified(System.Object,VectorDraw.Professional.vdPrimaries.vdLayout,VectorDraw.Professional.vdCollections.vdSelection)">
-            <summary>
-            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.GripSelectionModified"/> event.
-            </summary>
-            <param name="sender"></param>
-            <param name="layout"></param>
-            <param name="gripSelection"></param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.GetCustomMousePointer">
-            <summary>
-            Get the selected <see cref="T:System.Windows.Forms.Cursor"/>.
-            </summary>
-            <returns>The selected <see cref="T:System.Windows.Forms.Cursor"/> object.</returns>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SetCustomMousePointer(System.Windows.Forms.Cursor)">
-            <summary>
-            Select a new <see cref="T:System.Windows.Forms.Cursor"/>.
-            </summary>
-            <param name="newCursor">The new <see cref="T:System.Windows.Forms.Cursor"/> to be selected for the control.If it is null the default VectorDraw cursor is selected.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.LoadFromStream(VectorDraw.Professional.vdObjects.vdDocument,System.IO.Stream,System.String)">
-            <summary>
-             Loads a <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> from a stream.
-            </summary>
-            <param name="document">The document object that will be loaded from the passed stream.</param>
-            <param name="stream">A stream object to loaded</param>
-            <param name="fileTypeExtension">Can be one of the following strings : .vdml , .vdcl, .dxf, .dwg, .vdf  or a full path name of a file with its extension. </param>
-            <returns>True if the document was succesfully loaded.</returns>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.Redraw">
-            <summary>
-            Redraws the client area of the active control window.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.ReFresh">
-            <summary>
-            Refreshes the graphics by drawing the memory bitmap of the render into the control device.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.EnsureDocument">
-            <summary>
-            Select a new vdDocument object if the Selected document is null.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SetActiveDocument(VectorDraw.Professional.vdObjects.vdDocument)">
-            <summary>
-            Select a new <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> object.
-            </summary>
-            <param name="nDocument">The new <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> to be selected.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.#ctor">
-            <summary>
-             Main constructor of the VectorDrawBaseControl.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnLoad(System.EventArgs)">
-            <summary>
-            Fires when the control is loaded.
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnCreateControl">
-            <summary>
-             Raises the <see cref="M:System.Windows.Forms.Control.CreateControl"/> method
-            and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ControlCreated"/> event
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.WndProc(System.Windows.Forms.Message@)">
-            <summary>
-            Processes Windows messages.
-            </summary>
-            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnHandleDestroyed(System.EventArgs)">
-            <summary>
-            Raises the <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.HandleDestroyed(System.Object,System.EventArgs)"/> 
-            <see cref="E:System.Windows.Forms.Control.HandleDestroyed"/> and
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdHandleDestroyed"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.Paint"/>
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Paint(System.Windows.Forms.Control,System.Windows.Forms.PaintEventArgs)"/> and
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdPaint"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnInvalidated(System.Windows.Forms.InvalidateEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.Invalidated"/>
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Invalidated(System.Object,System.Drawing.Rectangle)"/> and
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdInvalidated"/>
-            </summary>
-            <param name="e">An <see cref="T:System.Windows.Forms.InvalidateEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragDrop(System.Windows.Forms.DragEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.DragDrop"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragDrop"/> and
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragDrop(System.Object,System.Windows.Forms.DragEventArgs)"/>
-            </summary>
-            <param name="drgevent">A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragEnter(System.Windows.Forms.DragEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.DragEnter"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragEnter"/> and
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragEnter(System.Object,System.Windows.Forms.DragEventArgs)"/>
-            </summary>
-            <param name="drgevent">A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnQueryContinueDrag(System.Windows.Forms.QueryContinueDragEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag"/> 
-            </summary>
-            <param name="qcdevent">A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragLeave(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.DragLeave"/> 
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragLeave"/> and
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragLeave(System.Object,System.EventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragOver(System.Windows.Forms.DragEventArgs)">
-            <summary>
-             Raises the <see cref="E:System.Windows.Forms.Control.DragOver"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragOver"/> and
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragOver(System.Object,System.Windows.Forms.DragEventArgs)"/>
-            </summary>
-            <param name="drgevent"> A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnGotFocus(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"/> 
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.GotFocus(System.Object,System.EventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdGotFocus"/>event.
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnLostFocus(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.LostFocus"/>
-            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.LostFocus(System.Object,System.EventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdLostFocus"/> event.
-            event.
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyDown(System.Windows.Forms.KeyEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.KeyDown"/> 
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyDown"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)"/>.
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.KeyPress"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyPress"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.KeyPressEventArgs"/> that contains the event data</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyUp(System.Windows.Forms.KeyEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.KeyUp"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyUp"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyUp(System.Object,System.Windows.Forms.KeyEventArgs)"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseClick(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseClick"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseClick"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseDoubleClick(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseDoubleClick"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseDoubleClick"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseDoubleClick(System.Object,System.Windows.Forms.MouseEventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseDown"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseUp"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseMove"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseMove"/> <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.MouseMoveAfter"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseEnter(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseEnter"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseEnter(System.Object,System.EventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseLeave(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave"/> 
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseLeave"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseLeave(System.Object,System.EventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseWheel(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseWheel"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)"/>
-            </summary>
-            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseHover(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.MouseHover"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseHover"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseHover(System.Object,System.EventArgs)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnResize(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.Resize"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdResize"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Resize(System.Windows.Forms.Control)"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDoubleClick(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:System.Windows.Forms.Control.DoubleClick"/>
-            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDoubleClick"/>
-            </summary>
-            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
-            <summary>
-            Processes a command key.
-            </summary>
-            <param name="msg">
-            A System.Windows.Forms.Message, passed by reference, that represents the
-            window message to process.
-            </param>
-            <param name="keyData">
-            One of the System.Windows.Forms.Keys values that represents the key to process.
-            </param>
-            <returns>
-            true if the character was processed by the control; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.IsInputKey(System.Windows.Forms.Keys)">
-            <summary>
-            Determines whether the specified key is a regular input key or a special key that requires preprocessing.
-            </summary>
-            <param name="keyData"> One of the System.Windows.Forms.Keys values.</param>
-            <returns>true if the specified key is a regular input key; otherwise, false.</returns>
-        </member>
-        <member name="F:VectorDraw.Professional.Control.VectorDrawBaseControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ControlCreated">
             <summary>
             Fires when the control created.
@@ -1256,6 +949,51 @@
             Fires after a Mouse move operation of active action is finished.
             </summary>
         </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionStart(System.Object,System.String,System.Boolean@)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionStart"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="actionName"></param>
+            <param name="cancel"></param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionEnd(System.Object,System.String)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionEnd"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="actionName"></param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseActionError(System.Object,System.String)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ActionError"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="actionName"></param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseGetDimensionText(System.Object,System.String@)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.GetDimensionText"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="newText"></param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseFilterActionPoint(System.Object,System.Object,VectorDraw.Geometry.gPoint@)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.FilterActionPoint"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="action"></param>
+            <param name="pt"></param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.RaiseGripSelectionModified(System.Object,VectorDraw.Professional.vdPrimaries.vdLayout,VectorDraw.Professional.vdCollections.vdSelection)">
+            <summary>
+            Raise the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.GripSelectionModified"/> event.
+            </summary>
+            <param name="sender"></param>
+            <param name="layout"></param>
+            <param name="gripSelection"></param>
+        </member>
         <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.BackColor">
             <summary>
             Gets or sets the background color for the control.
@@ -1301,15 +1039,438 @@
             Gets or sets a value that Enable or Disable the default VectorDraw Grip mouse actions.
             </summary>
         </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.GetCustomMousePointer">
+            <summary>
+            Get the selected <see cref="T:System.Windows.Forms.Cursor"/>.
+            </summary>
+            <returns>The selected <see cref="T:System.Windows.Forms.Cursor"/> object.</returns>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SetCustomMousePointer(System.Windows.Forms.Cursor)">
+            <summary>
+            Select a new <see cref="T:System.Windows.Forms.Cursor"/>.
+            </summary>
+            <param name="newCursor">The new <see cref="T:System.Windows.Forms.Cursor"/> to be selected for the control.If it is null the default VectorDraw cursor is selected.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.LoadFromStream(VectorDraw.Professional.vdObjects.vdDocument,System.IO.Stream,System.String)">
+            <summary>
+             Loads a <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> from a stream.
+            </summary>
+            <param name="document">The document object that will be loaded from the passed stream.</param>
+            <param name="stream">A stream object to loaded</param>
+            <param name="fileTypeExtension">Can be one of the following strings : .vdml , .vdcl, .dxf, .dwg, .vdf  or a full path name of a file with its extension. </param>
+            <returns>True if the document was succesfully loaded.</returns>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.Redraw">
+            <summary>
+            Redraws the client area of the active control window.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.ReFresh">
+            <summary>
+            Refreshes the graphics by drawing the memory bitmap of the render into the control device.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.EnsureDocument">
+            <summary>
+            Select a new vdDocument object if the Selected document is null.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SetActiveDocument(VectorDraw.Professional.vdObjects.vdDocument)">
+            <summary>
+            Select a new <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> object.
+            </summary>
+            <param name="nDocument">The new <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> to be selected.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.#ctor">
+            <summary>
+             Main constructor of the VectorDrawBaseControl.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnLoad(System.EventArgs)">
+            <summary>
+            Fires when the control is loaded.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnCreateControl">
+            <summary>
+             Raises the <see cref="M:System.Windows.Forms.Control.CreateControl"/> method
+            and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.ControlCreated"/> event
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Processes Windows messages.
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnHandleDestroyed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.HandleDestroyed(System.Object,System.EventArgs)"/> 
+            <see cref="E:System.Windows.Forms.Control.HandleDestroyed"/> and
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdHandleDestroyed"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated"/> event.
+            </summary>
+            <param name="e"> An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Paint"/>
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Paint(System.Windows.Forms.Control,System.Windows.Forms.PaintEventArgs)"/> and
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdPaint"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnInvalidated(System.Windows.Forms.InvalidateEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Invalidated"/>
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Invalidated(System.Object,System.Drawing.Rectangle)"/> and
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdInvalidated"/>
+            </summary>
+            <param name="e">An <see cref="T:System.Windows.Forms.InvalidateEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragDrop(System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.DragDrop"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragDrop"/> and
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragDrop(System.Object,System.Windows.Forms.DragEventArgs)"/>
+            </summary>
+            <param name="drgevent">A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragEnter(System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.DragEnter"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragEnter"/> and
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragEnter(System.Object,System.Windows.Forms.DragEventArgs)"/>
+            </summary>
+            <param name="drgevent">A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnQueryContinueDrag(System.Windows.Forms.QueryContinueDragEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.QueryContinueDrag"/> 
+            </summary>
+            <param name="qcdevent">A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragLeave(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.DragLeave"/> 
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragLeave"/> and
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragLeave(System.Object,System.EventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDragOver(System.Windows.Forms.DragEventArgs)">
+            <summary>
+             Raises the <see cref="E:System.Windows.Forms.Control.DragOver"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDragOver"/> and
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.DragOver(System.Object,System.Windows.Forms.DragEventArgs)"/>
+            </summary>
+            <param name="drgevent"> A <see cref="T:System.Windows.Forms.DragEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnGotFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"/> 
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.GotFocus(System.Object,System.EventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdGotFocus"/>event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnLostFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.LostFocus"/>
+            <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.LostFocus(System.Object,System.EventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdLostFocus"/> event.
+            event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyDown(System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.KeyDown"/> 
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyDown"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)"/>.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.KeyPress"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyPress"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.KeyPressEventArgs"/> that contains the event data</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnKeyUp(System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.KeyUp"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdKeyUp"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.KeyUp(System.Object,System.Windows.Forms.KeyEventArgs)"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseClick(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseClick"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseClick"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseDoubleClick(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseDoubleClick"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseDoubleClick"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseDoubleClick(System.Object,System.Windows.Forms.MouseEventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseDown"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseUp"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseMove"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseMove"/> <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)"/> and <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.MouseMoveAfter"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseEnter(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseEnter"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseEnter(System.Object,System.EventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseLeave(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave"/> 
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseLeave"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseLeave(System.Object,System.EventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseWheel(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseWheel"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)"/>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnMouseHover(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseHover"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdMouseHover"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.MouseHover(System.Object,System.EventArgs)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnResize(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Resize"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdResize"/> and <see cref="M:VectorDraw.Professional.vdPrimaries.vdLayout.Resize(System.Windows.Forms.Control)"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.OnDoubleClick(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.DoubleClick"/>
+            <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.vdDoubleClick"/>
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+            <summary>
+            Processes a command key.
+            </summary>
+            <param name="msg">
+            A System.Windows.Forms.Message, passed by reference, that represents the
+            window message to process.
+            </param>
+            <param name="keyData">
+            One of the System.Windows.Forms.Keys values that represents the key to process.
+            </param>
+            <returns>
+            true if the character was processed by the control; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.IsInputKey(System.Windows.Forms.Keys)">
+            <summary>
+            Determines whether the specified key is a regular input key or a special key that requires preprocessing.
+            </summary>
+            <param name="keyData"> One of the System.Windows.Forms.Keys values.</param>
+            <returns>true if the specified key is a regular input key; otherwise, false.</returns>
+        </member>
         <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.CanEnableIme">
             <summary>Gets a value indicating whether the System.Windows.Forms.Control.ImeMode
                  property can be set to an active value, to enable IME support.</summary>
             
              <returns>Returns true in all cases.</returns>
         </member>
+        <member name="T:VectorDraw.Professional.Control.VectorDrawBaseControl.TouchGestureManager">
+            <summary>
+            Manage some touch gesture properties for touch screens
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.TouchGestureManager.Actions">
+            <summary>
+            Get / Set  the default touch gesture actions for VectorDraw touch screen.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.TouchGestureManager.Dispose">
+            <summary>
+            Clean up any resources being used and make this object unusable
+            </summary>
+        </member>
+        <member name="T:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator">
+            <summary>
+            Defines the default VectorDraw supported actions of SpaceNavigator device by 3DConnexion .
+            </summary>
+        </member>
+        <member name="T:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Parse3dMouseEventDelegate">
+            <summary>
+            Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Parse3dMouseEvent"/> event.
+            </summary>
+            <param name="sender">The active <see cref="T:VectorDraw.Professional.vdObjects.vdDocument"/> object that will receive parse results of the event.</param>
+            <param name="spwEvent">The 3d mouse space navigator event.Read DxWare SDK documentation for details. </param>
+            <param name="Cancel">Set this as true in order not to run the default VectorDraw event code.</param>
+        </member>
+        <member name="E:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Parse3dMouseEvent">
+            <summary>
+            Fires when a 3d mouse space navigator event is received.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Open(System.String)">
+            <summary>
+            Open the communication with SpaceNavigator 3D Mouse and make the VectorDraw Control ready to receive messages from the device driver.
+            </summary>
+            <remarks>If the device is already open then first close the existing and reopen with the new passed application name</remarks>
+            <param name="appname">The Application Name used by SpaceNavigator driver settings.If it is an empty string then the <see cref="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Close"/> method is called instead.</param>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.IsOpen">
+            <summary>
+            Returns true if the device is present and is marked as open by the <see cref="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Open(System.String)"/> method and the <see cref="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Close"/> method is not called.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Close">
+            <summary>
+            Close the communication with SpaceNavigator 3D Mouse.No messages are received from the device driver.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.IsActive">
+            <summary>
+            Returns true if the device is open ready to send messages.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.DeviceInfo">
+            <summary>
+            Return information about the device that is used.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.ToString">
+            <summary>
+            Gets a System.String that represents the properties of this Object.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.SpaceMouseNavigator.Dispose">
+            <summary>
+            Clean up any resources being used and make this object unusable
+            </summary>
+        </member>
+        <member name="T:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDeviceManager">
+            <summary>
+            Manager for additional input device like touch gesture screens and SpaceNavigator devices
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDeviceManager.TouchGesture">
+            <summary>
+            Returns the manager for Touch Gesture
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDeviceManager.SpaceMouse">
+            <summary>
+            Returns the manager for SpaceNavigator device
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDeviceManager.Dispose">
+            <summary>
+            Clean up any resources being used and make this object unusable
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.inputDeviceManager">
+            <summary>
+            Get the Manager for additional input device like touch gesture screens and SpaceNavigator devices
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDevice_TouchGesture">
+            <summary>
+            Returns the manager for Touch Gesture
+            </summary>
+            <remarks>
+            Same as inputDeviceManager.TouchGesture
+            <para>Exported for VB.NET compatibility</para>
+            </remarks>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.VectorDrawBaseControl.InputDevice_SpaceMouse">
+            <summary>
+            Returns the manager for SpaceNavigator device
+            </summary>
+            <remarks>
+            Same as inputDeviceManager.SpaceMouse
+            <para>Exported for VB.NET compatibility</para>
+            </remarks>
+        </member>
+        <member name="F:VectorDraw.Professional.Control.VectorDrawBaseControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.Control.VectorDrawBaseControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:VectorDraw.Professional.Control.vdMenuStrip">
             <summary>
             This is an object which used to create a Menu or Toolbar button Command action items.
+            </summary>
+        </member>
+        <member name="T:VectorDraw.Professional.Control.vdMenuStrip.FileFindEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.vdMenuStrip.OnFileFind"/> event.
+            </summary>
+            <param name="sender">A <see cref="T:VectorDraw.Professional.Control.vdMenuStrip"/> object.</param>
+            <param name="fileName">A reference of the filename to search for.</param>
+            <param name="success">Set this as true if the return filename exist.</param>
+        </member>
+        <member name="T:VectorDraw.Professional.Control.vdMenuStrip.AddMenuButtonDelegate">
+            <summary>
+            Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.vdMenuStrip.OnAddMenuButton"/> event.
+            </summary>
+            <param name="sender">A <see cref="T:VectorDraw.Professional.Control.vdMenuStrip"/> object.</param>
+            <param name="item">The item button which is added in menu.</param>
+        </member>
+        <member name="E:VectorDraw.Professional.Control.vdMenuStrip.OnAddMenuButton">
+            <summary>
+            Fires when a button is added in the menu.
+            </summary>
+        </member>
+        <member name="E:VectorDraw.Professional.Control.vdMenuStrip.OnFileFind">
+            <summary>
+            Fires when a file is not exist.
             </summary>
         </member>
         <member name="M:VectorDraw.Professional.Control.vdMenuStrip.Dispose">
@@ -1320,6 +1481,11 @@
         <member name="M:VectorDraw.Professional.Control.vdMenuStrip.#ctor">
             <summary>
             Main constructor of the vdMenuStrip.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.Control.vdMenuStrip.Menu">
+            <summary>
+            Returns a <see cref="T:System.Windows.Forms.ToolStrip"/> which is loaded by a previous call of <see cref="M:VectorDraw.Professional.Control.vdMenuStrip.CreateMenu(System.String,System.String,System.Windows.Forms.ToolStripItemAlignment)"/> or <see cref="M:VectorDraw.Professional.Control.vdMenuStrip.CreateMenu(System.IO.StreamReader,System.Windows.Forms.ToolStripItemAlignment,System.String)"/>
             </summary>
         </member>
         <member name="M:VectorDraw.Professional.Control.vdMenuStrip.CreateMenu(System.String,System.String,System.Windows.Forms.ToolStripItemAlignment)">
@@ -1340,13 +1506,13 @@
             <param name="ImagesPath">A folder string that contains the images used as icons for the menu.</param>
             <returns>True if the menu was succesfully created.</returns>
              <example>This code will Load the menu from a resources text file of the project.<code>
-                        MemoryStream stream = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(stream);
-                        writer.Write(Resources.Menu);
-                        writer.Flush();
-                        stream.Position = 0;
-                        StreamReader Menu = new StreamReader(stream);
-                        vdFramedControl1.LoadMenu (Menu,"C:\\vdraw6\\REDIS\\AnyCPU\\images");
+              MemoryStream stream = new MemoryStream();
+              StreamWriter writer = new StreamWriter(stream);
+              writer.Write(Resources.Menu);
+              writer.Flush();
+              stream.Position = 0;
+              StreamReader Menu = new StreamReader(stream);
+              vdFramedControl1.LoadMenu (Menu,"C:\\vdraw6\\REDIS\\AnyCPU\\images");
             </code>
             </example>
         </member>
@@ -1378,52 +1544,6 @@
             Create toolbars for the selected resource menu file.
             </summary>
             <returns>Returns a collection of toolbars</returns>
-        </member>
-        <member name="E:VectorDraw.Professional.Control.vdMenuStrip.OnAddMenuButton">
-            <summary>
-            Fires when a button is added in the menu.
-            </summary>
-        </member>
-        <member name="E:VectorDraw.Professional.Control.vdMenuStrip.OnFileFind">
-            <summary>
-            Fires when a file is not exist.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.Control.vdMenuStrip.Menu">
-            <summary>
-            Returns a <see cref="T:System.Windows.Forms.ToolStrip"/> which is loaded by a previous call of <see cref="M:VectorDraw.Professional.Control.vdMenuStrip.CreateMenu(System.String,System.String,System.Windows.Forms.ToolStripItemAlignment)"/> or <see cref="M:VectorDraw.Professional.Control.vdMenuStrip.CreateMenu(System.IO.StreamReader,System.Windows.Forms.ToolStripItemAlignment,System.String)"/>
-            </summary>
-        </member>
-        <member name="T:VectorDraw.Professional.Control.vdMenuStrip.FileFindEventHandler">
-            <summary>
-            Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.vdMenuStrip.OnFileFind"/> event.
-            </summary>
-            <param name="sender">A <see cref="T:VectorDraw.Professional.Control.vdMenuStrip"/> object.</param>
-            <param name="fileName">A reference of the filename to search for.</param>
-            <param name="success">Set this as true if the return filename exist.</param>
-        </member>
-        <member name="T:VectorDraw.Professional.Control.vdMenuStrip.AddMenuButtonDelegate">
-            <summary>
-            Represents the method that will handle the <see cref="E:VectorDraw.Professional.Control.vdMenuStrip.OnAddMenuButton"/> event.
-            </summary>
-            <param name="sender">A <see cref="T:VectorDraw.Professional.Control.vdMenuStrip"/> object.</param>
-            <param name="item">The item button which is added in menu.</param>
-        </member>
-        <member name="T:VDrawBaseControl.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:VDrawBaseControl.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:VDrawBaseControl.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
         </member>
     </members>
 </doc>

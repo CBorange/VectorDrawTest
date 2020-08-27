@@ -9,23 +9,6 @@
             This is a Control that contains VectorDrawBaseControl, scroll bars, ruler and Layout Tab.
             </summary>
         </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="M:vdScrollableControl.vdScrollableControl.#ctor">
             <summary>
              Main constructor of the vdScrollableControl.
@@ -36,6 +19,16 @@
             Fires when the control is loaded.
             </summary>
             <param name="e">An System.EventArgs that contains the event data.</param>
+        </member>
+        <member name="P:vdScrollableControl.vdScrollableControl.LayoutTab">
+            <summary>
+            Returns the <see cref="T:System.Windows.Forms.TabControl"/> of the layout tab.
+            </summary>
+        </member>
+        <member name="P:vdScrollableControl.vdScrollableControl.BaseControl">
+            <summary>
+            Returns the <see cref="T:VectorDraw.Professional.Control.VectorDrawBaseControl"/> children control.
+            </summary>
         </member>
         <member name="M:vdScrollableControl.vdScrollableControl.GetShowLayoutTab">
             <summary>
@@ -106,50 +99,14 @@
             An System.EventArgs that contains the event data.
             </param>
         </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.OnResize(System.EventArgs)">
-            <summary>
-            Raises the System.Windows.Forms.Control.Resize event.
-            </summary>
-            <param name="e">
-            An System.EventArgs that contains the event data.
-            </param>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
-            <summary>
-            Raises the System.Windows.Forms.Control.Paint event.
-            </summary>
-            <param name="e"> A System.Windows.Forms.PaintEventArgs that contains the event data.</param>
-        </member>
-        <member name="P:vdScrollableControl.vdScrollableControl.LayoutTab">
-            <summary>
-            Returns the <see cref="T:System.Windows.Forms.TabControl"/> of the layout tab.
-            </summary>
-        </member>
-        <member name="P:vdScrollableControl.vdScrollableControl.BaseControl">
-            <summary>
-            Returns the <see cref="T:VectorDraw.Professional.Control.VectorDrawBaseControl"/> children control.
-            </summary>
-        </member>
         <member name="P:vdScrollableControl.vdScrollableControl.ShowLayoutPopupMenu">
             <summary>
             Get/Set a value representing if the popup menu will be displayed when right click the Layout tab.
             </summary>
         </member>
-        <member name="P:vdScrollableControl.vdScrollableControl.RulerObject">
-            <summary>
-            Gets the object used to display Vertical and horizontal ruler on the control.
-            </summary>
-            <remarks>Ruler displays the Coordinates relative to a plane with origin of Current User Matrix and X , Y , Z directions same as Active WorldToView matrix.
-            Also, in order for the ruler to work, the Z value of direction needs to be positive and to be no twist.</remarks>
-        </member>
         <member name="T:vdScrollableControl.vdScrollableControl.IvdRuler">
             <summary>
             Provides all functionality for the vdRuler object.
-            </summary>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.IvdRuler.Refresh">
-            <summary>
-            Redraws the ruler surface.
             </summary>
         </member>
         <member name="P:vdScrollableControl.vdScrollableControl.IvdRuler.TextFontFile">
@@ -165,6 +122,11 @@
         <member name="P:vdScrollableControl.vdScrollableControl.IvdRuler.Width">
             <summary>
             Get/Set the width of the horizontal and vertical ruler in pixels.
+            </summary>
+        </member>
+        <member name="M:vdScrollableControl.vdScrollableControl.IvdRuler.Refresh">
+            <summary>
+            Redraws the ruler surface.
             </summary>
         </member>
         <member name="P:vdScrollableControl.vdScrollableControl.IvdRuler.FractionalLimit">
@@ -237,19 +199,59 @@
             This is the object that reference the <see cref="P:vdScrollableControl.vdScrollableControl.RulerObject"/>.
             </summary>
         </member>
+        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.FontFileTypeConverter">
+            <summary>
+            Used to Select a TrueTypeFontFile for the textStle of ruler in the propert grid.
+            </summary>
+        </member>
+        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage">
+            <summary>
+            Represents the percentage of a size property
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Small">
+            <summary>
+            50 percent of the largest size
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.SmallMedium">
+            <summary>
+            60 percent of the largest size
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Medium">
+            <summary>
+            75 percent of the largest size
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.MediumLarge">
+            <summary>
+            90 percent of the largest size
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Large">
+            <summary>
+            100 percent of the size
+            </summary>
+        </member>
+        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType">
+            <summary>
+            Represents the display type units of the ruler.
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType.Decimal">
+            <summary>
+            Decimal display units
+            </summary>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType.Fractional">
+            <summary>
+            Fractional Inches units
+            </summary>
+        </member>
         <member name="M:vdScrollableControl.vdScrollableControl.vdRuler.#ctor">
             <summary>
             Initializes the vdRuler object.
-            </summary>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.vdRuler.Refresh">
-            <summary>
-            Redraws the ruler surface.
-            </summary>
-        </member>
-        <member name="M:vdScrollableControl.vdScrollableControl.vdRuler.Dispose">
-            <summary>
-            Disposes the object.
             </summary>
         </member>
         <member name="P:vdScrollableControl.vdScrollableControl.vdRuler.TextFontFile">
@@ -265,6 +267,11 @@
         <member name="P:vdScrollableControl.vdScrollableControl.vdRuler.Width">
             <summary>
             Get/Set the width of the horizontal and vertical ruler in pixels.
+            </summary>
+        </member>
+        <member name="M:vdScrollableControl.vdScrollableControl.vdRuler.Refresh">
+            <summary>
+            Redraws the ruler surface.
             </summary>
         </member>
         <member name="P:vdScrollableControl.vdScrollableControl.vdRuler.FractionalLimit">
@@ -346,54 +353,47 @@
             Set it to -1 for no exponential.
             </remarks>
         </member>
-        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.FontFileTypeConverter">
+        <member name="M:vdScrollableControl.vdScrollableControl.vdRuler.Dispose">
             <summary>
-            Used to Select a TrueTypeFontFile for the textStle of ruler in the propert grid.
+            Disposes the object.
             </summary>
         </member>
-        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage">
+        <member name="P:vdScrollableControl.vdScrollableControl.RulerObject">
             <summary>
-            Represents the percentage of a size property
+            Gets the object used to display Vertical and horizontal ruler on the control.
+            </summary>
+            <remarks>Ruler displays the Coordinates relative to a plane with origin of Current User Matrix and X , Y , Z directions same as Active WorldToView matrix.
+            Also, in order for the ruler to work, the Z value of direction needs to be positive and to be no twist.</remarks>
+        </member>
+        <member name="M:vdScrollableControl.vdScrollableControl.OnResize(System.EventArgs)">
+            <summary>
+            Raises the System.Windows.Forms.Control.Resize event.
+            </summary>
+            <param name="e">
+            An System.EventArgs that contains the event data.
+            </param>
+        </member>
+        <member name="M:vdScrollableControl.vdScrollableControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the System.Windows.Forms.Control.Paint event.
+            </summary>
+            <param name="e"> A System.Windows.Forms.PaintEventArgs that contains the event data.</param>
+        </member>
+        <member name="F:vdScrollableControl.vdScrollableControl.components">
+            <summary>
+            Required designer variable.
             </summary>
         </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Small">
+        <member name="M:vdScrollableControl.vdScrollableControl.Dispose(System.Boolean)">
             <summary>
-            50 percent of the largest size
+            Clean up any resources being used.
             </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.SmallMedium">
+        <member name="M:vdScrollableControl.vdScrollableControl.InitializeComponent">
             <summary>
-            60 percent of the largest size
-            </summary>
-        </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Medium">
-            <summary>
-            75 percent of the largest size
-            </summary>
-        </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.MediumLarge">
-            <summary>
-            90 percent of the largest size
-            </summary>
-        </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.SizePercentage.Large">
-            <summary>
-            100 percent of the size
-            </summary>
-        </member>
-        <member name="T:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType">
-            <summary>
-            Represents the display type units of the ruler.
-            </summary>
-        </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType.Decimal">
-            <summary>
-            Decimal display units
-            </summary>
-        </member>
-        <member name="F:vdScrollableControl.vdScrollableControl.vdRuler.DisplayType.Fractional">
-            <summary>
-            Fractional Inches units
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
             </summary>
         </member>
     </members>

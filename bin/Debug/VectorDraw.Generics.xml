@@ -4,71 +4,14 @@
         <name>VectorDraw.Generics</name>
     </assembly>
     <members>
-        <member name="T:VectorDraw.Generics.BaseObject">
-            <summary>
-            This is the Base object for the VectorDraw.Generics dll.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Generics.BaseObject.#ctor">
-            <summary>
-            Initializes the base object.
-            </summary>
-        </member>
-        <member name="T:VectorDraw.Generics.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Generics.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Generics.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="T:VectorDraw.Generics.vdCollectionEditor">
-            <summary>
-            Internally used to display the form of the default UItype editor for the collections.
-            </summary>
-        </member>
-        <member name="F:VectorDraw.Generics.vdCollectionEditor.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Generics.vdCollectionEditor.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:VectorDraw.Generics.vdCollectionEditor.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Generics.vdCollectionEditor.#ctor(System.Collections.IEnumerable,System.Boolean)">
-            <summary>
-            Initializes the object
-            </summary>
-            <param name="collection"></param>
-            <param name="sorted"></param>
-        </member>
-        <member name="M:VectorDraw.Generics.vdCollectionEditor.#ctor(VectorDraw.Generics.IvdValueTypeCollection,System.Boolean)">
-            <summary>
-            Initializes the object.
-            </summary>
-            <param name="collection"></param>
-            <param name="sorted"></param>
-        </member>
         <member name="T:VectorDraw.Generics.vdCollectionDialogEditor">
             <summary>
             Internally used to display the default UItype editor for the collections.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Generics.vdCollectionDialogEditor.Sorted">
+            <summary>
+            Defines if the items in list box will be sorted.Default value is true.
             </summary>
         </member>
         <member name="M:VectorDraw.Generics.vdCollectionDialogEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)">
@@ -77,6 +20,11 @@
             </summary>
             <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionDialogEditor.ShowDialog(System.Windows.Forms.Design.IWindowsFormsEditorService,System.Object)">
+            <summary>
+            Called when passed editorService is going to display the dialog  properties for the passed object value.
+            </summary>
         </member>
         <member name="M:VectorDraw.Generics.vdCollectionDialogEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)">
             <summary>
@@ -93,11 +41,6 @@
             </summary>
             <param name="context"></param>
             <returns></returns>
-        </member>
-        <member name="P:VectorDraw.Generics.vdCollectionDialogEditor.Sorted">
-            <summary>
-            Defines if the items in list box will be sorted.Default value is true.
-            </summary>
         </member>
         <member name="T:VectorDraw.Generics.vdCollectionDialogEditorNOSorted">
             <summary>
@@ -136,9 +79,30 @@
             The default interface of the vdArray collection object.
             </summary>
         </member>
+        <member name="T:VectorDraw.Generics.IListAdd">
+            <summary>
+            Interface defines collections that support Add method.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Generics.IListAdd.Add(System.Object)">
+            <summary>
+            Add a new item to the collection
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="T:VectorDraw.Generics.IListPosition">
             <summary>
             Implements a way to enamurate the items in a collection.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Generics.IListPosition.Current">
+            <summary>
+            Get the current object in the collection.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Generics.IListPosition.CurrentIndex">
+            <summary>
+            Get the current index of the collection.
             </summary>
         </member>
         <member name="M:VectorDraw.Generics.IListPosition.SetCurrentIndex(System.Int32)">
@@ -180,21 +144,16 @@
             <returns>True if the object was found and the index was changed.</returns>
             <remarks>If the collection reaches the start returns null.</remarks>
         </member>
-        <member name="P:VectorDraw.Generics.IListPosition.Current">
-            <summary>
-            Get the current object in the collection.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Generics.IListPosition.CurrentIndex">
-            <summary>
-            Get the current index of the collection.
-            </summary>
-        </member>
         <member name="T:VectorDraw.Generics.vdArray`1">
             <summary>
             This is the basic template collection.
             </summary>
             <typeparam name="T">The type of the objects that the collection will have.</typeparam>
+        </member>
+        <member name="P:VectorDraw.Generics.vdArray`1.ArrayItems">
+            <summary>
+            Get the items of the collection in a returned array.
+            </summary>
         </member>
         <member name="M:VectorDraw.Generics.vdArray`1.#ctor(`0[])">
             <summary>
@@ -219,6 +178,11 @@
             Changes the capacity of the collection to the given value if the existing capacity is less than this value.
             </summary>
             <param name="min">A value representing the new capacity of the collection.</param>
+        </member>
+        <member name="P:VectorDraw.Generics.vdArray`1.Count">
+            <summary>
+            Get the number of items in the collection.
+            </summary>
         </member>
         <member name="M:VectorDraw.Generics.vdArray`1.Resize(System.Int32,System.Boolean,`0)">
             <summary>
@@ -267,6 +231,16 @@
             <param name="entity">An existing object in the collection.</param>
             <returns>True if the object was found and the index was changed.</returns>
             <remarks>If the collection reaches the start returns null.</remarks>
+        </member>
+        <member name="P:VectorDraw.Generics.vdArray`1.Current">
+            <summary>
+            Get the current object in the collection.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Generics.vdArray`1.CurrentIndex">
+            <summary>
+            Get the current index of the collection.
+            </summary>
         </member>
         <member name="M:VectorDraw.Generics.vdArray`1.SetCurrentIndex(System.Int32)">
             <summary>
@@ -396,6 +370,14 @@
             <param name="index">An index representing the position where the objects will be inserted.</param>
             <param name="c">A vdArray collection to be inserted in this list.</param>
         </member>
+        <member name="P:VectorDraw.Generics.vdArray`1.Item(System.Int32)">
+            <summary>
+            Get/Set the object at a specified index of the collection.
+            </summary>
+            <param name="index">The index of the object.</param>
+            <returns>The object at the specified index.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the index is less than 0 or bigger or equal to <see cref="P:VectorDraw.Generics.vdArray`1.Count"/> property.</exception>
+        </member>
         <member name="M:VectorDraw.Generics.vdArray`1.AddItem(`0)">
             <summary>
             Adds an object to the end of the collection.
@@ -470,20 +452,20 @@
              <exception cref="T:System.InvalidOperationException">One or more elements in array does not implement the <see cref="T:System.IComparable`1"/>  generic interface.</exception>
              <example>
              <para>sort items in a collection of doubles</para>
-            <code>
-                            vdArray&lt;double&gt; collectionOfDoubles = new vdArray&lt;double&gt;();
-                            collectionOfDoubles.AddItem(5);
-                            collectionOfDoubles.AddItem(15);
-                            collectionOfDoubles.AddItem(2);
-                            collectionOfDoubles.AddItem(8);
-                            collectionOfDoubles.AddItem(3);
+             <code>
+                    vdArray&lt;double&gt; collectionOfDoubles = new vdArray&lt;double&gt;();
+                    collectionOfDoubles.AddItem(5);
+                    collectionOfDoubles.AddItem(15);
+                    collectionOfDoubles.AddItem(2);
+                    collectionOfDoubles.AddItem(8);
+                    collectionOfDoubles.AddItem(3);
             
-                            //sort the items from smaller value to bigger
-                            collectionOfDoubles.Sort();
-                            //the values will be take the following order
-                            //2 ,3, 5, 8, 15
-            </code>
-            </example>
+                    //sort the items from smaller value to bigger
+                    collectionOfDoubles.Sort();
+                    //the values will be take the following order
+                    //2 ,3, 5, 8, 15
+             </code>
+             </example>
         </member>
         <member name="M:VectorDraw.Generics.vdArray`1.Sort(System.Collections.Generic.IComparer{`0})">
              <summary>
@@ -502,39 +484,38 @@
              <exception cref="T:System.InvalidOperationException">
              comparer is null, and one or more elements in array does not implement the <see cref="T:System.IComparable`1"/>  generic interface
              </exception>
-             <example>
              <para>sort items in a collection of gPoints depend of their distance from an origin point.</para>
-            <code>
-                             private class OriginComparer : System.Collections.Generic.IComparer&lt;gPoint&gt;
-                             {
-                                gPoint mOrigin;
-                                public OriginComparer(gPoint Origin)
-                                {
-                                    mOrigin = Origin;
-                                }
-                                public int Compare(gPoint x, gPoint y)
-                                {
-                                    if (object.ReferenceEquals(x, y)) return 0;
-                                    double dif = x.Distance3D(mOrigin) - y.Distance3D(mOrigin);
-                                    if (dif == 0.0d) return 0;
-                                    if (dif &gt; 0.0d) return 1;
-                                    else return -1;
-                                }
-                             }
-                     
-                            vdArray&lt;gPoint&gt; collectionOfPoints = new vdArray&lt;gPoint&gt;();
-                            collectionOfPoints.AddItem(new gPoint(5,0,0));
-                            collectionOfPoints.AddItem(new gPoint(15, 0, 0));
-                            collectionOfPoints.AddItem(new gPoint(2, 0, 0));
-                            collectionOfPoints.AddItem(new gPoint(8, 0, 0));
-                            collectionOfPoints.AddItem(new gPoint(3, 0, 0));
+             <example>
+             <code>
+             private class OriginComparer : System.Collections.Generic.IComparer&lt;gPoint&gt;
+             {
+                gPoint mOrigin;
+                public OriginComparer(gPoint Origin)
+                {
+                    mOrigin = Origin;
+                }
+                public int Compare(gPoint x, gPoint y)
+                {
+                    if (object.ReferenceEquals(x, y)) return 0;
+                    double dif = x.Distance3D(mOrigin) - y.Distance3D(mOrigin);
+                    if (dif == 0.0d) return 0;
+                    if (dif > 0.0d) return 1;
+                    else return -1;
+                }
+             }
+             vdArray&lt;gPoint&gt; collectionOfPoints = new vdArray&lt;gPoint&gt;();
+             collectionOfPoints.AddItem(new gPoint(5,0,0));
+             collectionOfPoints.AddItem(new gPoint(15, 0, 0));
+             collectionOfPoints.AddItem(new gPoint(2, 0, 0));
+             collectionOfPoints.AddItem(new gPoint(8, 0, 0));
+             collectionOfPoints.AddItem(new gPoint(3, 0, 0));
             
-                            //sort the items from smaller to bigger depend of their distance from point(0,0,0)
-                            collectionOfPoints.Sort(new OriginComparer(new gPoint(0, 0, 0)));
-                            //the values will be take the following order
-                            //(2,0,0) ,(3,0,0), (5,0,0), (8,0,0), (15,0,0)
-            </code>
-            </example>
+             //sort the items from smaller to bigger depend of their distance from point(0,0,0)
+             collectionOfPoints.Sort(new OriginComparer(new gPoint(0, 0, 0)));
+             //the values will be take the following order
+             //(2,0,0) ,(3,0,0), (5,0,0), (8,0,0), (15,0,0)
+             </code>
+             </example>
         </member>
         <member name="M:VectorDraw.Generics.vdArray`1.SortByKeys(System.Array)">
             <summary>
@@ -548,33 +529,77 @@
             Not used 
             </summary>
         </member>
-        <member name="P:VectorDraw.Generics.vdArray`1.ArrayItems">
+        <member name="T:VectorDraw.Generics.BaseObject">
             <summary>
-            Get the items of the collection in a returned array.
+            This is the Base object for the VectorDraw.Generics dll.
             </summary>
         </member>
-        <member name="P:VectorDraw.Generics.vdArray`1.Count">
+        <member name="M:VectorDraw.Generics.BaseObject.#ctor">
             <summary>
-            Get the number of items in the collection.
+            Initializes the base object.
             </summary>
         </member>
-        <member name="P:VectorDraw.Generics.vdArray`1.Current">
+        <member name="T:VectorDraw.Generics.Properties.Resources">
             <summary>
-            Get the current object in the collection.
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="P:VectorDraw.Generics.vdArray`1.CurrentIndex">
+        <member name="P:VectorDraw.Generics.Properties.Resources.ResourceManager">
             <summary>
-            Get the current index of the collection.
+              Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
-        <member name="P:VectorDraw.Generics.vdArray`1.Item(System.Int32)">
+        <member name="P:VectorDraw.Generics.Properties.Resources.Culture">
             <summary>
-            Get/Set the object at a specified index of the collection.
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
             </summary>
-            <param name="index">The index of the object.</param>
-            <returns>The object at the specified index.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">If the index is less than 0 or bigger or equal to <see cref="P:VectorDraw.Generics.vdArray`1.Count"/> property.</exception>
+        </member>
+        <member name="T:VectorDraw.Generics.vdCollectionEditor">
+            <summary>
+            Internally used to display the form of the default UItype editor for the collections.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.#ctor(System.Collections.IEnumerable,System.Boolean)">
+            <summary>
+            Initializes the object
+            </summary>
+            <param name="collection"></param>
+            <param name="sorted"></param>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.ReFill">
+            <summary>
+            Updates all the dialog display property values.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.OnInitialize">
+            <summary>
+            Called when the default initialization is finished.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.#ctor(VectorDraw.Generics.IvdValueTypeCollection,System.Boolean)">
+            <summary>
+            Initializes the object.
+            </summary>
+            <param name="collection"></param>
+            <param name="sorted"></param>
+        </member>
+        <member name="F:VectorDraw.Generics.vdCollectionEditor.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:VectorDraw.Generics.vdCollectionEditor.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
         </member>
     </members>
 </doc>

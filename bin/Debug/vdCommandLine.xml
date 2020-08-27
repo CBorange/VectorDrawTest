@@ -47,14 +47,45 @@
             This is a Control which used to transfer the keyboard user input to VectorDraw Document actions.
             </summary>
         </member>
-        <member name="T:VectorDraw.Professional.vdCommandLine.IvdCommandLine">
+        <member name="E:VectorDraw.Professional.vdCommandLine.vdCommandLine.CommandExecute">
             <summary>
-            Provides the functionality for the <see cref="T:VectorDraw.Professional.vdCommandLine.vdCommandLine"/> object.
+            Fires before a command execute.
+            </summary>
+        </member>
+        <member name="E:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserTextEnterPressed">
+            <summary>
+            Fires when the user press the enter in commandline user text control.
             </summary>
         </member>
         <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.#ctor">
             <summary>
              Main constructor of the vdCommandLine.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.CommandLineHeight">
+            <summary>
+            Get the Height of the CommandLine without the History panel.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.ProcessKeyMessages">
+            <summary>
+            Get/Set a boolean value that controls if the key messages from the VectorDraw control will be also process by this control.
+            </summary>
+            <remarks>Default value is true.</remarks>
+        </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.History">
+            <summary>
+            Returns the <see cref="T:System.Windows.Forms.TextBox"/> of the History control.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserText">
+            <summary>
+            Returns the <see cref="T:System.Windows.Forms.TextBox"/> of the command line user control.
+            </summary>
+        </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserTextString">
+            <summary>
+            Get/Set the command line text string.
             </summary>
         </member>
         <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.SendKeyPress(System.Windows.Forms.KeyPressEventArgs)">
@@ -118,13 +149,13 @@
             <param name="file">The System.IO.StreamReader stream to load the commands from. This can be a project's resources file that is common to the commands.txt that we provide.</param>
             <returns>True if the commands were succesfully loaded.</returns>
              <example>This code will Load the commands from a project's resources file.<code>
-                        stream = new MemoryStream();
-                        writer = new StreamWriter(stream);
-                        writer.Write(Resources.Commands);
-                        writer.Flush();
-                        stream.Position = 0;
-                        StreamReader Commands = new StreamReader(stream);
-                        vdFramedControl1.LoadCommands(Commands);
+              stream = new MemoryStream();
+              writer = new StreamWriter(stream);
+              writer.Write(Resources.Commands);
+              writer.Flush();
+              stream.Position = 0;
+              StreamReader Commands = new StreamReader(stream);
+              vdFramedControl1.LoadCommands(Commands);
             </code>
             </example>
         </member>
@@ -167,6 +198,12 @@
             </summary>
             <param name="fullcommandline">This string must have the same syntax as a line in the commands.txt</param>
         </member>
+        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.PopupFormFont">
+            <summary>
+            Get/Set the font used to display the commands to the popup form.
+            </summary>
+            <remarks> Default value is Font("Microsoft Sans Serif", 12.0f, FontStyle.Regular)</remarks>
+        </member>
         <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.SetPopupFormFont(System.String,System.Single,System.Int32)">
             <summary>
             A method to set the PopupFormFont font.
@@ -175,71 +212,6 @@
             <param name="size">The size of the font.</param>
             <param name="style">The style of the Font <see cref="T:System.Drawing.FontStyle"/></param>
             <remarks> This method is exported specially for vb6 users , for .NET it is better to use directly the PopupFormFont property.</remarks>
-        </member>
-        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.OnLostFocus(System.EventArgs)">
-            <summary>
-            Fires when the control losses Focus.
-            </summary>
-            <param name="e">Default event args.</param>
-        </member>
-        <member name="F:VectorDraw.Professional.vdCommandLine.vdCommandLine.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="E:VectorDraw.Professional.vdCommandLine.vdCommandLine.CommandExecute">
-            <summary>
-            Fires before a command execute.
-            </summary>
-        </member>
-        <member name="E:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserTextEnterPressed">
-            <summary>
-            Fires when the user press the enter in commandline user text control.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.CommandLineHeight">
-            <summary>
-            Get the Height of the CommandLine without the History panel.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.ProcessKeyMessages">
-            <summary>
-            Get/Set a boolean value that controls if the key messages from the VectorDraw control will be also process by this control.
-            </summary>
-            <remarks>Default value is true.</remarks>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.History">
-            <summary>
-            Returns the <see cref="T:System.Windows.Forms.TextBox"/> of the History control.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserText">
-            <summary>
-            Returns the <see cref="T:System.Windows.Forms.TextBox"/> of the command line user control.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.UserTextString">
-            <summary>
-            Get/Set the command line text string.
-            </summary>
-        </member>
-        <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.PopupFormFont">
-            <summary>
-            Get/Set the font used to display the commands to the popup form.
-            </summary>
-            <remarks> Default value is Font("Microsoft Sans Serif", 12.0f, FontStyle.Regular)</remarks>
         </member>
         <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.PopuphighlightColor">
             <summary>
@@ -286,6 +258,34 @@
         <member name="P:VectorDraw.Professional.vdCommandLine.vdCommandLine.PopupFormShowBelow">
             <summary>
             Represents a boolean value that if true shows the popup form below the commandLine, usefull when the commandline is in the upper section of the application.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.OnLostFocus(System.EventArgs)">
+            <summary>
+            Fires when the control losses Focus.
+            </summary>
+            <param name="e">Default event args.</param>
+        </member>
+        <member name="F:VectorDraw.Professional.vdCommandLine.vdCommandLine.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:VectorDraw.Professional.vdCommandLine.vdCommandLine.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:VectorDraw.Professional.vdCommandLine.IvdCommandLine">
+            <summary>
+            Provides the functionality for the <see cref="T:VectorDraw.Professional.vdCommandLine.vdCommandLine"/> object.
             </summary>
         </member>
         <member name="T:VectorDraw.Professional.vdCommandLine.IvdCommandLineEvents">
