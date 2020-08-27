@@ -35,11 +35,17 @@ namespace MathPractice.Model.CustomFigure
         {
             get { return figureColor; }
         }
-        public FigureDrawer(gPoint[] points, vdDocument document, Color figureColor)
+        private float figureWidth;
+        public float FigureWidth
+        {
+            get { return figureWidth; }
+        }
+        public FigureDrawer(gPoint[] points, vdDocument document, Color figureColor, float figureWidth)
         {
             this.points = points;
             this.document = document;
             this.figureColor = figureColor;
+            this.figureWidth = figureWidth;
             InitLines();
         }
         private void InitLines()
@@ -55,7 +61,7 @@ namespace MathPractice.Model.CustomFigure
                     nextPointIDX = 0;
 
                 lines[i].StartPoint = points[i];
-                lines[i].PenWidth = 0.75f;
+                lines[i].PenWidth = figureWidth;
                 lines[i].EndPoint = points[nextPointIDX];
                 lines[i].PenColor.SystemColor = figureColor;
             }

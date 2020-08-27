@@ -37,7 +37,7 @@ namespace MathPractice.Model.CustomFigure
             debugCircle.Center = newPoint;
             debugCircle.Update();
 
-            debugText.TextString = $"{caption} : {text}";
+            debugText.TextString = $"{caption}: {text}";
             debugText.InsertionPoint = newPoint;
             debugText.Update();
 

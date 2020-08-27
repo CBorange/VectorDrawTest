@@ -20,11 +20,13 @@ namespace MathPractice.Model.CuttingAlgorithm
             ExtendLength = 0;
             FirstCutPoint = null;
             SecondCutPoint = null;
+            ExceptionShape = false;
         }
         public double CutAngle;
         public double ExtendLength;
         public gPoint FirstCutPoint;
         public gPoint SecondCutPoint;
+        public bool ExceptionShape;
     }
     public interface IUpCuttingAlgorithm
     {

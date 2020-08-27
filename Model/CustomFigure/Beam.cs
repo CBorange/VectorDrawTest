@@ -162,10 +162,10 @@ namespace MathPractice.Model.CustomFigure
             lbCircle = new DebugCircle(document, leftBottom, CIRCLE_SIZE, "LB");
             rbCircle = new DebugCircle(document, rightBottom, CIRCLE_SIZE, "RB");
             rotCircle = new DebugCircle(document, center, CIRCLE_SIZE, "ROT");
-            lCircle = new DebugCircle(document, left, CIRCLE_SIZE, "LEFT");
-            rCircle = new DebugCircle(document, right, CIRCLE_SIZE, "RIGHT");
-            tCircle = new DebugCircle(document, top, CIRCLE_SIZE, "TOP");
-            bCircle = new DebugCircle(document, bottom, CIRCLE_SIZE, "BOTTOM");
+            lCircle = new DebugCircle(document, left, CIRCLE_SIZE, "L");
+            rCircle = new DebugCircle(document, right, CIRCLE_SIZE, "R");
+            tCircle = new DebugCircle(document, top, CIRCLE_SIZE, "T");
+            bCircle = new DebugCircle(document, bottom, CIRCLE_SIZE, "B");
         }
         private void RefreshRectData()
         {
@@ -208,15 +208,15 @@ namespace MathPractice.Model.CustomFigure
             top = MathSupporter.Instance.GetRotatedPoint(rotation, top, center);
             bottom = MathSupporter.Instance.GetRotatedPoint(rotation, bottom, center);
 
-            ltCircle.UpdateCircle(leftTop, $"{string.Format("{0:0.00}",leftTop.x)}, {string.Format("{0:0.00}", leftTop.y)}");
-            rtCircle.UpdateCircle(rightTop, $"{string.Format("{0:0.00}", rightTop.x)}, {string.Format("{0:0.00}", rightTop.y)}");
-            rbCircle.UpdateCircle(rightBottom, $"{string.Format("{0:0.00}", rightBottom.x)}, {string.Format("{0:0.00}", rightBottom.y)}");
-            lbCircle.UpdateCircle(leftBottom, $"{string.Format("{0:0.00}", leftBottom.x)}, {string.Format("{0:0.00}", leftBottom.y)}");
-            lCircle.UpdateCircle(left, $"{string.Format("{0:0.00}", left.x)}, {string.Format("{0:0.00}", left.y)}");
-            rCircle.UpdateCircle(right, $"{string.Format("{0:0.00}", right.x)}, {string.Format("{0:0.00}", right.y)}");
-            tCircle.UpdateCircle(top, $"{string.Format("{0:0.00}", top.x)}, {string.Format("{0:0.00}", top.y)}");
-            bCircle.UpdateCircle(bottom, $"{string.Format("{0:0.00}", bottom.x)}, {string.Format("{0:0.00}", bottom.y)}");
-            rotCircle.UpdateCircle(center, $"{string.Format("{0:0.00}", rotation)}");
+            ltCircle.UpdateCircle(leftTop, $"{string.Format("{0:0}", leftTop.x)},{string.Format("{0:0}", leftTop.y)}");
+            rtCircle.UpdateCircle(rightTop, $"{string.Format("{0:0}", rightTop.x)},{string.Format("{0:0}", rightTop.y)}");
+            rbCircle.UpdateCircle(rightBottom, $"{string.Format("{0:0}", rightBottom.x)},{string.Format("{0:0}", rightBottom.y)}");
+            lbCircle.UpdateCircle(leftBottom, $"{string.Format("{0:0}", leftBottom.x)},{string.Format("{0:0}", leftBottom.y)}");
+            lCircle.UpdateCircle(left, $"{string.Format("{0:0}", left.x)},{string.Format("{0:0}", left.y)}");
+            rCircle.UpdateCircle(right, $"{string.Format("{0:0}", right.x)},{string.Format("{0:0}", right.y)}");
+            tCircle.UpdateCircle(top, $"{string.Format("{0:0}", top.x)},{string.Format("{0:0}", top.y)}");
+            bCircle.UpdateCircle(bottom, $"{string.Format("{0:0}", bottom.x)},{string.Format("{0:0}", bottom.y)}");
+            rotCircle.UpdateCircle(center, $"{string.Format("{0:0}", rotation)}");
 
             // refresh line vertex
             line_lt2rt.StartPoint = leftTop;
@@ -272,17 +272,17 @@ namespace MathPractice.Model.CustomFigure
             cuttingFigures.Clear();
             extendFigure.Clear();
         }
-        public void AddCuttingFigure(List<gPoint> points, Color figureColor)
+        public void AddCuttingFigure(List<gPoint> points, Color figureColor, float figureWidth)
         {
-            cuttingFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor));
+            cuttingFigures.Add(new FigureDrawer(points.ToArray(), document, figureColor, figureWidth));
         }
-        public void AddExtendFigure(List<gPoint> points, Color figureColor)
+        public void AddExtendFigure(List<gPoint> points, Color figureColor, float figureWidth)
         {
-            extendFigure.Add(new FigureDrawer(points.ToArray(), document, figureColor));
+            extendFigure.Add(new FigureDrawer(points.ToArray(), document, figureColor, figureWidth));
         }
-        public void AddExtendFigure(gPoint[] points, Color figureColor)
+        public void AddExtendFigure(gPoint[] points, Color figureColor, float figureWidth)
         {
-            extendFigure.Add(new FigureDrawer(points, document, figureColor));
+            extendFigure.Add(new FigureDrawer(points, document, figureColor, figureWidth));
         }
 
         public void RemoveAllCalcTarget()

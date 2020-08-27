@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
 using VectorDraw.Geometry;
@@ -85,9 +86,21 @@ namespace MathPractice.Model.CuttingAlgorithm
             lb2ltExtend = math.GetExtendedPointBy2Points(cuttedBeam.LeftBottom, cuttedBeam.LeftTop, 1000000);
             rb2rtExtend = math.GetExtendedPointBy2Points(cuttedBeam.RightBottom, cuttedBeam.RightTop, 1000000);
 
+            if (!CheckCalculatable())
+            {
+                result.ExceptionShape = true;
+                MessageBox.Show("계산할 수 없는 형태의 이형 입니다.", "계산 불가", MessageBoxButtons.OK);
+                return result;
+            }
             CuttingProcess_Left2Right();
             CuttingProcess_Right2Left();
 
+            if (result.ExtendLength < 0)
+            {
+                result.ExceptionShape = true;
+                MessageBox.Show("계산할 수 없는 형태의 이형 입니다.", "계산 불가", MessageBoxButtons.OK);
+                return result;
+            }
             return result;
         }
 
@@ -184,13 +197,13 @@ namespace MathPractice.Model.CuttingAlgorithm
         {
             // 산출한 확장 길이 비주얼 적용
             if (needExtend)
-                cuttedBeam.AddExtendFigure(extendPoints, Color.Green);
+                cuttedBeam.AddExtendFigure(extendPoints, Color.Green, 0.4f);
 
             // 충돌 좌표 중 가까운 2 충돌 점만 표시
             List<gPoint> finalCuttingFigures = new List<gPoint>(2);
             finalCuttingFigures.Add(colPointsAndDisList[0].Point);
             finalCuttingFigures.Add(colPointsAndDisList[1].Point);
-            cuttedBeam.AddCuttingFigure(finalCuttingFigures, Color.Azure);
+            cuttedBeam.AddCuttingFigure(finalCuttingFigures, Color.Yellow,0.75f);
         }
         private void CalcCollisionPoint(string CheckDir)
         {
@@ -252,6 +265,15 @@ namespace MathPractice.Model.CuttingAlgorithm
             }
             return origin2SecondNearestPointLen;
         }
+        private bool CheckCalculatable()
+        {
+            int colCount = 0;
+            if (math.GetBeamLineCollision(upBeam, lt2rtExtend, rt2ltExtend)) colCount += 1;
+            if (math.GetBeamLineCollision(upBeam, lb2rbExtend, rb2lbExtend)) colCount += 1;
+            if (colCount >= 2)
+                return true;
+            return false;
+        }
 
         private bool CompareDouble(double a, double b)
         {
@@ -299,15 +321,22 @@ namespace MathPractice.Model.CuttingAlgorithm
             }
             return resultList;
         }
-        private void GetCollisionPoints(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, gPoint cutBeam_EpointExpend)
+        private bool GetCollisionPoints(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, gPoint cutBeam_EpointExpend)
         {
-            if (!math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint))
+            if (math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint))
             {
-                if (math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend))
-                    entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend));
+                entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint));
+                return true;
             }
             else
-                entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint));
+            {
+                if (math.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend))
+                {
+                    entireColPoints.Add(math.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EpointExpend));
+                    return true;
+                }
+                return false;
+            }
         }
         
         

@@ -235,6 +235,18 @@ namespace MathPractice.Model.Manager
             }
             return ab <= 0 && cd <= 0;
         }
+        public bool GetBeamLineCollision(Beam beam, gPoint lineStart, gPoint lineEnd)
+        {
+            if (GetLineIsCross(beam.LeftTop, beam.RightTop, lineStart, lineEnd))
+                return true;
+            if (GetLineIsCross(beam.LeftBottom, beam.RightBottom, lineStart, lineEnd))
+                return true;
+            if (GetLineIsCross(beam.LeftBottom, beam.LeftTop, lineStart, lineEnd))
+                return true;
+            if (GetLineIsCross(beam.RightBottom, beam.RightTop, lineStart, lineEnd))
+                return true;
+            return false;
+        }
         //public double GetAngleByCenterLine(gPoint center, gPoint a1, gPoint a2)
         //{
         //    gPoint centerLeft = new gPoint(center.x - 1000.0f, center.y);

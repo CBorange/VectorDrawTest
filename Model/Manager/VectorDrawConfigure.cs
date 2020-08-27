@@ -100,7 +100,7 @@ namespace MathPractice.Model.Manager
         }
         public vdText AddTextToDocument(gPoint insertPoint, string caption)
         {
-            vdText text = new vdText(document, caption, insertPoint, 4);
+            vdText text = new vdText(document, caption, insertPoint, 3);
             text.PenColor.SystemColor = Color.Orange;
             text.Update();
 
