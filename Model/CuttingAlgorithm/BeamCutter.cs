@@ -8,10 +8,10 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
-using MathPractice.Model.CustomFigure;
-using MathPractice.Model.Manager;
+using VectordrawTest.Model.CustomFigure;
+using VectordrawTest.Model.Manager;
 
-namespace MathPractice.Model.CuttingAlgorithm
+namespace VectordrawTest.Model.CuttingAlgorithm
 {
     public class BeamCutter
     {

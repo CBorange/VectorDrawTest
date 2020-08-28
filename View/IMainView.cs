@@ -1,14 +1,14 @@
-﻿using MathPractice.Controller;
-using MathPractice.Model;
+﻿using VectordrawTest.Controller;
+using VectordrawTest.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MathPractice.Model.Manager;
-using MathPractice.Model.CuttingAlgorithm;
+using VectordrawTest.Model.Manager;
+using VectordrawTest.Model.CuttingAlgorithm;
 
-namespace MathPractice.View
+namespace VectordrawTest.View
 {
     public interface IMainView
     {

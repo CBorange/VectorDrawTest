@@ -10,9 +10,9 @@ using VectorDraw.Professional.vdObjects;
 using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 using System.Drawing;
-using MathPractice.Model.CustomFigure;
+using VectordrawTest.Model.CustomFigure;
 
-namespace MathPractice.Model.Manager
+namespace VectordrawTest.Model.Manager
 {
     public class BeamBuilder
     {

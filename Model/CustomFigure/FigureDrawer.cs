@@ -8,10 +8,10 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using VectorDraw.Render;
-using MathPractice.Model.Manager;
+using VectordrawTest.Model.Manager;
 using System.Drawing;
 
-namespace MathPractice.Model.CustomFigure
+namespace VectordrawTest.Model.CustomFigure
 {
     public class FigureDrawer
     {

@@ -8,9 +8,9 @@ using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
-using MathPractice.Model.CustomFigure;
+using VectordrawTest.Model.CustomFigure;
 
-namespace MathPractice.Model.CuttingAlgorithm
+namespace VectordrawTest.Model.CuttingAlgorithm
 {
     public class CuttingResult
     {

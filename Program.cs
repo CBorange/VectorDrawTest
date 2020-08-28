@@ -1,15 +1,15 @@
-﻿using MathPractice.Controller;
-using MathPractice.Model;
-using MathPractice.View;
+﻿using VectordrawTest.Controller;
+using VectordrawTest.Model;
+using VectordrawTest.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MathPractice.Model.Manager;
-using MathPractice.Model.CuttingAlgorithm;
+using VectordrawTest.Model.Manager;
+using VectordrawTest.Model.CuttingAlgorithm;
 
-namespace MathPractice
+namespace VectordrawTest
 {
     static class Program
     {

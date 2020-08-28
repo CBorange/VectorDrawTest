@@ -14,7 +14,7 @@ using VectorDraw.Render;
 using System.Runtime.Remoting.Messaging;
 using System.Diagnostics;
 
-namespace MathPractice.Model.Manager
+namespace VectordrawTest.Model.Manager
 {
     public class VectorDrawConfigure
     {

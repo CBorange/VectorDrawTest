@@ -9,10 +9,10 @@ using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using VectorDraw.Render;
 using System.Drawing;
-using MathPractice.Model.CustomFigure;
-using MathPractice.Model.CuttingAlgorithm;
+using VectordrawTest.Model.CustomFigure;
+using VectordrawTest.Model.CuttingAlgorithm;
 
-namespace MathPractice.Model.Manager
+namespace VectordrawTest.Model.Manager
 {
     public class BeamManager
     {

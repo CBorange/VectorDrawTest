@@ -11,7 +11,7 @@ using VectorDraw.Professional.vdCommandLine;
 using System.Windows.Forms;
 
 
-namespace MathPractice.Model.Manager
+namespace VectordrawTest.Model.Manager
 {
     public class DebugSupporter
     {

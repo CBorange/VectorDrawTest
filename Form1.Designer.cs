@@ -1,4 +1,4 @@
-﻿namespace MathPractice
+﻿namespace VectordrawTest
 {
     partial class Form1
     {

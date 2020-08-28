@@ -9,10 +9,10 @@ using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
-using MathPractice.Model.CustomFigure;
-using MathPractice.Model.CuttingAlgorithm;
+using VectordrawTest.Model.CustomFigure;
+using VectordrawTest.Model.CuttingAlgorithm;
 
-namespace MathPractice.Model.Manager
+namespace VectordrawTest.Model.Manager
 {
     public class MathSupporter
     {

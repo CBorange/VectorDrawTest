@@ -13,13 +13,13 @@ using System.Windows.Forms;
 using VectorDraw.Geometry;
 using VectorDraw.Professional.vdPrimaries;
 using VectorDraw.Professional.vdFigures;
-using MathPractice.View;
-using MathPractice.Controller;
-using MathPractice.Model;
-using MathPractice.Model.Manager;
-using MathPractice.Model.CuttingAlgorithm;
+using VectordrawTest.View;
+using VectordrawTest.Controller;
+using VectordrawTest.Model;
+using VectordrawTest.Model.Manager;
+using VectordrawTest.Model.CuttingAlgorithm;
 
-namespace MathPractice
+namespace VectordrawTest
 {
     public partial class Form1 : Form, IMainView
     {

@@ -10,11 +10,11 @@ using VectorDraw.Professional.vdFigures;
 using VectorDraw.Professional.vdObjects;
 using System.Drawing;
 using VectorDraw.Professional.PropertyList;
-using MathPractice.Model.Manager;
-using MathPractice.Model.CustomFigure;
+using VectordrawTest.Model.Manager;
+using VectordrawTest.Model.CustomFigure;
 using System.Diagnostics;
 
-namespace MathPractice.Model.CuttingAlgorithm
+namespace VectordrawTest.Model.CuttingAlgorithm
 {
     public class PointAndDis
     {

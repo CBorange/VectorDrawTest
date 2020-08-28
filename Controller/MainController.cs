@@ -1,17 +1,17 @@
-﻿using MathPractice.View;
+﻿using VectordrawTest.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MathPractice.Controller;
-using MathPractice.Model;
+using VectordrawTest.Controller;
+using VectordrawTest.Model;
 using VectorDraw.Geometry;
-using MathPractice.Model.Manager;
-using MathPractice.Model.CuttingAlgorithm;
-using MathPractice.Model.CustomFigure;
+using VectordrawTest.Model.Manager;
+using VectordrawTest.Model.CuttingAlgorithm;
+using VectordrawTest.Model.CustomFigure;
 
-namespace MathPractice.Controller
+namespace VectordrawTest.Controller
 {
     public class MainController
     {
