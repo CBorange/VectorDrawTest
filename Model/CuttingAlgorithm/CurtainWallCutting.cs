@@ -491,86 +491,12 @@ namespace MathPractice.Model.CuttingAlgorithm
         }
         public gPoint GetCenterBy2Points(gPoint pointA, gPoint pointB)
         {
-            Vector a2B = MathSupporter.Instance.GetVectorBy2Point(pointB, pointA);
+            Vector a2B = GetVectorBy2Point(pointB, pointA);
             double start2CenterLength = a2B.Length * 0.5f;
             a2B.Normalize();
             a2B *= start2CenterLength;
             return new gPoint(pointA.x + a2B.x, pointA.y + a2B.y);
         }
-        public gPoint GetNearestPoint(gPoint center, gPoint[] points)
-        {
-            gPoint nearestPoint = points[0];
-            double minLength = GetLengthBy2Point(center, points[0]);
-            for (int i = 1; i < points.Length; ++i)
-            {
-                double dis = GetLengthBy2Point(center, points[i]);
-                if (dis < minLength)
-                {
-                    minLength = dis;
-                    nearestPoint = points[i];
-                }
-            }
-            return new gPoint(nearestPoint);
-        }
-        public gPoint GetFarthestPoint(gPoint center, gPoint[] points)
-        {
-            gPoint farthestPoint = points[0];
-            double maxLength = GetLengthBy2Point(center, points[0]);
-            for (int i = 1; i < points.Length; ++i)
-            {
-                double dis = GetLengthBy2Point(center, points[i]);
-                if (dis > maxLength)
-                {
-                    maxLength = dis;
-                    farthestPoint = points[i];
-                }
-            }
-            return new gPoint(farthestPoint);
-        }
-        public bool OBBCollision(Beam beamA, Beam beamB)
-        {
-            Vector disVec = GetVectorBy2Point(beamA.Center, beamB.Center);
-            Vector[] seperateVec =
-            {
-                GetVectorBy2Point(beamA.Top,beamA.Center),
-                GetVectorBy2Point(beamA.Right,beamA.Center),
-                GetVectorBy2Point(beamB.Top,beamB.Center),
-                GetVectorBy2Point(beamB.Right,beamB.Center)
-            };
-            Vector seperateUnit;
-            for (int seperateIDX = 0; seperateIDX < 4; ++seperateIDX)
-            {
-                double sum = 0;
-                seperateUnit = new Vector(seperateVec[seperateIDX]);
-                seperateUnit.Normalize();
-
-                for (int vecIDx = 0; vecIDx < 4; ++vecIDx)
-                    sum += Math.Abs(seperateVec[vecIDx].Dot(seperateUnit));
-
-                if (Math.Abs(disVec.Dot(seperateUnit)) > sum)
-                    return false;
-            }
-            return true;
-        }
-        public bool Point2BeamCollision(gPoint point, Beam beam)
-        {
-            gPoint left = new gPoint(beam.Left);
-            gPoint right = new gPoint(beam.Right);
-            gPoint bottom = new gPoint(beam.Bottom);
-            gPoint top = new gPoint(beam.Top);
-
-            double rot = beam.Rotation * -1;
-            left = GetRotatedPoint(rot, left, beam.Center);
-            right = GetRotatedPoint(rot, right, beam.Center);
-            bottom = GetRotatedPoint(rot, bottom, beam.Center);
-            top = GetRotatedPoint(rot, top, beam.Center);
-            point = GetRotatedPoint(rot, point, beam.Center);
-
-            if (point.x >= left.x && point.x <= right.x && point.y <= top.y && point.y >= bottom.y)
-                return true;
-            return false;
-        }
-
         public int CCW(gPoint a, gPoint b, gPoint c)
         {
             double op = (a.x * b.y) + (b.x * c.y) + (c.x * a.y);
@@ -602,15 +528,15 @@ namespace MathPractice.Model.CuttingAlgorithm
             }
             return ab <= 0 && cd <= 0;
         }
-        public bool GetBarLineCollision(Bar beam, gPoint lineStart, gPoint lineEnd)
+        public bool GetBarLineCollision(Bar bar, gPoint lineStart, gPoint lineEnd)
         {
-            if (GetLineIsCross(beam.LT, beam.RT, lineStart, lineEnd))
+            if (GetLineIsCross(bar.LT, bar.RT, lineStart, lineEnd))
                 return true;
-            if (GetLineIsCross(beam.LT, beam.RT, lineStart, lineEnd))
+            if (GetLineIsCross(bar.LT, bar.RT, lineStart, lineEnd))
                 return true;
-            if (GetLineIsCross(beam.LB, beam.LT, lineStart, lineEnd))
+            if (GetLineIsCross(bar.LB, bar.LT, lineStart, lineEnd))
                 return true;
-            if (GetLineIsCross(beam.RB, beam.RT, lineStart, lineEnd))
+            if (GetLineIsCross(bar.RB, bar.RT, lineStart, lineEnd))
                 return true;
             return false;
         }

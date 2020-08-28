@@ -37,11 +37,11 @@ namespace MathPractice.Model.Manager
         }
         public Beam CreateHorBeam(gPoint newPoint)
         {
-            return new Beam(newPoint, document, Color.Red, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 90, $"horBeam_{beamManager.HorBeams.Count}");
+            return new Beam(newPoint, document, Color.Red, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 0, $"horBeam_{beamManager.HorBeams.Count}");
         }
         public Beam CreateVerBeam(gPoint newPoint)
         {
-            return new Beam(newPoint, document, Color.Blue, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 0, $"verBeam_{beamManager.VerBeams.Count}");
+            return new Beam(newPoint, document, Color.Blue, DEFAULT_BEAM_WIDTH, DEFAULT_BEAM_HEIGHT, 90, $"verBeam_{beamManager.VerBeams.Count}");
         }
     }
 }
