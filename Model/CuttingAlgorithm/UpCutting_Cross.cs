@@ -16,11 +16,7 @@ using System.Diagnostics;
 
 namespace VectordrawTest.Model.CuttingAlgorithm
 {
-    public class PointAndDis
-    {
-        public gPoint Point;
-        public double Distance;
-    }
+    
     
     public class UpCutting_Cross : IUpCuttingAlgorithm
     {

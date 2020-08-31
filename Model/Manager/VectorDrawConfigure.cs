@@ -112,12 +112,10 @@ namespace VectordrawTest.Model.Manager
         // Event Handler
         public void AllDrawOver_Handler(object sender, vdRender render, ref bool cancel)
         {
-            Debug.WriteLine("AllDrawOver");
             beamManager.DrawOutLineFromAllBeam(render);
         }
         public void ActionEnd_Handler(object sender, string actionName)
         {
-            Debug.WriteLine("ActionEnd");
             beamManager.RefreshAllBeam();
             document.Redraw(true);
         }

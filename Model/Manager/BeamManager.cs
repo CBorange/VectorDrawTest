@@ -116,7 +116,7 @@ namespace VectordrawTest.Model.Manager
                 {
                     //collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[verIDX], horBeams[horIDX]);
                     CuttingResult result = curtainwallCutting.GetCuttingResult(calcBeams[verIDX].Left, calcBeams[verIDX].Right, horBeams[horIDX].Left, horBeams[horIDX].Right,
-                        horBeams[horIDX].BeamHeight, horBeams[horIDX].BeamWidth);
+                        calcBeams[verIDX].BeamHeight, horBeams[horIDX].BeamHeight, calcBeams[verIDX].BeamWidth, horBeams[horIDX].BeamWidth);
 
                     // Result에 따른 처리
                     if (result.ExceptionShape)
@@ -171,7 +171,7 @@ namespace VectordrawTest.Model.Manager
                 {
                     //collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[horIdx], verBeams[verIdx]);
                     CuttingResult result = curtainwallCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
-                        verBeams[verIdx].BeamHeight, verBeams[verIdx].BeamWidth);
+                        calcBeams[horIdx].BeamHeight, verBeams[verIdx].BeamHeight, calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth);
                     // Result에 따른 처리
                     if (result.ExceptionShape)
                         continue;

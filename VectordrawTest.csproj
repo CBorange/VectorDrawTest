@@ -62,35 +62,89 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="vdCommandLine, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdDXF, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdFramedControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdgrAPI, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VDgridLib, Version=8.8004.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="vdCommandLine, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdCommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="vdIFC, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VdProControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdPropertyGrid, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VDrawBaseControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VDrawI5, Version=8.8004.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+    <Reference Include="vdFramedControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdFramedControl.dll</HintPath>
+    </Reference>
+    <Reference Include="vdgrAPI, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdgrAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="VDgridLib, Version=8.8004.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VDgridLib.dll</HintPath>
+    </Reference>
+    <Reference Include="vdIFC, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdIFC.dll</HintPath>
+    </Reference>
+    <Reference Include="VdProControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VdProControl.dll</HintPath>
+    </Reference>
+    <Reference Include="vdPropertyGrid, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdPropertyGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="VDrawBaseControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VDrawBaseControl.dll</HintPath>
+    </Reference>
+    <Reference Include="VDrawI5, Version=8.8004.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VDrawI5.dll</HintPath>
     </Reference>
     <Reference Include="VDrawLib5, Version=8.8004.0.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VDrawLib5.dll</HintPath>
     </Reference>
-    <Reference Include="VdrawPro5, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdRay, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdScrollableControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="vdWalls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="vdxFcnv, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Actions, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Generics, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Geometry, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Professional, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Render, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.Serialize, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
-    <Reference Include="VectorDraw.SolidModel, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL" />
+    <Reference Include="VdrawPro5, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VdrawPro5.dll</HintPath>
+    </Reference>
+    <Reference Include="vdRay, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdRay.dll</HintPath>
+    </Reference>
+    <Reference Include="vdScrollableControl, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\vdScrollableControl.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Actions, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Actions.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Generics, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Generics.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Geometry, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Geometry.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Professional, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Professional.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Render, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Render.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.Serialize, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.Serialize.dll</HintPath>
+    </Reference>
+    <Reference Include="VectorDraw.SolidModel, Version=8.8004.1.2, Culture=neutral, PublicKeyToken=54eac14e23c9ee53, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\VectorDraw_8.x\VectorDraw\Common\VectorDraw.SolidModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\MainController.cs" />
