@@ -18,11 +18,9 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         private MathSupporter math;
         private vdDocument document;
         private BeamManager beamManager;
-        private IUpCuttingAlgorithm crossAlgorithm;
 
         public BeamCutter()
         {
-            crossAlgorithm = new UpCutting_Cross();
         }
         public void Initialize(vdDocument document, BeamManager beamManager)
         {
@@ -32,7 +30,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         }
         public void CalcCuttingRect_CrossAlgorithm(Beam upBeam, Beam cuttedBeam)
         {
-            crossAlgorithm.CalcAlgorithm_CuttingRect(upBeam, cuttedBeam);
+
         }
         public void CheckCollisionHorToVer(Beam horBeam)
         {

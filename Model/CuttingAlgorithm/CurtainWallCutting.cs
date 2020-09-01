@@ -30,7 +30,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             FirstCutPoint = null;
             SecondCutPoint = null;
             ExtendPoint = null;
-            ExceptionShape = false;
+            ResultCode = 0;
             HasExtend = false;
             ExtendDir = string.Empty;
         }
@@ -39,7 +39,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         public gPoint FirstCutPoint;
         public gPoint SecondCutPoint;
         public gPoint ExtendPoint;
-        public bool ExceptionShape;
+        public int ResultCode;
         public bool HasExtend;
         public string ExtendDir;
     }
@@ -119,17 +119,16 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             lb2ltExtend = math.GetExtendedPointBy2Points(cutBar.LB, cutBar.LT, 1000000);
             rb2rtExtend = math.GetExtendedPointBy2Points(cutBar.RB, cutBar.RT, 1000000);
 
-            if (!CheckCalculatable())
+            int checkResult = CheckCalculatable();
+            if (checkResult != 0)
             {
-                result.ExceptionShape = true;
+                result.ResultCode = checkResult;
                 return result;
             }
             entireColPoints.Clear();
-            if (!CuttingProcess_Left2Right() || !CuttingProcess_Right2Left())
-            {
-                result.ExceptionShape = true;
-                return result;
-            }
+            CuttingProcess_Left2Right();
+            CuttingProcess_Right2Left();
+
             if (needExtend)
             {
                 double origin2SecondNearPointLen = GetOrigin2SecondNearPointLen();
@@ -141,7 +140,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             if (result.ExtendLength < 0)
             {
-                result.ExceptionShape = true;
+                result.ResultCode = -3;
                 return result;
             }
             result.CutAngle = GetCuttingAngle();
@@ -183,18 +182,16 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             lb2ltExtend = math.GetExtendedPointBy2Points(cutBar.LB, cutBar.LT, 1000000);
             rb2rtExtend = math.GetExtendedPointBy2Points(cutBar.RB, cutBar.RT, 1000000);
 
-            if (!CheckCalculatable())
+            int checkResult = CheckCalculatable();
+            if (checkResult != 0)
             {
-                result.ExceptionShape = true;
+                result.ResultCode = checkResult;
                 return result;
             }
-
             entireColPoints.Clear();
-            if (!CuttingProcess_Left2Right() || !CuttingProcess_Right2Left())
-            {
-                result.ExceptionShape = true;
-                return result;
-            }
+            CuttingProcess_Left2Right();
+            CuttingProcess_Right2Left();
+
             if (needExtend)
             {
                 double origin2SecondNearPointLen = GetOrigin2SecondNearPointLen();
@@ -206,7 +203,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             if (result.ExtendLength < 0)
             {
-                result.ExceptionShape = true;
+                result.ResultCode = -3;
                 return result;
             }
             result.CutAngle = GetCuttingAngle();
@@ -217,7 +214,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
         #region Calculate Left To Right
         // 좌측 -> 우측 검사 Process 함수
-        private bool CuttingProcess_Left2Right()
+        private void CuttingProcess_Left2Right()
         {
             List<gPoint> currentCutPoints = new List<gPoint>();
             // 좌 -> 우 충돌 검사
@@ -232,12 +229,11 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             entireColPoints.AddRange(currentCutPoints);
             ManufactureCollisionPoint();
-            return true;
         }
         #endregion
 
         #region Calculate Right To Left
-        private bool CuttingProcess_Right2Left()
+        private void CuttingProcess_Right2Left()
         {
             List<gPoint> currentCutPoints = new List<gPoint>();
             // 우 -> 좌
@@ -252,7 +248,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             entireColPoints.AddRange(currentCutPoints);
             ManufactureCollisionPoint();
-            return true;
         }
         #endregion
 
@@ -401,22 +396,22 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             }
             return origin2SecondNearestPointLen;
         }
-        private bool CheckCalculatable()
+        private int CheckCalculatable()
         {
             // CutBar의 넓은 면의 선분 2개를 확장하였을 때 UpBar와 충돌해야 True
             int colCount = 0;
             if (math.GetBarLineCollision(upBar, lt2rtExtend, rt2ltExtend)) colCount += 1;
             if (math.GetBarLineCollision(upBar, lb2rbExtend, rb2lbExtend)) colCount += 1;
             if (colCount < 2)
-                return false;
+                return -2;
 
             // UpBar의 꼭짓점이 CutBar와 충돌하지 않아야 함
-            if (math.GetPoint2BarCollision(upBar.LT, cutBar)) return false;
-            if (math.GetPoint2BarCollision(upBar.RT, cutBar)) return false;
-            if (math.GetPoint2BarCollision(upBar.LB, cutBar)) return false;
-            if (math.GetPoint2BarCollision(upBar.RB, cutBar)) return false;
+            if (math.GetPoint2BarCollision(upBar.LT, cutBar)) return -1;
+            if (math.GetPoint2BarCollision(upBar.RT, cutBar)) return -1;
+            if (math.GetPoint2BarCollision(upBar.LB, cutBar)) return -1;
+            if (math.GetPoint2BarCollision(upBar.RB, cutBar)) return -1;
 
-            return true;
+            return 0;
         }
 
         private bool CompareDouble(double a, double b)

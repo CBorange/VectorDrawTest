@@ -119,7 +119,7 @@ namespace VectordrawTest.Model.Manager
                         calcBeams[verIDX].BeamHeight, horBeams[horIDX].BeamHeight, calcBeams[verIDX].BeamWidth, horBeams[horIDX].BeamWidth);
 
                     // Result에 따른 처리
-                    if (result.ExceptionShape)
+                    if (result.ResultCode != 0) 
                         continue;
 
                     if (result.HasExtend)
@@ -173,7 +173,7 @@ namespace VectordrawTest.Model.Manager
                     CuttingResult result = curtainwallCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
                         calcBeams[horIdx].BeamHeight, verBeams[verIdx].BeamHeight, calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth);
                     // Result에 따른 처리
-                    if (result.ExceptionShape)
+                    if (result.ResultCode != 0)
                         continue;
 
                     if (result.HasExtend)
