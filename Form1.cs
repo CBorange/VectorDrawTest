@@ -65,6 +65,10 @@ namespace VectordrawTest
         {
             mainController.UpBeam_Vertical();
         }
+        private void CuttingBeam_Midline(object sender, EventArgs e)
+        {
+            mainController.CuttingBeam_Midline();
+        }
 
         private void CreateHorBeam(object sender, EventArgs e)
         {
@@ -82,11 +86,6 @@ namespace VectordrawTest
             if (point == null)
                 return;
             mainController.CreateNewVerBeam(point);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            VectorDraw.Professional.ActionUtilities.vdCommandAction.LineEx(vectorDrawBaseControl1.ActiveDocument);
         }
     }
 }

@@ -42,15 +42,20 @@ namespace VectordrawTest.Controller
         {
             beamManager.CuttingBeam_VerticalUp();
         }
+        public void CuttingBeam_Midline()
+        {
+            beamManager.CuttingBeam_MidlineCutting();
+        }
         public void CreateNewHorBeam(gPoint point)
         {
-            Beam newBeam = beamBuilder.CreateHorBeam(point);
+            Beam newBeam = beamBuilder.CreateHorBeam(point, 0);
             beamManager.AddNewHorBeam(newBeam);
         }
         public void CreateNewVerBeam(gPoint point)
         {
-            Beam newBeam = beamBuilder.CreateVerBeam(point);
+            Beam newBeam = beamBuilder.CreateVerBeam(point, 90);
             beamManager.AddNewVerBeam(newBeam);
         }
+        
     }
 }

@@ -37,7 +37,8 @@ namespace VectordrawTest.Model.Manager
 
         private BeamCutter collisionCalculator;
         private VectorDrawConfigure drawConfigure;
-        private CurtainWallCutting curtainwallCutting;
+        private UpCuttingAlgorithm upCutting;
+        private MidlineCuttingAlgorithm midLineCutting;
 
         public BeamManager()
         {
@@ -49,7 +50,8 @@ namespace VectordrawTest.Model.Manager
             this.document = document;
             this.collisionCalculator = collisionCalculator;
             this.drawConfigure = configure;
-            curtainwallCutting = new CurtainWallCutting();
+            upCutting = new UpCuttingAlgorithm();
+            midLineCutting = new MidlineCuttingAlgorithm();
 
             InitBaseLine();
             InitBeams();
@@ -105,110 +107,180 @@ namespace VectordrawTest.Model.Manager
         }
         public void CuttingBeam_VerticalUp()
         {
+            // Figure Refresh
             for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
                 verBeams[verIdx].RemoveAllFigures();
 
+            // Cutting
             for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
             {
                 horBeams[horIDX].RemoveAllFigures();
                 List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
                 for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
                 {
-                    //collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[verIDX], horBeams[horIDX]);
-                    CuttingResult result = curtainwallCutting.GetCuttingResult(calcBeams[verIDX].Left, calcBeams[verIDX].Right, horBeams[horIDX].Left, horBeams[horIDX].Right,
+                    UpCuttingResult result = upCutting.GetCuttingResult(calcBeams[verIDX].Left, calcBeams[verIDX].Right, horBeams[horIDX].Left, horBeams[horIDX].Right,
                         calcBeams[verIDX].BeamHeight, horBeams[horIDX].BeamHeight, calcBeams[verIDX].BeamWidth, horBeams[horIDX].BeamWidth);
-
-                    // Result에 따른 처리
-                    if (result.ResultCode != 0) 
-                        continue;
-
-                    if (result.HasExtend)
-                    {
-                        gPoint[] extendPoints = new gPoint[4];
-                        if (result.ExtendDir.Equals("LEFT"))
-                        {
-                            Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(horBeams[horIDX].LeftTop, horBeams[horIDX].RightTop);
-                            Vector rb2lbUnit = MathSupporter.Instance.GetUnitVecBy2Point(horBeams[horIDX].LeftBottom, horBeams[horIDX].RightBottom);
-                            gPoint extendLT = MathSupporter.Instance.GetExtendPoint(horBeams[horIDX].LeftTop, rt2ltUnit * result.ExtendLength);
-                            gPoint extendLB = MathSupporter.Instance.GetExtendPoint(horBeams[horIDX].LeftBottom, rb2lbUnit * result.ExtendLength);
-
-                            extendPoints[0] = new gPoint(horBeams[horIDX].LeftTop);
-                            extendPoints[1] = new gPoint(extendLT);
-                            extendPoints[2] = new gPoint(extendLB);
-                            extendPoints[3] = new gPoint(horBeams[horIDX].LeftBottom);
-                        }
-                        else
-                        {
-                            Vector lt2rtUnit = MathSupporter.Instance.GetUnitVecBy2Point(horBeams[horIDX].RightTop, horBeams[horIDX].LeftTop);
-                            Vector lb2rbUnit = MathSupporter.Instance.GetUnitVecBy2Point(horBeams[horIDX].RightBottom, horBeams[horIDX].LeftBottom);
-                            gPoint extendRT = MathSupporter.Instance.GetExtendPoint(horBeams[horIDX].RightTop, lt2rtUnit * result.ExtendLength);
-                            gPoint extendRB = MathSupporter.Instance.GetExtendPoint(horBeams[horIDX].RightBottom, lb2rbUnit * result.ExtendLength);
-
-                            extendPoints[0] = new gPoint(horBeams[horIDX].RightTop);
-                            extendPoints[1] = new gPoint(extendRT);
-                            extendPoints[2] = new gPoint(extendRB);
-                            extendPoints[3] = new gPoint(horBeams[horIDX].RightBottom);
-                        }
-                        horBeams[horIDX].AddExtendFigure(extendPoints, Color.Green, 0.5f);
-                    }
-                    List<gPoint> cuttingPoints = new List<gPoint>(2);
-                    cuttingPoints.Add(result.FirstCutPoint);
-                    cuttingPoints.Add(result.SecondCutPoint);
-                    horBeams[horIDX].AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
+                    CreateUpCuttingFigure(result, horBeams[horIDX]);
                 }
             }
             RefreshAllBeam();
         }
         public void CuttingBeam_HorizontalUp()
         {
+            // Figure Refresh
             for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
                 horBeams[horIDX].RemoveAllFigures();
+
+            // Cutting
             for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
             {
                 verBeams[verIdx].RemoveAllFigures();
                 List<Beam> calcBeams = verBeams[verIdx].CalcTargetBeams;
                 for (int horIdx = 0; horIdx < calcBeams.Count; ++horIdx)
                 {
-                    //collisionCalculator.CalcCuttingRect_CrossAlgorithm(calcBeams[horIdx], verBeams[verIdx]);
-                    CuttingResult result = curtainwallCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
+                    UpCuttingResult result = upCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
                         calcBeams[horIdx].BeamHeight, verBeams[verIdx].BeamHeight, calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth);
-                    // Result에 따른 처리
-                    if (result.ResultCode != 0)
-                        continue;
+                    CreateUpCuttingFigure(result, verBeams[verIdx]);
+                }
+            }
+            RefreshAllBeam();
+        }
+        private void CreateUpCuttingFigure(UpCuttingResult cuttingResult, Beam targetBeam)
+        {
+            // Result에 따른 처리
+            if (cuttingResult.ResultCode != 0)
+                return;
 
-                    if (result.HasExtend)
-                    {
-                        gPoint[] extendPoints = new gPoint[4];
-                        if (result.ExtendDir.Equals("LEFT"))
-                        {
-                            Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(verBeams[verIdx].LeftTop, verBeams[verIdx].RightTop);
-                            Vector rb2lbUnit = MathSupporter.Instance.GetUnitVecBy2Point(verBeams[verIdx].LeftBottom, verBeams[verIdx].RightBottom);
-                            gPoint extendLT = MathSupporter.Instance.GetExtendPoint(verBeams[verIdx].LeftTop, rt2ltUnit * result.ExtendLength);
-                            gPoint extendLB = MathSupporter.Instance.GetExtendPoint(verBeams[verIdx].LeftBottom, rb2lbUnit * result.ExtendLength);
+            if (cuttingResult.HasExtend)
+            {
+                gPoint[] extendPoints = new gPoint[4];
+                if (cuttingResult.ExtendDir.Equals("LEFT"))
+                {
+                    Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftTop, targetBeam.RightTop);
+                    Vector rb2lbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftBottom, targetBeam.RightBottom);
+                    gPoint extendLT = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftTop, rt2ltUnit * cuttingResult.ExtendLength);
+                    gPoint extendLB = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftBottom, rb2lbUnit * cuttingResult.ExtendLength);
 
-                            extendPoints[0] = new gPoint(verBeams[verIdx].LeftTop);
-                            extendPoints[1] = new gPoint(extendLT);
-                            extendPoints[2] = new gPoint(extendLB);
-                            extendPoints[3] = new gPoint(verBeams[verIdx].LeftBottom);
-                        }
-                        else
-                        {
-                            Vector lt2rtUnit = MathSupporter.Instance.GetUnitVecBy2Point(verBeams[verIdx].RightTop, verBeams[verIdx].LeftTop);
-                            Vector lb2rbUnit = MathSupporter.Instance.GetUnitVecBy2Point(verBeams[verIdx].RightBottom, verBeams[verIdx].LeftBottom);
-                            gPoint extendRT = MathSupporter.Instance.GetExtendPoint(verBeams[verIdx].RightTop, lt2rtUnit * result.ExtendLength);
-                            gPoint extendRB = MathSupporter.Instance.GetExtendPoint(verBeams[verIdx].RightBottom, lb2rbUnit * result.ExtendLength);
+                    extendPoints[0] = new gPoint(targetBeam.LeftTop);
+                    extendPoints[1] = new gPoint(extendLT);
+                    extendPoints[2] = new gPoint(extendLB);
+                    extendPoints[3] = new gPoint(targetBeam.LeftBottom);
+                }
+                else
+                {
+                    Vector lt2rtUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightTop, targetBeam.LeftTop);
+                    Vector lb2rbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightBottom, targetBeam.LeftBottom);
+                    gPoint extendRT = MathSupporter.Instance.GetExtendPoint(targetBeam.RightTop, lt2rtUnit * cuttingResult.ExtendLength);
+                    gPoint extendRB = MathSupporter.Instance.GetExtendPoint(targetBeam.RightBottom, lb2rbUnit * cuttingResult.ExtendLength);
 
-                            extendPoints[0] = new gPoint(verBeams[verIdx].RightTop);
-                            extendPoints[1] = new gPoint(extendRT);
-                            extendPoints[2] = new gPoint(extendRB);
-                            extendPoints[3] = new gPoint(verBeams[verIdx].RightBottom);
-                        }
-                        verBeams[verIdx].AddExtendFigure(extendPoints, Color.Green, 0.5f);
-                    }
-                    List<gPoint> cuttingPoints = new List<gPoint>(2);
-                    cuttingPoints.Add(result.FirstCutPoint);
-                    cuttingPoints.Add(result.SecondCutPoint);
-                    verBeams[verIdx].AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
+                    extendPoints[0] = new gPoint(targetBeam.RightTop);
+                    extendPoints[1] = new gPoint(extendRT);
+                    extendPoints[2] = new gPoint(extendRB);
+                    extendPoints[3] = new gPoint(targetBeam.RightBottom);
+                }
+                targetBeam.AddExtendFigure(extendPoints, Color.Green, 0.5f);
+            }
+            List<gPoint> cuttingPoints = new List<gPoint>(2);
+            cuttingPoints.Add(cuttingResult.FirstCutPoint);
+            cuttingPoints.Add(cuttingResult.SecondCutPoint);
+            targetBeam.AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
+        }
+        private void CreateMidlineExtendFigure(MidlineCuttingResult result, Beam targetBeam, string barType)
+        {
+            if (result.ResultCode != 0)
+                return;
+
+            gPoint[] extendPoints = new gPoint[4];
+
+            if (barType.Equals("A"))    // Bar A
+            {
+                
+                if (result.BarA_ExtendDir.Equals("LEFT"))
+                {
+                    Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftTop, targetBeam.RightTop);
+                    Vector rb2lbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftBottom, targetBeam.RightBottom);
+                    gPoint extendLT = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftTop, rt2ltUnit * result.BarA_ExtendLength);
+                    gPoint extendLB = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftBottom, rb2lbUnit * result.BarA_ExtendLength);
+
+                    extendPoints[0] = new gPoint(targetBeam.LeftTop);
+                    extendPoints[1] = new gPoint(extendLT);
+                    extendPoints[2] = new gPoint(extendLB);
+                    extendPoints[3] = new gPoint(targetBeam.LeftBottom);
+                }
+                else
+                {
+                    Vector lt2rtUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightTop, targetBeam.LeftTop);
+                    Vector lb2rbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightBottom, targetBeam.LeftBottom);
+                    gPoint extendRT = MathSupporter.Instance.GetExtendPoint(targetBeam.RightTop, lt2rtUnit * result.BarA_ExtendLength);
+                    gPoint extendRB = MathSupporter.Instance.GetExtendPoint(targetBeam.RightBottom, lb2rbUnit * result.BarA_ExtendLength);
+
+                    extendPoints[0] = new gPoint(targetBeam.RightTop);
+                    extendPoints[1] = new gPoint(extendRT);
+                    extendPoints[2] = new gPoint(extendRB);
+                    extendPoints[3] = new gPoint(targetBeam.RightBottom);
+                }
+            }
+            else  // Bar B
+            {
+                if (result.BarB_ExtendDir.Equals("LEFT"))
+                {
+                    Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftTop, targetBeam.RightTop);
+                    Vector rb2lbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftBottom, targetBeam.RightBottom);
+                    gPoint extendLT = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftTop, rt2ltUnit * result.BarB_ExtendLength);
+                    gPoint extendLB = MathSupporter.Instance.GetExtendPoint(targetBeam.LeftBottom, rb2lbUnit * result.BarB_ExtendLength);
+
+                    extendPoints[0] = new gPoint(targetBeam.LeftTop);
+                    extendPoints[1] = new gPoint(extendLT);
+                    extendPoints[2] = new gPoint(extendLB);
+                    extendPoints[3] = new gPoint(targetBeam.LeftBottom);
+                }
+                else
+                {
+                    Vector lt2rtUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightTop, targetBeam.LeftTop);
+                    Vector lb2rbUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.RightBottom, targetBeam.LeftBottom);
+                    gPoint extendRT = MathSupporter.Instance.GetExtendPoint(targetBeam.RightTop, lt2rtUnit * result.BarB_ExtendLength);
+                    gPoint extendRB = MathSupporter.Instance.GetExtendPoint(targetBeam.RightBottom, lb2rbUnit * result.BarB_ExtendLength);
+
+                    extendPoints[0] = new gPoint(targetBeam.RightTop);
+                    extendPoints[1] = new gPoint(extendRT);
+                    extendPoints[2] = new gPoint(extendRB);
+                    extendPoints[3] = new gPoint(targetBeam.RightBottom);
+                }
+            }
+            targetBeam.AddExtendFigure(extendPoints, Color.Green, 0.5f);
+        }
+        private void CreateMidlineCuttingFigure(MidlineCuttingResult result, Beam beamA, Beam beamB)
+        {
+            if (result.ResultCode != 0)
+                return;
+
+            CreateMidlineExtendFigure(result, beamA, "A");
+            CreateMidlineExtendFigure(result, beamB, "B");
+
+
+            // Cutting Figure
+            List<gPoint> cuttingPoints = new List<gPoint>(2);
+            cuttingPoints.Add(result.FirstCutPoint);
+            cuttingPoints.Add(result.SecondCutPoint);
+            beamA.AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
+        }
+        public void CuttingBeam_MidlineCutting()
+        {
+            // Figure Refresh
+            for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
+                verBeams[verIdx].RemoveAllFigures();
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+                horBeams[horIDX].RemoveAllFigures();
+
+            // Cutting
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+            {
+                List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
+                for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
+                {
+                    MidlineCuttingResult result = midLineCutting.GetCuttingResult(horBeams[horIDX].Left, horBeams[horIDX].Right, horBeams[horIDX].BeamHeight, horBeams[horIDX].BeamWidth,
+                        calcBeams[verIDX].Left, calcBeams[verIDX].Right, calcBeams[verIDX].BeamHeight, calcBeams[verIDX].BeamWidth);
+                    CreateMidlineCuttingFigure(result, horBeams[horIDX], calcBeams[verIDX]);
                 }
             }
             RefreshAllBeam();

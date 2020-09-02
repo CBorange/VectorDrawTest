@@ -11,6 +11,7 @@ using VectorDraw.Render;
 using VectordrawTest.Model.Manager;
 using System.Drawing;
 using System.Diagnostics;
+using VectordrawTest.Model.CuttingAlgorithm;
 
 namespace VectordrawTest.Model.CustomFigure
 {
@@ -180,8 +181,8 @@ namespace VectordrawTest.Model.CustomFigure
 
             double x = baseS2E.Dot(centerLineUnit);
             rotation = Math.Atan2(baseS2E.y, x);
-
             rotation = Globals.RadiansToDegrees(rotation);
+
             if (baseS2E.x < 0 && baseS2E.y >= 0)
                 rotation *= -1;
             else if (baseS2E.x < 0 && baseS2E.y <= 0)
