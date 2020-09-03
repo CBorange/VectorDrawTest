@@ -105,6 +105,8 @@ namespace VectordrawTest.Model.Manager
             verBeams.Add(beam);
             RefreshAllBeam();
         }
+
+        // Cutting Methods
         public void CuttingBeam_VerticalUp()
         {
             // Figure Refresh
@@ -141,6 +143,27 @@ namespace VectordrawTest.Model.Manager
                     UpCuttingResult result = upCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
                         calcBeams[horIdx].BeamHeight, verBeams[verIdx].BeamHeight, calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth);
                     CreateUpCuttingFigure(result, verBeams[verIdx]);
+                }
+            }
+            RefreshAllBeam();
+        }
+        public void CuttingBeam_MidlineCutting()
+        {
+            // Figure Refresh
+            for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
+                verBeams[verIdx].RemoveAllFigures();
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+                horBeams[horIDX].RemoveAllFigures();
+
+            // Cutting
+            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
+            {
+                List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
+                for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
+                {
+                    MidlineCuttingResult result = midLineCutting.GetCuttingResult(horBeams[horIDX].Left, horBeams[horIDX].Right, horBeams[horIDX].BeamHeight, horBeams[horIDX].BeamWidth,
+                        calcBeams[verIDX].Left, calcBeams[verIDX].Right, calcBeams[verIDX].BeamHeight, calcBeams[verIDX].BeamWidth);
+                    CreateMidlineCuttingFigure(result, horBeams[horIDX], calcBeams[verIDX]);
                 }
             }
             RefreshAllBeam();
@@ -264,26 +287,6 @@ namespace VectordrawTest.Model.Manager
             cuttingPoints.Add(result.SecondCutPoint);
             beamA.AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
         }
-        public void CuttingBeam_MidlineCutting()
-        {
-            // Figure Refresh
-            for (int verIdx = 0; verIdx < verBeams.Count; ++verIdx)
-                verBeams[verIdx].RemoveAllFigures();
-            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
-                horBeams[horIDX].RemoveAllFigures();
 
-            // Cutting
-            for (int horIDX = 0; horIDX < horBeams.Count; ++horIDX)
-            {
-                List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
-                for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
-                {
-                    MidlineCuttingResult result = midLineCutting.GetCuttingResult(horBeams[horIDX].Left, horBeams[horIDX].Right, horBeams[horIDX].BeamHeight, horBeams[horIDX].BeamWidth,
-                        calcBeams[verIDX].Left, calcBeams[verIDX].Right, calcBeams[verIDX].BeamHeight, calcBeams[verIDX].BeamWidth);
-                    CreateMidlineCuttingFigure(result, horBeams[horIDX], calcBeams[verIDX]);
-                }
-            }
-            RefreshAllBeam();
-        }
     }
 }

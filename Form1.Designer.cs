@@ -131,7 +131,9 @@
             this.Controls.Add(this.vdCommandLine1);
             this.Controls.Add(this.HorUp_Btn);
             this.Controls.Add(this.vectorDrawBaseControl1);
+            this.Location = new System.Drawing.Point(300, 100);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
