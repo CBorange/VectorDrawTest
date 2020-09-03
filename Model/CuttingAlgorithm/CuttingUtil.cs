@@ -184,7 +184,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         public static bool CompareDouble(double a, double b)
         {
             double difference = Math.Abs(a - b);
-            if (difference <= 0.000000001 || difference == 0)
+            if (difference <= 0.00000001 || difference == 0)
                 return true;
             return false;
         }

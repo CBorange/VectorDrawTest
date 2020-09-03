@@ -77,45 +77,61 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         public MidlineCuttingResult GetCuttingResult(gPoint barA_StartPoint, gPoint barA_EndPoint, double barA_Width, double barA_Length,
             gPoint barB_StartPoint, gPoint barB_EndPoint, double barB_Width, double barB_Length)
         {
-            result = new MidlineCuttingResult();
-            barA = CuttingUtil.CreateBar(barA_StartPoint, barA_EndPoint, barA_Width, barA_Length);
-            barB = CuttingUtil.CreateBar(barB_StartPoint, barB_EndPoint, barB_Width, barB_Length);
+            try
+            {
+                result = new MidlineCuttingResult();
+                barA = CuttingUtil.CreateBar(barA_StartPoint, barA_EndPoint, barA_Width, barA_Length);
+                barB = CuttingUtil.CreateBar(barB_StartPoint, barB_EndPoint, barB_Width, barB_Length);
 
-            // 계산용 확장 선 산출
-            barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
-            barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
-            barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
-            barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
+                // 계산용 확장 선 산출
+                barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
+                barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
+                barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
+                barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
 
-            barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
-            barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
-            barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
-            barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
+                barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
+                barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
+                barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
+                barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
 
-            CalculateCollisionPoints();
-            ManufactureCuttingPoints();
+                CalculateCollisionPoints();
+                ManufactureCuttingPoints();
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -1;
+                return result;
+            }
             result.ResultCode = 0;
             return result;
         }
         public MidlineCuttingResult GetCuttingResult(linesegment barA_Segment, linesegment barB_Segment, double barA_Width, double barB_Width)
         {
-            result = new MidlineCuttingResult();
-            barA = CuttingUtil.CreateBar(barA_Segment.StartPoint, barA_Segment.EndPoint, barA_Width, barA_Segment.length);
-            barB = CuttingUtil.CreateBar(barB_Segment.StartPoint, barB_Segment.EndPoint, barB_Width, barB_Segment.length);
+            try
+            {
+                result = new MidlineCuttingResult();
+                barA = CuttingUtil.CreateBar(barA_Segment.StartPoint, barA_Segment.EndPoint, barA_Width, barA_Segment.length);
+                barB = CuttingUtil.CreateBar(barB_Segment.StartPoint, barB_Segment.EndPoint, barB_Width, barB_Segment.length);
 
-            // 계산용 확장 선 산출
-            barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
-            barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
-            barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
-            barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
+                // 계산용 확장 선 산출
+                barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
+                barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
+                barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
+                barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
 
-            barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
-            barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
-            barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
-            barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
+                barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
+                barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
+                barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
+                barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
 
-            CalculateCollisionPoints();
-            ManufactureCuttingPoints();
+                CalculateCollisionPoints();
+                ManufactureCuttingPoints();
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -1;
+                return result;
+            }
             result.ResultCode = 0;
             return result;
         }
@@ -146,10 +162,51 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             a2bVec *= (lenBy2BarCenters * 0.5);
             gPoint centerBy2Bars = CurtainWallMath.GetExtendPoint(barA.Center, a2bVec);
 
-            List<PointAndDis> barsCenterNearPoints = Conversion_gPoint2PointAndDisList(centerBy2Bars);
-            barsCenterNearPoints = barsCenterNearPoints.OrderBy(obj => obj.Distance).ToList();
-            result.FirstCutPoint = barsCenterNearPoints[0].Point;
-            result.SecondCutPoint = barsCenterNearPoints[barsCenterNearPoints.Count - 1].Point;
+            // BarA <-> BarB의 BaseLine 사이각 계산
+            gPoint[] barBLPoints = new gPoint[4];
+            barBLPoints[0] = barA.Left;
+            barBLPoints[1] = barA.Right;
+            barBLPoints[2] = barB.Left;
+            barBLPoints[3] = barB.Right;
+            gPoint barLinkPoint = GetDuplicatePointOnArry(barBLPoints);
+
+            gPoint barASymmetryPoint = barA.Left;
+            if (IsSamePoint(barA.Left, barLinkPoint))
+                barASymmetryPoint = barA.Right;
+
+            gPoint barBSymmetryPoint = barB.Left;
+            if (IsSamePoint(barB.Left, barLinkPoint))
+                barBSymmetryPoint = barB.Right;
+
+            Vector barAVec = CurtainWallMath.GetUnitVecBy2Point(barASymmetryPoint, barLinkPoint);
+            Vector barBVec = CurtainWallMath.GetUnitVecBy2Point(barBSymmetryPoint, barLinkPoint);
+            double blAngle = barAVec.Dot(barBVec);
+            blAngle = Math.Acos(blAngle);
+            blAngle = Globals.RadiansToDegrees(blAngle);
+            blAngle = Math.Abs(blAngle);
+
+            // BarA <-> BarB BaseLine 사이의 각이 예각인 경우
+            if (blAngle <= 90)
+            {
+                List<PointAndDis> barsCenterNearPoints = Conversion_gPoint2PointAndDisList(centerBy2Bars);
+                barsCenterNearPoints = barsCenterNearPoints.OrderBy(obj => obj.Distance).ToList();
+                result.FirstCutPoint = barsCenterNearPoints[0].Point;
+                result.SecondCutPoint = barsCenterNearPoints[barsCenterNearPoints.Count - 1].Point;
+            }
+            // BarA <-> BarB BaseLine 사이의 각이 둔각인 경우
+            else if (blAngle > 90)
+            {
+                List<PointAndDis> barsCenterNearPoints = Conversion_gPoint2PointAndDisList(centerBy2Bars);
+                barsCenterNearPoints = barsCenterNearPoints.OrderBy(obj => obj.Distance).ToList();
+                result.FirstCutPoint = barsCenterNearPoints[0].Point;
+
+                List<PointAndDis> barLinkNearPoints = Conversion_gPoint2PointAndDisList(barLinkPoint);
+                barLinkNearPoints = barLinkNearPoints.OrderBy(obj => obj.Distance).ToList();
+
+                result.SecondCutPoint = barLinkNearPoints[0].Point;
+                if (IsSamePoint(result.FirstCutPoint, result.SecondCutPoint))
+                    result.SecondCutPoint = barLinkNearPoints[1].Point;
+            }
 
             // BarA
             barAColPoints = Conversion_gPoint2PointAndDisList(barA);
@@ -280,6 +337,60 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             }
             return origin2SecondNearestPointLen;
         }
+        /// <summary>
+        /// foundPoint 에 해당하는 Point를 originArray에서 탐색하여 반환
+        /// </summary>
+        /// <param name="originArray"></param>
+        /// <param name="foundPoint"></param>
+        /// <returns></returns>
+        private gPoint GetSamePointOnArray(gPoint[] originArray, gPoint foundPoint)
+        {
+            gPoint samePoint = null;
+            for (int i = 0; i < originArray.Length; ++i)
+            {
+                if (CurtainWallMath.CompareDouble(originArray[i].x, foundPoint.x) &&
+                    CurtainWallMath.CompareDouble(originArray[i].y, foundPoint.y))
+                {
+                    samePoint = new gPoint(originArray[i]);
+                    break;
+                }
+            }
+            return samePoint;
+        }
+
+        /// <summary>
+        /// originArray에서 값이 겹치는 Point를 탐색하여 반환
+        /// </summary>
+        /// <param name="originArray"></param>
+        /// <returns></returns>
+        private gPoint GetDuplicatePointOnArry(gPoint[] originArray)
+        {
+            gPoint duplicatePoint = null;
+            for (int i = 0; i < originArray.Length; ++i)
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    if (CurtainWallMath.CompareDouble(originArray[i].x, originArray[j].x) &&
+                        CurtainWallMath.CompareDouble(originArray[i].y, originArray[j].y))
+                    {
+                        duplicatePoint = new gPoint(originArray[i]);
+                        return duplicatePoint;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private bool IsSamePoint(gPoint pointA, gPoint pointB)
+        {
+            if (CurtainWallMath.CompareDouble(pointA.x, pointB.x) &&
+                CurtainWallMath.CompareDouble(pointA.y, pointB.y))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private List<PointAndDis> Conversion_gPoint2PointAndDisList(gPoint center)
         {
             List<PointAndDis> newList = new List<PointAndDis>();
