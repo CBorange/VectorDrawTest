@@ -94,8 +94,41 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             CalculateCollisionPoints();
             ManufactureCuttingPoints();
+            //AngleCuttingLogic();
+
 
             return result;
+        }
+        private void AngleCuttingLogic()
+        {
+            //BarA <->BarB의 BaseLine 사이각 계산, BarA, BarB의 BaseLine이 부딪히는 지점 계산
+            gPoint[] barBLPoints = new gPoint[4];
+            barBLPoints[0] = barA.Left;
+            barBLPoints[1] = barA.Right;
+            barBLPoints[2] = barB.Left;
+            barBLPoints[3] = barB.Right;
+            gPoint barLinkPoint = CuttingUtil.GetDuplicatePointOnArray(barBLPoints);
+            if (barLinkPoint == null)
+            {
+                result.ResultCode = -1;
+            }
+
+            gPoint barASymmetryPoint = barA.Left;
+            if (CuttingUtil.IsSamePoint(barA.Left, barLinkPoint))
+                barASymmetryPoint = barA.Right;
+
+            gPoint barBSymmetryPoint = barB.Left;
+            if (CuttingUtil.IsSamePoint(barB.Left, barLinkPoint))
+                barBSymmetryPoint = barB.Right;
+
+            Vector barAVec = CurtainWallMath.GetUnitVecBy2Point(barASymmetryPoint, barLinkPoint);
+            Vector barBVec = CurtainWallMath.GetUnitVecBy2Point(barBSymmetryPoint, barLinkPoint);
+            double blAngle = barAVec.Dot(barBVec);
+            blAngle = Math.Acos(blAngle);
+            blAngle = Globals.RadiansToDegrees(blAngle);
+            blAngle = Math.Abs(blAngle);
+
+            double halfBLAngle = (blAngle * 0.5);
         }
         public MidlineCuttingResult GetCuttingResult(linesegment barA_Segment, linesegment barB_Segment, double barA_Width, double barB_Width)
         {
@@ -146,7 +179,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             barBLPoints[1] = barA.Right;
             barBLPoints[2] = barB.Left;
             barBLPoints[3] = barB.Right;
-            gPoint barLinkPoint = GetDuplicatePointOnArray(barBLPoints);
+            gPoint barLinkPoint = CuttingUtil.GetDuplicatePointOnArray(barBLPoints);
             if (barLinkPoint == null)
             {
                 result.ResultCode = -1;
@@ -154,11 +187,11 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             }
 
             gPoint barASymmetryPoint = barA.Left;
-            if (IsSamePoint(barA.Left, barLinkPoint))
+            if (CuttingUtil.IsSamePoint(barA.Left, barLinkPoint))
                 barASymmetryPoint = barA.Right;
 
             gPoint barBSymmetryPoint = barB.Left;
-            if (IsSamePoint(barB.Left, barLinkPoint))
+            if (CuttingUtil.IsSamePoint(barB.Left, barLinkPoint))
                 barBSymmetryPoint = barB.Right;
 
             Vector barAVec = CurtainWallMath.GetUnitVecBy2Point(barASymmetryPoint, barLinkPoint);
@@ -204,7 +237,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 barLinkNearPoints = barLinkNearPoints.OrderBy(obj => obj.Distance).ToList();
 
                 result.SecondCutPoint = barLinkNearPoints[0].Point;
-                if (IsSamePoint(result.FirstCutPoint, result.SecondCutPoint))
+                if (CuttingUtil.IsSamePoint(result.FirstCutPoint, result.SecondCutPoint))
                     result.SecondCutPoint = barLinkNearPoints[1].Point;
             }
 
@@ -339,59 +372,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             }
             return origin2SecondNearestPointLen;
         }
-        /// <summary>
-        /// foundPoint 에 해당하는 Point를 originArray에서 탐색하여 반환
-        /// </summary>
-        /// <param name="originArray"></param>
-        /// <param name="foundPoint"></param>
-        /// <returns></returns>
-        private gPoint GetSamePointOnArray(gPoint[] originArray, gPoint foundPoint)
-        {
-            gPoint samePoint = null;
-            for (int i = 0; i < originArray.Length; ++i)
-            {
-                if (CurtainWallMath.CompareDouble(originArray[i].x, foundPoint.x) &&
-                    CurtainWallMath.CompareDouble(originArray[i].y, foundPoint.y))
-                {
-                    samePoint = new gPoint(originArray[i]);
-                    break;
-                }
-            }
-            return samePoint;
-        }
-
-        /// <summary>
-        /// originArray에서 값이 겹치는 Point를 탐색하여 반환
-        /// </summary>
-        /// <param name="originArray"></param>
-        /// <returns></returns>
-        private gPoint GetDuplicatePointOnArray(gPoint[] originArray)
-        {
-            gPoint duplicatePoint = null;
-            for (int i = 0; i < originArray.Length; ++i)
-            {
-                for (int j = 0; j < i; ++j)
-                {
-                    if (CurtainWallMath.CompareDouble(originArray[i].x, originArray[j].x) &&
-                        CurtainWallMath.CompareDouble(originArray[i].y, originArray[j].y))
-                    {
-                        duplicatePoint = new gPoint(originArray[i]);
-                        return duplicatePoint;
-                    }
-                }
-            }
-            return null;
-        }
-
-        private bool IsSamePoint(gPoint pointA, gPoint pointB)
-        {
-            if (CurtainWallMath.CompareDouble(pointA.x, pointB.x) &&
-                CurtainWallMath.CompareDouble(pointA.y, pointB.y))
-            {
-                return true;
-            }
-            return false;
-        }
+        
 
         private List<PointAndDis> Conversion_gPoint2PointAndDisList(gPoint center)
         {

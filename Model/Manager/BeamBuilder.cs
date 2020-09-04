@@ -18,8 +18,8 @@ namespace VectordrawTest.Model.Manager
     public class BeamBuilder
     {
         // Const
-        public const int DEFAULT_BEAM_LENGTH = 200;
-        public const int DEFAULT_BEAM_WIDTH = 50;
+        public const int DEFAULT_BEAM_LENGTH = 300;
+        public const int DEFAULT_BEAM_WIDTH = 60;
         private vdDocument document;
         public vdDocument Document { get; }
 
@@ -33,19 +33,19 @@ namespace VectordrawTest.Model.Manager
             this.document = document;
             this.beamManager = beamManager;
 
-            double horRot = -23.215125;
-            double verRot = 89;
+            double horRot = 253;
+            double verRot = 45;
 
             // 테스트 용
-            //// 수직
-            //gPoint point1 = new gPoint(40913.32670452, 13377.83499133, 0);
-            //gPoint point2 = new gPoint(40913.32670453, 17411.85172475, 0);
+            // 수직
+            //gPoint point1 = new gPoint(73098.88097591, 20901.80130121, 0);
+            //gPoint point2 = new gPoint(73098.88097489, 24221.80129747, 0);
             //linesegment seg1 = new linesegment(point1, point2);
             //double width1 = 60;
 
             //// 수평
-            //gPoint point3 = new gPoint(36347.85030018, 15938.10177558, 0);
-            //gPoint point4 = new gPoint(40927.85030017, 13404.08504218, 0);
+            //gPoint point3 = new gPoint(72108.4636168, 20901.80130063, 0);
+            //gPoint point4 = new gPoint(73161.98241116, 20901.80130125, 0);
             //linesegment seg2 = new linesegment(point3, point4);
             //double width2 = 60;
 

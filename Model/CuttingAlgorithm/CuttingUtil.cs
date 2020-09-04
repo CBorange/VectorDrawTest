@@ -240,5 +240,92 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             return bar;
         }
+        /// <summary>
+        /// foundPoint 에 해당하는 Point를 originArray에서 탐색하여 반환
+        /// </summary>
+        /// <param name="originArray"></param>
+        /// <param name="foundPoint"></param>
+        /// <returns></returns>
+        public static gPoint GetSamePointOnArray(gPoint[] originArray, gPoint foundPoint)
+        {
+            gPoint samePoint = null;
+            for (int i = 0; i < originArray.Length; ++i)
+            {
+                if (CurtainWallMath.CompareDouble(originArray[i].x, foundPoint.x) &&
+                    CurtainWallMath.CompareDouble(originArray[i].y, foundPoint.y))
+                {
+                    samePoint = new gPoint(originArray[i]);
+                    break;
+                }
+            }
+            return samePoint;
+        }
+
+        /// <summary>
+        /// originArray에서 값이 겹치는 Point를 탐색하여 반환
+        /// </summary>
+        /// <param name="originArray"></param>
+        /// <returns></returns>
+        public static gPoint GetDuplicatePointOnArray(gPoint[] originArray)
+        {
+            gPoint duplicatePoint = null;
+            for (int i = 0; i < originArray.Length; ++i)
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    if (CurtainWallMath.CompareDouble(originArray[i].x, originArray[j].x) &&
+                        CurtainWallMath.CompareDouble(originArray[i].y, originArray[j].y))
+                    {
+                        duplicatePoint = new gPoint(originArray[i]);
+                        return duplicatePoint;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static bool IsSamePoint(gPoint pointA, gPoint pointB)
+        {
+            if (CurtainWallMath.CompareDouble(pointA.x, pointB.x) &&
+                CurtainWallMath.CompareDouble(pointA.y, pointB.y))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static void GetBarVertexOriginPoint(gPoint vertexPoint, Bar targetBar, out gPoint originPoint, out gPoint otherOriginPoint)
+        {
+            gPoint vPoint = new gPoint(vertexPoint);
+            double rot = targetBar.Rotation * -1;
+            vPoint = CurtainWallMath.GetRotatedPoint(rot, vPoint, targetBar.Center);
+
+            if (vPoint.y >= targetBar.Center.y)
+            {
+                if (vPoint.x <= targetBar.Center.x)
+                {
+                    originPoint = targetBar.RT;
+                    otherOriginPoint = targetBar.RB;
+                }
+                else
+                {
+                    originPoint = targetBar.LT;
+                    otherOriginPoint = targetBar.LB;
+                }
+            }
+            else
+            {
+                if (vPoint.x <= targetBar.Center.x)
+                {
+                    originPoint = targetBar.RB;
+                    otherOriginPoint = targetBar.RT;
+                }
+                else
+                {
+                    originPoint = targetBar.LB;
+                    otherOriginPoint = targetBar.LT;
+                }
+            }
+        }
     }
 }
