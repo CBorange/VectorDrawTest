@@ -17,25 +17,25 @@ namespace VectordrawTest.Model.CustomFigure
 {
     public class Beam
     {
+        private double beamLength;
+        public double BeamLength
+        {
+            get { return beamLength; }
+        }
         private double beamWidth;
         public double BeamWidth
         {
             get { return beamWidth; }
         }
-        private double beamHeight;
-        public double BeamHeight
+        private double halfLength;
+        public double HalfLength
         {
-            get { return beamHeight; }
+            get { return halfLength; }
         }
         private double halfWidth;
         public double HalfWidth
         {
             get { return halfWidth; }
-        }
-        private double halfHeight;
-        public double HalfHeight
-        {
-            get { return halfHeight; }
         }
         private string beamName;
         private vdDocument document;
@@ -106,7 +106,7 @@ namespace VectordrawTest.Model.CustomFigure
         private List<FigureDrawer> extendFigure;
         public List<FigureDrawer> ExtendFigure { get { return extendFigure; } }
 
-        public Beam(gPoint point, vdDocument document, Color drawColor, double width, double height,double rotation, string beamName)
+        public Beam(gPoint point, vdDocument document, Color drawColor, double length, double width,double rotation, string beamName)
         {
             this.rotation = rotation;
             this.beamName = beamName;
@@ -114,10 +114,10 @@ namespace VectordrawTest.Model.CustomFigure
             this.drawColor = drawColor;
 
             center = point;
+            beamLength = length;
             beamWidth = width;
-            beamHeight = height;
+            halfLength = length * 0.5f;
             halfWidth = width * 0.5f;
-            halfHeight = height * 0.5f;
 
             leftTop = new gPoint();
             rightTop = new gPoint();
@@ -132,18 +132,54 @@ namespace VectordrawTest.Model.CustomFigure
             cuttingFigures = new List<FigureDrawer>();
             extendFigure = new List<FigureDrawer>();
 
+            baseLine = new vdLine();
+            baseLine.StartPoint = new gPoint(center.x - halfLength, center.y);
+            baseLine.EndPoint = new gPoint(center.x + halfLength, center.y);
+            baseLine.StartPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.StartPoint, center);
+            baseLine.EndPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.EndPoint, center);
+
             InitLines();
             InitDebugCircles();
             VectorDrawConfigure.Instance.AddLineToDocument(baseLine);
         }
+        public Beam(gPoint startPoint, gPoint endPoint, vdDocument document, Color drawColor, double length, double width, string beamName)
+        {
+            this.rotation = 0;
+            this.beamName = beamName;
+            this.document = document;
+            this.drawColor = drawColor;
+
+            beamLength = length;
+            beamWidth = width;
+            halfLength = length * 0.5f;
+            halfWidth = width * 0.5f;
+
+            center = new gPoint();
+            leftTop = new gPoint();
+            rightTop = new gPoint();
+            leftBottom = new gPoint();
+            rightBottom = new gPoint();
+            left = new gPoint();
+            right = new gPoint();
+            top = new gPoint();
+            bottom = new gPoint();
+
+            calcTargetBeams = new List<Beam>();
+            cuttingFigures = new List<FigureDrawer>();
+            extendFigure = new List<FigureDrawer>();
+
+            // InitLines
+            baseLine = new vdLine();
+            baseLine.StartPoint = startPoint;
+            baseLine.EndPoint = endPoint;
+
+            InitLines();
+            InitDebugCircles();
+            VectorDrawConfigure.Instance.AddLineToDocument(baseLine);
+            UpdateBaseLine();
+        }
         private void InitLines()
         {
-            baseLine = new vdLine();
-            baseLine.StartPoint = new gPoint(center.x - halfWidth, center.y);
-            baseLine.EndPoint = new gPoint(center.x + halfWidth, center.y);
-            baseLine.StartPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.StartPoint, center);
-            baseLine.EndPoint = MathSupporter.Instance.GetRotatedPoint(rotation, baseLine.EndPoint, center);
-
             line_lt2rt = new vdLine();
             line_lt2rt.SetUnRegisterDocument(document);
 
@@ -189,16 +225,16 @@ namespace VectordrawTest.Model.CustomFigure
                 rotation *= -1;
 
             // calc vertex point
-            leftTop = new gPoint(center.x - halfWidth, center.y + halfHeight);
-            rightTop = new gPoint(center.x + halfWidth, center.y + halfHeight);
-            rightBottom = new gPoint(center.x + halfWidth, center.y - halfHeight);
-            leftBottom = new gPoint(center.x - halfWidth, center.y - halfHeight);
+            leftTop = new gPoint(center.x - halfLength, center.y + halfWidth);
+            rightTop = new gPoint(center.x + halfLength, center.y + halfWidth);
+            rightBottom = new gPoint(center.x + halfLength, center.y - halfWidth);
+            leftBottom = new gPoint(center.x - halfLength, center.y - halfWidth);
             
 
-            left = new gPoint(center.x - halfWidth, center.y);
-            right = new gPoint(center.x + halfWidth, center.y);
-            top = new gPoint(center.x, center.y + halfHeight);
-            bottom = new gPoint(center.x, center.y - halfHeight);
+            left = new gPoint(center.x - halfLength, center.y);
+            right = new gPoint(center.x + halfLength, center.y);
+            top = new gPoint(center.x, center.y + halfWidth);
+            bottom = new gPoint(center.x, center.y - halfWidth);
 
             leftTop = MathSupporter.Instance.GetRotatedPoint(rotation, leftTop, center);
             rightTop = MathSupporter.Instance.GetRotatedPoint(rotation, rightTop, center);

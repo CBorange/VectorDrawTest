@@ -121,7 +121,7 @@ namespace VectordrawTest.Model.Manager
                 for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
                 {
                     UpCuttingResult result = upCutting.GetCuttingResult(calcBeams[verIDX].Left, calcBeams[verIDX].Right, horBeams[horIDX].Left, horBeams[horIDX].Right,
-                        calcBeams[verIDX].BeamHeight, horBeams[horIDX].BeamHeight, calcBeams[verIDX].BeamWidth, horBeams[horIDX].BeamWidth);
+                        calcBeams[verIDX].BeamWidth, horBeams[horIDX].BeamWidth, calcBeams[verIDX].BeamLength, horBeams[horIDX].BeamLength);
                     CreateUpCuttingFigure(result, horBeams[horIDX]);
                 }
             }
@@ -141,7 +141,7 @@ namespace VectordrawTest.Model.Manager
                 for (int horIdx = 0; horIdx < calcBeams.Count; ++horIdx)
                 {
                     UpCuttingResult result = upCutting.GetCuttingResult(calcBeams[horIdx].Left, calcBeams[horIdx].Right, verBeams[verIdx].Left, verBeams[verIdx].Right,
-                        calcBeams[horIdx].BeamHeight, verBeams[verIdx].BeamHeight, calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth);
+                        calcBeams[horIdx].BeamWidth, verBeams[verIdx].BeamWidth, calcBeams[horIdx].BeamLength, verBeams[verIdx].BeamLength);
                     CreateUpCuttingFigure(result, verBeams[verIdx]);
                 }
             }
@@ -161,8 +161,8 @@ namespace VectordrawTest.Model.Manager
                 List<Beam> calcBeams = horBeams[horIDX].CalcTargetBeams;
                 for (int verIDX = 0; verIDX < calcBeams.Count; ++verIDX)
                 {
-                    MidlineCuttingResult result = midLineCutting.GetCuttingResult(horBeams[horIDX].Left, horBeams[horIDX].Right, horBeams[horIDX].BeamHeight, horBeams[horIDX].BeamWidth,
-                        calcBeams[verIDX].Left, calcBeams[verIDX].Right, calcBeams[verIDX].BeamHeight, calcBeams[verIDX].BeamWidth);
+                    MidlineCuttingResult result = midLineCutting.GetCuttingResult(horBeams[horIDX].Left, horBeams[horIDX].Right, horBeams[horIDX].BeamWidth, horBeams[horIDX].BeamLength,
+                        calcBeams[verIDX].Left, calcBeams[verIDX].Right, calcBeams[verIDX].BeamWidth, calcBeams[verIDX].BeamLength);
                     CreateMidlineCuttingFigure(result, horBeams[horIDX], calcBeams[verIDX]);
                 }
             }
