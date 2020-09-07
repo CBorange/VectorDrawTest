@@ -33,8 +33,8 @@ namespace VectordrawTest.Model.Manager
             this.document = document;
             this.beamManager = beamManager;
 
-            double horRot = 218.97646341;
-            double verRot = 82.52456621;
+            double horRot = 0;
+            double verRot = 216.85485232;
 
             // 테스트 용
             // 수직

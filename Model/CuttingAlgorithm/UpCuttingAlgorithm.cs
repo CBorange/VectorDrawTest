@@ -20,22 +20,30 @@ namespace VectordrawTest.Model.CuttingAlgorithm
     {
         public UpCuttingResult()
         {
-            CutAngle = 0;
-            FirstCutPoint = null;
-            SecondCutPoint = null;
+            CutBar_CutAngle = 0;
             CutBar_ExtendPoint_First = null;
             CutBar_ExtendPoint_Second = null;
-            UpBar_ExtendPoint_Second = null;
+            CutBar_CutPoint_First = null;
+            CutBar_CutPoint_Second = null;
+
+            UpBar_CutAngle = 0;
             UpBar_ExtendPoint_First = null;
-            ResultCode = 0;
+            UpBar_ExtendPoint_Second = null;
+            UpBar_CutPoint_First = null;
+            UpBar_CutPoint_Second = null;
         }
-        public double CutAngle;
+        public double CutBar_CutAngle;
         public gPoint CutBar_ExtendPoint_First;
         public gPoint CutBar_ExtendPoint_Second;
+        public gPoint CutBar_CutPoint_First;
+        public gPoint CutBar_CutPoint_Second;
+
+        public double UpBar_CutAngle;
         public gPoint UpBar_ExtendPoint_First;
         public gPoint UpBar_ExtendPoint_Second;
-        public gPoint FirstCutPoint;
-        public gPoint SecondCutPoint;
+        public gPoint UpBar_CutPoint_First;
+        public gPoint UpBar_CutPoint_Second;
+
         public int ResultCode;
     }
     public class UpCuttingAlgorithm
@@ -87,7 +95,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             entireColPoints.Clear();
             CuttingProcess();
 
-            // CutBar 확장 위치 산출
+            // CutBar 계산
             double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
             double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
 
@@ -96,21 +104,26 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 cutBarCenter = cutBar.Right;
 
             cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
-            result.FirstCutPoint = cutBar_ColPoints[0].Point;
-            result.SecondCutPoint = cutBar_ColPoints[1].Point;
+            result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
+            result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
             CalcCutBar_ExtendPoints();
 
-            // UpBar 확장 위치 산출
+            result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
+
+            // UpBar 계산
             double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
             double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
 
             gPoint upBarCenter = upBar.Left;
             if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
                 upBarCenter = upBar.Right;
+
             upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
+            result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
+            result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
             CalcUpBar_ExtendPoints(upBar_ColPoints);
 
-            result.CutAngle = GetCuttingAngle();
+            result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
 
             return result;
         }
@@ -136,7 +149,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             entireColPoints.Clear();
             CuttingProcess();
 
-            // CutBar 확장 위치 산출
+            // CutBar 계산
             double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
             double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
 
@@ -145,21 +158,26 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 cutBarCenter = cutBar.Right;
 
             cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
-            result.FirstCutPoint = cutBar_ColPoints[0].Point;
-            result.SecondCutPoint = cutBar_ColPoints[1].Point;
+            result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
+            result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
             CalcCutBar_ExtendPoints();
 
-            // UpBar 확장 위치 산출
+            result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
+
+            // UpBar 계산
             double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
             double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
 
             gPoint upBarCenter = upBar.Left;
             if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
                 upBarCenter = upBar.Right;
+
             upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
+            result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
+            result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
             CalcUpBar_ExtendPoints(upBar_ColPoints);
 
-            result.CutAngle = GetCuttingAngle();
+            result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
 
             return result;
         }
@@ -200,17 +218,17 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         {
             gPoint originPoint = null;
             gPoint sidePoint = null;
-            CuttingUtil.GetBarVertexSymmetryPoint(result.SecondCutPoint, cutBar, out originPoint, out sidePoint);
-            double origin2SecondCutLength = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, originPoint);
+            CuttingUtil.GetBarVertexSymmetryPoint(result.CutBar_CutPoint_Second, cutBar, out originPoint, out sidePoint);
+            double origin2SecondCutLength = CurtainWallMath.GetLengthBy2Point(result.CutBar_CutPoint_Second, originPoint);
             double extendLength = origin2SecondCutLength - cutBar.Length;
 
             // 확장 길이가 0보다 작으면 확장이 필요 없음
             if (extendLength < 0)
                 return;
 
-            Vector origin2SecondCutVec = CurtainWallMath.GetUnitVecBy2Point(result.SecondCutPoint, originPoint);
+            Vector origin2SecondCutVec = CurtainWallMath.GetUnitVecBy2Point(result.CutBar_CutPoint_Second, originPoint);
             origin2SecondCutVec *= origin2SecondCutLength;
-            Vector side2FirstCutVec = CurtainWallMath.GetUnitVecBy2Point(result.FirstCutPoint, sidePoint);
+            Vector side2FirstCutVec = CurtainWallMath.GetUnitVecBy2Point(result.CutBar_CutPoint_First, sidePoint);
             side2FirstCutVec *= origin2SecondCutLength;
 
             result.CutBar_ExtendPoint_Second = CurtainWallMath.GetExtendPoint(originPoint, origin2SecondCutVec);
@@ -243,14 +261,13 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 return null;
             return colPoints;
         }
-        private double GetCuttingAngle()
+        private double GetCuttingAngle(gPoint secondCutPoint, gPoint firstCutPoint, Bar targetBar)
         {
-            gPoint farPoint = new gPoint(result.SecondCutPoint);
-            gPoint originPoint = CuttingUtil.GetBarVertexSymmetryPoint(farPoint, cutBar);
+            gPoint farSymmetryPoint = CuttingUtil.GetBarVertexSymmetryPoint(secondCutPoint, targetBar);
 
-            Vector cutVec = CurtainWallMath.GetUnitVecBy2Point(result.FirstCutPoint, farPoint);
-            Vector horVec = CurtainWallMath.GetUnitVecBy2Point(originPoint, farPoint);
-            double cutAngle = cutVec.Dot(horVec);
+            Vector cutVec = CurtainWallMath.GetUnitVecBy2Point(firstCutPoint, secondCutPoint);
+            Vector symmetryVec = CurtainWallMath.GetUnitVecBy2Point(farSymmetryPoint, secondCutPoint);
+            double cutAngle = cutVec.Dot(symmetryVec);
             cutAngle = Math.Acos(cutAngle);
             cutAngle = Globals.RadiansToDegrees(cutAngle);
             return cutAngle;

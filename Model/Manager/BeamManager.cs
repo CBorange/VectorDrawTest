@@ -126,7 +126,7 @@ namespace VectordrawTest.Model.Manager
                     if (result.ResultCode != 0)
                         continue;
 
-                    CreateUpCuttingFigure(result, horBeams[horIDX]);
+                    CreateUpCuttingFigure(result, horBeams[horIDX], calcBeams[verIDX]);
                     CreateUpCuttingExtendFigure(result.UpBar_ExtendPoint_First, result.UpBar_ExtendPoint_Second, calcBeams[verIDX]);
                     CreateUpCuttingExtendFigure(result.CutBar_ExtendPoint_First, result.CutBar_ExtendPoint_Second, horBeams[horIDX]);
                 }
@@ -152,7 +152,7 @@ namespace VectordrawTest.Model.Manager
                     if (result.ResultCode != 0)
                         continue;
 
-                    CreateUpCuttingFigure(result, verBeams[verIdx]);
+                    CreateUpCuttingFigure(result, verBeams[verIdx], calcBeams[horIdx]);
                     CreateUpCuttingExtendFigure(result.UpBar_ExtendPoint_First, result.UpBar_ExtendPoint_Second, calcBeams[horIdx]);
                     CreateUpCuttingExtendFigure(result.CutBar_ExtendPoint_First, result.CutBar_ExtendPoint_Second, verBeams[verIdx]);
                 }
@@ -182,12 +182,17 @@ namespace VectordrawTest.Model.Manager
         }
 
         // Cutting Figure(CutPoint, ExtendPoint based Graphics Object Create)
-        private void CreateUpCuttingFigure(UpCuttingResult result, Beam targetBeam)
+        private void CreateUpCuttingFigure(UpCuttingResult result, Beam cutBar, Beam upBar)
         {
-            List<gPoint> cuttingPoints = new List<gPoint>(2);
-            cuttingPoints.Add(result.FirstCutPoint);
-            cuttingPoints.Add(result.SecondCutPoint);
-            targetBeam.AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
+            List<gPoint> cutBarCuttingPoints = new List<gPoint>(2);
+            cutBarCuttingPoints.Add(result.CutBar_CutPoint_First);
+            cutBarCuttingPoints.Add(result.CutBar_CutPoint_Second);
+            cutBar.AddCuttingFigure(cutBarCuttingPoints, Color.Yellow, 0.75f);
+
+            List<gPoint> upBarCuttingPoints = new List<gPoint>(2);
+            upBarCuttingPoints.Add(result.UpBar_CutPoint_First);
+            upBarCuttingPoints.Add(result.UpBar_CutPoint_Second);
+            upBar.AddCuttingFigure(upBarCuttingPoints, Color.Magenta, 0.75f);
         }
         private void CreateUpCuttingExtendFigure(gPoint firstExtendPoint, gPoint secondExtendPoint, Beam targetBeam)
         {
