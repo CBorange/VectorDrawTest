@@ -320,39 +320,21 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         private void CalcExtendLength(string barType)
         {
             if (barType.Equals("A"))
-                result.BarA_ExtendLength = GetOrigin2SecondCutPointLen(barA);
+                result.BarA_ExtendLength = GetLengthSecondCut2Near(barA);
             else
-                result.BarB_ExtendLength = GetOrigin2SecondCutPointLen(barB);
+                result.BarB_ExtendLength = GetLengthSecondCut2Near(barB);
         }
-        private double GetOrigin2SecondCutPointLen(Bar targetBar)
-        {
-            double rot = targetBar.Rotation * -1;
-            gPoint secondCutPoint = CurtainWallMath.GetRotatedPoint(rot, result.SecondCutPoint, targetBar.Center);
 
-            double origin2SecondNearestPointLen = 0;
-            if (secondCutPoint.y > targetBar.Center.y)
-            {
-                if (secondCutPoint.x <= targetBar.Center.x)
-                {
-                    origin2SecondNearestPointLen = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.LT);
-                }
-                else if (secondCutPoint.x > targetBar.Center.x)
-                {
-                    origin2SecondNearestPointLen = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.RT);
-                }
-            }
-            else if (secondCutPoint.y <= targetBar.Center.y)
-            {
-                if (secondCutPoint.x <= targetBar.Center.x)
-                {
-                    origin2SecondNearestPointLen = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.LB);
-                }
-                else if (secondCutPoint.x > targetBar.Center.x)
-                {
-                    origin2SecondNearestPointLen = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.RB);
-                }
-            }
-            return origin2SecondNearestPointLen;
+        private double GetLengthSecondCut2Near(Bar targetBar)
+        {
+            List<PointAndDis> vertexPoints = new List<PointAndDis>(4);
+            vertexPoints.Add(new PointAndDis(targetBar.LT, CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.LT)));
+            vertexPoints.Add(new PointAndDis(targetBar.LB, CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.LB)));
+            vertexPoints.Add(new PointAndDis(targetBar.RT, CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.RT)));
+            vertexPoints.Add(new PointAndDis(targetBar.RB, CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, targetBar.RB)));
+            vertexPoints = vertexPoints.OrderBy(obj => obj.Distance).ToList();
+
+            return vertexPoints[0].Distance;
         }
         
 

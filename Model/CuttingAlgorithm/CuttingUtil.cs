@@ -18,6 +18,16 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 {
     public class PointAndDis
     {
+        public PointAndDis()
+        {
+            Point = null;
+            Distance = 0;
+        }
+        public PointAndDis(gPoint point, double dis)
+        {
+            Point = point;
+            Distance = dis;
+        }
         public gPoint Point;
         public double Distance;
     }
