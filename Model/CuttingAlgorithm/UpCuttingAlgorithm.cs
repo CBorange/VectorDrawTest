@@ -60,9 +60,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         private List<PointAndDis> upBar_ColPoints;
         private List<PointAndDis> cutBar_ColPoints;
 
-        private double upBar_ExtendLength = 0;
-        private bool upBar_NeedExtend = false;
-
         public UpCuttingAlgorithm()
         {
             math = new CurtainWallMath();
@@ -98,7 +95,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
                 cutBarCenter = cutBar.Right;
 
-            cutBar_ColPoints = GetPointsByBarCenter(cutBarCenter, entireColPoints);
+            cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
             result.FirstCutPoint = cutBar_ColPoints[0].Point;
             result.SecondCutPoint = cutBar_ColPoints[1].Point;
             CalcCutBar_ExtendPoints();
@@ -110,7 +107,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             gPoint upBarCenter = upBar.Left;
             if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
                 upBarCenter = upBar.Right;
-            upBar_ColPoints = GetPointsByBarCenter(upBarCenter, entireColPoints);
+            upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
             CalcUpBar_ExtendPoints(upBar_ColPoints);
 
             result.CutAngle = GetCuttingAngle();
@@ -147,7 +144,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
                 cutBarCenter = cutBar.Right;
 
-            cutBar_ColPoints = GetPointsByBarCenter(cutBarCenter, entireColPoints);
+            cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
             result.FirstCutPoint = cutBar_ColPoints[0].Point;
             result.SecondCutPoint = cutBar_ColPoints[1].Point;
             CalcCutBar_ExtendPoints();
@@ -159,7 +156,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             gPoint upBarCenter = upBar.Left;
             if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
                 upBarCenter = upBar.Right;
-            upBar_ColPoints = GetPointsByBarCenter(upBarCenter, entireColPoints);
+            upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
             CalcUpBar_ExtendPoints(upBar_ColPoints);
 
             result.CutAngle = GetCuttingAngle();
@@ -183,7 +180,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             gPoint fartestPoint = colPoints[colPoints.Count - 1].Point;
             gPoint secondPoint = colPoints[colPoints.Count - 2].Point;
 
-            CuttingUtil.GetBarVertexOriginPoint(fartestPoint, upBar, out originPoint, out sidePoint);
+            CuttingUtil.GetBarVertexSymmetryPoint(fartestPoint, upBar, out originPoint, out sidePoint);
             double origin2FartestCutLength = CurtainWallMath.GetLengthBy2Point(fartestPoint, originPoint);
             double extendLength = origin2FartestCutLength - upBar.Length;
 
@@ -203,7 +200,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         {
             gPoint originPoint = null;
             gPoint sidePoint = null;
-            CuttingUtil.GetBarVertexOriginPoint(result.SecondCutPoint, cutBar, out originPoint, out sidePoint);
+            CuttingUtil.GetBarVertexSymmetryPoint(result.SecondCutPoint, cutBar, out originPoint, out sidePoint);
             double origin2SecondCutLength = CurtainWallMath.GetLengthBy2Point(result.SecondCutPoint, originPoint);
             double extendLength = origin2SecondCutLength - cutBar.Length;
 
@@ -229,7 +226,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 result += CurtainWallMath.GetLengthBy2Point(center, colPoints[i]);
             return result;
         }
-        private List<PointAndDis> GetPointsByBarCenter(gPoint barCenter, List<gPoint> unManufacturedPoints)
+        private List<PointAndDis> GetPADByBarCenter(gPoint barCenter, List<gPoint> unManufacturedPoints)
         {
             List<PointAndDis> colPoints = new List<PointAndDis>();
             for (int i = 0; i < unManufacturedPoints.Count; ++i)
@@ -239,7 +236,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 pointAndDis.Distance = CurtainWallMath.GetLengthBy2Point(barCenter, unManufacturedPoints[i]);
                 colPoints.Add(pointAndDis);
             }
-            colPoints = DistinctSelf_gPoint(colPoints);
+            colPoints = CuttingUtil.DistinctPAD_Points(colPoints);
             colPoints = colPoints.OrderBy(dis => dis.Distance).ToList();
 
             if (colPoints.Count <= 1)
@@ -249,25 +246,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         private double GetCuttingAngle()
         {
             gPoint farPoint = new gPoint(result.SecondCutPoint);
-            gPoint originPoint = null;
-            double rot = cutBar.Rotation * -1;
-            farPoint = CurtainWallMath.GetRotatedPoint(rot, farPoint, cutBar.Center);
-            if (farPoint.y <= cutBar.Center.y)
-            {
-                if (farPoint.x <= cutBar.Center.x)
-                    originPoint = cutBar.RB;
-                else
-                    originPoint = cutBar.LB;
-            }
-            else
-            {
-                if (farPoint.x <= cutBar.Center.x)
-                    originPoint = cutBar.RT;
-                else
-                    originPoint = cutBar.LT;
-            }
-            rot *= -1;
-            farPoint = result.SecondCutPoint;
+            gPoint originPoint = CuttingUtil.GetBarVertexSymmetryPoint(farPoint, cutBar);
 
             Vector cutVec = CurtainWallMath.GetUnitVecBy2Point(result.FirstCutPoint, farPoint);
             Vector horVec = CurtainWallMath.GetUnitVecBy2Point(originPoint, farPoint);
@@ -275,45 +254,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             cutAngle = Math.Acos(cutAngle);
             cutAngle = Globals.RadiansToDegrees(cutAngle);
             return cutAngle;
-        }
-        private List<PointAndDis> DistinctSelf_Double(List<PointAndDis> originList)
-        {
-            List<PointAndDis> resultList = new List<PointAndDis>();
-            for (int i = 0; i < originList.Count; ++i)
-            {
-                bool duplicate = false;
-                for (int j = 0; j < i; ++j)
-                {
-                    if (CurtainWallMath.CompareDouble(originList[i].Distance, originList[j].Distance))
-                    {
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate)
-                    resultList.Add(originList[i]);
-            }
-            return resultList;
-        }
-        private List<PointAndDis> DistinctSelf_gPoint(List<PointAndDis> originList)
-        {
-            List<PointAndDis> resultList = new List<PointAndDis>();
-            for (int i = 0; i < originList.Count; ++i)
-            {
-                bool duplicate = false;
-                for (int j = 0; j < i; ++j)
-                {
-                    if (CurtainWallMath.CompareDouble(originList[i].Point.x, originList[j].Point.x) &&
-                        CurtainWallMath.CompareDouble(originList[i].Point.y, originList[j].Point.y))
-                    {
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate)
-                    resultList.Add(originList[i]);
-            }
-            return resultList;
         }
         private bool GetCollisionPoints(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, List<gPoint> currentCutPoints)
         {

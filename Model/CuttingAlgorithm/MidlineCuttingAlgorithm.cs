@@ -94,12 +94,11 @@ namespace VectordrawTest.Model.CuttingAlgorithm
 
             CalculateCollisionPoints();
             ManufactureCuttingPoints();
-            //AngleCuttingLogic();
-
+            //AngleBasedCuttingAlgorithm();
 
             return result;
         }
-        private void AngleCuttingLogic()
+        private void AngleBasedCuttingAlgorithm()
         {
             //BarA <->BarB의 BaseLine 사이각 계산, BarA, BarB의 BaseLine이 부딪히는 지점 계산
             gPoint[] barBLPoints = new gPoint[4];
@@ -268,37 +267,20 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             CalcExtendLength("B");
 
             // Calc CuttingAngle
-            result.BarA_CutAngle = CalcCuttingAngle(barA, result.FirstCutPoint, result.SecondCutPoint);
-            result.BarB_CutAngle = CalcCuttingAngle(barB, result.FirstCutPoint, result.SecondCutPoint);
+            result.BarA_CutAngle = GetCuttingAngle(barA, result.FirstCutPoint, result.SecondCutPoint);
+            result.BarB_CutAngle = GetCuttingAngle(barB, result.FirstCutPoint, result.SecondCutPoint);
 
             result.ResultCode = 0;
         }
-        private double CalcCuttingAngle(Bar targetBar, gPoint targetBar_FirstCutPoint, gPoint targetBar_SecondCutPoint)
+        private double GetCuttingAngle(Bar targetBar, gPoint targetBar_FirstCutPoint, gPoint targetBar_SecondCutPoint)
         {
             // BarA
             gPoint secondCutPoint = new gPoint(targetBar_SecondCutPoint);
-            gPoint originPoint = null;
-            double rot = targetBar.Rotation * -1;
-            secondCutPoint = CurtainWallMath.GetRotatedPoint(rot, secondCutPoint, targetBar.Center);
-            if (secondCutPoint.y <= targetBar.Center.y)
-            {
-                if (secondCutPoint.x <= targetBar.Center.x)
-                    originPoint = targetBar.RB;
-                else
-                    originPoint = targetBar.LB;
-            }
-            else
-            {
-                if (secondCutPoint.x <= targetBar.Center.x)
-                    originPoint = targetBar.RT;
-                else
-                    originPoint = targetBar.LT;
-            }
+            gPoint scndCutSymmetryPoint = CuttingUtil.GetBarVertexSymmetryPoint(secondCutPoint, targetBar);
 
-            rot *= -1;
             Vector cutVec = CurtainWallMath.GetUnitVecBy2Point(targetBar_FirstCutPoint, targetBar_SecondCutPoint);
-            Vector originVec = CurtainWallMath.GetUnitVecBy2Point(originPoint, targetBar_SecondCutPoint);
-            double cutAngle = cutVec.Dot(originVec);
+            Vector toSymmetryVec = CurtainWallMath.GetUnitVecBy2Point(scndCutSymmetryPoint, targetBar_SecondCutPoint);
+            double cutAngle = cutVec.Dot(toSymmetryVec);
             cutAngle = Math.Acos(cutAngle);
             cutAngle = Globals.RadiansToDegrees(cutAngle);
             return cutAngle;

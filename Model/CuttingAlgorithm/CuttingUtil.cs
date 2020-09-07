@@ -294,38 +294,102 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             return false;
         }
 
-        public static void GetBarVertexOriginPoint(gPoint vertexPoint, Bar targetBar, out gPoint originPoint, out gPoint otherOriginPoint)
+        public static List<PointAndDis> DistinctPAD_Points(List<PointAndDis> originList)
         {
-            gPoint vPoint = new gPoint(vertexPoint);
-            double rot = targetBar.Rotation * -1;
-            vPoint = CurtainWallMath.GetRotatedPoint(rot, vPoint, targetBar.Center);
+            List<PointAndDis> resultList = new List<PointAndDis>();
+            for (int i = 0; i < originList.Count; ++i)
+            {
+                bool duplicate = false;
+                for (int j = 0; j < i; ++j)
+                {
+                    if (CurtainWallMath.CompareDouble(originList[i].Point.x, originList[j].Point.x) &&
+                        CurtainWallMath.CompareDouble(originList[i].Point.y, originList[j].Point.y))
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate)
+                    resultList.Add(originList[i]);
+            }
+            return resultList;
+        }
 
-            if (vPoint.y >= targetBar.Center.y)
+        public static List<PointAndDis> DistinctPAD_Distance(List<PointAndDis> originList)
+        {
+            List<PointAndDis> resultList = new List<PointAndDis>();
+            for (int i = 0; i < originList.Count; ++i)
             {
-                if (vPoint.x <= targetBar.Center.x)
+                bool duplicate = false;
+                for (int j = 0; j < i; ++j)
                 {
-                    originPoint = targetBar.RT;
-                    otherOriginPoint = targetBar.RB;
+                    if (CurtainWallMath.CompareDouble(originList[i].Distance, originList[j].Distance))
+                    {
+                        duplicate = true;
+                        break;
+                    }
                 }
-                else
-                {
-                    originPoint = targetBar.LT;
-                    otherOriginPoint = targetBar.LB;
-                }
+                if (!duplicate)
+                    resultList.Add(originList[i]);
             }
-            else
+            return resultList;
+        }
+
+        public static gPoint GetBarVertexSymmetryPoint(gPoint targetPoint, Bar targetBar)
+        {
+            gPoint target = new gPoint(CurtainWallMath.GetRotatedPoint(targetBar.Rotation * -1, targetPoint, targetBar.Center));
+            Vector target2Center = CurtainWallMath.GetVectorBy2Point(targetBar.Center, target);
+
+            double barLength = targetBar.Length * 0.5;
+            double t2cLength = Math.Abs(target2Center.x);
+            t2cLength = t2cLength - barLength;
+
+            if (t2cLength != 0)
             {
-                if (vPoint.x <= targetBar.Center.x)
-                {
-                    originPoint = targetBar.RB;
-                    otherOriginPoint = targetBar.RT;
-                }
-                else
-                {
-                    originPoint = targetBar.LB;
-                    otherOriginPoint = targetBar.LT;
-                }
+                Vector translateVec = new Vector(target2Center.x, 0, 0);
+                translateVec.Normalize();
+                if (t2cLength < 0)
+                    translateVec.x *= -1;
+                translateVec *= Math.Abs(t2cLength);
+                target = CurtainWallMath.GetExtendPoint(target, translateVec);
+                target2Center = CurtainWallMath.GetVectorBy2Point(targetBar.Center, target);
             }
+
+            gPoint result = CurtainWallMath.GetExtendPoint(target, target2Center);
+            target2Center.y *= -1;
+            result = CurtainWallMath.GetExtendPoint(result, target2Center);
+            result = CurtainWallMath.GetRotatedPoint(targetBar.Rotation, result, targetBar.Center);
+            return result;
+        }
+
+        public static void GetBarVertexSymmetryPoint(gPoint vertexPoint, Bar targetBar, out gPoint symmetryPoint, out gPoint diagonalPoint)
+        {
+            gPoint vertex = new gPoint(CurtainWallMath.GetRotatedPoint(targetBar.Rotation * -1, vertexPoint, targetBar.Center));
+            Vector vertex2Center = CurtainWallMath.GetVectorBy2Point(targetBar.Center, vertex);
+
+            double barLength = targetBar.Length * 0.5;
+            double v2cLength = Math.Abs(vertex2Center.x);
+            v2cLength = v2cLength - barLength;
+
+            // vertexPoint를 Bar의 4꼭짓점 중 하나로 변환(가장 가까운 Bar 꼭짓점)
+            if (v2cLength != 0)
+            {
+                Vector translateVec = new Vector(vertex2Center.x, 0, 0);
+                translateVec.Normalize();
+                if (v2cLength < 0)
+                    translateVec.x *= -1;
+                translateVec *= Math.Abs(v2cLength);
+                vertex = CurtainWallMath.GetExtendPoint(vertex, translateVec);
+                vertex2Center = CurtainWallMath.GetVectorBy2Point(targetBar.Center, vertex);
+            }
+
+            vertex2Center.y *= -1;
+            symmetryPoint = CurtainWallMath.GetExtendPoint(targetBar.Center, vertex2Center);
+            symmetryPoint = CurtainWallMath.GetRotatedPoint(targetBar.Rotation, symmetryPoint, targetBar.Center);
+
+            vertex2Center.y *= -1;
+            diagonalPoint = CurtainWallMath.GetExtendPoint(targetBar.Center, vertex2Center);
+            diagonalPoint = CurtainWallMath.GetRotatedPoint(targetBar.Rotation, diagonalPoint, targetBar.Center);
         }
     }
 }
