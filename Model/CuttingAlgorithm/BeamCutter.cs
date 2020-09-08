@@ -28,10 +28,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             math = MathSupporter.Instance;
             this.beamManager = beamManager;
         }
-        public void CalcCuttingRect_CrossAlgorithm(Beam upBeam, Beam cuttedBeam)
-        {
-
-        }
         public void CheckCollisionHorToVer(Beam horBeam)
         {
             horBeam.RemoveAllCalcTarget();

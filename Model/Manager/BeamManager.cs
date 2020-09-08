@@ -213,7 +213,6 @@ namespace VectordrawTest.Model.Manager
 
             if (barType.Equals("A"))    // Bar A
             {
-                
                 if (result.BarA_ExtendDir.Equals("LEFT"))
                 {
                     Vector rt2ltUnit = MathSupporter.Instance.GetUnitVecBy2Point(targetBeam.LeftTop, targetBeam.RightTop);
@@ -276,13 +275,11 @@ namespace VectordrawTest.Model.Manager
             CreateMidlineExtendFigure(result, beamA, "A");
             CreateMidlineExtendFigure(result, beamB, "B");
 
-
             // Cutting Figure
             List<gPoint> cuttingPoints = new List<gPoint>(2);
             cuttingPoints.Add(result.FirstCutPoint);
             cuttingPoints.Add(result.SecondCutPoint);
             beamA.AddCuttingFigure(cuttingPoints, Color.Yellow, 0.75f);
         }
-
     }
 }

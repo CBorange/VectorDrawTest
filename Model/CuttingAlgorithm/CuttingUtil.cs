@@ -88,33 +88,44 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         }
         public static gPoint GetCrossPoint(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {
-            Vector lineA2C = GetVectorBy2Point(pointC, pointA);
-            Vector lineA2B = GetVectorBy2Point(pointB, pointA);
-            Vector lineA2B_Unit = new Vector(lineA2B);
-            lineA2B_Unit.Normalize();
+            //Vector lineA2C = GetVectorBy2Point(pointC, pointA);
+            //Vector lineA2B = GetVectorBy2Point(pointB, pointA);
+            //Vector lineA2B_Unit = new Vector(lineA2B);
+            //lineA2B_Unit.Normalize();
 
-            double a2eLength = lineA2C.Dot(lineA2B_Unit);
-            Vector lineA2E = lineA2B_Unit * a2eLength;
-            gPoint pointE = new gPoint(pointA.x + lineA2E.x, pointA.y + lineA2E.y);
+            //double a2eLength = lineA2C.Dot(lineA2B_Unit);
+            //Vector lineA2E = lineA2B_Unit * a2eLength;
+            //gPoint pointE = new gPoint(pointA.x + lineA2E.x, pointA.y + lineA2E.y);
 
-            Vector lineC2E = GetVectorBy2Point(pointE, pointC);
-            Vector lineC2E_Unit = new Vector(lineC2E);
-            lineC2E_Unit.Normalize();
-            Vector lineC2D = GetVectorBy2Point(pointD, pointC);
-            double c2fLength = lineC2D.Dot(lineC2E_Unit);
+            //Vector lineC2E = GetVectorBy2Point(pointE, pointC);
+            //Vector lineC2E_Unit = new Vector(lineC2E);
+            //lineC2E_Unit.Normalize();
+            //Vector lineC2D = GetVectorBy2Point(pointD, pointC);
+            //double c2fLength = lineC2D.Dot(lineC2E_Unit);
 
-            Vector lineC2F = lineC2E_Unit * c2fLength;
-            gPoint pointF = new gPoint(pointC.x + lineC2F.x, pointC.y + lineC2F.y);
+            //Vector lineC2F = lineC2E_Unit * c2fLength;
+            //gPoint pointF = new gPoint(pointC.x + lineC2F.x, pointC.y + lineC2F.y);
 
-            double c2eRatio = lineC2E.Length / c2fLength;
+            //double c2eRatio = lineC2E.Length / c2fLength;
 
-            double crossPointLength = lineC2D.Length * c2eRatio;
-            Vector lineC2D_Unit = new Vector(lineC2D);
-            lineC2D_Unit.Normalize();
-            Vector lineC2CrossPoint = lineC2D_Unit * crossPointLength;
+            //double crossPointLength = lineC2D.Length * c2eRatio;
+            //Vector lineC2D_Unit = new Vector(lineC2D);
+            //lineC2D_Unit.Normalize();
+            //Vector lineC2CrossPoint = lineC2D_Unit * crossPointLength;
 
-            gPoint crossPoint = new gPoint(pointC.x + lineC2CrossPoint.x, pointC.y + lineC2CrossPoint.y);
-            return crossPoint;
+            //gPoint crossPoint = new gPoint(pointC.x + lineC2CrossPoint.x, pointC.y + lineC2CrossPoint.y);
+            //return crossPoint;
+
+            double px = (pointA.x * pointB.y - pointA.y * pointB.x) * (pointC.x - pointD.x) - (pointA.x - pointB.x) * (pointC.x * pointD.y - pointC.y * pointD.x);
+            double py = (pointA.x * pointB.y - pointA.y * pointB.x) * (pointC.y - pointD.y) - (pointA.y - pointB.y) * (pointC.x * pointD.y - pointC.y * pointD.x);
+            double p = (pointA.x - pointB.x) * (pointC.y - pointD.y) - (pointA.y - pointB.y) * (pointC.x - pointD.x);
+
+            if (p == 0)
+                return null;
+
+            double x = px / p;
+            double y = py / p;
+            return new gPoint(x, y);
         }
         public static double GetLengthBy2Point(gPoint pointA, gPoint pointB)
         {
@@ -195,6 +206,17 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         {
             double difference = Math.Abs(a - b);
             if (difference <= 0.00000001 || difference == 0)
+                return true;
+            return false;
+        }
+        public static bool GetPointLineCollision(gPoint point, gPoint lineStart, gPoint lineEnd)
+        {
+            double point2LineStart = GetLengthBy2Point(point, lineStart);
+            double point2LineEnd = GetLengthBy2Point(point, lineEnd);
+            double lineLength = GetLengthBy2Point(lineStart, lineEnd);
+
+            double point2LineLength = point2LineStart + point2LineEnd;
+            if (CompareDouble(point2LineLength, lineLength))
                 return true;
             return false;
         }

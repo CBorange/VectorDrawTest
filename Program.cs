@@ -1,6 +1,4 @@
-﻿using VectordrawTest.Controller;
-using VectordrawTest.Model;
-using VectordrawTest.View;
+﻿using VectordrawTest.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +25,8 @@ namespace VectordrawTest
             BeamManager beamManager = new BeamManager();
             BeamCutter collisionCalculator = new BeamCutter();
             BeamBuilder beamBuilder = new BeamBuilder();
-            mainForm.InitializeAllModels(VectorDrawConfigure.Instance, beamManager, collisionCalculator, beamBuilder);
-
-            MainController mainController = new MainController(mainForm, VectorDrawConfigure.Instance, beamManager, collisionCalculator,
-                beamBuilder);
-            mainForm.AttachController(mainController);
-
+            CollisionLineCalculator colLineCalculator = new CollisionLineCalculator();
+            mainForm.InitializeAllModels(VectorDrawConfigure.Instance, beamManager, collisionCalculator, beamBuilder, colLineCalculator);
 
             Application.Run(mainForm);
         }

@@ -35,23 +35,23 @@
             this.AddVerBeam_Btn = new System.Windows.Forms.Button();
             this.MidlineCut_Btn = new System.Windows.Forms.Button();
             this.VerUp_Btn = new System.Windows.Forms.Button();
+            this.Calc_CollisionLines = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // vectorDrawBaseControl1
             // 
             this.vectorDrawBaseControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.vectorDrawBaseControl1.AllowDrop = true;
-            this.vectorDrawBaseControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.vectorDrawBaseControl1.Location = new System.Drawing.Point(12, 12);
             this.vectorDrawBaseControl1.Name = "vectorDrawBaseControl1";
-            this.vectorDrawBaseControl1.Size = new System.Drawing.Size(1294, 740);
+            this.vectorDrawBaseControl1.Size = new System.Drawing.Size(1255, 777);
             this.vectorDrawBaseControl1.TabIndex = 0;
             // 
             // HorUp_Btn
             // 
-            this.HorUp_Btn.Location = new System.Drawing.Point(1312, 12);
+            this.HorUp_Btn.Location = new System.Drawing.Point(1273, 12);
             this.HorUp_Btn.Name = "HorUp_Btn";
-            this.HorUp_Btn.Size = new System.Drawing.Size(115, 28);
+            this.HorUp_Btn.Size = new System.Drawing.Size(94, 28);
             this.HorUp_Btn.TabIndex = 3;
             this.HorUp_Btn.Text = "가로 바 위";
             this.HorUp_Btn.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@
             // 
             this.vdCommandLine1.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.vdCommandLine1.EnablePopupForm = true;
-            this.vdCommandLine1.Location = new System.Drawing.Point(12, 758);
+            this.vdCommandLine1.Location = new System.Drawing.Point(12, 795);
             this.vdCommandLine1.MaxNumberOfCommandsShown = 10;
             this.vdCommandLine1.Name = "vdCommandLine1";
             this.vdCommandLine1.PopupBackColor = System.Drawing.Color.White;
@@ -79,7 +79,7 @@
             // AddHorBeam_Btn
             // 
             this.AddHorBeam_Btn.Font = new System.Drawing.Font("굴림", 9F);
-            this.AddHorBeam_Btn.Location = new System.Drawing.Point(1312, 130);
+            this.AddHorBeam_Btn.Location = new System.Drawing.Point(1273, 46);
             this.AddHorBeam_Btn.Name = "AddHorBeam_Btn";
             this.AddHorBeam_Btn.Size = new System.Drawing.Size(115, 27);
             this.AddHorBeam_Btn.TabIndex = 8;
@@ -90,7 +90,7 @@
             // AddVerBeam_Btn
             // 
             this.AddVerBeam_Btn.Font = new System.Drawing.Font("굴림", 9F);
-            this.AddVerBeam_Btn.Location = new System.Drawing.Point(1312, 163);
+            this.AddVerBeam_Btn.Location = new System.Drawing.Point(1394, 46);
             this.AddVerBeam_Btn.Name = "AddVerBeam_Btn";
             this.AddVerBeam_Btn.Size = new System.Drawing.Size(115, 27);
             this.AddVerBeam_Btn.TabIndex = 9;
@@ -101,9 +101,9 @@
             // MidlineCut_Btn
             // 
             this.MidlineCut_Btn.Font = new System.Drawing.Font("굴림", 9F);
-            this.MidlineCut_Btn.Location = new System.Drawing.Point(1312, 80);
+            this.MidlineCut_Btn.Location = new System.Drawing.Point(1468, 13);
             this.MidlineCut_Btn.Name = "MidlineCut_Btn";
-            this.MidlineCut_Btn.Size = new System.Drawing.Size(115, 27);
+            this.MidlineCut_Btn.Size = new System.Drawing.Size(104, 27);
             this.MidlineCut_Btn.TabIndex = 10;
             this.MidlineCut_Btn.Text = "균등 커팅";
             this.MidlineCut_Btn.UseVisualStyleBackColor = true;
@@ -111,19 +111,30 @@
             // 
             // VerUp_Btn
             // 
-            this.VerUp_Btn.Location = new System.Drawing.Point(1312, 46);
+            this.VerUp_Btn.Location = new System.Drawing.Point(1373, 12);
             this.VerUp_Btn.Name = "VerUp_Btn";
-            this.VerUp_Btn.Size = new System.Drawing.Size(115, 28);
+            this.VerUp_Btn.Size = new System.Drawing.Size(89, 28);
             this.VerUp_Btn.TabIndex = 11;
             this.VerUp_Btn.Text = "세로 바 위";
             this.VerUp_Btn.UseVisualStyleBackColor = true;
             this.VerUp_Btn.Click += new System.EventHandler(this.UpBeam_ForVertical);
             // 
+            // Calc_CollisionLines
+            // 
+            this.Calc_CollisionLines.Location = new System.Drawing.Point(1273, 79);
+            this.Calc_CollisionLines.Name = "Calc_CollisionLines";
+            this.Calc_CollisionLines.Size = new System.Drawing.Size(94, 28);
+            this.Calc_CollisionLines.TabIndex = 12;
+            this.Calc_CollisionLines.Text = "충돌 라인 검사";
+            this.Calc_CollisionLines.UseVisualStyleBackColor = true;
+            this.Calc_CollisionLines.Click += new System.EventHandler(this.CalcCollisionLines);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1439, 824);
+            this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.Calc_CollisionLines);
             this.Controls.Add(this.VerUp_Btn);
             this.Controls.Add(this.MidlineCut_Btn);
             this.Controls.Add(this.AddVerBeam_Btn);
@@ -149,6 +160,7 @@
         private System.Windows.Forms.Button AddVerBeam_Btn;
         private System.Windows.Forms.Button MidlineCut_Btn;
         private System.Windows.Forms.Button VerUp_Btn;
+        private System.Windows.Forms.Button Calc_CollisionLines;
     }
 }
 
