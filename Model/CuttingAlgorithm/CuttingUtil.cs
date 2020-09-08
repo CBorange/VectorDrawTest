@@ -165,11 +165,12 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         }
         public static int CCW(gPoint a, gPoint b, gPoint c)
         {
-            double op = (a.x * b.y) + (b.x * c.y) + (c.x * a.y);
-            op -= (a.y * b.x) + (b.y * c.x) + (c.y * a.x);
-            if (op > 0) return 1;
-            else if (op == 0) return 0;
-            else return -1;
+            return (int)((a.x * b.y) + (b.x * c.y) + (c.x * a.y) - ((a.y * b.x) + (b.y * c.x) + (c.y * a.x)));
+            //double op = (a.x * b.y) + (b.x * c.y) + (c.x * a.y);
+            //op -= (a.y * b.x) + (b.y * c.x) + (c.y * a.x);
+            //if (op > 0) return 1;
+            //else if (op == 0) return 0;
+            //else return -1;
         }
         public static bool GetLineIsCross(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {

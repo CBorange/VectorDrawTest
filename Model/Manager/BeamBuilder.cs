@@ -73,29 +73,29 @@ namespace VectordrawTest.Model.Manager
             double ver2Length = CurtainWallMath.GetLengthBy2Point(new gPoint(200, -200), new gPoint(200, 500));
             beamManager.AddNewVerBeam(new Beam(new gPoint(200, -200), new gPoint(200, 500), document, Color.Blue, ver2Length, 50, "VerBeam_2"));
 
-            double ver3Length = CurtainWallMath.GetLengthBy2Point(new gPoint(550, -200), new gPoint(550, 500));
-            beamManager.AddNewVerBeam(new Beam(new gPoint(550, -200), new gPoint(550, 500), document, Color.Blue, ver3Length, 50, "VerBeam_3"));
+            //double ver3Length = CurtainWallMath.GetLengthBy2Point(new gPoint(550, -200), new gPoint(550, 500));
+            //beamManager.AddNewVerBeam(new Beam(new gPoint(550, -200), new gPoint(550, 500), document, Color.Blue, ver3Length, 50, "VerBeam_3"));
 
-            double ver4Length = CurtainWallMath.GetLengthBy2Point(new gPoint(900, -200), new gPoint(900, 500));
-            beamManager.AddNewVerBeam(new Beam(new gPoint(900, -200), new gPoint(900, 500), document, Color.Blue, ver4Length, 50, "VerBeam_4"));
+            //double ver4Length = CurtainWallMath.GetLengthBy2Point(new gPoint(900, -200), new gPoint(900, 500));
+            //beamManager.AddNewVerBeam(new Beam(new gPoint(900, -200), new gPoint(900, 500), document, Color.Blue, ver4Length, 50, "VerBeam_4"));
 
             // 수평 바 추가
             Vector ver1S2E = CurtainWallMath.GetUnitVecBy2Point(new gPoint(200, 500), new gPoint(-200, -200));
             double barDis = ver1Length / 3;
 
             gPoint hor1StartP = CurtainWallMath.GetExtendPoint(new gPoint(-200, -200), ver1S2E * (barDis * 0));
-            gPoint hor1EndP = new gPoint(900, hor1StartP.y);
+            gPoint hor1EndP = new gPoint(210, hor1StartP.y);
             gPoint hor2StartP = CurtainWallMath.GetExtendPoint(new gPoint(-200, -200), ver1S2E * (barDis * 1));
-            gPoint hor2EndP = new gPoint(900, hor2StartP.y);
+            gPoint hor2EndP = new gPoint(210, hor2StartP.y);
             gPoint hor3StartP = CurtainWallMath.GetExtendPoint(new gPoint(-200, -200), ver1S2E * (barDis * 2));
-            gPoint hor3EndP = new gPoint(900, hor3StartP.y);
+            gPoint hor3EndP = new gPoint(210, hor3StartP.y);
             gPoint hor4StartP = CurtainWallMath.GetExtendPoint(new gPoint(-200, -200), ver1S2E * (barDis * 3));
-            gPoint hor4EndP = new gPoint(900, hor4StartP.y);
+            gPoint hor4EndP = new gPoint(210, hor4StartP.y);
 
             beamManager.AddNewHorBeam(new Beam(hor1StartP, hor1EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor1StartP, hor1EndP), 50, "HorBeam_1"));
             beamManager.AddNewHorBeam(new Beam(hor2StartP, hor2EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor2StartP, hor2EndP), 50, "HorBeam_2"));
-            beamManager.AddNewHorBeam(new Beam(hor3StartP, hor3EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor3StartP, hor3EndP), 50, "HorBeam_3"));
-            beamManager.AddNewHorBeam(new Beam(hor4StartP, hor4EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor4StartP, hor4EndP), 50, "HorBeam_3"));
+            //beamManager.AddNewHorBeam(new Beam(hor3StartP, hor3EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor3StartP, hor3EndP), 50, "HorBeam_3"));
+            //beamManager.AddNewHorBeam(new Beam(hor4StartP, hor4EndP, document, Color.Red, CurtainWallMath.GetLengthBy2Point(hor4StartP, hor4EndP), 50, "HorBeam_3"));
 
             
         }

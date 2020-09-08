@@ -92,7 +92,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             up_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LT, upBar.RT, 1000000);
             up_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LB, upBar.RB, 1000000);
 
-            entireColPoints.Clear();
             CuttingProcess();
 
             // CutBar 계산

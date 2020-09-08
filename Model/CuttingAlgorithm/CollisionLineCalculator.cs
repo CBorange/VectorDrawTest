@@ -58,23 +58,20 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 for (int lineIdx = 0; lineIdx < baseLines.Count; ++lineIdx)
                 {
                     if (checkIdx == lineIdx) continue;
-                    if (CurtainWallMath.GetLineIsCross(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
-                        baseLines[lineIdx].StartPoint, baseLines[lineIdx].EndPoint))
-                    {
-                        CollisionInfo colInfo = new CollisionInfo();
-                        // 충돌 점 산출
-                        colInfo.CollisionPoint = CurtainWallMath.GetCrossPoint(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
+                    CollisionInfo colInfo = new CollisionInfo();
+                    // 충돌 점 산출
+                    colInfo.CollisionPoint = CurtainWallMath.GetCrossPoint(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
+                    baseLines[lineIdx].StartPoint, baseLines[lineIdx].EndPoint);
+                    if (colInfo.CollisionPoint == null) continue;
+
+                    // 충돌 선분 저장
+                    colInfo.CollidedLine = baseLines[lineIdx];
+
+                    // 충돌 각도 산출
+                    colInfo.Angle = CalculateAngle(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
                         baseLines[lineIdx].StartPoint, baseLines[lineIdx].EndPoint);
 
-                        // 충돌 선분 저장
-                        colInfo.CollidedLine = baseLines[lineIdx];
-
-                        // 충돌 각도 산출
-                        colInfo.Angle = CalculateAngle(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
-                            baseLines[lineIdx].StartPoint, baseLines[lineIdx].EndPoint);
-
-                        colDataSet.CollisionList.Add(colInfo);
-                    }
+                    colDataSet.CollisionList.Add(colInfo);
                 }
                 collisionLines.Add(colDataSet);
             }
