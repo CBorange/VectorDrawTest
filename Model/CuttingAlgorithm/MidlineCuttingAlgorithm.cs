@@ -217,7 +217,8 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             short2LongVec *= (lenBy2BarCenters * 0.5);
             gPoint centerBy2Bars = CurtainWallMath.GetExtendPoint(shortBar.Center, short2LongVec);
 
-            // BarA <-> BarB BaseLine 사이의 각이 예각인 경우
+            // BarA <-> BarB BL 사이 각에 따라 CuttingPoint 산출
+            // 예각
             if (blAngle <= 90)
             {
                 List<PointAndDis> barsCenterNearPoints = Conversion_gPoint2PointAndDisList(centerBy2Bars);
@@ -225,7 +226,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 result.FirstCutPoint = barsCenterNearPoints[0].Point;
                 result.SecondCutPoint = barsCenterNearPoints[barsCenterNearPoints.Count - 1].Point;
             }
-            // BarA <-> BarB BaseLine 사이의 각이 둔각인 경우
+            // 둔각
             else if (blAngle > 90)
             {
                 List<PointAndDis> barsCenterNearPoints = Conversion_gPoint2PointAndDisList(centerBy2Bars);
@@ -263,8 +264,8 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             barBColPoints = barBColPoints.OrderBy(obj => obj.Distance).ToList();
 
             // Calc Extend Length
-            CalcExtendLength("A");
-            CalcExtendLength("B");
+            result.BarA_ExtendLength = GetLengthSecondCut2Near(barA);
+            result.BarB_ExtendLength = GetLengthSecondCut2Near(barB);
 
             // Calc CuttingAngle
             result.BarA_CutAngle = GetCuttingAngle(barA, result.FirstCutPoint, result.SecondCutPoint);
@@ -316,13 +317,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                     result.BarB_ExtendDir = "RIGHT";
             }
 
-        }
-        private void CalcExtendLength(string barType)
-        {
-            if (barType.Equals("A"))
-                result.BarA_ExtendLength = GetLengthSecondCut2Near(barA);
-            else
-                result.BarB_ExtendLength = GetLengthSecondCut2Near(barB);
         }
 
         private double GetLengthSecondCut2Near(Bar targetBar)
