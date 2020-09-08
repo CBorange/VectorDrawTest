@@ -208,5 +208,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Hicom.BizDraw\Src\Hicom.BizDraw.Geometry\Hicom.BizDraw.Geometry.csproj">
+      <Project>{9fac8732-c74d-4ed4-99f7-26e86ae7d667}</Project>
+      <Name>Hicom.BizDraw.Geometry</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

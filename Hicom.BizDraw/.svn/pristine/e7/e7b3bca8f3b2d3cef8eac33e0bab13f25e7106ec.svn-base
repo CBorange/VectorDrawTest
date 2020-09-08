@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.Geometry", "Src\Hicom.BizDraw.Geometry\Hicom.BizDraw.Geometry.csproj", "{9FAC8732-C74D-4ED4-99F7-26E86AE7D667}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.DrawControls", "Src\Hicom.BizDraw.DrawControls\Hicom.BizDraw.DrawControls.csproj", "{46743ED4-1424-4798-A445-A0CFDC6D6202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.Browser", "Src\Hicom.BizDraw.Browser\Hicom.BizDraw.Browser.csproj", "{F29E52A5-C5A8-469D-B012-772818FD2395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.Command", "Src\Hicom.BizDraw.Command\Hicom.BizDraw.Command.csproj", "{95D975C9-9C1C-481A-A3F9-4DAB40003011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.PlanDraw", "Src\Hicom.BizDraw.PlanDraw\Hicom.BizDraw.PlanDraw.csproj", "{A61682DF-B7B4-4B5F-982C-629A2C6E6C80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hicom.BizDraw.Entity", "Src\Hicom.BizDraw.Entity\Hicom.BizDraw.Entity.csproj", "{940A8F46-FCE1-46A2-A0A5-D70ABC486E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FAC8732-C74D-4ED4-99F7-26E86AE7D667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FAC8732-C74D-4ED4-99F7-26E86AE7D667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FAC8732-C74D-4ED4-99F7-26E86AE7D667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FAC8732-C74D-4ED4-99F7-26E86AE7D667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46743ED4-1424-4798-A445-A0CFDC6D6202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46743ED4-1424-4798-A445-A0CFDC6D6202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46743ED4-1424-4798-A445-A0CFDC6D6202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46743ED4-1424-4798-A445-A0CFDC6D6202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29E52A5-C5A8-469D-B012-772818FD2395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29E52A5-C5A8-469D-B012-772818FD2395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29E52A5-C5A8-469D-B012-772818FD2395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29E52A5-C5A8-469D-B012-772818FD2395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D975C9-9C1C-481A-A3F9-4DAB40003011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D975C9-9C1C-481A-A3F9-4DAB40003011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D975C9-9C1C-481A-A3F9-4DAB40003011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D975C9-9C1C-481A-A3F9-4DAB40003011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A61682DF-B7B4-4B5F-982C-629A2C6E6C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A61682DF-B7B4-4B5F-982C-629A2C6E6C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A61682DF-B7B4-4B5F-982C-629A2C6E6C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A61682DF-B7B4-4B5F-982C-629A2C6E6C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{940A8F46-FCE1-46A2-A0A5-D70ABC486E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{940A8F46-FCE1-46A2-A0A5-D70ABC486E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{940A8F46-FCE1-46A2-A0A5-D70ABC486E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{940A8F46-FCE1-46A2-A0A5-D70ABC486E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

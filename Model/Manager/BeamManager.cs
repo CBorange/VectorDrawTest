@@ -12,10 +12,12 @@ using System.Drawing;
 using VectordrawTest.Model.CustomFigure;
 using VectordrawTest.Model.CuttingAlgorithm;
 
+
 namespace VectordrawTest.Model.Manager
 {
     public class BeamManager
     {
+        
         // Variable
         private vdDocument document;
         public vdDocument Document 

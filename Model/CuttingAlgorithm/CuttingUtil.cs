@@ -195,14 +195,6 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             }
             return ab <= 0 && cd <= 0;
         }
-        public static bool GetBarLineCollision(Bar bar, gPoint lineStart, gPoint lineEnd)
-        {
-            if (GetLineIsCross(bar.LT, bar.RT, lineStart, lineEnd))
-                return true;
-            if (GetLineIsCross(bar.LB, bar.RB, lineStart, lineEnd))
-                return true;
-            return false;
-        }
         public static bool CompareDouble(double a, double b)
         {
             double difference = Math.Abs(a - b);

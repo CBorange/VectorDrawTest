@@ -13,6 +13,7 @@ using VectorDraw.Professional.PropertyList;
 using VectordrawTest.Model.Manager;
 using VectordrawTest.Model.CustomFigure;
 using System.Diagnostics;
+using Hicom.BizDraw.Geometry;
 
 namespace VectordrawTest.Model.CuttingAlgorithm
 {
@@ -184,10 +185,10 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         // 충돌 검사
         private void CuttingProcess()
         {
-            GetCollisionPoints(up_LT2RT_Ext, up_RT2LT_Ext, cut_LT2RT_Ext, cut_RT2LT_Ext, entireColPoints);
-            GetCollisionPoints(up_LT2RT_Ext, up_RT2LT_Ext, cut_LB2RB_Ext, cut_RB2LB_Ext, entireColPoints);
-            GetCollisionPoints(up_LB2RB_Ext, up_RB2LB_Ext, cut_LT2RT_Ext, cut_RT2LT_Ext, entireColPoints);
-            GetCollisionPoints(up_LB2RB_Ext, up_RB2LB_Ext, cut_LB2RB_Ext, cut_RB2LB_Ext, entireColPoints);
+            CalcCollisionPoint(up_LT2RT_Ext, up_RT2LT_Ext, cut_LT2RT_Ext, cut_RT2LT_Ext, entireColPoints);
+            CalcCollisionPoint(up_LT2RT_Ext, up_RT2LT_Ext, cut_LB2RB_Ext, cut_RB2LB_Ext, entireColPoints);
+            CalcCollisionPoint(up_LB2RB_Ext, up_RB2LB_Ext, cut_LT2RT_Ext, cut_RT2LT_Ext, entireColPoints);
+            CalcCollisionPoint(up_LB2RB_Ext, up_RB2LB_Ext, cut_LB2RB_Ext, cut_RB2LB_Ext, entireColPoints);
         }
 
         private void CalcUpBar_ExtendPoints(List<PointAndDis> colPoints)
@@ -271,14 +272,13 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             cutAngle = Globals.RadiansToDegrees(cutAngle);
             return cutAngle;
         }
-        private bool GetCollisionPoints(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, List<gPoint> currentCutPoints)
+        private void CalcCollisionPoint(gPoint upBeam_SPoint, gPoint upBeam_EPoint, gPoint cutBeam_SPoint, gPoint cutBeam_EPoint, List<gPoint> currentCutPoints)
         {
-            if (CurtainWallMath.GetLineIsCross(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint))
-            {
-                currentCutPoints.Add(CurtainWallMath.GetCrossPoint(upBeam_SPoint, upBeam_EPoint, cutBeam_SPoint, cutBeam_EPoint));
-                return true;
-            }
-            return false;
+            linesegment upBeamLine = new linesegment(upBeam_SPoint, upBeam_EPoint);
+            linesegment cutBeamLine = new linesegment(cutBeam_SPoint, cutBeam_EPoint);
+            gPoint colPoint = new gPoint();
+            if (Geometry.Intersection(upBeamLine, cutBeamLine, colPoint) == 1)
+                currentCutPoints.Add(colPoint);
         }
         #endregion
     }

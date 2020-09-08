@@ -13,6 +13,7 @@ using VectorDraw.Professional.PropertyList;
 using VectordrawTest.Model.Manager;
 using VectordrawTest.Model.CustomFigure;
 using System.Diagnostics;
+using Hicom.BizDraw.Geometry;
 
 namespace VectordrawTest.Model.CuttingAlgorithm
 {
@@ -155,17 +156,24 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         {
             entireColPoints.Clear();
 
+            linesegment barAExtendTop = new linesegment(barA_ExtendLT2RT, barA_ExtendRT2LT);
+            linesegment barAExtendBot = new linesegment(barA_ExtendLB2RB, barA_ExtendRB2LB);
+            linesegment barBExtendTop = new linesegment(barB_ExtendLT2RT, barB_ExtendRT2LT);
+            linesegment barBExtendBot = new linesegment(barB_ExtendLB2RB, barB_ExtendRB2LB);
+
             // BarA : Top -> BarB : Top,Bot
-            if (CurtainWallMath.GetLineIsCross(barA_ExtendLT2RT, barA_ExtendRT2LT, barB_ExtendLT2RT, barB_ExtendRT2LT))
-                entireColPoints.Add(CurtainWallMath.GetCrossPoint(barA_ExtendLT2RT, barA_ExtendRT2LT, barB_ExtendLT2RT, barB_ExtendRT2LT));
-            if (CurtainWallMath.GetLineIsCross(barA_ExtendLT2RT, barA_ExtendRT2LT, barB_ExtendLB2RB, barB_ExtendRB2LB))
-                entireColPoints.Add(CurtainWallMath.GetCrossPoint(barA_ExtendLT2RT, barA_ExtendRT2LT, barB_ExtendLB2RB, barB_ExtendRB2LB));
+            gPoint col_ATop_To_BTop = new gPoint();
+            if (Geometry.Intersection(barAExtendTop, barBExtendTop, col_ATop_To_BTop) == 1) entireColPoints.Add(col_ATop_To_BTop);
+
+            gPoint col_ATop_To_BBot = new gPoint();
+            if (Geometry.Intersection(barAExtendTop, barBExtendBot, col_ATop_To_BBot) == 1) entireColPoints.Add(col_ATop_To_BBot);
 
             // BarA : Bot -> BarB : Top, Bot
-            if (CurtainWallMath.GetLineIsCross(barA_ExtendLB2RB, barA_ExtendRB2LB, barB_ExtendLT2RT, barB_ExtendRT2LT))
-                entireColPoints.Add(CurtainWallMath.GetCrossPoint(barA_ExtendLB2RB, barA_ExtendRB2LB, barB_ExtendLT2RT, barB_ExtendRT2LT));
-            if (CurtainWallMath.GetLineIsCross(barA_ExtendLB2RB, barA_ExtendRB2LB, barB_ExtendLB2RB, barB_ExtendRB2LB))
-                entireColPoints.Add(CurtainWallMath.GetCrossPoint(barA_ExtendLB2RB, barA_ExtendRB2LB, barB_ExtendLB2RB, barB_ExtendRB2LB));
+            gPoint col_ABot_To_BTop = new gPoint();
+            if (Geometry.Intersection(barAExtendBot, barBExtendTop, col_ABot_To_BTop) == 1) entireColPoints.Add(col_ABot_To_BTop);
+
+            gPoint col_ABot_To_BBot = new gPoint();
+            if (Geometry.Intersection(barAExtendBot, barBExtendBot, col_ABot_To_BBot) == 1) entireColPoints.Add(col_ABot_To_BBot);
         }
         private void ManufactureCuttingPoints()
         {

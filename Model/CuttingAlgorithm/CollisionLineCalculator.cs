@@ -13,6 +13,7 @@ using VectorDraw.Professional.PropertyList;
 using VectordrawTest.Model.Manager;
 using VectordrawTest.Model.CustomFigure;
 using System.Diagnostics;
+using Hicom.BizDraw.Geometry;
 
 namespace VectordrawTest.Model.CuttingAlgorithm
 {
@@ -21,7 +22,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
     {
         public CollisionInfo()
         {
-            CollisionPoint = null;
+            CollisionPoint = new gPoint();
             CollidedLine = null;
             Angle = 0;
         }
@@ -60,9 +61,8 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                     if (checkIdx == lineIdx) continue;
                     CollisionInfo colInfo = new CollisionInfo();
                     // 충돌 점 산출
-                    colInfo.CollisionPoint = CurtainWallMath.GetCrossPoint(baseLines[checkIdx].StartPoint, baseLines[checkIdx].EndPoint,
-                    baseLines[lineIdx].StartPoint, baseLines[lineIdx].EndPoint);
-                    if (colInfo.CollisionPoint == null) continue;
+                    if (Geometry.Intersection(baseLines[checkIdx], baseLines[lineIdx], colInfo.CollisionPoint) == 0)
+                        continue;
 
                     // 충돌 선분 저장
                     colInfo.CollidedLine = baseLines[lineIdx];
