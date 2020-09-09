@@ -37,6 +37,13 @@ namespace VectordrawTest.Model.Manager
             get { return horBeams; }
         }
 
+        private List<LineCollisionDataSet> beamLineCollisionDatas;
+        public List<LineCollisionDataSet> BeamLineCollisionDatas
+        {
+            get { return beamLineCollisionDatas; }
+        }
+
+        // Another Manager
         private BeamCutter collisionCalculator;
         private VectorDrawConfigure drawConfigure;
         private UpCuttingAlgorithm upCutting;
@@ -106,6 +113,25 @@ namespace VectordrawTest.Model.Manager
         {
             verBeams.Add(beam);
             RefreshAllBeam();
+        }
+        public Beam FoundBeam(gPoint point, bool selectOption)
+        {
+            for (int i = 0; i < horBeams.Count; ++i)
+            {
+                if (CurtainWallMath.GetPoint2BeamCollision(point, horBeams[i]))
+                {
+                    return horBeams[i];
+
+                }
+            }
+            for (int i = 0; i < verBeams.Count; ++i)
+            {
+                if (CurtainWallMath.GetPoint2BeamCollision(point, verBeams[i]))
+                {
+                    return verBeams[i];
+                }
+            }
+            return null;
         }
 
         // Cutting Methods

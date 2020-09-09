@@ -38,6 +38,10 @@ namespace VectordrawTest.Model.CustomFigure
             get { return halfWidth; }
         }
         private string beamName;
+        public string BeamName
+        {
+            get { return beamName; }
+        }
         private vdDocument document;
         public vdDocument Document
         {
@@ -98,6 +102,9 @@ namespace VectordrawTest.Model.CustomFigure
 
         private List<Beam> calcTargetBeams;
         public List<Beam> CalcTargetBeams { get { return calcTargetBeams; } }
+
+        private LineCollisionDataSet collisionData;
+        public LineCollisionDataSet CollisionData { get { return collisionData; } }
 
         // Figures 
         private List<FigureDrawer> cuttingFigures;
@@ -177,6 +184,10 @@ namespace VectordrawTest.Model.CustomFigure
             InitDebugCircles();
             VectorDrawConfigure.Instance.AddLineToDocument(baseLine);
             UpdateBaseLine();
+        }
+        public void AttachCollisionData(LineCollisionDataSet collisionData)
+        {
+            this.collisionData = collisionData;
         }
         private void InitLines()
         {
@@ -302,7 +313,6 @@ namespace VectordrawTest.Model.CustomFigure
             // Expand Rect Draw
             for (int i = 0; i < extendFigure.Count; ++i)
                 extendFigure[i].DrawLines(render);
-
         }
         public void RemoveAllFigures()
         {

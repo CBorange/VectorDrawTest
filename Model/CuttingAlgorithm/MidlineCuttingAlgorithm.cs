@@ -78,26 +78,34 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         public MidlineCuttingResult GetCuttingResult(gPoint barA_StartPoint, gPoint barA_EndPoint, double barA_Width, double barA_Length,
             gPoint barB_StartPoint, gPoint barB_EndPoint, double barB_Width, double barB_Length)
         {
-            result = new MidlineCuttingResult();
-            barA = CuttingUtil.CreateBar(barA_StartPoint, barA_EndPoint, barA_Width, barA_Length);
-            barB = CuttingUtil.CreateBar(barB_StartPoint, barB_EndPoint, barB_Width, barB_Length);
+            try
+            {
+                result = new MidlineCuttingResult();
+                barA = CuttingUtil.CreateBar(barA_StartPoint, barA_EndPoint, barA_Width, barA_Length);
+                barB = CuttingUtil.CreateBar(barB_StartPoint, barB_EndPoint, barB_Width, barB_Length);
 
-            // 계산용 확장 선 산출
-            barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
-            barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
-            barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
-            barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
+                // 계산용 확장 선 산출
+                barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
+                barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
+                barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
+                barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
 
-            barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
-            barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
-            barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
-            barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
+                barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
+                barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
+                barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
+                barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
 
-            CalculateCollisionPoints();
-            ManufactureCuttingPoints();
-            //AngleBasedCuttingAlgorithm();
+                CalculateCollisionPoints();
+                ManufactureCuttingPoints();
+                //AngleBasedCuttingAlgorithm();
 
-            return result;
+                return result;
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -2;
+                return result;
+            }
         }
         private void AngleBasedCuttingAlgorithm()
         {
@@ -132,25 +140,33 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         }
         public MidlineCuttingResult GetCuttingResult(linesegment barA_Segment, linesegment barB_Segment, double barA_Width, double barB_Width)
         {
-            result = new MidlineCuttingResult();
-            barA = CuttingUtil.CreateBar(barA_Segment.StartPoint, barA_Segment.EndPoint, barA_Width, barA_Segment.length);
-            barB = CuttingUtil.CreateBar(barB_Segment.StartPoint, barB_Segment.EndPoint, barB_Width, barB_Segment.length);
+            try
+            {
+                result = new MidlineCuttingResult();
+                barA = CuttingUtil.CreateBar(barA_Segment.StartPoint, barA_Segment.EndPoint, barA_Width, barA_Segment.length);
+                barB = CuttingUtil.CreateBar(barB_Segment.StartPoint, barB_Segment.EndPoint, barB_Width, barB_Segment.length);
 
-            // 계산용 확장 선 산출
-            barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
-            barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
-            barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
-            barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
+                // 계산용 확장 선 산출
+                barA_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barA.RT, barA.LT, 1000000);
+                barA_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barA.LT, barA.RT, 1000000);
+                barA_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barA.RB, barA.LB, 1000000);
+                barA_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barA.LB, barA.RB, 1000000);
 
-            barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
-            barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
-            barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
-            barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
+                barB_ExtendRT2LT = CurtainWallMath.GetExtendedPointBy2Points(barB.RT, barB.LT, 1000000);
+                barB_ExtendLT2RT = CurtainWallMath.GetExtendedPointBy2Points(barB.LT, barB.RT, 1000000);
+                barB_ExtendRB2LB = CurtainWallMath.GetExtendedPointBy2Points(barB.RB, barB.LB, 1000000);
+                barB_ExtendLB2RB = CurtainWallMath.GetExtendedPointBy2Points(barB.LB, barB.RB, 1000000);
 
-            CalculateCollisionPoints();
-            ManufactureCuttingPoints();
+                CalculateCollisionPoints();
+                ManufactureCuttingPoints();
 
-            return result;
+                return result;
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -2;
+                return result;
+            }
         }
         private void CalculateCollisionPoints()
         {

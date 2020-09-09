@@ -86,6 +86,36 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 return true;
             return false;
         }
+        public static bool GetPoint2BeamCollision(gPoint point, Beam beam)
+        {
+            gPoint left = new gPoint(beam.Left);
+            gPoint right = new gPoint(beam.Right);
+            gPoint bottom = new gPoint(beam.Bottom);
+            gPoint top = new gPoint(beam.Top);
+
+            double rot = beam.Rotation * -1;
+            left = GetRotatedPoint(rot, left, beam.Center);
+            right = GetRotatedPoint(rot, right, beam.Center);
+            bottom = GetRotatedPoint(rot, bottom, beam.Center);
+            top = GetRotatedPoint(rot, top, beam.Center);
+            point = GetRotatedPoint(rot, point, beam.Center);
+
+            if (point.x >= left.x &&
+                point.x <= right.x &&
+                point.y <= top.y &&
+                point.y >= bottom.y)
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// 수정 필요(사용 안함)
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="pointC"></param>
+        /// <param name="pointD"></param>
+        /// <returns></returns>
         public static gPoint GetCrossPoint(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {
             //Vector lineA2C = GetVectorBy2Point(pointC, pointA);
@@ -163,6 +193,14 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             a2B *= start2CenterLength;
             return new gPoint(pointA.x + a2B.x, pointA.y + a2B.y);
         }
+
+        /// <summary>
+        /// 수정 필요(사용 안함)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public static int CCW(gPoint a, gPoint b, gPoint c)
         {
             return (int)((a.x * b.y) + (b.x * c.y) + (c.x * a.y) - ((a.y * b.x) + (b.y * c.x) + (c.y * a.x)));
@@ -172,6 +210,15 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             //else if (op == 0) return 0;
             //else return -1;
         }
+
+        /// <summary>
+        /// 수정 필요(사용 안함)
+        /// </summary>
+        /// <param name="pointA"></param>
+        /// <param name="pointB"></param>
+        /// <param name="pointC"></param>
+        /// <param name="pointD"></param>
+        /// <returns></returns>
         public static bool GetLineIsCross(gPoint pointA, gPoint pointB, gPoint pointC, gPoint pointD)
         {
             int ab = CCW(pointA, pointB, pointC) * CCW(pointA, pointB, pointD);

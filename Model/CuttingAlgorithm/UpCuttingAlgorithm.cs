@@ -32,6 +32,8 @@ namespace VectordrawTest.Model.CuttingAlgorithm
             UpBar_ExtendPoint_Second = null;
             UpBar_CutPoint_First = null;
             UpBar_CutPoint_Second = null;
+
+            ResultCode = 0;
         }
         public double CutBar_CutAngle;
         public gPoint CutBar_ExtendPoint_First;
@@ -76,110 +78,126 @@ namespace VectordrawTest.Model.CuttingAlgorithm
         public UpCuttingResult GetCuttingResult(gPoint upBar_StartPoint, gPoint upBar_EndPoint, gPoint cutBar_StartPoint, gPoint cutBar_EndPoint,
             double upBarWidth, double cutBarWidth, double upBarLength, double cutBarLength)
         {
-            result = new UpCuttingResult();
+            try
+            {
+                result = new UpCuttingResult();
 
-            upBar = CuttingUtil.CreateBar(upBar_StartPoint, upBar_EndPoint, upBarWidth, upBarLength);
-            cutBar = CuttingUtil.CreateBar(cutBar_StartPoint, cutBar_EndPoint, cutBarWidth, cutBarLength);
-            entireColPoints = new List<gPoint>();
+                upBar = CuttingUtil.CreateBar(upBar_StartPoint, upBar_EndPoint, upBarWidth, upBarLength);
+                cutBar = CuttingUtil.CreateBar(cutBar_StartPoint, cutBar_EndPoint, cutBarWidth, cutBarLength);
+                entireColPoints = new List<gPoint>();
 
-            // 검사 용 각 꼭짓점 확장 지점 생성
-            cut_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RT, cutBar.LT, 1000000);
-            cut_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RB, cutBar.LB, 1000000);
-            cut_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LT, cutBar.RT, 1000000);
-            cut_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LB, cutBar.RB, 1000000);
+                // 검사 용 각 꼭짓점 확장 지점 생성
+                cut_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RT, cutBar.LT, 1000000);
+                cut_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RB, cutBar.LB, 1000000);
+                cut_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LT, cutBar.RT, 1000000);
+                cut_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LB, cutBar.RB, 1000000);
 
-            up_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RT, upBar.LT, 1000000);
-            up_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RB, upBar.LB, 1000000);
-            up_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LT, upBar.RT, 1000000);
-            up_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LB, upBar.RB, 1000000);
+                up_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RT, upBar.LT, 1000000);
+                up_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RB, upBar.LB, 1000000);
+                up_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LT, upBar.RT, 1000000);
+                up_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LB, upBar.RB, 1000000);
 
-            CuttingProcess();
+                CuttingProcess();
 
-            // CutBar 계산
-            double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
-            double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
+                // CutBar 계산
+                double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
+                double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
 
-            gPoint cutBarCenter = cutBar.Left;
-            if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
-                cutBarCenter = cutBar.Right;
+                gPoint cutBarCenter = cutBar.Left;
+                if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
+                    cutBarCenter = cutBar.Right;
 
-            cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
-            result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
-            result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
-            CalcCutBar_ExtendPoints();
+                cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
+                result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
+                result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
+                CalcCutBar_ExtendPoints();
 
-            result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
+                result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
 
-            // UpBar 계산
-            double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
-            double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
+                // UpBar 계산
+                double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
+                double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
 
-            gPoint upBarCenter = upBar.Left;
-            if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
-                upBarCenter = upBar.Right;
+                gPoint upBarCenter = upBar.Left;
+                if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
+                    upBarCenter = upBar.Right;
 
-            upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
-            result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
-            result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
-            CalcUpBar_ExtendPoints(upBar_ColPoints);
+                upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
+                result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
+                result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
+                CalcUpBar_ExtendPoints(upBar_ColPoints);
 
-            result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
+                result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
 
-            return result;
+                return result;
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -1;
+                return result;
+            }
         }
         public UpCuttingResult GetCuttingResult(linesegment upBarSegment, linesegment cutBarSegment, double upBarWidth, double cutBarWidth)
         {
-            result = new UpCuttingResult();
+            try
+            {
+                result = new UpCuttingResult();
 
-            upBar = CuttingUtil.CreateBar(upBarSegment.StartPoint, upBarSegment.EndPoint, upBarWidth, upBarSegment.length);
-            cutBar = CuttingUtil.CreateBar(cutBarSegment.StartPoint, cutBarSegment.EndPoint, cutBarWidth, cutBarSegment.length);
-            entireColPoints = new List<gPoint>();
+                upBar = CuttingUtil.CreateBar(upBarSegment.StartPoint, upBarSegment.EndPoint, upBarWidth, upBarSegment.length);
+                cutBar = CuttingUtil.CreateBar(cutBarSegment.StartPoint, cutBarSegment.EndPoint, cutBarWidth, cutBarSegment.length);
+                entireColPoints = new List<gPoint>();
 
-            // 검사 용 각 꼭짓점 확장 지점 생성
-            cut_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RT, cutBar.LT, 1000000);
-            cut_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RB, cutBar.LB, 1000000);
-            cut_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LT, cutBar.RT, 1000000);
-            cut_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LB, cutBar.RB, 1000000);
+                // 검사 용 각 꼭짓점 확장 지점 생성
+                cut_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RT, cutBar.LT, 1000000);
+                cut_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.RB, cutBar.LB, 1000000);
+                cut_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LT, cutBar.RT, 1000000);
+                cut_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(cutBar.LB, cutBar.RB, 1000000);
 
-            up_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RT, upBar.LT, 1000000);
-            up_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RB, upBar.LB, 1000000);
-            up_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LT, upBar.RT, 1000000);
-            up_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LB, upBar.RB, 1000000);
+                up_RT2LT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RT, upBar.LT, 1000000);
+                up_RB2LB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.RB, upBar.LB, 1000000);
+                up_LT2RT_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LT, upBar.RT, 1000000);
+                up_LB2RB_Ext = CurtainWallMath.GetExtendedPointBy2Points(upBar.LB, upBar.RB, 1000000);
 
-            entireColPoints.Clear();
-            CuttingProcess();
+                entireColPoints.Clear();
+                CuttingProcess();
 
-            // CutBar 계산
-            double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
-            double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
+                // CutBar 계산
+                double cutBar_Left2CutPointsLength = GetLengthByColPoints(cutBar.Left, entireColPoints);
+                double cutBar_Right2CutPointsLength = GetLengthByColPoints(cutBar.Right, entireColPoints);
 
-            gPoint cutBarCenter = cutBar.Left;
-            if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
-                cutBarCenter = cutBar.Right;
+                gPoint cutBarCenter = cutBar.Left;
+                if (cutBar_Right2CutPointsLength > cutBar_Left2CutPointsLength)
+                    cutBarCenter = cutBar.Right;
 
-            cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
-            result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
-            result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
-            CalcCutBar_ExtendPoints();
+                cutBar_ColPoints = GetPADByBarCenter(cutBarCenter, entireColPoints);
+                result.CutBar_CutPoint_First = cutBar_ColPoints[0].Point;
+                result.CutBar_CutPoint_Second = cutBar_ColPoints[1].Point;
+                CalcCutBar_ExtendPoints();
 
-            result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
+                result.CutBar_CutAngle = GetCuttingAngle(result.CutBar_CutPoint_Second, result.CutBar_CutPoint_First, cutBar);
 
-            // UpBar 계산
-            double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
-            double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
+                // UpBar 계산
+                double upBar_Left2CutPointsLength = GetLengthByColPoints(upBar.Left, entireColPoints);
+                double upBar_Right2CutPointsLength = GetLengthByColPoints(upBar.Right, entireColPoints);
 
-            gPoint upBarCenter = upBar.Left;
-            if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
-                upBarCenter = upBar.Right;
+                gPoint upBarCenter = upBar.Left;
+                if (upBar_Right2CutPointsLength > upBar_Left2CutPointsLength)
+                    upBarCenter = upBar.Right;
 
-            upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
-            result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
-            result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
-            CalcUpBar_ExtendPoints(upBar_ColPoints);
+                upBar_ColPoints = GetPADByBarCenter(upBarCenter, entireColPoints);
+                result.UpBar_CutPoint_First = upBar_ColPoints[upBar_ColPoints.Count - 2].Point;
+                result.UpBar_CutPoint_Second = upBar_ColPoints[upBar_ColPoints.Count - 1].Point;
+                CalcUpBar_ExtendPoints(upBar_ColPoints);
 
-            result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
+                result.UpBar_CutAngle = GetCuttingAngle(result.UpBar_CutPoint_Second, result.UpBar_CutPoint_First, upBar);
 
-            return result;
+                return result;
+            }
+            catch(Exception)
+            {
+                result.ResultCode = -1;
+                return result;
+            }
         }
 
         // 충돌 검사

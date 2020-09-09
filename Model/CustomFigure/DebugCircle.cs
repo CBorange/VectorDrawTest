@@ -40,8 +40,6 @@ namespace VectordrawTest.Model.CustomFigure
             debugText.TextString = $"{caption}: {text}";
             debugText.InsertionPoint = newPoint;
             debugText.Update();
-
-            document.Redraw(true);
         }
     }
 }

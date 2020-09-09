@@ -50,7 +50,7 @@ namespace VectordrawTest.Model.Manager
 
             document.ShowUCSAxis = false;
             document.ActiveLayOut.ZoomWindow(new gPoint(-VIEW_HALFWIDTH, -VIEW_HALFHEIGHT), new gPoint(VIEW_HALFWIDTH, VIEW_HALFHEIGHT));
-            document.OnDrawOverAll += new vdDocument.DrawOverAllEventHandler(AllDrawOver_Handler);
+            document.OnDrawAfter += new vdDocument.DrawAfterEventHandler(AllDrawOver_Handler);
             document.ActionEnd += new vdDocument.ActionEndEventHandler(ActionEnd_Handler);
 
             string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\";
@@ -110,14 +110,13 @@ namespace VectordrawTest.Model.Manager
         }
 
         // Event Handler
-        public void AllDrawOver_Handler(object sender, vdRender render, ref bool cancel)
+        public void AllDrawOver_Handler(object sender, vdRender render)
         {
             beamManager.DrawOutLineFromAllBeam(render);
         }
         public void ActionEnd_Handler(object sender, string actionName)
         {
             beamManager.RefreshAllBeam();
-            document.Redraw(true);
         }
     }
 }

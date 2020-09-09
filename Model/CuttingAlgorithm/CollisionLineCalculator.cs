@@ -60,6 +60,7 @@ namespace VectordrawTest.Model.CuttingAlgorithm
                 {
                     if (checkIdx == lineIdx) continue;
                     CollisionInfo colInfo = new CollisionInfo();
+
                     // 충돌 점 산출
                     if (Geometry.Intersection(baseLines[checkIdx], baseLines[lineIdx], colInfo.CollisionPoint) == 0)
                         continue;
